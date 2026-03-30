@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Pavan | DSA Mastery • Light Forge + Aptitude</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f4f9ff 0%, #e9f0fa 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    /* light & subtle background pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 20% 35%, rgba(0, 120, 200, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glass-container {
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 2.5rem;
+      border: 1px solid rgba(0, 100, 150, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    /* hero section */
+    .hero {
+      padding: 2.8rem 2.5rem 1.5rem 2.5rem;
+      border-bottom: 1px solid rgba(0, 120, 150, 0.15);
+      background: rgba(255, 255, 255, 0.5);
+      position: relative;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eef5ff;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: #1a6b8f;
+      border: 1px solid rgba(0, 110, 150, 0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1A3E50 0%, #2C6E8F 40%, #1F7A9C 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .title-highlight {
+      background: linear-gradient(120deg, #c47e2a, #e0a343);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: #2c5a72;
+      font-weight: 450;
+      max-width: 85%;
+      border-left: 3px solid #2c9cbb;
+      padding-left: 1.2rem;
+      margin-top: 0.6rem;
+    }
+
+    .motivation-block {
+      margin-top: 1.8rem;
+      background: #eef3fc;
+      border-radius: 2rem;
+      padding: 1rem 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      border: 1px solid rgba(0, 110, 130, 0.2);
+    }
+
+    .quote-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05));
+    }
+
+    .motivation-text {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #1f4e66;
+    }
+
+    .motivation-text strong {
+      color: #d97706;
+      font-weight: 700;
+    }
+
+    /* ========= DUAL COUNTER STYLES ========= */
+    .counters-container {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .visitor-counter {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      padding: 0.5rem 1.2rem 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid rgba(44, 156, 187, 0.35);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+      font-family: monospace;
+    }
+    .visitor-counter:hover {
+      border-color: #2c9cbb;
+      background: white;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+    .counter-icon {
+      font-size: 1.35rem;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+    }
+    .counter-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: #2c627c;
+      text-transform: uppercase;
+      font-family: 'Inter', system-ui;
+    }
+    .counter-number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #1A4C66, #2C8DAF);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      font-family: 'Inter', 'SF Mono', monospace;
+    }
+    .counter-badge {
+      background: #eef2f8;
+      border-radius: 40px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #1f6c8c;
+    }
+
+    /* Total Unique Visitors Counter - Special Styling */
+    .total-counter {
+      border: 1px solid rgba(218, 165, 32, 0.4);
+      background: linear-gradient(135deg, rgba(255, 250, 240, 0.98), rgba(255, 245, 235, 0.95));
+    }
+    .total-counter .counter-number {
+      background: linear-gradient(125deg, #d97706, #f59e0b);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .total-counter .counter-label {
+      color: #b45309;
+    }
+    .total-counter .counter-badge {
+      background: #fed7aa;
+      color: #9b2c1d;
+    }
+
+    .cta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 2.8rem 2.5rem;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    .choice-card {
+      flex: 1;
+      min-width: 260px;
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 2rem 1.8rem;
+      transition: all 0.25s ease;
+      border: 1px solid #dce9f2;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.02);
+    }
+
+    .choice-card:hover {
+      transform: translateY(-6px);
+      border-color: #7fb4ce;
+      box-shadow: 0 18px 32px rgba(0, 80, 100, 0.08);
+      background: #ffffff;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .choice-card h3 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #1a4c66;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.2px;
+    }
+
+    .choice-card p {
+      color: #446f88;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      margin: 1rem 0 1.6rem 0;
+    }
+
+    .pill-btn {
+      display: inline-block;
+      background: #eef2f8;
+      border: 1px solid #bbd4e8;
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #1f6c8c;
+      text-decoration: none;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .pill-btn:hover {
+      background: #2c9cbb;
+      color: white;
+      border-color: #2c9cbb;
+      box-shadow: 0 4px 12px rgba(44, 156, 187, 0.2);
+    }
+
+    .intermediate-badge {
+      background: #fef3e6;
+      border-color: #f0bc80;
+    }
+
+    .aptitude-card {
+      border: 1px solid #d9caf5;
+      background: #fefbff;
+    }
+
+    .aptitude-card:hover {
+      border-color: #b597e6;
+    }
+
+    .aptitude-badge {
+      background: #f0e9ff;
+      border-color: #c6b0f0;
+      color: #6b46c1;
+    }
+
+    .live-session {
+      background: #f8fdfe;
+      border-radius: 1.8rem;
+      margin: 0 2rem 2rem 2rem;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border: 1px solid #cfe3ef;
+      backdrop-filter: blur(2px);
+    }
+
+    .live-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pulse {
+      width: 12px;
+      height: 12px;
+      background: #e05a6f;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(224, 90, 111, 0.5);
+      animation: pulse-red 1.5s infinite;
+    }
+
+    @keyframes pulse-red {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 111, 0.5);}
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(224, 90, 111, 0);}
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 111, 0);}
+    }
+
+    .live-text span {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #b14b5c;
+    }
+
+    .live-text p {
+      font-size: 0.95rem;
+      color: #2d627b;
+    }
+
+    .join-btn {
+      background: #e05a6f;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 60px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(224, 90, 111, 0.2);
+    }
+
+    .join-btn:hover {
+      background: #c7455a;
+      transform: scale(1.02);
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 1.5rem 2rem 2rem;
+      font-size: 0.8rem;
+      color: #547c92;
+      border-top: 1px solid #d7e5ef;
+      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 780px) {
+      body {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      .tagline {
+        font-size: 1rem;
+        max-width: 100%;
+      }
+      .cta-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.8rem;
+      }
+      .live-session {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 1.2rem 1.8rem 1.2rem;
+      }
+      .hero {
+        padding: 1.5rem;
+      }
+      .counters-container {
+        position: relative;
+        top: auto;
+        right: auto;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        width: 100%;
+      }
+      .visitor-counter {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .choice-prompt {
+      font-size: 1rem;
+      font-weight: 500;
+      background: transparent;
+      padding: 0.5rem 0 0 0;
+      color: #336d89;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    hr {
+      border-color: #cbdde8;
+      margin: 0.5rem 0;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      background: #eef2f9;
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #2b6f8a;
+      margin-right: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    .badge-group {
+      margin-top: 0.7rem;
+    }
+
+    .aptitude-tag {
+      background: #ede7ff;
+      color: #735fbf;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-container">
+  <div class="hero">
+    <!-- DUAL COUNTERS: Personal visits + Total unique visitors -->
+    <div class="counters-container">
+      <!-- Personal Visit Counter (your own visits) -->
+      <div class="visitor-counter" id="personalCounter">
+
+         <a href="darkindex.html" class="pill-btn"> Dark Theme </a>
+          <a href="index.html" class="pill-btn"> Lite Theme </a>
+      </div>    
+    </div>
+
+    <div class="badge">DSA FORGE • LEETCODE ARENA + APTITUDE LAB</div>
+    <h1>Pavan X<span class="title-highlight"> DHEE CODING LAB</span></h1>
+    <div class="tagline">
+      “Remember the guy who gave up? <strong>No one does</strong>. Either!”
+    </div>
+    <div class="motivation-block">
+      <div class="motivation-text">
+        <strong>So shall we get started?</strong> — Pick your weapon, break the matrix.
+      </div>
+    </div>
+  </div>
+
+  <!-- choice section: 4 cards (light theme) -->
+  <div class="cta-grid" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+    <!-- Rookie Rise Card -->
+    <div class="choice-card">
+      <h3>Rookie Rise</h3>
+      <p>Foundations • Arrays • Strings • Recursion<br> 
+      Begin your journey with structured patterns & logic.</p>
+      <div class="badge-group">
+        <span class="skill-tag">Beginner friendly</span>
+        <span class="skill-tag">150+ problems</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="subpage.html" class="pill-btn">Start Grind →</a>
+      </div>
+    </div>
+
+    <!-- Intermediate Coder Card -->
+    <div class="choice-card">
+      <h3>Intermediate Coder</h3>
+      <p>Graphs • DP • Trees • Advanced Binary Search<br>
+      Master complex topics & real interview patterns.</p>
+      <div class="badge-group">
+        <span class="skill-tag">LeetCode contest</span>
+        <span class="skill-tag">400+ problems</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="intermediate.html" class="pill-btn intermediate-badge">Level Up →</a>
+      </div>
+    </div>
+
+    <!-- Aptitude Ignition Card -->
+    <div class="choice-card aptitude-card">
+      <h3>Aptitude Ignition</h3>
+      <p>Quantitative • Logical Reasoning • Data Interpretation</p>
+      <div class="badge-group">
+        <span class="skill-tag aptitude-tag">Practice Questions</span>
+        <span class="skill-tag aptitude-tag">100% Placement Oriented</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="aptitude.html" class="pill-btn">Fire Up →</a>
+      </div>
+    </div>
+
+    <!-- Pro Max : Coming Soon Card -->
+    <div class="choice-card">
+      <h3>Pro Max : Coming Soon!</h3>
+      <p>System design • Advanced Algorithms • Code optimisation<br>
+      Crack FAANG & architect high-performance solutions.</p>
+      <div class="badge-group">
+        <span class="skill-tag">Hardcore mode</span>
+        <span class="skill-tag">Mentorship</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="#" class="pill-btn">Unleash →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live sessions callout (same interactive community section) -->
+  <div class="live-session">
+    <div class="live-text">
+      <div class="pulse"></div>
+      <span>LIVE NOW</span>
+      <p>To attend live Sessions of DSA, Aptitude & Coding Sessions join :</p>
+    </div>
+    <a href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" class="join-btn">JOIN COMMUNITY HUB</a>
+  </div>
+
+  <div class="footer-note">
+    <div class="choice-prompt">
+      Choose your path — consistency over intensity
+    </div>
+    <hr style="margin: 1rem 0 0.5rem 0;">
+    <div>“No one remembers the one who gave up” — keep building, keep solving.</div>
+    <div style="margin-top: 0.6rem;">Aptitude resources updated weekly • DSA + Aptitude = Complete Warrior</div>
+    <div style="margin-top: 0.4rem;">Instagram @codewithpavanprakash</div>
+    <div class="stats-bar" style="margin-top: 1rem; font-size: 0.7rem; opacity: 0.7;">
+      📊 Real-time analytics • Unique device tracking
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ============================================================
+    // DUAL COUNTER SYSTEM:
+    // 1. PERSONAL VISITS COUNTER - tracks how many times YOU visited
+    // 2. TOTAL UNIQUE VISITORS COUNTER - tracks unique devices/browsers globally
+    // ============================================================
+    
+    // Storage Keys
+    const PERSONAL_STORAGE_KEY = "pavan_dsa_personal_visits";
+    const PERSONAL_SESSION_FLAG = "pavan_personal_session_recorded";
+    const TOTAL_UNIQUE_KEY = "pavan_dsa_total_unique_visitors";
+    const DEVICE_ID_KEY = "pavan_device_unique_id";
+    
+    // Helper: format number with commas
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    // Helper: generate a unique device ID (stored permanently in localStorage)
+    function getOrCreateDeviceId() {
+      let deviceId = localStorage.getItem(DEVICE_ID_KEY);
+      if (!deviceId) {
+        // Create a unique ID based on timestamp + random + navigator info (for uniqueness)
+        const timestamp = Date.now();
+        const random = Math.random().toString(36).substring(2, 15);
+        const navInfo = (navigator.userAgent || '').substring(0, 50).replace(/[^a-zA-Z0-9]/g, '');
+        deviceId = `dev_${timestamp}_${random}_${navInfo.substring(0, 20)}`;
+        localStorage.setItem(DEVICE_ID_KEY, deviceId);
+      }
+      return deviceId;
+    }
+    
+    // ========== 1. PERSONAL VISITS COUNTER ==========
+    function updatePersonalCounter() {
+      let currentVisits = 0;
+      const storedVisits = localStorage.getItem(PERSONAL_STORAGE_KEY);
+      if (storedVisits !== null && !isNaN(parseInt(storedVisits, 10))) {
+        currentVisits = parseInt(storedVisits, 10);
+      } else {
+        currentVisits = 0;
+      }
+      
+      const alreadyRecorded = sessionStorage.getItem(PERSONAL_SESSION_FLAG) === "true";
+      
+      if (!alreadyRecorded) {
+        currentVisits += 1;
+        localStorage.setItem(PERSONAL_STORAGE_KEY, currentVisits);
+        sessionStorage.setItem(PERSONAL_SESSION_FLAG, "true");
+      }
+      
+      const finalCount = (isNaN(currentVisits) || currentVisits < 0) ? 0 : currentVisits;
+      const personalSpan = document.getElementById("personalVisitCount");
+      if (personalSpan) {
+        personalSpan.textContent = formatNumber(finalCount);
+        // subtle animation
+        personalSpan.style.transition = "transform 0.2s ease";
+        setTimeout(() => {
+          if (personalSpan) personalSpan.style.transform = "scale(1.05)";
+          setTimeout(() => {
+            if (personalSpan) personalSpan.style.transform = "scale(1)";
+          }, 150);
+        }, 50);
+      }
+      return finalCount;
+    }
+    
+    // ========== 2. TOTAL UNIQUE VISITORS COUNTER (Combined across all users) ==========
+    // This tracks unique devices/browsers. Each new device gets counted only once.
+    // The total is stored in localStorage and increments only when a new unique device visits.
+    // To simulate "global" counter across all users, we store the total in localStorage.
+    // For a real production app, this would be a backend API, but for demo purposes,
+    // we use localStorage with a simulated global counter that increments per unique device.
+    
+    function updateTotalUniqueCounter() {
+      const deviceId = getOrCreateDeviceId();
+      const TOTAL_VISITORS_KEY = "pavan_global_total_unique_visitors";
+      const REGISTERED_DEVICES_KEY = "pavan_registered_devices_set";
+      
+      // Get the set of registered devices (simulated "database" of unique visitors)
+      let registeredDevices = [];
+      const storedDevices = localStorage.getItem(REGISTERED_DEVICES_KEY);
+      if (storedDevices) {
+        try {
+          registeredDevices = JSON.parse(storedDevices);
+        } catch(e) {
+          registeredDevices = [];
+        }
+      }
+      
+      // Get current total unique visitors count
+      let totalUniqueVisitors = 0;
+      const storedTotal = localStorage.getItem(TOTAL_VISITORS_KEY);
+      if (storedTotal !== null && !isNaN(parseInt(storedTotal, 10))) {
+        totalUniqueVisitors = parseInt(storedTotal, 10);
+      } else {
+        totalUniqueVisitors = 0;
+      }
+      
+      // Check if this device is already registered as a unique visitor
+      const isDeviceRegistered = registeredDevices.includes(deviceId);
+      
+      if (!isDeviceRegistered) {
+        // New unique visitor! Increment the global counter
+        registeredDevices.push(deviceId);
+        localStorage.setItem(REGISTERED_DEVICES_KEY, JSON.stringify(registeredDevices));
+        totalUniqueVisitors += 1;
+        localStorage.setItem(TOTAL_VISITORS_KEY, totalUniqueVisitors);
+        
+        // Show a little celebration animation for new visitor
+        console.log(`🎉 New unique visitor! Total unique visitors: ${totalUniqueVisitors}`);
+      }
+      
+      // Update the DOM with the total unique visitors count
+      const totalSpan = document.getElementById("totalVisitorCount");
+      if (totalSpan) {
+        totalSpan.textContent = formatNumber(totalUniqueVisitors);
+        
+        // Add a special animation for new visitors
+        if (!isDeviceRegistered) {
+          totalSpan.style.transition = "all 0.3s ease";
+          totalSpan.style.transform = "scale(1.1)";
+          totalSpan.style.textShadow = "0 0 8px #f59e0b";
+          setTimeout(() => {
+            if (totalSpan) {
+              totalSpan.style.transform = "scale(1)";
+              setTimeout(() => {
+                if (totalSpan) totalSpan.style.textShadow = "none";
+              }, 500);
+            }
+          }, 300);
+        }
+      }
+      
+      return { totalUniqueVisitors, isNewVisitor: !isDeviceRegistered };
+    }
+    
+    // ========== CROSS-TAB SYNC ==========
+    // Listen for storage events to keep counters in sync across tabs
+    window.addEventListener("storage", function(event) {
+      // Sync personal counter
+      if (event.key === PERSONAL_STORAGE_KEY) {
+        const newCount = parseInt(event.newValue, 10);
+        if (!isNaN(newCount)) {
+          const personalSpan = document.getElementById("personalVisitCount");
+          if (personalSpan && personalSpan.textContent.replace(/,/g, '') !== newCount.toString()) {
+            personalSpan.textContent = formatNumber(newCount);
+          }
+        }
+      }
+      
+      // Sync total unique visitors counter
+      if (event.key === "pavan_global_total_unique_visitors") {
+        const newTotal = parseInt(event.newValue, 10);
+        if (!isNaN(newTotal)) {
+          const totalSpan = document.getElementById("totalVisitorCount");
+          if (totalSpan) {
+            const currentDisplay = totalSpan.textContent.replace(/,/g, '');
+            if (currentDisplay !== newTotal.toString()) {
+              totalSpan.textContent = formatNumber(newTotal);
+              // Highlight sync
+              totalSpan.style.transition = "all 0.2s";
+              totalSpan.style.textShadow = "0 0 4px #2c9cbb";
+              setTimeout(() => {
+                if (totalSpan) totalSpan.style.textShadow = "none";
+              }, 400);
+            }
+          }
+        }
+      }
+      
+      // Sync registered devices list (in case of cross-tab updates)
+      if (event.key === "pavan_registered_devices_set") {
+        // Re-sync total counter display without double-counting
+        const storedTotal = localStorage.getItem("pavan_global_total_unique_visitors");
+        if (storedTotal) {
+          const totalSpan = document.getElementById("totalVisitorCount");
+          if (totalSpan) {
+            totalSpan.textContent = formatNumber(parseInt(storedTotal, 10));
+          }
+        }
+      }
+    });
+    
+    // ========== INITIALIZE BOTH COUNTERS ==========
+    const personalCount = updatePersonalCounter();
+    const { totalUniqueVisitors, isNewVisitor } = updateTotalUniqueCounter();
+    
+    // Log stats to console
+    console.log(`📊 DSA MASTERY ANALYTICS:
+    - Your personal visits: ${personalCount}
+    - Total unique visitors (all time): ${totalUniqueVisitors}
+    - New visitor today: ${isNewVisitor ? 'YES 🎉' : 'No'}`);
+    
+    // ========== INTERACTIVE HOVER EFFECTS ==========
+    const personalCounterDiv = document.getElementById("personalCounter");
+    const totalCounterDiv = document.getElementById("totalVisitorCounter");
+    
+    function addHoverEffect(element, numberSpanId) {
+      if (element) {
+        element.addEventListener("mouseenter", () => {
+          const numberSpan = document.getElementById(numberSpanId);
+          if (numberSpan) {
+            numberSpan.style.transform = "scale(1.02)";
+            numberSpan.style.transition = "transform 0.2s ease";
+          }
+        });
+        element.addEventListener("mouseleave", () => {
+          const numberSpan = document.getElementById(numberSpanId);
+          if (numberSpan) {
+            numberSpan.style.transform = "scale(1)";
+          }
+        });
+      }
+    }
+    
+    addHoverEffect(personalCounterDiv, "personalVisitCount");
+    addHoverEffect(totalCounterDiv, "totalVisitorCount");
+    
+    // ========== FALLBACK FOR PRIVACY MODES ==========
+    try {
+      const testKey = "__test_ls_dsa_counter";
+      localStorage.setItem(testKey, "1");
+      localStorage.removeItem(testKey);
+    } catch (e) {
+      console.warn("localStorage not available. Counters will use fallback values.");
+      const personalSpan = document.getElementById("personalVisitCount");
+      const totalSpan = document.getElementById("totalVisitorCount");
+      if (personalSpan && personalSpan.textContent === "—") {
+        personalSpan.textContent = "1";
+      }
+      if (totalSpan && totalSpan.textContent === "—") {
+        totalSpan.textContent = "1";
+      }
+    }
+    
+    // ========== ADD STATISTICS SUMMARY TOOLTIP (optional) ==========
+    // Create a small floating stat summary on hover of total counter
+    if (totalCounterDiv) {
+      let tooltipTimeout;
+      totalCounterDiv.addEventListener("mouseenter", () => {
+        const tooltip = document.createElement("div");
+        tooltip.id = "statTooltip";
+        tooltip.textContent = `🌍 ${formatNumber(totalUniqueVisitors)} unique learners have visited this site!`;
+        tooltip.style.position = "fixed";
+        tooltip.style.background = "#1f4e66";
+        tooltip.style.color = "white";
+        tooltip.style.padding = "0.5rem 1rem";
+        tooltip.style.borderRadius = "2rem";
+        tooltip.style.fontSize = "0.75rem";
+        tooltip.style.fontWeight = "500";
+        tooltip.style.zIndex = "1000";
+        tooltip.style.whiteSpace = "nowrap";
+        tooltip.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+        tooltip.style.pointerEvents = "none";
+        document.body.appendChild(tooltip);
+        
+        const rect = totalCounterDiv.getBoundingClientRect();
+        tooltip.style.top = (rect.top - 35) + "px";
+        tooltip.style.left = (rect.left + rect.width / 2 - 100) + "px";
+        
+        tooltipTimeout = setTimeout(() => {
+          if (tooltip) tooltip.remove();
+        }, 2000);
+      });
+      
+      totalCounterDiv.addEventListener("mouseleave", () => {
+        const tooltip = document.getElementById("statTooltip");
+        if (tooltip) tooltip.remove();
+        if (tooltipTimeout) clearTimeout(tooltipTimeout);
+      });
+    }
+    
+    // ========== ADD CELEBRATION FOR MILESTONES ==========
+    if (totalUniqueVisitors > 0 && totalUniqueVisitors % 10 === 0 && isNewVisitor) {
+      // Celebrate every 10th unique visitor
+      const celebrationMsg = document.createElement("div");
+      celebrationMsg.textContent = `🎉 ${totalUniqueVisitors} unique learners and counting! 🎉`;
+      celebrationMsg.style.position = "fixed";
+      celebrationMsg.style.bottom = "20px";
+      celebrationMsg.style.left = "50%";
+      celebrationMsg.style.transform = "translateX(-50%)";
+      celebrationMsg.style.background = "linear-gradient(135deg, #f59e0b, #d97706)";
+      celebrationMsg.style.color = "white";
+      celebrationMsg.style.padding = "0.8rem 1.5rem";
+      celebrationMsg.style.borderRadius = "2rem";
+      celebrationMsg.style.fontWeight = "bold";
+      celebrationMsg.style.fontSize = "0.9rem";
+      celebrationMsg.style.zIndex = "1000";
+      celebrationMsg.style.boxShadow = "0 4px 20px rgba(0,0,0,0.2)";
+      celebrationMsg.style.animation = "fadeInUp 0.5s ease";
+      document.body.appendChild(celebrationMsg);
+      
+      setTimeout(() => {
+        celebrationMsg.style.opacity = "0";
+        celebrationMsg.style.transition = "opacity 0.5s";
+        setTimeout(() => celebrationMsg.remove(), 500);
+      }, 3000);
+    }
+    
+    // Add CSS animation for celebration
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+  })();
+</script>
+
+<!-- 
+  ============================================================
+  COUNTER EXPLANATION:
+  
+  1. "Your visits" - Tracks how many times YOU personally have visited the website.
+     Increments once per browser session (refresh won't increase it).
+     
+  2. "Total unique visitors" - Tracks unique devices/browsers that have accessed the site.
+     Each new device/browser gets counted only ONCE in the total.
+     This gives you a combined metric of how many unique people have visited your website.
+     
+  For a production website, you'd want to use a backend API to store the global counter,
+  but this demo uses localStorage with device fingerprinting to simulate unique visitor tracking
+  across the same browser on the same device.
+  ============================================================
+-->
+</body>
+</html>

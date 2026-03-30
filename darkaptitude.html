@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aptitude Practice | 20 Questions Per Topic (Dark Mode)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* DARK THEME */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0f1a;
+      color: #e0f0fa;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Header Styles */
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #b0d8f0, #7fc0dc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #9fc8e0;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #8fb0c2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .stats-badge {
+      display: inline-flex;
+      gap: 1.5rem;
+      background: #1a2a38;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: #b0d0e4;
+      border: 1px solid #2a4a60;
+    }
+
+    /* Topics Grid */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    /* Topic Card - Dark Theme */
+    .topic-card {
+      background: #111c26;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      border: 1px solid #2a4050;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+      border-color: #5f8faa;
+    }
+
+    /* Topic Header */
+    .topic-header {
+      background: linear-gradient(135deg, #10222e 0%, #0a1a24 100%);
+      padding: 1.2rem 1.5rem;
+      border-bottom: 3px solid #2a6d8c;
+    }
+
+    .topic-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #cae3f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topic-header h2 span {
+      font-size: 1.8rem;
+    }
+
+    .topic-desc {
+      font-size: 0.85rem;
+      color: #8fb0c2;
+      margin-top: 6px;
+    }
+
+    .question-count-badge {
+      display: inline-block;
+      background: #2a6d8c;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* Questions Section */
+    .questions-section {
+      padding: 1.2rem 1.5rem 1.5rem;
+      background: #0e1822;
+    }
+
+    .questions-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #9fc8e0;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #2a4a60;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .questions-list {
+      list-style: none;
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .questions-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .questions-list::-webkit-scrollbar-track {
+      background: #1a2a38;
+      border-radius: 10px;
+    }
+
+    .questions-list::-webkit-scrollbar-thumb {
+      background: #3a6e8c;
+      border-radius: 10px;
+    }
+
+    .question-item {
+      background: #0f1c28;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.7rem;
+      border-radius: 12px;
+      border-left: 4px solid #5f8faa;
+      font-size: 0.88rem;
+      color: #d0e4f0;
+      transition: background 0.2s;
+    }
+
+    .question-item:hover {
+      background: #152836;
+    }
+
+    .question-number {
+      display: inline-block;
+      background: #1e3a48;
+      border-radius: 20px;
+      padding: 0.15rem 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-right: 0.7rem;
+      color: #b0d4f0;
+    }
+
+    .question-text {
+      display: inline;
+      word-break: break-word;
+    }
+
+    /* Card Footer */
+    .card-footer {
+      padding: 0.8rem 1.5rem 1.2rem;
+      background: #0a141c;
+      border-top: 1px solid #2a4a60;
+      font-size: 0.75rem;
+      color: #8fb0c2;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #2a4a60;
+      font-size: 0.8rem;
+      color: #8fb0c2;
+    }
+
+    @media (max-width: 850px) {
+      .container {
+        padding: 1rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .topics-grid {
+        grid-template-columns: 1fr;
+      }
+      .questions-list {
+        max-height: 400px;
+      }
+    }
+
+    /* Home link for consistency with other pages */
+    .home-nav {
+      margin-bottom: 1.5rem;
+    }
+    .home-link {
+      background: rgba(30, 50, 70, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      color: #b0d4f0;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: 1px solid rgba(70, 150, 200, 0.4);
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .home-link:hover {
+      background: #2a4a60;
+      border-color: #5fa3c0;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="home-nav">
+    <a href="darkindex.html" class="home-link">🏠 Home Page</a>
+  </div>
+  
+  <div class="hero">
+    <h1> Aptitude Practice Hub</h1>
+    <h2>Pavan X Dhee Coding Lab</h2>
+    <p>20 carefully curated practice questions for each topic — no solutions, just pure practice to sharpen your skills.</p>
+    <div class="stats-badge">
+      <span>📖 20 Topics</span>
+      <span>✍️ 500+ Questions</span>
+      <span>🎯 Self-Assessment</span>
+    </div>
+  </div>
+
+  <div class="topics-grid">
+    
+    <!-- Topic: Percentages -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>🧩</span>Percentages
+        </h2>
+        <div class="topic-desc">Percentage change, successive percentages, profit/loss basics</div>
+        <div class="question-count-badge">28 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">Rahul's marks increased from 60 to 80 in mathematics. What is the percentage change?</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">If Rahul's marks changed from 50 to 30 in science, what is the percentage decrease?</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">A number is increased by 20% and then again by 10%. What is the net percentage change?</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">A number is increased by 10% and then decreased by 10%. What is the net percentage change?</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">A number is decreased by 20% and then again decreased by 20%. What is the net percentage change?</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">If a number is increased by 20%, by what percentage should it be decreased to return to the original?</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">If a number is decreased by 20%, by what percentage should it be increased to return to the original?</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">If Anirudh's salary is 10% more than Vijay's, by what percent is Vijay's salary less than Anirudh's?</span></li>
+          <li class="question-item"><span class="question-number">9</span> <span class="question-text">If Raj's income is 25% less than Rahul's, by what percent is Rahul's income greater than Raj's?</span></li>
+          <li class="question-item"><span class="question-number">10</span> <span class="question-text">Half of one third of one fifth of a number is 40. Find 80% of the number.</span></li>
+          <li class="question-item"><span class="question-number">11</span> <span class="question-text">15% of 45% of a number is 105.3. Find 24% of the number.</span></li>
+          <li class="question-item"><span class="question-number">12</span> <span class="question-text">If 25% of a number is added to 100, the result is the number itself. Find the number.</span></li>
+          <li class="question-item"><span class="question-number">13</span> <span class="question-text">If numerator increases by 20% and denominator by 25%, the fraction becomes 3/5. What is the original fraction?</span></li>
+          <li class="question-item"><span class="question-number">14</span> <span class="question-text">If 40% of a is b, then b% of 20 equals what in terms of a?</span></li>
+          <li class="question-item"><span class="question-number">15</span> <span class="question-text">An article priced at Rs 500 gets successive discounts of 20% and 40%. Find the selling price.</span></li>
+          <li class="question-item"><span class="question-number">16</span> <span class="question-text">The final price is Rs 448 after discounts of 20% and 30%. Find the original price.</span></li>
+          <li class="question-item"><span class="question-number">17</span> <span class="question-text">Three successive discounts of 10%, 15% and 20% are equivalent to a single discount of what percent?</span></li>
+          <li class="question-item"><span class="question-number">18</span> <span class="question-text">Out of 1200 boys and 800 girls, 40% boys and 20% girls failed. What percentage passed?</span></li>
+          <li class="question-item"><span class="question-number">19</span> <span class="question-text">If 60% boys and 55% girls passed and overall pass is 58%, find ratio of boys to girls.</span></li>
+          <li class="question-item"><span class="question-number">20</span> <span class="question-text">Out of 250 questions, Praveen got 40% of first 125 correct. How many must he get correct in remaining to reach 60% overall?</span></li>
+          <li class="question-item"><span class="question-number">21</span> <span class="question-text">Raj spends 25% on groceries, 20% on bills and 15% on travel. If he saves Rs 112000 annually, find his monthly salary.</span></li>
+          <li class="question-item"><span class="question-number">22</span> <span class="question-text">Shekhar spends 50% on groceries, 10% on travel and 20% of remaining on girlfriend. If he saves Rs 16000, find his income.</span></li>
+          <li class="question-item"><span class="question-number">23</span> <span class="question-text">Rajesh invested 20% more than Somesh. Somesh invested 10% less than Kunal. Total is Rs 17880. Find Kunal's investment.</span></li>
+          <li class="question-item"><span class="question-number">24</span> <span class="question-text">Fresh fruit has 64% water, dried fruit 20%. From 100 kg fresh, how much dried fruit is obtained?</span></li>
+          <li class="question-item"><span class="question-number">25</span> <span class="question-text">Coins of 25p, 50p and 1 Rs are in ratio 10:5:2. Total value Rs 1400. Find total number of coins.</span></li>
+          <li class="question-item"><span class="question-number">26</span> <span class="question-text">Rahul bought 12 dozens toys at Rs 300 per dozen and sold each at Rs 50. Find profit percentage.</span></li>
+          <li class="question-item"><span class="question-number">27</span> <span class="question-text">A shopkeeper buys toffees at 6 for Rs 1. How many should he sell per rupee to gain 20%?</span></li>
+          <li class="question-item"><span class="question-number">28</span> <span class="question-text">If selling price is doubled and profit triples, find the profit percent.</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Analyze patterns, draw diagrams, and think critically
+      </div>
+    </div>
+
+    <!-- Topic: Profit and Loss -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>🧩</span>Profit and Loss
+        </h2>
+        <div class="topic-desc">CP, SP, profit%, loss%, discounts, marked price</div>
+        <div class="question-count-badge">25 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">Vineet buys 6 mangoes for Rs 8 and sells them at 4 for Rs 6. Find his profit or loss percentage.</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">Vineet buys mangoes at 4 kg for Rs 28 and sells them at 6 kg for Rs 60. To earn Rs 108 profit, how many kg should he sell?</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">Ajay loses Rs 60 if he sells mangoes at Rs 6 each but gains Rs 65 if he sells them at Rs 6.25. How many mangoes does he sell?</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">Vijay buys mangoes at Rs 5 per dozen and equal quantity at Rs 4 per dozen. He sells at Rs 5.5 per dozen and gains Rs 50. How many dozens did he buy?</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">Vineet buys equal number of mangoes at 50 for Rs 10 and 40 for Rs 10. He sells them at 90 for Rs 20. Find his profit or loss percentage.</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">If cost of 6 apples equals selling price of 8 apples, find profit or loss percentage.</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">If cost of 8 apples equals selling price of 6 apples, find profit or loss percentage.</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">Cost price of 20 apples equals selling price of x apples. If profit is 25%, find x.</span></li>
+          <li class="question-item"><span class="question-number">9</span> <span class="question-text">By selling 45 apples a man gains the selling price of 30 apples. Find profit percentage.</span></li>
+          <li class="question-item"><span class="question-number">10</span> <span class="question-text">Shankar sells at cost price but gives 900 g instead of 1 kg. Find his profit percentage.</span></li>
+          <li class="question-item"><span class="question-number">11</span> <span class="question-text">If Shankar also cheats supplier by taking 1100 g per kg, find his profit percentage.</span></li>
+          <li class="question-item"><span class="question-number">12</span> <span class="question-text">Kanak bought 2 bikes at Rs 1200 each. One sold at 20% profit and other at 10% loss. Find net profit or loss.</span></li>
+          <li class="question-item"><span class="question-number">13</span> <span class="question-text">Kanak bought 2 bikes at Rs 1200 each. One sold at 20% profit and other at 20% loss. Find net profit or loss.</span></li>
+          <li class="question-item"><span class="question-number">14</span> <span class="question-text">Kanak sold 2 bikes at Rs 1800 each. One sold at 20% profit and other at 10% loss. Find net profit or loss percentage.</span></li>
+          <li class="question-item"><span class="question-number">15</span> <span class="question-text">Kanak sold 2 bikes at Rs 1200 each. One sold at 20% profit and other at 20% loss. Find net profit or loss.</span></li>
+          <li class="question-item"><span class="question-number">16</span> <span class="question-text">After giving 12.5% discount, Ajay still gains 16.66%. Find the marked price percentage above cost price.</span></li>
+          <li class="question-item"><span class="question-number">17</span> <span class="question-text">Ajay bought a rucksack for Rs 4000 and sold at 18% loss. With that money he bought a cooker and sold at 20% profit. Find overall profit or loss.</span></li>
+          <li class="question-item"><span class="question-number">18</span> <span class="question-text">Ajay marks goods to gain 40% and gives 15% discount. Find actual profit percentage.</span></li>
+          <li class="question-item"><span class="question-number">19</span> <span class="question-text">Mahesh's sales increase by 30% weekly. Difference between week 1 and week 3 is Rs 828. Find week 2 sales.</span></li>
+          <li class="question-item"><span class="question-number">20</span> <span class="question-text">Overall profit in 3 weeks is 71%. First and second week profits are 25% and 20%. Find third week profit.</span></li>
+          <li class="question-item"><span class="question-number">21</span> <span class="question-text">Milkman buys milk at x Rs/litre and sells at 3x Rs/litre, mixing 2L water per 10L milk. Find overall profit.</span></li>
+          <li class="question-item"><span class="question-number">22</span> <span class="question-text">After reducing MP by Rs 32, a shopkeeper still gains 15%. CP = Rs 320. Find profit if sold at MP.</span></li>
+          <li class="question-item"><span class="question-number">23</span> <span class="question-text">If selling price doubles and profit triples, find profit percentage.</span></li>
+          <li class="question-item"><span class="question-number">24</span> <span class="question-text">Selling 20 balls for Rs 1500 results in loss equal to CP of 5 balls. Find cost price per ball.</span></li>
+          <li class="question-item"><span class="question-number">25</span> <span class="question-text">A shopkeeper gains 25% and uses 25% less weight. Find total profit percentage.</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Analyze patterns, draw diagrams, and think critically
+      </div>
+    </div>
+
+    <!-- Topic: Ratios and Proportions -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>🧩</span>Ratios and Proportions
+        </h2>
+        <div class="topic-desc">Ratio, proportion, partnership, mixtures</div>
+        <div class="question-count-badge">20 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">Find the inverse ratio of 1:2:3.</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">If 15% of A is equal to 20% of B, then what is the ratio A:B?</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">An amount of Rs 2250 is divided among Ajay, Vijay and Rahul such that 1/6 of Ajay's share, 1/4 of Vijay's share and 2/5 of Rahul's share are equal. Find Ajay's share.</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">A sum is divided among A, B, C and D in the ratio 5:2:4:3. If C gets Rs 1000 more than D, find B's share.</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">Seats for Maths, Physics and Biology are in the ratio 5:7:8. They are increased by 40%, 50% and 75%. Find the new ratio.</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">The ratio of boys to girls is 3:2. If 20% boys and 25% girls scored ≥90%, what percentage scored less than 90%?</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">Rs 160 consists of 1 rupee, 50 paise and 25 paise coins in ratio 4:5:6. Find the number of 25 paise coins.</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">Income ratio of Ajay and Vijay is 3:2 and expenditure ratio is 5:3. If both save Rs 1000, find Ajay's income.</span></li>
+          <li class="question-item"><span class="question-number">9</span> <span class="question-text">Students in 3 batches are in ratio 2:3:5. After adding 20 students to each, ratio becomes 4:5:7. Find original total students.</span></li>
+          <li class="question-item"><span class="question-number">10</span> <span class="question-text">Divide Rs 500 among P, Q, R and S such that (P+Q) = 3(R+S), Q = 4R and R = 1.5S. Find Q's share.</span></li>
+          <li class="question-item"><span class="question-number">11</span> <span class="question-text">Income of A is 10% more than B and B is 20% less than C. Find ratio A:B:C.</span></li>
+          <li class="question-item"><span class="question-number">12</span> <span class="question-text">Tickets priced Rs 1000, Rs 500 and Rs 200 are sold in ratio 3:2:5. Total collection is Rs 2.5 crore. Find number of tickets sold.</span></li>
+          <li class="question-item"><span class="question-number">13</span> <span class="question-text">Find three numbers in ratio 1:2:3 such that sum of their squares is 504.</span></li>
+          <li class="question-item"><span class="question-number">14</span> <span class="question-text">Ratio of marks of A and B is 5:7. If 5A = 3B + 12, find their marks.</span></li>
+          <li class="question-item"><span class="question-number">15</span> <span class="question-text">Salary of A is 80% of B and salary of C is 120% of A. Find ratio A:B:C.</span></li>
+          <li class="question-item"><span class="question-number">16</span> <span class="question-text">In 120 litres mixture, milk:water = 2:1. To make it 1:2, how much water should be added?</span></li>
+          <li class="question-item"><span class="question-number">17</span> <span class="question-text">If 0.75 : x :: 5 : 8, find x.</span></li>
+          <li class="question-item"><span class="question-number">18</span> <span class="question-text">Find the fourth proportional to 3, 4, 15.</span></li>
+          <li class="question-item"><span class="question-number">19</span> <span class="question-text">Speeds of three bikes are in ratio 3:5:7. Find ratio of time taken for same distance.</span></li>
+          <li class="question-item"><span class="question-number">20</span> <span class="question-text">Find the mean proportional between 6 and 24.</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Solve each question independently | No solutions provided
+      </div>
+    </div>
+
+    <!-- Topic: Simple Interest and Compound Interest -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>🧮</span> Simple & Compound Interest
+        </h2>
+        <div class="topic-desc">SI, CI, principal, rate, time, amount calculations</div>
+        <div class="question-count-badge">28 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">A sum of Rs.10000 is lent out for 2 years at 5% p.a. Find the simple interest.</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">A sum of Rs.8000 is lent out for 2 years at 6% p.a. Find the amount.</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">A sum of Rs.7500 is lent out for 9 months at 6% per annum. Find the simple interest.</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">A sum of Rs.6300 is lent out for 8 months at 7% per annum. Find the simple interest.</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">A sum of Rs.1725 is lent out from May 1st to July 12th at 8% per annum. Find the simple interest.</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">The simple interest obtained on a sum of Rs.800 in 2 years is Rs.96. Find the rate of interest per annum.</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">The amount obtained on a certain sum in 3 years at 12% per annum is Rs.9792. Find the sum.</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">A sum of Rs.16800 is divided into 2 parts and lent out. One at 6% p.a. and the other at 8% p.a. After 2 years the total amount is Rs.19000. Find the sum lent at 6%.</span></li>
+          <li class="question-item"><span class="question-number">9</span> <span class="question-text">In what time will the simple interest on a certain sum become 0.125 times of the principal at 10% per annum?</span></li>
+          <li class="question-item"><span class="question-number">10</span> <span class="question-text">The simple interest accrued in 2 years on a principal of Rs.24000 is one-eighth of the principal. What is the rate of interest?</span></li>
+          <li class="question-item"><span class="question-number">11</span> <span class="question-text">Ramesh took a loan at 6% per annum and it increased every year by 1.5%. If he pays Rs.8190 as interest at the end of 3 years, what is the loan amount?</span></li>
+          <li class="question-item"><span class="question-number">12</span> <span class="question-text">Ramesh invested a certain sum at 5% p.a. and another sum at 6% p.a. He gained Rs.1220 as total interest for one year. If the rates were interchanged, he would have earned Rs.20 less. What is the second sum?</span></li>
+          <li class="question-item"><span class="question-number">13</span> <span class="question-text">A sum of Rs.2600 is divided into two parts. One part is lent at 10% p.a. for 5 years and the other at 9% p.a. for 6 years. The simple interests are equal. Find the second sum.</span></li>
+          <li class="question-item"><span class="question-number">14</span> <span class="question-text">Find the compound interest on Rs.15000 for 2 years at 10% per annum compounded annually.</span></li>
+          <li class="question-item"><span class="question-number">15</span> <span class="question-text">Find the compound interest on Rs.15000 for 1 year at 10% p.a. compounded half-yearly.</span></li>
+          <li class="question-item"><span class="question-number">16</span> <span class="question-text">Find the compound interest on Rs.33000 for 6 months at 12% p.a. compounded quarterly.</span></li>
+          <li class="question-item"><span class="question-number">17</span> <span class="question-text">The compound interest on Rs.15800 for 2 years is Rs.7716.72. Find the rate of interest.</span></li>
+          <li class="question-item"><span class="question-number">18</span> <span class="question-text">What is the approximate compound interest on Rs.4890 at 5% p.a. for 3 years?</span></li>
+          <li class="question-item"><span class="question-number">19</span> <span class="question-text">The simple interest on Rs.22500 for 4 years is Rs.10800. What is the compound interest for 2 years at the same rate?</span></li>
+          <li class="question-item"><span class="question-number">20</span> <span class="question-text">The simple interest on a sum for 8 years at 13% p.a. is Rs.6500. Find the compound interest for 2 years at 8% p.a.</span></li>
+          <li class="question-item"><span class="question-number">21</span> <span class="question-text">Find the difference between simple interest and compound interest on Rs.7300 at 6% p.a. for 2 years.</span></li>
+          <li class="question-item"><span class="question-number">22</span> <span class="question-text">The difference between simple interest and compound interest for 2 years at 5% p.a. is Rs.15. Find the sum.</span></li>
+          <li class="question-item"><span class="question-number">23</span> <span class="question-text">A bank offers 10% compound interest p.a. compounded half-yearly. A customer deposits Rs.1900 on Jan 1 and July 1. Find the interest earned in one year.</span></li>
+          <li class="question-item"><span class="question-number">24</span> <span class="question-text">There is a 60% increase in a sum in 3 years at simple interest. Find the compound interest on Rs.15000 for 2 years at the same rate.</span></li>
+          <li class="question-item"><span class="question-number">25</span> <span class="question-text">The least number of years in which a sum doubles at 20% compound interest is:</span></li>
+          <li class="question-item"><span class="question-number">26</span> <span class="question-text">A sum doubles in 8 years at compound interest. In how many years will it become 16 times?</span></li>
+          <li class="question-item"><span class="question-number">27</span> <span class="question-text">A sum doubles in 5 years at simple interest. In how many years will it become 5 times?</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Solve each question independently | No solutions provided
+      </div>
+    </div>
+
+    <!-- Topic: Time and Work -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>⏱️</span> Time and Work
+        </h2>
+        <div class="topic-desc">Work efficiency, pipes & cisterns, man-days</div>
+        <div class="question-count-badge">8 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">A can do a work in 15 days and B in 20 days. If they work together for 5 days, then the fraction of work left is:</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">A can construct a road in 16 days and B in 20 days. With the help of C, they completed the job in 8 days. In how many days can C alone do the work?</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">A, B and C can do a piece of work in 10, 20 and 30 days respectively. In how many days can A complete the work if B and C assist him on every third day?</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">A can finish a job 60 days earlier than B. Working together, in how many days can they complete the work?</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">A alone can complete a work in 8 days and B in 12 days. They undertake the work for Rs.6000. With the help of C, they finish the work in 4 days. How much should C be paid?</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">A can do a piece of work in 8 days; B and C together can do it in 4 days, while A and C together can do it in 3 days. In how many days can B alone complete the work?</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">A can complete a work in the same time as B and C together. If A and B together can do it in 8 days and C alone in 40 days, then in how many days can B alone complete the work?</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">A completes 80% of a work in 10 days. He then calls B, and together they finish the remaining work in 1 day. In how many days can B alone complete the whole work?</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Solve each question independently | No solutions provided
+      </div>
+    </div>
+
+    <!-- Topic: Averages -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>📊</span> Averages
+        </h2>
+        <div class="topic-desc">Mean, weighted average, replacement problems</div>
+        <div class="question-count-badge">21 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">Find the average of first 30 natural numbers.</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">The average of 2, 7, 6 and x is 5 and the average of 18, 1, 6, x and y is 10. What is the value of y?</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">The average weight of 15 boys in a class is 40 kg and that of the remaining 10 boys is 50 kg. Find the average weights of all the boys in the class.</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">The average of five consecutive odd numbers is 83. What is the fourth number in the descending order?</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">The average of 4 consecutive even numbers A, B, C and D respectively is 79. What is the product of A and D?</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">The average age of P boys is x years and of q girls is y years. What is the average age of all together?</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">Nine persons went to a hotel for taking their meals. Eight of them spent Rs 12 each and the ninth spent Rs 8 more than the average expenditure of all nine. What was the total money spent by them?</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">In the first 20 overs of a cricket game, the run rate was only 5. What should be the run rate in the remaining 30 overs to reach the target of 295 runs?</span></li>
+          <li class="question-item"><span class="question-number">9</span> <span class="question-text">A museum has an average of 550 visitors on Sundays and 250 on other days. What is the average number of visitors per day in a month of 30 days beginning with a Sunday?</span></li>
+          <li class="question-item"><span class="question-number">10</span> <span class="question-text">The average age of a committee of 8 members is 40 years. A member aged 55 years retired and was replaced by another aged 39 years. What is the new average age?</span></li>
+          <li class="question-item"><span class="question-number">11</span> <span class="question-text">The average weight of 8 persons increases by 2.5 kg when a new person replaces one weighing 65 kg. What might be the weight of the new person?</span></li>
+          <li class="question-item"><span class="question-number">12</span> <span class="question-text">The captain of a cricket team of 11 members is 29 years old and the wicket keeper is 26 years old. If their ages are excluded, the average age of remaining players is one year less than the team average. What is the average age of the team?</span></li>
+          <li class="question-item"><span class="question-number">13</span> <span class="question-text">The average of 10 numbers is calculated as 15. One number 36 was wrongly read as 26. What is the correct average?</span></li>
+          <li class="question-item"><span class="question-number">14</span> <span class="question-text">The average age of 40 students is 8 years. Including the teacher increases the average by 0.5 years. What is the age of the teacher?</span></li>
+          <li class="question-item"><span class="question-number">15</span> <span class="question-text">A contractor employs 20 male, 15 female and 5 child workers. Daily wages are Rs 25, Rs 20 and Rs 8 respectively. What is the average wage per day?</span></li>
+          <li class="question-item"><span class="question-number">16</span> <span class="question-text">The average monthly income of a family of four is Rs 10000. After one daughter leaves, the average becomes Rs 9500. What was her income?</span></li>
+          <li class="question-item"><span class="question-number">17</span> <span class="question-text">Average salary of 24 workers is Rs 2800. The supervisor earns Rs 6500. What is the average salary of all 25 employees?</span></li>
+          <li class="question-item"><span class="question-number">18</span> <span class="question-text">The average marks of 9 students is 54. Three scored 80, 56 and 62. What is the average of remaining 6 students?</span></li>
+          <li class="question-item"><span class="question-number">19</span> <span class="question-text">If the average of 11 consecutive odd numbers is 17, what is the difference between the smallest and largest number?</span></li>
+          <li class="question-item"><span class="question-number">20</span> <span class="question-text">Average age of 30 boys is 15. A 21-year-old leaves and a new boy joins. New average is 14.8. What is the age of the new boy?</span></li>
+          <li class="question-item"><span class="question-number">21</span> <span class="question-text">The average weight of 10 men decreases by 1 kg when a 50 kg man is replaced. What is the weight of the new man?</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Analyze patterns, draw diagrams, and think critically
+      </div>
+    </div>
+
+    <!-- Topic: Mixtures and Alligations -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>🧪</span> Mixtures and Alligations
+        </h2>
+        <div class="topic-desc">Alligation rule, mixing ratios, replacement problems</div>
+        <div class="question-count-badge">15 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">In what ratio must a shopkeeper mix two types of rice worth Rs 50 per kg and Rs 70 per kg so that the average cost is Rs 65 per kg?</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">A container has 50 litres of milk. 10 litres are removed and replaced with water. This is repeated once more. How much milk is left now?</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">In what ratio must sugar at Rs 1.15 and Rs 1.24 per kg be mixed so that selling at Rs 1.50 gives 25% gain?</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">How much water should be mixed with 36 litres of milk costing Rs 5 per litre so that the mixture costs Rs 3.60 per litre?</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">How many kg of sugar at 50 paise per kg must be mixed with 25 kg at 34 paise per kg so that selling at 44 paise gives 10% gain?</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">How much sugar at Rs 9.5 per kg should be added to 17 kg of tea at Rs 20 per kg so that the mixture is worth Rs 13 per kg?</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">A hospital mixture costs Rs 7.62 per litre with 5% salt. Another mixture has 75% water and costs Rs 7.82 per litre. What will be the cost of 5 litres mixture containing 18% salt?</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">A vessel has a mixture with 20% spirit. 5 litres are removed and replaced with water. Now spirit is 12%. What is the total quantity of the vessel?</span></li>
+          <li class="question-item"><span class="question-number">9</span> <span class="question-text">An alloy has 65% copper. Another has copper and nickel in ratio 17:3. In what ratio should they be mixed so that copper is 4 times nickel?</span></li>
+          <li class="question-item"><span class="question-number">10</span> <span class="question-text">One mixture has 88% sulphur and another has 70%. In what ratio should they be mixed to get 84% sulphur?</span></li>
+          <li class="question-item"><span class="question-number">11</span> <span class="question-text">In what ratio should water be mixed with juice costing Rs 12 per litre to obtain mixture worth Rs 8 per litre?</span></li>
+          <li class="question-item"><span class="question-number">12</span> <span class="question-text">In what proportion should water be mixed with milk to gain 40% by selling at cost price?</span></li>
+          <li class="question-item"><span class="question-number">13</span> <span class="question-text">A 400 gm solution has 30% spirit. What ratio of spirit should be added to make it 80%?</span></li>
+          <li class="question-item"><span class="question-number">14</span> <span class="question-text">One alloy has silver and copper in ratio 5:1 and another in 7:2. What quantities should be mixed to make 5 lb alloy with 80% silver?</span></li>
+          <li class="question-item"><span class="question-number">15</span> <span class="question-text">Box A has wheat at Rs 30/kg and Box B at Rs 40/kg. Mixed in ratio 4:7, what is the price per kg of the mixture?</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Analyze patterns, draw diagrams, and think critically
+      </div>
+    </div>
+
+    <!-- Topic: Time Speed and Distance -->
+    <div class="topic-card">
+      <div class="topic-header">
+        <h2>
+          <span>🚗</span> Time Speed and Distance
+        </h2>
+        <div class="topic-desc">Speed, distance, time, trains, races, boats & streams</div>
+        <div class="question-count-badge">43 Practice Questions</div>
+      </div>
+      <div class="questions-section">
+        <div class="questions-title">
+          <span>📝</span> Practice Questions (Selected)
+        </div>
+        <ul class="questions-list">
+          <li class="question-item"><span class="question-number">1</span> <span class="question-text">A person crosses an 800 m long street in 10 minutes. What is his speed in km/hr?</span></li>
+          <li class="question-item"><span class="question-number">2</span> <span class="question-text">A car covers a distance at 60 kmph in 5 hours. To cover the same distance in 2 hours, what speed is required?</span></li>
+          <li class="question-item"><span class="question-number">3</span> <span class="question-text">If a person walks at 18 km/hr instead of 12 km/hr, he would have walked 40 km more. What is the actual distance?</span></li>
+          <li class="question-item"><span class="question-number">4</span> <span class="question-text">A train can travel 100% faster than a car. Both start together and reach 50 km away at the same time, but the train stops for 20 minutes. Find the speed of the train.</span></li>
+          <li class="question-item"><span class="question-number">5</span> <span class="question-text">The ratio of speeds of two trains is 4:3. If the second train covers 100 km in 2 hours, what is the speed of the first train?</span></li>
+          <li class="question-item"><span class="question-number">6</span> <span class="question-text">A man completes a journey in 10 hours, travelling first half at 20 km/hr and second half at 25 km/hr. Find total distance.</span></li>
+          <li class="question-item"><span class="question-number">7</span> <span class="question-text">In a 100 m race, A gives B 10 m and C 25 m. How much can B give C?</span></li>
+          <li class="question-item"><span class="question-number">8</span> <span class="question-text">A train at 44 kmph crosses a man in 10 seconds. Find train length.</span></li>
+          <li class="question-item"><span class="question-number">9</span> <span class="question-text">A 160 m train passes a man running at 4 kmph in same direction in 10 sec. Find train speed.</span></li>
+          <li class="question-item"><span class="question-number">10</span> <span class="question-text">Boat speed 14 kmph, stream 6 kmph. Time for 80 km downstream?</span></li>
+          <li class="question-item"><span class="question-number">11</span> <span class="question-text">Upstream 8h36m, downstream 3h48m. Find ratio boat:stream.</span></li>
+          <li class="question-item"><span class="question-number">12</span> <span class="question-text">Two persons run on 200 m circular track at 5 m/min and 20 m/min. Find first meeting time.</span></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        💡 Solve each question independently | No solutions provided
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>📘 20+ practice questions per topic — No solutions provided intentionally. Challenge yourself to find the answers!</p>
+    <p style="margin-top: 0.5rem;">✔️ Aptitude Mastery | Practice consistently for best results</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Pavan | DSA Mastery • Light Forge + Aptitude</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* DARK THEME OVERRIDE */
+    body {
+      background: linear-gradient(145deg, #0a0f1a 0%, #0c1220 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    /* dark subtle pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 20% 35%, rgba(100, 180, 250, 0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glass-container {
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(15, 25, 35, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 2.5rem;
+      border: 1px solid rgba(70, 150, 200, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    /* hero section */
+    .hero {
+      padding: 2.8rem 2.5rem 1.5rem 2.5rem;
+      border-bottom: 1px solid rgba(70, 150, 200, 0.25);
+      background: rgba(10, 18, 28, 0.6);
+      position: relative;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1e2a3a;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: #7ab3c8;
+      border: 1px solid rgba(70, 150, 200, 0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #c0e0ff 0%, #5fa3c0 40%, #8bcbdf 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .title-highlight {
+      background: linear-gradient(120deg, #f3b35e, #ffcf8a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: #b0d0e0;
+      font-weight: 450;
+      max-width: 85%;
+      border-left: 3px solid #3a9fc0;
+      padding-left: 1.2rem;
+      margin-top: 0.6rem;
+    }
+
+    .motivation-block {
+      margin-top: 1.8rem;
+      background: #101e2c;
+      border-radius: 2rem;
+      padding: 1rem 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      border: 1px solid rgba(70, 150, 200, 0.3);
+    }
+
+    .quote-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+    }
+
+    .motivation-text {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #c4e0f0;
+    }
+
+    .motivation-text strong {
+      color: #f3b35e;
+      font-weight: 700;
+    }
+
+    /* ========= DUAL COUNTER STYLES ========= */
+    .counters-container {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .visitor-counter {
+      background: rgba(20, 32, 44, 0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      padding: 0.5rem 1.2rem 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid rgba(70, 150, 200, 0.5);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+      font-family: monospace;
+    }
+    .visitor-counter:hover {
+      border-color: #5fa3c0;
+      background: #1e2e3e;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+    .counter-icon {
+      font-size: 1.35rem;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+    }
+    .counter-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: #9fc8dd;
+      text-transform: uppercase;
+      font-family: 'Inter', system-ui;
+    }
+    .counter-number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #9ac2d9, #6fb4d0);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      font-family: 'Inter', 'SF Mono', monospace;
+    }
+    .counter-badge {
+      background: #1f2f3c;
+      border-radius: 40px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #aacfe2;
+    }
+
+    /* Total Unique Visitors Counter - Special Styling */
+    .total-counter {
+      border: 1px solid rgba(218, 165, 32, 0.5);
+      background: linear-gradient(135deg, rgba(30, 35, 40, 0.98), rgba(25, 30, 38, 0.95));
+    }
+    .total-counter .counter-number {
+      background: linear-gradient(125deg, #f3b35e, #f5b84d);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .total-counter .counter-label {
+      color: #f3b35e;
+    }
+    .total-counter .counter-badge {
+      background: #2a2a1c;
+      color: #f5bc70;
+    }
+
+    .cta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 2.8rem 2.5rem;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    .choice-card {
+      flex: 1;
+      min-width: 260px;
+      background: #111c26;
+      border-radius: 1.8rem;
+      padding: 2rem 1.8rem;
+      transition: all 0.25s ease;
+      border: 1px solid #2a4050;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .choice-card:hover {
+      transform: translateY(-6px);
+      border-color: #5f8faa;
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.4);
+      background: #13222e;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .choice-card h3 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #cae3f0;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.2px;
+    }
+
+    .choice-card p {
+      color: #9ebed0;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      margin: 1rem 0 1.6rem 0;
+    }
+
+    .pill-btn {
+      display: inline-block;
+      background: #1e2f3c;
+      border: 1px solid #3f6b84;
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #cce3f0;
+      text-decoration: none;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .pill-btn:hover {
+      background: #2a6d8c;
+      color: white;
+      border-color: #5fa3c0;
+      box-shadow: 0 4px 12px rgba(70, 150, 200, 0.3);
+    }
+
+    .intermediate-badge {
+      background: #2a2a1e;
+      border-color: #b48c48;
+    }
+
+    .aptitude-card {
+      border: 1px solid #6b5b8e;
+      background: #141a28;
+    }
+
+    .aptitude-card:hover {
+      border-color: #9b7fd9;
+    }
+
+    .aptitude-badge {
+      background: #26223a;
+      border-color: #8f79c0;
+      color: #cfbefa;
+    }
+
+    .live-session {
+      background: #0e1a24;
+      border-radius: 1.8rem;
+      margin: 0 2rem 2rem 2rem;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border: 1px solid #2e4b60;
+      backdrop-filter: blur(2px);
+    }
+
+    .live-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pulse {
+      width: 12px;
+      height: 12px;
+      background: #e05a6f;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(224, 90, 111, 0.5);
+      animation: pulse-red 1.5s infinite;
+    }
+
+    @keyframes pulse-red {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 111, 0.5);}
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(224, 90, 111, 0);}
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 111, 0);}
+    }
+
+    .live-text span {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #e07a8a;
+    }
+
+    .live-text p {
+      font-size: 0.95rem;
+      color: #b0d0e4;
+    }
+
+    .join-btn {
+      background: #e05a6f;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 60px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(224, 90, 111, 0.3);
+    }
+
+    .join-btn:hover {
+      background: #c7455a;
+      transform: scale(1.02);
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 1.5rem 2rem 2rem;
+      font-size: 0.8rem;
+      color: #8fb0c2;
+      border-top: 1px solid #2a4558;
+      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 780px) {
+      body {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      .tagline {
+        font-size: 1rem;
+        max-width: 100%;
+      }
+      .cta-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.8rem;
+      }
+      .live-session {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 1.2rem 1.8rem 1.2rem;
+      }
+      .hero {
+        padding: 1.5rem;
+      }
+      .counters-container {
+        position: relative;
+        top: auto;
+        right: auto;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        width: 100%;
+      }
+      .visitor-counter {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .choice-prompt {
+      font-size: 1rem;
+      font-weight: 500;
+      background: transparent;
+      padding: 0.5rem 0 0 0;
+      color: #b0cce0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    hr {
+      border-color: #2a4a60;
+      margin: 0.5rem 0;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      background: #1f2e3a;
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #b0d0e0;
+      margin-right: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    .badge-group {
+      margin-top: 0.7rem;
+    }
+
+    .aptitude-tag {
+      background: #2a2442;
+      color: #cfbefa;
+    }
+
+    .stats-bar {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-container">
+  <div class="hero">
+    
+    <div class="counters-container">
+      <div class="visitor-counter" id="personalCounter">
+
+              <a href="darkindex.html" class="pill-btn"> Dark Theme </a>
+          <a href="index.html" class="pill-btn"> Lite Theme </a>
+      </div>    
+    </div>
+
+    <div class="badge">DSA FORGE • LEETCODE ARENA + APTITUDE LAB</div>
+    <h1>Pavan X<span class="title-highlight"> DHEE CODING LAB</span></h1>
+    <div class="tagline">
+      “Remember the guy who gave up? <strong>No one does</strong>. Either!”
+    </div>
+    <div class="motivation-block">
+      <div class="motivation-text">
+        <strong>So shall we get started?</strong> — Pick your weapon, break the matrix.
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-grid" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+    <div class="choice-card">
+      <h3>Rookie Rise</h3>
+      <p>Foundations • Arrays • Strings • Recursion<br> 
+      Begin your journey with structured patterns & logic.</p>
+      <div class="badge-group">
+        <span class="skill-tag">Beginner friendly</span>
+        <span class="skill-tag">150+ problems</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="darksubpage.html" class="pill-btn">Start Grind →</a>
+      </div>
+    </div>
+
+    <div class="choice-card">
+      <h3>Intermediate Coder</h3>
+      <p>Graphs • DP • Trees • Advanced Binary Search<br>
+      Master complex topics & real interview patterns.</p>
+      <div class="badge-group">
+        <span class="skill-tag">LeetCode contest</span>
+        <span class="skill-tag">400+ problems</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="darkintermediate.html" class="pill-btn intermediate-badge">Level Up →</a>
+      </div>
+    </div>
+
+    <div class="choice-card aptitude-card">
+      <h3>Aptitude Ignition</h3>
+      <p>Quantitative • Logical Reasoning • Data Interpretation</p>
+      <div class="badge-group">
+        <span class="skill-tag aptitude-tag">Practice Questions</span>
+        <span class="skill-tag aptitude-tag">100% Placement Oriented</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="darkaptitude.html" class="pill-btn">Fire Up →</a>
+      </div>
+    </div>
+
+    <div class="choice-card">
+      <h3>Pro Max : Coming Soon!</h3>
+      <p>System design • Advanced Algorithms • Code optimisation<br>
+      Crack FAANG & architect high-performance solutions.</p>
+      <div class="badge-group">
+        <span class="skill-tag">Hardcore mode</span>
+        <span class="skill-tag">Mentorship</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="#" class="pill-btn">Unleash →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="live-session">
+    <div class="live-text">
+      <div class="pulse"></div>
+      <span>LIVE NOW</span>
+      <p>To attend live Sessions of DSA, Aptitude & Coding Sessions join :</p>
+    </div>
+    <a href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" class="join-btn">JOIN COMMUNITY HUB</a>
+  </div>
+
+  <div class="footer-note">
+    <div class="choice-prompt">
+      Choose your path — consistency over intensity
+    </div>
+    <hr style="margin: 1rem 0 0.5rem 0;">
+    <div>“No one remembers the one who gave up” — keep building, keep solving.</div>
+    <div style="margin-top: 0.6rem;">Aptitude resources updated weekly • DSA + Aptitude = Complete Warrior</div>
+    <div style="margin-top: 0.4rem;">Instagram @codewithpavanprakash</div>
+    <div class="stats-bar" style="margin-top: 1rem; font-size: 0.7rem; opacity: 0.7;">
+      📊 Real-time analytics • Unique device tracking
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const PERSONAL_STORAGE_KEY = "pavan_dsa_personal_visits";
+    const PERSONAL_SESSION_FLAG = "pavan_personal_session_recorded";
+    const TOTAL_UNIQUE_KEY = "pavan_dsa_total_unique_visitors";
+    const DEVICE_ID_KEY = "pavan_device_unique_id";
+    
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    function getOrCreateDeviceId() {
+      let deviceId = localStorage.getItem(DEVICE_ID_KEY);
+      if (!deviceId) {
+        const timestamp = Date.now();
+        const random = Math.random().toString(36).substring(2, 15);
+        const navInfo = (navigator.userAgent || '').substring(0, 50).replace(/[^a-zA-Z0-9]/g, '');
+        deviceId = `dev_${timestamp}_${random}_${navInfo.substring(0, 20)}`;
+        localStorage.setItem(DEVICE_ID_KEY, deviceId);
+      }
+      return deviceId;
+    }
+    
+    function updatePersonalCounter() {
+      let currentVisits = 0;
+      const storedVisits = localStorage.getItem(PERSONAL_STORAGE_KEY);
+      if (storedVisits !== null && !isNaN(parseInt(storedVisits, 10))) {
+        currentVisits = parseInt(storedVisits, 10);
+      } else {
+        currentVisits = 0;
+      }
+      
+      const alreadyRecorded = sessionStorage.getItem(PERSONAL_SESSION_FLAG) === "true";
+      
+      if (!alreadyRecorded) {
+        currentVisits += 1;
+        localStorage.setItem(PERSONAL_STORAGE_KEY, currentVisits);
+        sessionStorage.setItem(PERSONAL_SESSION_FLAG, "true");
+      }
+      
+      const finalCount = (isNaN(currentVisits) || currentVisits < 0) ? 0 : currentVisits;
+      const personalSpan = document.getElementById("personalVisitCount");
+      if (personalSpan) {
+        personalSpan.textContent = formatNumber(finalCount);
+        setTimeout(() => {
+          if (personalSpan) personalSpan.style.transform = "scale(1.05)";
+          setTimeout(() => {
+            if (personalSpan) personalSpan.style.transform = "scale(1)";
+          }, 150);
+        }, 50);
+      }
+      return finalCount;
+    }
+    
+    function updateTotalUniqueCounter() {
+      const deviceId = getOrCreateDeviceId();
+      const TOTAL_VISITORS_KEY = "pavan_global_total_unique_visitors";
+      const REGISTERED_DEVICES_KEY = "pavan_registered_devices_set";
+      
+      let registeredDevices = [];
+      const storedDevices = localStorage.getItem(REGISTERED_DEVICES_KEY);
+      if (storedDevices) {
+        try {
+          registeredDevices = JSON.parse(storedDevices);
+        } catch(e) {
+          registeredDevices = [];
+        }
+      }
+      
+      let totalUniqueVisitors = 0;
+      const storedTotal = localStorage.getItem(TOTAL_VISITORS_KEY);
+      if (storedTotal !== null && !isNaN(parseInt(storedTotal, 10))) {
+        totalUniqueVisitors = parseInt(storedTotal, 10);
+      } else {
+        totalUniqueVisitors = 0;
+      }
+      
+      const isDeviceRegistered = registeredDevices.includes(deviceId);
+      
+      if (!isDeviceRegistered) {
+        registeredDevices.push(deviceId);
+        localStorage.setItem(REGISTERED_DEVICES_KEY, JSON.stringify(registeredDevices));
+        totalUniqueVisitors += 1;
+        localStorage.setItem(TOTAL_VISITORS_KEY, totalUniqueVisitors);
+        console.log(`🎉 New unique visitor! Total unique visitors: ${totalUniqueVisitors}`);
+      }
+      
+      const totalSpan = document.getElementById("totalVisitorCount");
+      if (totalSpan) {
+        totalSpan.textContent = formatNumber(totalUniqueVisitors);
+        if (!isDeviceRegistered) {
+          totalSpan.style.transition = "all 0.3s ease";
+          totalSpan.style.transform = "scale(1.1)";
+          totalSpan.style.textShadow = "0 0 8px #f59e0b";
+          setTimeout(() => {
+            if (totalSpan) {
+              totalSpan.style.transform = "scale(1)";
+              setTimeout(() => {
+                if (totalSpan) totalSpan.style.textShadow = "none";
+              }, 500);
+            }
+          }, 300);
+        }
+      }
+      
+      return { totalUniqueVisitors, isNewVisitor: !isDeviceRegistered };
+    }
+    
+    window.addEventListener("storage", function(event) {
+      if (event.key === PERSONAL_STORAGE_KEY) {
+        const newCount = parseInt(event.newValue, 10);
+        if (!isNaN(newCount)) {
+          const personalSpan = document.getElementById("personalVisitCount");
+          if (personalSpan && personalSpan.textContent.replace(/,/g, '') !== newCount.toString()) {
+            personalSpan.textContent = formatNumber(newCount);
+          }
+        }
+      }
+      if (event.key === "pavan_global_total_unique_visitors") {
+        const newTotal = parseInt(event.newValue, 10);
+        if (!isNaN(newTotal)) {
+          const totalSpan = document.getElementById("totalVisitorCount");
+          if (totalSpan) {
+            const currentDisplay = totalSpan.textContent.replace(/,/g, '');
+            if (currentDisplay !== newTotal.toString()) {
+              totalSpan.textContent = formatNumber(newTotal);
+              totalSpan.style.transition = "all 0.2s";
+              totalSpan.style.textShadow = "0 0 4px #5fa3c0";
+              setTimeout(() => {
+                if (totalSpan) totalSpan.style.textShadow = "none";
+              }, 400);
+            }
+          }
+        }
+      }
+      if (event.key === "pavan_registered_devices_set") {
+        const storedTotal = localStorage.getItem("pavan_global_total_unique_visitors");
+        if (storedTotal) {
+          const totalSpan = document.getElementById("totalVisitorCount");
+          if (totalSpan) {
+            totalSpan.textContent = formatNumber(parseInt(storedTotal, 10));
+          }
+        }
+      }
+    });
+    
+    const personalCount = updatePersonalCounter();
+    const { totalUniqueVisitors, isNewVisitor } = updateTotalUniqueCounter();
+    console.log(`📊 DSA MASTERY ANALYTICS:
+    - Your personal visits: ${personalCount}
+    - Total unique visitors (all time): ${totalUniqueVisitors}
+    - New visitor today: ${isNewVisitor ? 'YES 🎉' : 'No'}`);
+    
+    const personalCounterDiv = document.getElementById("personalCounter");
+    const totalCounterDiv = document.getElementById("totalVisitorCounter");
+    
+    function addHoverEffect(element, numberSpanId) {
+      if (element) {
+        element.addEventListener("mouseenter", () => {
+          const numberSpan = document.getElementById(numberSpanId);
+          if (numberSpan) {
+            numberSpan.style.transform = "scale(1.02)";
+            numberSpan.style.transition = "transform 0.2s ease";
+          }
+        });
+        element.addEventListener("mouseleave", () => {
+          const numberSpan = document.getElementById(numberSpanId);
+          if (numberSpan) {
+            numberSpan.style.transform = "scale(1)";
+          }
+        });
+      }
+    }
+    
+    addHoverEffect(personalCounterDiv, "personalVisitCount");
+    addHoverEffect(totalCounterDiv, "totalVisitorCount");
+    
+    try {
+      const testKey = "__test_ls_dsa_counter";
+      localStorage.setItem(testKey, "1");
+      localStorage.removeItem(testKey);
+    } catch (e) {
+      console.warn("localStorage not available. Counters will use fallback values.");
+      const personalSpan = document.getElementById("personalVisitCount");
+      const totalSpan = document.getElementById("totalVisitorCount");
+      if (personalSpan && personalSpan.textContent === "—") {
+        personalSpan.textContent = "1";
+      }
+      if (totalSpan && totalSpan.textContent === "—") {
+        totalSpan.textContent = "1";
+      }
+    }
+    
+    if (totalCounterDiv) {
+      let tooltipTimeout;
+      totalCounterDiv.addEventListener("mouseenter", () => {
+        const tooltip = document.createElement("div");
+        tooltip.id = "statTooltip";
+        tooltip.textContent = `🌍 ${formatNumber(totalUniqueVisitors)} unique learners have visited this site!`;
+        tooltip.style.position = "fixed";
+        tooltip.style.background = "#1f4e66";
+        tooltip.style.color = "white";
+        tooltip.style.padding = "0.5rem 1rem";
+        tooltip.style.borderRadius = "2rem";
+        tooltip.style.fontSize = "0.75rem";
+        tooltip.style.fontWeight = "500";
+        tooltip.style.zIndex = "1000";
+        tooltip.style.whiteSpace = "nowrap";
+        tooltip.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+        tooltip.style.pointerEvents = "none";
+        document.body.appendChild(tooltip);
+        
+        const rect = totalCounterDiv.getBoundingClientRect();
+        tooltip.style.top = (rect.top - 35) + "px";
+        tooltip.style.left = (rect.left + rect.width / 2 - 100) + "px";
+        
+        tooltipTimeout = setTimeout(() => {
+          if (tooltip) tooltip.remove();
+        }, 2000);
+      });
+      
+      totalCounterDiv.addEventListener("mouseleave", () => {
+        const tooltip = document.getElementById("statTooltip");
+        if (tooltip) tooltip.remove();
+        if (tooltipTimeout) clearTimeout(tooltipTimeout);
+      });
+    }
+    
+    if (totalUniqueVisitors > 0 && totalUniqueVisitors % 10 === 0 && isNewVisitor) {
+      const celebrationMsg = document.createElement("div");
+      celebrationMsg.textContent = `🎉 ${totalUniqueVisitors} unique learners and counting! 🎉`;
+      celebrationMsg.style.position = "fixed";
+      celebrationMsg.style.bottom = "20px";
+      celebrationMsg.style.left = "50%";
+      celebrationMsg.style.transform = "translateX(-50%)";
+      celebrationMsg.style.background = "linear-gradient(135deg, #f3b35e, #d97706)";
+      celebrationMsg.style.color = "white";
+      celebrationMsg.style.padding = "0.8rem 1.5rem";
+      celebrationMsg.style.borderRadius = "2rem";
+      celebrationMsg.style.fontWeight = "bold";
+      celebrationMsg.style.fontSize = "0.9rem";
+      celebrationMsg.style.zIndex = "1000";
+      celebrationMsg.style.boxShadow = "0 4px 20px rgba(0,0,0,0.3)";
+      celebrationMsg.style.animation = "fadeInUp 0.5s ease";
+      document.body.appendChild(celebrationMsg);
+      
+      setTimeout(() => {
+        celebrationMsg.style.opacity = "0";
+        celebrationMsg.style.transition = "opacity 0.5s";
+        setTimeout(() => celebrationMsg.remove(), 500);
+      }, 3000);
+    }
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+  })();
+</script>
+
+</body>
+</html>
