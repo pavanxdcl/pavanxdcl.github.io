@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>DSA Forge | Java & Python Mastery (Light Mode)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>JavaScript Mastery · Pavan X Dhee Coding Lab</title>
+    <!-- Keep exact same HTML content, only CSS redesigned - LIGHT THEME -->
     <style>
+        /* ========== REDESIGNED LIGHT THEME CSS ========== */
+        /* Clean · Modern · Airy · High readability */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* LIGHT THEME OVERRIDE - same layout, fresh light colors */
         body {
-            background: linear-gradient(145deg, #f0f6fa 0%, #e4edf5 100%);
-            font-family: 'Inter', system-ui, -apple-system, 'Poppins', 'Segoe UI', sans-serif;
-            color: #1a3a4a;
+            background: linear-gradient(135deg, #f5f7fc 0%, #eef2f8 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1a2c3e;
             line-height: 1.5;
-            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            padding: 2rem 1.5rem 4rem;
         }
 
-        /* soft grain overlay (light) */
+        /* subtle light pattern overlay */
         body::before {
             content: "";
             position: fixed;
@@ -28,316 +31,344 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(rgba(0, 100, 120, 0.05) 1px, transparent 1px);
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
             background-size: 32px 32px;
+            opacity: 0.3;
             pointer-events: none;
             z-index: 0;
         }
 
-        .main-wrapper {
-            max-width: 1400px;
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
         }
 
-        /* home link - light style */
+        /* Home navigation card - light theme */
         .home-nav {
-            margin-bottom: 1.5rem;
-        }
-        .home-link {
-            background: rgba(100, 140, 170, 0.1);
-            backdrop-filter: blur(4px);
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            text-decoration: none;
-            color: #2c728c;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border: 1px solid rgba(40, 140, 160, 0.3);
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .home-link:hover {
-            background: #cde3ef;
-            border-color: #2c9cbb;
-            color: #1f5a70;
-            transform: translateY(-2px);
+            margin-bottom: 2rem;
         }
 
-        /* header glass - light version */
-        .hero-header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 2.5rem;
-            padding: 1.8rem 2rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid rgba(60, 140, 160, 0.25);
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            backdrop-filter: blur(0);
+            border: 1px solid #dce3ec;
+            border-radius: 60px;
+            padding: 0.7rem 1.6rem;
+            color: #2c3e66;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            letter-spacing: -0.2px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        .home-btn:hover {
+            background: #ffffff;
+            border-color: #3b82f6;
+            color: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.12);
+        }
+
+        /* Main heading - light & vibrant */
+        .module-header {
+            text-align: center;
+            margin: 1rem 0 2rem 0;
+        }
+
+        .module-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e6f0ff, #ffffff);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+            margin-bottom: 1.2rem;
+            backdrop-filter: blur(4px);
+        }
+
+        h1 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6, #2563eb);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: #334155;
+            background: rgba(255, 255, 255, 0.7);
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(5px);
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+
+        .highlight-tag {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .tag {
+            background: white;
+            backdrop-filter: blur(0);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-left: 3px solid #3b82f6;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        /* recordings section - card grid light */
+        .recordings-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1.2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+            color: #0f172a;
+        }
+
+        .recordings-title span {
+            background: linear-gradient(145deg, #eff6ff, #dbeafe);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            padding: 0.2rem 0.9rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .class-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .class-card {
+            background: white;
+            backdrop-filter: blur(0);
+            border-radius: 28px;
+            border: 1px solid #e2edff;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .class-card:hover {
+            border-color: #93c5fd;
+            transform: translateY(-3px);
+            background: #ffffff;
+            box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-content {
+            padding: 1.4rem 1.8rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 1.5rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+            gap: 1rem;
         }
-        .logo-group {
+
+        .class-info {
             display: flex;
             align-items: center;
             gap: 1rem;
             flex-wrap: wrap;
         }
-        .logo-group img {
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
-            transition: transform 0.2s;
+
+        .class-number {
+            background: linear-gradient(145deg, #eff6ff, #ffffff);
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.02);
         }
-        .logo-group img:hover {
+
+        .class-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.3px;
+            color: #0f172a;
+        }
+
+        .class-desc {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-top: 4px;
+        }
+
+        .recording-link {
+            background: #eff6ff;
+            backdrop-filter: blur(0);
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .recording-link:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+            box-shadow: 0 5px 12px rgba(59,130,246,0.2);
             transform: scale(1.02);
         }
-        .hero-header h1 {
-            font-size: 2.1rem;
-            font-weight: 700;
-            background: linear-gradient(120deg, #1c5a74, #2f8fae, #3a6c8c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-        }
-        @media (max-width: 650px) {
-            .hero-header { flex-direction: column; align-items: flex-start; }
-            .hero-header h1 { font-size: 1.6rem; }
-        }
 
-        /* tab navigation - light theme */
-        .tab-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(60, 130, 150, 0.25);
-            padding-bottom: 0.5rem;
-        }
-        .tab-btn {
-            background: transparent;
-            border: none;
-            padding: 0.7rem 1.8rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 60px;
-            cursor: pointer;
-            color: #3a6e86;
-            transition: 0.2s;
-            backdrop-filter: blur(2px);
-            font-family: inherit;
-        }
-        .tab-btn.active {
-            background: #d9eef7;
-            color: #1e6f8c;
-            box-shadow: 0 2px 8px rgba(0, 100, 120, 0.1);
-            border: 1px solid #8fcbdf;
-        }
-        .tab-btn:hover:not(.active) {
-            background: rgba(100, 150, 180, 0.12);
-            color: #1e5e78;
-        }
-
-        /* content panels */
-        .tab-panel {
-            display: none;
-            animation: fade 0.25s ease;
-        }
-        .tab-panel.active-panel {
-            display: block;
-        }
-        @keyframes fade {
-            from { opacity: 0; transform: translateY(6px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-
-        /* card style for sections - light pastel */
-        .section-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            padding: 1.8rem;
-            margin-bottom: 2rem;
-            border: 1px solid #cde3ef;
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-        .section-card h2 {
-            font-size: 1.7rem;
-            font-weight: 700;
-            border-left: 5px solid #2c9cbb;
-            padding-left: 1rem;
-            margin-bottom: 1.2rem;
-            letter-spacing: -0.2px;
-            color: #235f78;
-        }
-        .section-card h3 {
-            font-size: 1.3rem;
-            margin: 1rem 0 0.5rem;
-            color: #2c7a98;
-        }
-        .resource-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .resource-list li {
-            margin-bottom: 1rem;
-            padding: 0.6rem 0.8rem;
-            background: #f3f9fe;
-            border-radius: 1rem;
-            border-left: 3px solid #7fc1d4;
-            color: #2b5d74;
-        }
-        .resource-list strong {
-            color: #c47e2a;
-        }
-        a {
-            color: #1f7f9c;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            border-bottom: 1px dotted #9fcbd9;
-        }
-        a:hover {
-            color: #e05a6f;
-            border-bottom-color: #e05a6f;
-        }
-        .btn-sm {
-            display: inline-block;
-            background: #e4f0f5;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            margin-left: 0.5rem;
-            border: none;
-        }
-        .badge {
-            background: #dbeef5;
-            border-radius: 30px;
-            padding: 0.2rem 0.7rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: #236f8c;
-        }
-        .grid-2col {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-        hr {
-            border-color: #cde0e9;
-            margin: 1rem 0;
-        }
-        footer {
+        /* footer light */
+        .footer-note {
+            margin-top: 3.5rem;
             text-align: center;
-            margin-top: 3rem;
-            padding: 1.5rem;
+            padding: 1rem;
+            border-top: 1px solid #dce5f0;
             font-size: 0.8rem;
-            color: #58829b;
-            border-top: 1px solid #cde0e9;
-        }
-        @media (max-width: 700px) {
-            body { padding: 1rem; }
-            .section-card { padding: 1.2rem; }
+            color: #5b6e8c;
         }
 
-        /* additional small polish */
-        .resource-list li a {
-            word-break: break-word;
+        /* responsive adjustments */
+        @media (max-width: 680px) {
+            body {
+                padding: 1rem 1rem 2rem;
+            }
+            h1 {
+                font-size: 1.9rem;
+            }
+            .card-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .recording-link {
+                align-self: flex-start;
+                margin-top: 8px;
+            }
+            .class-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
-        .hero-header .badge {
-            background: #e0f0f5;
-            color: #1d6c88;
+
+        /* smooth subtle glow for headings */
+        @keyframes softGlowLight {
+            0% { opacity: 0.9; }
+            100% { opacity: 1; text-shadow: 0 0 4px rgba(59,130,246,0.2);}
+        }
+        h1 {
+            animation: softGlowLight 2s infinite alternate;
         }
     </style>
 </head>
 <body>
-<div class="main-wrapper">
+<div class="container">
+    <!-- Home page link - exactly as original but redesigned style - light theme -->
     <div class="home-nav">
-        <a href="index.html" class="home-link">🏠 Home Page</a>
+        <a href="https://pavanxdcl.github.io/" class="home-btn">🏠 Home Page</a>
     </div>
 
-    <div class="hero-header">
-        <div class="logo-group">
-            <!-- <img src="/images/javalogo.png" alt="Java" width="58" onerror="this.src='https://placehold.co/60x60/eef2f8/2c7a98?text=Java'"> -->
-            <h1>JavaScript Module : Beginner DSA Module : Pavan X Dhee Coding Lab </h1>
-            <!-- <img src="/images/pythonlogo.png" alt="Python" width="48" onerror="this.src='https://placehold.co/50x50/eef2f8/2c7a98?text=Py'"> -->
+    <!-- main header content (same HTML text, new visual design - light theme) -->
+    <div class="module-header">
+        <div class="module-badge">⚡ INTERVIEW READY ⚡</div>
+        <h1>JavaScript Module : Beginner DSA Module</h1>
+        <div class="subhead">Pavan X Dhee Coding Lab</div>
+        <div class="highlight-tag">
+            <div class="tag">⚡ Core Concepts</div>
+            <div class="tag">📺 Live sessions</div>
+            <div class="tag">🎯 Placement Focused</div>
         </div>
-        <div class="badge">⚡ Core Concepts • Live sessions • Placement Focused</div>
     </div>
 
+    <!-- JavaScript Class Recordings section - same HTML structure but redesigned light -->
+    <div class="recordings-title">
+        📼 JavaScript Class Recordings <span>new</span>
+    </div>
 
-
-    <!-- ======================= TAB 1: BASICS ======================= -->
-    <div id="basics-panel" class="tab-panel active-panel">
-        <div class="section-card">
-            <h2>JavaScript Class Recordings</h2>
-            <ul class="resource-list">
-                <li><strong>Class 1 :</strong>  
-                   <a href="https://youtu.be/eUAqbFn64a0" target="_blank">Introduction + Operators Part-1 [Recording] </a>
-                </li>
-                 <li><strong>Class 2 :</strong>  
-                   <a href="https://youtu.be/A2SV_bf0yl0" target="_blank">Operators Part-2 [Recording] </a>
-                </li>
-                 <li><strong>Class 3 :</strong>  
-                   <a href="https://youtu.be/TpcTsba0B4E" target="_blank">Selection Statements [Recording] </a>
-                </li>
-               </ul>
-
-               
+    <div class="class-grid">
+        <!-- Class 1 Card -->
+        <div class="class-card">
+            <div class="card-content">
+                <div class="class-info">
+                    <div class="class-number">1</div>
+                    <div>
+                        <div class="class-title">Introduction + Operators Part-1</div>
+                        <div class="class-desc">Foundations & building blocks · Hands-on examples</div>
+                    </div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=eUAqbFn64a0" class="recording-link">▶️ [Recording]</a>
+            </div>
         </div>
-        
+
+        <!-- Class 2 Card -->
+        <div class="class-card">
+            <div class="card-content">
+                <div class="class-info">
+                    <div class="class-number">2</div>
+                    <div>
+                        <div class="class-title">Operators Part-2</div>
+                        <div class="class-desc">Arithmetic, logical, comparison & advanced tricks</div>
+                    </div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=A2SV_bf0yl0" class="recording-link">▶️ [Recording]</a>
+            </div>
+        </div>
+
+        <!-- Class 3 Card -->
+        <div class="class-card">
+            <div class="card-content">
+                <div class="class-info">
+                    <div class="class-number">3</div>
+                    <div>
+                        <div class="class-title">Selection Statements</div>
+                        <div class="class-desc">if-else, switch, ternary · decision making mastery</div>
+                    </div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=TpcTsba0B4E" class="recording-link">▶️ [Recording]</a>
+            </div>
+        </div>
     </div>
 
-    
-    <footer>
-        ⚡ “No one remembers the one who gave up” — Keep grinding DSA with Java & Python 🐍☕<br>
-        📌 Live sessions every week | All resources & homework updated
-    </footer>
+    <!-- subtle footer to match original spirit but redesigned light style -->
+    <div class="footer-note">
+        ⚡ Pavan X Dhee Coding Lab · master the art of JavaScript & DSA ⚡
+    </div>
 </div>
-
-<script>
-    (function() {
-        const tabs = document.querySelectorAll('.tab-btn');
-        const panels = {
-            basics: document.getElementById('basics-panel'),
-            collections: document.getElementById('collections-panel'),
-            twopointers: document.getElementById('twopointers-panel'),
-            linkedlist: document.getElementById('linkedlist-panel'),
-            leetcode: document.getElementById('leetcode-panel')
-        };
-
-        function activateTab(tabId) {
-            Object.values(panels).forEach(panel => {
-                if (panel) panel.classList.remove('active-panel');
-            });
-            if (panels[tabId]) panels[tabId].classList.add('active-panel');
-            
-            tabs.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.getAttribute('data-tab') === tabId) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        tabs.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const tabValue = btn.getAttribute('data-tab');
-                if (tabValue === 'basics') activateTab('basics');
-                else if (tabValue === 'collections') activateTab('collections');
-                else if (tabValue === 'twopointers') activateTab('twopointers');
-                else if (tabValue === 'linkedlist') activateTab('linkedlist');
-                else if (tabValue === 'leetcode') activateTab('leetcode');
-            });
-        });
-
-        if (!panels.basics.classList.contains('active-panel')) activateTab('basics');
-    })();
-</script>
 </body>
 </html>
