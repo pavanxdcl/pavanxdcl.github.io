@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DSA Warm-up Course | DesiQna | SDE Prep India</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+        a{
+            text-decoration: none;
+            color: red;
+        }
+        /* container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* typography */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f2b3d, #1e4a76);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.75rem;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            border-left: 4px solid #f59e0b;
+            padding-left: 1rem;
+            margin: 1rem 0 1.5rem 0;
+            font-weight: 500;
+        }
+
+        /* mentor card */
+        .mentor-grid {
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #e9eef3;
+        }
+
+        .mentor-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px dashed #e2e8f0;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mentor-name h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0c4a6e;
+        }
+
+        .mentor-name .badge {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            background: #f1f5f9;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #0f3b5c;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .achievements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1rem 0;
+            background: #f9fafb;
+            padding: 1rem 1.5rem;
+            border-radius: 2rem;
+        }
+
+        .achievement {
+            background: white;
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #eef2ff;
+        }
+
+        .story {
+            margin-top: 1.2rem;
+            background: #fefce8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 1.5rem;
+            font-style: normal;
+            border-left: 6px solid #f97316;
+            font-size: 1rem;
+            color: #2d3e50;
+        }
+
+        /* guidelines grid */
+        .guidelines {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .guideline-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+            border: 1px solid #eef2ff;
+            transition: all 0.2s;
+        }
+
+        .guideline-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .guideline-card p {
+            color: #334155;
+        }
+
+        .note-template {
+            background: #eef2ff;
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0 2rem 0;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        /* section styling */
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem 0;
+            border-left: 6px solid #f97316;
+            padding-left: 1rem;
+        }
+
+        .course-path-banner {
+            background: linear-gradient(110deg, #e9f5ff, #ffffff);
+            border-radius: 1.8rem;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.8rem 0;
+            border-radius: 1.2rem;
+            background: white;
+            border: 1px solid #e2edf2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #f1f5f9;
+            text-align: left;
+            padding: 1rem 1rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid #eef2ff;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .importance-badge {
+            background: #fee2e2;
+            color: #b91c1c;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .resource-link {
+            background: #f1f5f9;
+            padding: 0.2rem 0.7rem;
+            border-radius: 24px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin: 0.2rem 0.2rem;
+            text-decoration: none;
+            color: #2c3e66;
+            font-weight: 500;
+        }
+
+        .resource-link:hover {
+            background: #e2e8f0;
+        }
+
+        .video-badge {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        .doc-badge {
+            background: #dcfce7;
+            color: #14532d;
+        }
+
+        .footer-note {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-note a {
+            color: #facc15;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .inline-icon {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .stats {
+                gap: 1rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- main heading -->
+    <h1>Pavan X Dhee Coding Lab <br>DSA : Pro Max</h1>
+    <div class="subhead">
+        Comprehensive Data Structures & Algorithms Structured Course by
+        Pavan Prakash X Dhee Coding Lab
+    </div>
+
+    <!-- mentor section -->
+    <div class="mentor-grid">
+        <div class="mentor-header">
+            <div class="mentor-name">
+                <h2>Pavan Prakash </h2>
+                <div class="badge">SDE @ Prodhee Tech</div>
+            </div>
+            <div class="stats">
+                <div class="stat-item"><div class="stat-number">2000+</div><div class="stat-label">Students Mentored</div></div>
+                <div class="stat-item"><div class="stat-number">1500+</div><div class="stat-label">DSA Questions Solved</div></div>
+               </div>
+        </div>
+        <div class="achievements">
+            <span class="achievement">🏆 LeetCode & Hackerrank Expert</span>
+            <span class="achievement">🚀 Cracked Offer By TCS Codevita</span>
+            <span class="achievement">⚡ Contest Expert</span>
+        </div>
+        
+    </div>
+
+    <!-- guidelines -->
+    <div class="guidelines">
+        <div class="guideline-card"><h3>✅ Use Your Own Logic</h3><p>Don't copy variables or logic. Understand concepts & create your own approach.</p></div>
+        <div class="guideline-card"><h3>🎯 Extract Concepts</h3><p>Focus on core ideas, implement them your own way.</p></div>
+        <div class="guideline-card"><h3>🤔 Understand the "Why"</h3><p>Analyze necessity of each part to grasp deeper concepts.</p></div>
+        <div class="guideline-card"><h3>🚀 Prepare for Advanced</h3><p>Solid foundation for easy adaptation at higher levels.</p></div>
+    </div>
+
+    <div class="note-template">
+        📝 <strong>Create revision notes</strong> 
+    </div>
+
+    <!-- course path banner -->
+    <div class="course-path-banner">
+        <p style="font-weight:600; font-size:1.1rem;">📌 Course Completion Path — Rookie Module → Pro Max Series</p>
+        <p>Once you complete this, You are king of your own territory in DSA<br>
+        Complete all videos + notes (even if you know the solution) + Give Contest in Leetcode and Codechef to keep hustling!</p>
+    </div>
+
+    <!-- TWO POINTER section -->
+    <div class="section-title">👉 Two Pointer & Binary Search</div>
+    <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Session</th><th>Content</th><th>Resources</th><th>Importance</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Master-class-1</td><td>Two Pointer Template + Master-class</td><td><span class="resource-link"><a href="https://youtu.be/VwaIhrHlBz0"  target="_blank">🔥 Class Recording</a></span><span class="resource-link"><a href="https://docs.google.com/document/d/1x0924fJCr6R0fKZv8kG7OiGY7UApr7VHVIipEYHeU0s/edit?usp=sharing"  target="_blank">🔥 VERY IMPORTANT</a></span></td><td>
+                    <span class="importance-badge">Critical</span>
+                    <span class="importance-badge"><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/" target="_blank">Click Here to Practice</a></span>
+            
+                <tr><td>Master-class-2</td><td>Two Pointer Template + Binary Search</td><td><span class="resource-link"><a href="https://youtu.be/b0B0qODeI70"  target="_blank">🔥 Class Recording</a></span><span class="resource-link"><a href="https://docs.google.com/document/d/1x0924fJCr6R0fKZv8kG7OiGY7UApr7VHVIipEYHeU0s/edit?usp=sharing"  target="_blank">🔥 VERY IMPORTANT</a></span></td><td>
+                    <span class="importance-badge">Critical</span>
+                    <span class="importance-badge"><a href="https://leetcode.com/problems/binary-search/description/" target="_blank">Click Here to Practice</a></span>
+            
+                <tr><td>Master-class-3</td><td>Two Pointer Template + 2Sum - ||</td><td><span class="resource-link"><a href="https://youtu.be/0YYo3iX0VbE"  target="_blank">🔥 Class Recording</a></span><span class="resource-link"><a href="https://docs.google.com/document/d/1x0924fJCr6R0fKZv8kG7OiGY7UApr7VHVIipEYHeU0s/edit?usp=sharing"  target="_blank">🔥 VERY IMPORTANT</a></span></td><td>
+                    <span class="importance-badge">Critical</span>
+                    <span class="importance-badge"><a href="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/" target="_blank">Click Here to Practice</a></span>
+            
+
+                </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- footer / credit note -->
+    <div class="footer-note">
+        <p>📌 Pro Max DSA Course by Pavan Prakash</p>
+        <p style="margin-top:0.5rem;">🎯 Watch all videos + make notes even if you know the solution. Master concepts, not code.</p>
+        <p style="margin-top:1rem;">🚀 <a href="index.html">PavanXDcl.github.io</a> | Complete roadmap to crack product based companies</p>
+    </div>
+</div>
+</body>
+</html>
