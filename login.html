@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DSA Pro Max Portal | Secure Access</title>
+    <!-- Google Fonts & simple reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        h1{
+            color: white;
+        }
+        body {
+            background: linear-gradient(145deg, #0a0f1e 0%, #0c1222 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        /* main card container */
+        .auth-container {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(18, 25, 45, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(66, 153, 225, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* toggle tabs */
+        .toggle-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.35);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 1.2rem 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: #9aa4bf;
+            transition: all 0.25s;
+            background: transparent;
+            border: none;
+            letter-spacing: -0.2px;
+            backdrop-filter: blur(4px);
+        }
+
+        .tab-btn i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .tab-btn.active {
+            color: white;
+            background: linear-gradient(135deg, #2b3b6e, #1e2a4a);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 8px rgba(0,0,0,0.2);
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        /* forms panel */
+        .form-panel {
+            padding: 2rem 1.8rem 2.2rem;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+        }
+
+        .hidden-form {
+            display: none;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #b9c3e6;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-group label i {
+            width: 18px;
+            font-size: 0.9rem;
+            color: #3b82f6;
+        }
+
+        .input-group input {
+            background: rgba(10, 14, 23, 0.8);
+            border: 1px solid #2d3a5e;
+            border-radius: 1.2rem;
+            padding: 0.9rem 1rem;
+            font-size: 0.95rem;
+            color: #f0f3ff;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
+            background: #0f1422;
+        }
+
+        .input-group input::placeholder {
+            color: #5a6a92;
+            font-weight: 400;
+        }
+
+        .submit-btn {
+            background: linear-gradient(95deg, #2563eb, #1e40af);
+            border: none;
+            padding: 0.9rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(95deg, #3b82f6, #1e3a8a);
+            transform: scale(0.98);
+        }
+
+        .info-message {
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 2rem;
+            background: rgba(0,0,0,0.3);
+            color: #cbd5ff;
+        }
+
+        .error-msg {
+            color: #f97316;
+            background: rgba(249,115,22,0.15);
+            border-left: 3px solid #f97316;
+            padding: 0.6rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .success-msg {
+            color: #4ade80;
+            background: rgba(74,222,128,0.1);
+            border-left: 3px solid #4ade80;
+        }
+
+        .demo-note {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6c7aa3;
+            border-top: 1px dashed #2a3455;
+            padding-top: 1rem;
+        }
+
+        /* loading spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.8rem;
+            color: #4d5b82;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .reset-link {
+            cursor: pointer;
+            text-decoration: underline;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .reset-link:hover {
+            opacity: 1;
+            color: #f0f3ff;
+        }
+
+        /* small info badge */
+        .session-warning {
+            background: rgba(0,0,0,0.5);
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body>
+
+  
+<div class="auth-container" id="authRoot">
+    <div class="toggle-tabs">
+        <button class="tab-btn active" id="loginTabBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="tab-btn" id="signupTabBtn"><i class="fas fa-user-plus"></i> Create Account</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="form-panel" id="loginPanel">
+        <form id="loginForm" class="auth-form">
+            <div class="input-group">
+                  <h1>PavanXDcl Pro Max Batch</h1>
+                <label><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="off">
+            </div>
+            <button type="submit" class="submit-btn" id="loginBtnSubmit"><i class="fas fa-arrow-right-to-bracket"></i> Login & Access DSA Pro</button>
+            <div id="loginMessage" class="info-message"></div>
+        </form>
+        <div class="demo-note">
+            <i class="fas fa-flask"></i> Remember the Credentials! 
+        </div>
+    </div>
+
+    <!-- SIGNUP FORM (CREATE ACCOUNT) -->
+    <div class="form-panel hidden-form" id="signupPanel">
+        <form id="signupForm" class="auth-form">
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="signupName" placeholder="Alex Johnson" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="signupEmail" placeholder="alex@dsa.com" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="signupPassword" placeholder="min 6 characters" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-check-circle"></i> Confirm Password</label>
+                <input type="password" id="signupConfirm" placeholder="confirm password" required autocomplete="off">
+            </div>
+            <button type="submit" class="submit-btn" id="signupBtnSubmit"><i class="fas fa-user-check"></i> Create Account</button>
+            <div id="signupMessage" class="info-message"></div>
+        </form>
+        <div class="demo-note">
+            <i class="fas fa-database"></i> Accounts stored locally. You must enter credentials every time you login.
+        </div>
+    </div>
+    <footer>
+        <span><i class="fas fa-shield-alt"></i> Secure access · DSA : Pro Max</span>
+        <span class="reset-link" id="manualClearSessionBtn"><i class="fas fa-door-open"></i> Clear any stored session</span>
+    </footer>
+</div>
+
+<script>
+    // ---------- STORAGE KEYS ----------
+    const USERS_STORAGE_KEY = 'dsa_pro_max_users';
+    // WE COMPLETELY REMOVED AUTO-LOGIN: no session storage for persistent login.
+    // The CURRENT_SESSION_KEY will NOT be used to auto-redirect. It will only be used temporarily during a single successful login flow,
+    // but on page load we NEVER auto-redirect based on it. Additionally, after redirect we don't rely on it.
+    // To ensure "they must enter credentials every time", we will not check any existing session on page load.
+    // Also, we will add a mechanism to clear any lingering session data manually.
+    
+    // Optional: we keep a temporary flag for redirect only (not for auto-login). 
+    // But to be extra safe, we will NOT read any session on init. 
+    // Also we provide a manual clear button to wipe any leftover tokens.
+
+    // Helper: load users from localStorage
+    function getUsers() {
+        const raw = localStorage.getItem(USERS_STORAGE_KEY);
+        if (!raw) return {};
+        try {
+            return JSON.parse(raw);
+        } catch(e) {
+            return {};
+        }
+    }
+
+    function saveUsers(users) {
+        localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+    }
+
+    // create new user account
+    function createUserAccount(email, password, fullName) {
+        const users = getUsers();
+        const normalizedEmail = email.trim().toLowerCase();
+        if (users[normalizedEmail]) {
+            return { success: false, message: 'Email already exists! Try logging in.' };
+        }
+        if (password.length < 6) {
+            return { success: false, message: 'Password must be at least 6 characters.' };
+        }
+        users[normalizedEmail] = {
+            password: password,   // Demo only — in real app always hash.
+            fullName: fullName.trim() || "DSA Learner",
+            createdAt: new Date().toISOString()
+        };
+        saveUsers(users);
+        return { success: true, message: 'Account created successfully! You can now login.' };
+    }
+
+    // validate login credentials - returns success/fail, no automatic session storage for auto-login
+    // However for redirection after manual login we will just return success and then redirect.
+    // We will NOT persist a session that auto-logs in next time.
+    function validateLogin(email, password) {
+        const users = getUsers();
+        const normalizedEmail = email.trim().toLowerCase();
+        const user = users[normalizedEmail];
+        if (!user) {
+            return { success: false, message: 'No account found with this email. Please sign up first.' };
+        }
+        if (user.password !== password) {
+            return { success: false, message: 'Incorrect password. Try again.' };
+        }
+        // VALID CREDENTIALS: we will NOT store any persistent session.
+        // Return success without touching any "session" storage.
+        return { 
+            success: true, 
+            message: 'Login successful! Redirecting to DSA Pro Max...',
+            userData: { email: normalizedEmail, fullName: user.fullName }
+        };
+    }
+
+    // redirect to target protected page
+    function redirectToProtectedPage() {
+        const targetUrl = "https://pavanxdcl.github.io/promax.html";
+        window.location.href = targetUrl;
+    }
+
+    // Helper to clear any possible leftover session data from old versions (for safety)
+    function clearAnyLegacySession() {
+        // Remove any old session key that might have been used previously for auto-login
+        localStorage.removeItem('dsa_pro_max_session');
+        // Also clear any other potential keys that could cause auto behavior
+        localStorage.removeItem('dsa_auto_login_token');
+        sessionStorage.removeItem('dsa_temp_auth');
+    }
+
+    // UI handlers
+    (function initAuthApp() {
+        // FIRST: ensure no auto-login happens. Remove any legacy session storage that could cause redirect.
+        clearAnyLegacySession();
+        
+        // DOM elements
+        const loginTab = document.getElementById('loginTabBtn');
+        const signupTab = document.getElementById('signupTabBtn');
+        const loginPanel = document.getElementById('loginPanel');
+        const signupPanel = document.getElementById('signupPanel');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const loginMessageDiv = document.getElementById('loginMessage');
+        const signupMessageDiv = document.getElementById('signupMessage');
+        const loginBtn = document.getElementById('loginBtnSubmit');
+        const signupBtn = document.getElementById('signupBtnSubmit');
+        const manualClearBtn = document.getElementById('manualClearSessionBtn');
+
+        // helper show message
+        function showLoginMessage(msg, isError = true) {
+            loginMessageDiv.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-circle-check'}"></i> ${msg}`;
+            loginMessageDiv.className = `info-message ${isError ? 'error-msg' : 'success-msg'}`;
+            setTimeout(() => {
+                if (loginMessageDiv) {
+                    loginMessageDiv.className = 'info-message';
+                    loginMessageDiv.innerHTML = '';
+                }
+            }, 4000);
+        }
+
+        function showSignupMessage(msg, isError = true) {
+            signupMessageDiv.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-circle-check'}"></i> ${msg}`;
+            signupMessageDiv.className = `info-message ${isError ? 'error-msg' : 'success-msg'}`;
+            setTimeout(() => {
+                if (signupMessageDiv) {
+                    signupMessageDiv.className = 'info-message';
+                    signupMessageDiv.innerHTML = '';
+                }
+            }, 4000);
+        }
+
+        function setButtonLoading(button, isLoading, originalText) {
+            if (isLoading) {
+                button.disabled = true;
+                button.innerHTML = `<span class="loading-spinner"></span>  Please wait...`;
+            } else {
+                button.disabled = false;
+                button.innerHTML = originalText;
+            }
+        }
+
+        // Tab switching
+        function switchToLogin() {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginPanel.classList.remove('hidden-form');
+            signupPanel.classList.add('hidden-form');
+            loginMessageDiv.innerHTML = '';
+            signupMessageDiv.innerHTML = '';
+        }
+
+        function switchToSignup() {
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+            signupPanel.classList.remove('hidden-form');
+            loginPanel.classList.add('hidden-form');
+            loginMessageDiv.innerHTML = '';
+            signupMessageDiv.innerHTML = '';
+        }
+
+        loginTab.addEventListener('click', switchToLogin);
+        signupTab.addEventListener('click', switchToSignup);
+
+        // ---- LOGIN SUBMIT (MANUAL CREDENTIALS ONLY, NO AUTO SESSION) ----
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            if (!email || !password) {
+                showLoginMessage('Please enter email and password', true);
+                return;
+            }
+            const originalBtnText = loginBtn.innerHTML;
+            setButtonLoading(loginBtn, true, originalBtnText);
+            
+            // Simulate async validation (no actual network)
+            setTimeout(() => {
+                const result = validateLogin(email, password);
+                if (result.success) {
+                    showLoginMessage('✅ Access granted! Redirecting to DSA Pro Max course...', false);
+                    // Before redirecting, ensure we clear any possible leftover session data again (belt and suspenders)
+                    clearAnyLegacySession();
+                    // Redirect after short delay
+                    setTimeout(() => {
+                        redirectToProtectedPage();
+                    }, 800);
+                } else {
+                    showLoginMessage(result.message, true);
+                    setButtonLoading(loginBtn, false, originalBtnText);
+                    // Clear password field for security after failed attempt? optional but good UX for retry.
+                    document.getElementById('loginPassword').value = '';
+                }
+                if (!result.success) setButtonLoading(loginBtn, false, originalBtnText);
+            }, 300);
+        });
+
+        // ---- SIGNUP SUBMIT (CREATE ACCOUNT) ----
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+
+            if (!fullName || !email || !password || !confirm) {
+                showSignupMessage('All fields are required.', true);
+                return;
+            }
+            if (password !== confirm) {
+                showSignupMessage('Password and confirm password do not match.', true);
+                return;
+            }
+            if (password.length < 6) {
+                showSignupMessage('Password must be at least 6 characters.', true);
+                return;
+            }
+            const originalSignupText = signupBtn.innerHTML;
+            setButtonLoading(signupBtn, true, originalSignupText);
+            
+            setTimeout(() => {
+                const result = createUserAccount(email, password, fullName);
+                if (result.success) {
+                    showSignupMessage('✨ Account created! You can now login. Redirecting to login form...', false);
+                    // clear signup fields
+                    document.getElementById('signupName').value = '';
+                    document.getElementById('signupEmail').value = '';
+                    document.getElementById('signupPassword').value = '';
+                    document.getElementById('signupConfirm').value = '';
+                    // after short delay switch to login tab and prefill email for convenience
+                    setTimeout(() => {
+                        switchToLogin();
+                        document.getElementById('loginEmail').value = email;
+                        document.getElementById('loginPassword').value = '';
+                        showLoginMessage('Account created! Please enter your password to login.', false);
+                        setButtonLoading(signupBtn, false, originalSignupText);
+                    }, 1200);
+                } else {
+                    showSignupMessage(result.message, true);
+                    setButtonLoading(signupBtn, false, originalSignupText);
+                }
+                if (!result.success) setButtonLoading(signupBtn, false, originalSignupText);
+            }, 300);
+        });
+
+        // ---------- Preload demo accounts for easier testing (no auto-login, just storage) ----------
+        function seedDemoUsers() {
+            const users = getUsers();
+            const demoEmail = 'test@dsa.com';
+            if (!users[demoEmail]) {
+                users[demoEmail] = {
+                    password: 'test123',
+                    fullName: 'Demo Scholar',
+                    createdAt: new Date().toISOString()
+                };
+            }
+            if (!users['dsa@learner.com']) {
+                users['dsa@learner.com'] = {
+                    password: 'pass123',
+                    fullName: 'DSA Pro Learner',
+                    createdAt: new Date().toISOString()
+                };
+            }
+            saveUsers(users);
+        }
+        seedDemoUsers();
+
+        // ---- MANUAL CLEAR SESSION BUTTON: ensures no leftover data could ever cause auto-redirect ----
+        manualClearBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Clear all possible storage that could contain session info.
+            localStorage.removeItem('dsa_pro_max_session');
+            localStorage.removeItem('dsa_auto_login_token');
+            sessionStorage.clear();
+            // Also we could reset any in-memory state, but the main goal: user must re-enter credentials.
+            // Show confirmation message
+            const tempMsg = document.createElement('div');
+            tempMsg.innerText = '✓ Any stored session data has been cleared. You will need to enter credentials to access DSA Pro.';
+            tempMsg.style.position = 'fixed';
+            tempMsg.style.bottom = '20px';
+            tempMsg.style.left = '20px';
+            tempMsg.style.right = '20px';
+            tempMsg.style.backgroundColor = '#1e293b';
+            tempMsg.style.color = '#bbf0d0';
+            tempMsg.style.padding = '12px 16px';
+            tempMsg.style.borderRadius = '40px';
+            tempMsg.style.textAlign = 'center';
+            tempMsg.style.fontSize = '0.85rem';
+            tempMsg.style.zIndex = '9999';
+            tempMsg.style.backdropFilter = 'blur(12px)';
+            tempMsg.style.border = '1px solid #3b82f6';
+            document.body.appendChild(tempMsg);
+            setTimeout(() => {
+                tempMsg.remove();
+            }, 3000);
+            // Also clear any input fields for extra security? optional but friendly.
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            // Clear any visible messages
+            if (loginMessageDiv) loginMessageDiv.innerHTML = '';
+            if (signupMessageDiv) signupMessageDiv.innerHTML = '';
+            // Ensure that any potential redirect flags are gone
+        });
+
+        // Additional safety: On page load, we must NOT auto-redirect based on any previous session.
+        // We've already cleared legacy session at start. But also we need to be absolutely sure that
+        // there is no code that checks for existing session and redirects. So we removed checkExistingSession entirely.
+        // Also ensure that there's no interval or hidden timer that does auto-login.
+        // For extra robustness, we can add a flag to prevent any accidental redirect.
+        window.addEventListener('load', () => {
+            // Double-clear any possible session leftovers again to guarantee no auto-login
+            localStorage.removeItem('dsa_pro_max_session');
+            // Also ensure no query parameters force a login
+            if (window.location.hash === '#autologin') {
+                window.location.hash = '';
+            }
+            // Display a subtle note that manual entry is required each time (no auto-login)
+            const footerNote = document.querySelector('footer');
+            if (footerNote && !document.getElementById('manualOnlyBadge')) {
+                const badge = document.createElement('span');
+                badge.id = 'manualOnlyBadge';
+                badge.className = 'session-warning';
+                badge.innerHTML = '<i class="fas fa-keyboard"></i> Manual login only · credentials required every time';
+                badge.style.marginLeft = '8px';
+                footerNote.appendChild(badge);
+            }
+        });
+        
+        // Remove any possible event that could read from localStorage to auto-submit.
+        // Additionally, override any potential auto-fill from browser? Not needed, but we enforce empty on load.
+        // Ensure the login form is pristine.
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
+        
+        // Also add a small message in the login panel indicating that session is never remembered.
+        const loginPanelDiv = document.getElementById('loginPanel');
+        if (loginPanelDiv && !document.getElementById('noAutoMsg')) {
+            const noAutoHint = document.createElement('div');
+            noAutoHint.id = 'noAutoMsg';
+            noAutoHint.style.fontSize = '0.7rem';
+            noAutoHint.style.textAlign = 'center';
+            noAutoHint.style.marginTop = '12px';
+            noAutoHint.style.color = '#8f9bb5';
+            noAutoHint.style.backgroundColor = 'rgba(0,0,0,0.2)';
+            noAutoHint.style.padding = '6px 12px';
+            noAutoHint.style.borderRadius = '40px';
+            noAutoHint.style.display = 'inline-block';
+            noAutoHint.style.width = 'auto';
+            noAutoHint.innerHTML = '<i class="fas fa-lock"></i> No auto-login: you must enter credentials each session';
+            const demoNote = loginPanelDiv.querySelector('.demo-note');
+            if (demoNote) {
+                demoNote.insertAdjacentElement('beforebegin', noAutoHint);
+            } else {
+                loginPanelDiv.appendChild(noAutoHint);
+            }
+        }
+        
+        // Also ensure that any previously stored session from older version of the page won't cause redirect.
+        // We also expose a global reset for debugging but it's fine.
+        console.log('Secure login portal: Auto-login disabled. Credentials required every time.');
+    })();
+</script>
+</body>
+</html>
