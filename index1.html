@@ -1,901 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Pavan | DSA Mastery • Light Forge + Aptitude</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavan X DCL</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--c1:#0f0f0f;--c2:#1a1a1a;--c3:#242424;--c4:#2e2e2e;
+--acc:#7c3aed;--acc2:#a855f7;--acc3:#c084fc;
+--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--cyan:#06b6d4;
+--txt:#f5f5f5;--txt2:#a3a3a3;--txt3:#737373;
+--border:rgba(255,255,255,0.08);
+}
+body{background:var(--c1);color:var(--txt);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 
-    body {
-      background: linear-gradient(145deg, #f4f9ff 0%, #e9f0fa 100%);
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Poppins', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      position: relative;
-    }
+.hero{
+  position:relative;min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:4rem 1.5rem 5rem;overflow:hidden;
+}
+.grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(124,58,237,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,58,237,0.06) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,black 40%,transparent 100%);
+}
+.glow-orb{
+  position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,0.18) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none;
+}
 
-    /* light & subtle background pattern */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(circle at 20% 35%, rgba(0, 120, 200, 0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-    }
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.4);
+  color:#c084fc;font-size:12px;font-weight:500;letter-spacing:0.06em;
+  padding:5px 14px;border-radius:100px;margin-bottom:1.5rem;text-transform:uppercase;
+}
+.dot-live{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-    .glass-container {
-      max-width: 1300px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(2px);
-      border-radius: 2.5rem;
-      border: 1px solid rgba(0, 100, 150, 0.2);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      z-index: 2;
-    }
+h1{font-size:clamp(2.4rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.25rem}
+.grad{background:linear-gradient(135deg,#f5f5f5 30%,#a855f7 70%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--txt2);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
 
-    /* hero section */
-    .hero {
-      padding: 2.8rem 2.5rem 1.5rem 2.5rem;
-      border-bottom: 1px solid rgba(0, 120, 150, 0.15);
-      background: rgba(255, 255, 255, 0.5);
-      position: relative;
-    }
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:3.5rem}
+.btn-prim{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--acc);color:#fff;font-size:15px;font-weight:600;
+  padding:14px 28px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;
+  text-decoration:none;
+}
+.btn-prim:hover{background:var(--acc2);transform:translateY(-1px)}
+.btn-sec{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--txt);font-size:15px;font-weight:500;
+  padding:14px 28px;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all .2s;
+  text-decoration:none;
+}
+.btn-sec:hover{border-color:rgba(255,255,255,0.2);background:var(--c2)}
 
-    .badge {
-      display: inline-block;
-      background: #eef5ff;
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      color: #1a6b8f;
-      border: 1px solid rgba(0, 110, 150, 0.25);
-      margin-bottom: 1.5rem;
-    }
+.stats-row{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:1.6rem;font-weight:700;color:#fff}
+.stat-lbl{font-size:12px;color:var(--txt3);letter-spacing:0.05em;text-transform:uppercase;margin-top:2px}
+.stat-div{width:1px;background:var(--border);height:40px;align-self:center}
 
-    h1 {
-      font-size: 3.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1A3E50 0%, #2C6E8F 40%, #1F7A9C 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-    }
+section{padding:5rem 1.5rem;max-width:1100px;margin:0 auto}
+.section-tag{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--acc3);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;letter-spacing:-0.025em;margin-bottom:.75rem}
+.section-sub{color:var(--txt2);font-size:1rem;line-height:1.7;max-width:560px}
 
-    .title-highlight {
-      background: linear-gradient(120deg, #c47e2a, #e0a343);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      font-weight: 800;
-    }
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:3rem}
+.card{
+  background:var(--c2);border:1px solid var(--border);border-radius:16px;
+  padding:1.5rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
+  text-decoration:none;color:var(--txt);display:block;
+}
+.card::before{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;
+  background:radial-gradient(circle at top left,rgba(124,58,237,0.12),transparent 60%);
+}
+.card:hover{border-color:rgba(124,58,237,0.4);transform:translateY(-3px)}
+.card:hover::before{opacity:1}
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;font-size:20px}
+.ic-purple{background:rgba(124,58,237,0.2);color:#a855f7}
+.ic-cyan{background:rgba(6,182,212,0.15);color:#06b6d4}
+.ic-amber{background:rgba(245,158,11,0.15);color:#f59e0b}
+.ic-green{background:rgba(34,197,94,0.15);color:#22c55e}
+.card-title{font-size:1rem;font-weight:600;margin-bottom:.4rem}
+.card-desc{font-size:13px;color:var(--txt2);line-height:1.65;margin-bottom:1rem}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:100px;background:rgba(255,255,255,0.06);color:var(--txt3)}
+.card-arrow{position:absolute;top:1.25rem;right:1.25rem;color:var(--txt3);font-size:16px;transition:all .2s}
+.card:hover .card-arrow{color:var(--acc3);transform:translate(2px,-2px)}
+.card-live-badge{
+  position:absolute;top:1rem;right:1rem;
+  background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);
+  color:#22c55e;font-size:10px;font-weight:600;letter-spacing:0.08em;
+  padding:3px 10px;border-radius:100px;display:flex;align-items:center;gap:5px;text-transform:uppercase;
+}
 
-    .tagline {
-      font-size: 1.2rem;
-      color: #2c5a72;
-      font-weight: 450;
-      max-width: 85%;
-      border-left: 3px solid #2c9cbb;
-      padding-left: 1.2rem;
-      margin-top: 0.6rem;
-    }
+.quote-block{
+  background:var(--c2);border:1px solid var(--border);border-left:3px solid var(--acc);
+  border-radius:0 12px 12px 0;padding:1.5rem 2rem;margin:3rem 0;
+}
+.quote-text{font-size:1.1rem;font-style:italic;color:var(--txt);line-height:1.7;margin-bottom:.5rem}
+.quote-sub{font-size:13px;color:var(--txt3)}
 
-    .motivation-block {
-      margin-top: 1.8rem;
-      background: #eef3fc;
-      border-radius: 2rem;
-      padding: 1rem 1.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      border: 1px solid rgba(0, 110, 130, 0.2);
-    }
+.community{
+  background:var(--c2);border:1px solid var(--border);border-radius:24px;
+  padding:3rem 2rem;text-align:center;margin-top:3rem;position:relative;overflow:hidden;
+}
+.community::before{
+  content:'';position:absolute;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,0.12) 0%,transparent 70%);
+  top:-80px;right:-60px;pointer-events:none;
+}
+.community-title{font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.community-sub{color:var(--txt2);font-size:.9rem;margin-bottom:1.75rem}
+.btn-whatsapp{
+  display:inline-flex;align-items:center;gap:9px;
+  background:#25d366;color:#fff;font-size:15px;font-weight:600;
+  padding:14px 28px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;
+  text-decoration:none;
+}
+.btn-whatsapp:hover{background:#1db954;transform:translateY(-1px)}
 
-    .quote-icon {
-      font-size: 2rem;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05));
-    }
+.footer{
+  border-top:1px solid var(--border);padding:2rem 1.5rem;
+  display:flex;gap:1rem;justify-content:space-between;align-items:center;flex-wrap:wrap;
+  max-width:1100px;margin:0 auto;
+}
+.footer-left{font-size:13px;color:var(--txt3)}
+.footer-right{display:flex;gap:16px}
+.footer-link{font-size:13px;color:var(--txt3);text-decoration:none;transition:color .15s}
+.footer-link:hover{color:var(--txt)}
 
-    .motivation-text {
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #1f4e66;
-    }
+.divider{border:none;border-top:1px solid var(--border);margin:0 1.5rem}
 
-    .motivation-text strong {
-      color: #d97706;
-      font-weight: 700;
-    }
-
-    /* ========= DUAL COUNTER STYLES ========= */
-    .counters-container {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      display: flex;
-      gap: 1rem;
-      z-index: 10;
-    }
-
-    .visitor-counter {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-radius: 60px;
-      padding: 0.5rem 1.2rem 0.5rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      border: 1px solid rgba(44, 156, 187, 0.35);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0,0,0,0.02);
-      transition: all 0.2s ease;
-      font-family: monospace;
-    }
-    .visitor-counter:hover {
-      border-color: #2c9cbb;
-      background: white;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-      transform: translateY(-2px);
-    }
-    .counter-icon {
-      font-size: 1.35rem;
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
-    }
-    .counter-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      color: #2c627c;
-      text-transform: uppercase;
-      font-family: 'Inter', system-ui;
-    }
-    .counter-number {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(125deg, #1A4C66, #2C8DAF);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      line-height: 1;
-      letter-spacing: -0.5px;
-      font-family: 'Inter', 'SF Mono', monospace;
-    }
-    .counter-badge {
-      background: #eef2f8;
-      border-radius: 40px;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #1f6c8c;
-    }
-
-    /* Total Unique Visitors Counter - Special Styling */
-    .total-counter {
-      border: 1px solid rgba(218, 165, 32, 0.4);
-      background: linear-gradient(135deg, rgba(255, 250, 240, 0.98), rgba(255, 245, 235, 0.95));
-    }
-    .total-counter .counter-number {
-      background: linear-gradient(125deg, #d97706, #f59e0b);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .total-counter .counter-label {
-      color: #b45309;
-    }
-    .total-counter .counter-badge {
-      background: #fed7aa;
-      color: #9b2c1d;
-    }
-
-    .cta-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 2.8rem 2.5rem;
-      justify-content: space-between;
-      align-items: stretch;
-    }
-
-    .choice-card {
-      flex: 1;
-      min-width: 260px;
-      background: #ffffff;
-      border-radius: 1.8rem;
-      padding: 2rem 1.8rem;
-      transition: all 0.25s ease;
-      border: 1px solid #dce9f2;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.02);
-    }
-
-    .choice-card:hover {
-      transform: translateY(-6px);
-      border-color: #7fb4ce;
-      box-shadow: 0 18px 32px rgba(0, 80, 100, 0.08);
-      background: #ffffff;
-    }
-
-    .card-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .choice-card h3 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #1a4c66;
-      margin-bottom: 0.8rem;
-      letter-spacing: -0.2px;
-    }
-
-    .choice-card p {
-      color: #446f88;
-      line-height: 1.5;
-      font-size: 0.95rem;
-      margin: 1rem 0 1.6rem 0;
-    }
-
-    .pill-btn {
-      display: inline-block;
-      background: #eef2f8;
-      border: 1px solid #bbd4e8;
-      padding: 0.7rem 1.6rem;
-      border-radius: 60px;
-      font-weight: 600;
-      color: #1f6c8c;
-      text-decoration: none;
-      transition: 0.2s;
-      font-size: 0.9rem;
-    }
-
-    .pill-btn:hover {
-      background: #2c9cbb;
-      color: white;
-      border-color: #2c9cbb;
-      box-shadow: 0 4px 12px rgba(44, 156, 187, 0.2);
-    }
-
-    .intermediate-badge {
-      background: #fef3e6;
-      border-color: #f0bc80;
-    }
-
-    .aptitude-card {
-      border: 1px solid #d9caf5;
-      background: #fefbff;
-    }
-
-    .aptitude-card:hover {
-      border-color: #b597e6;
-    }
-
-    .aptitude-badge {
-      background: #f0e9ff;
-      border-color: #c6b0f0;
-      color: #6b46c1;
-    }
-
-    .live-session {
-      background: #f8fdfe;
-      border-radius: 1.8rem;
-      margin: 0 2rem 2rem 2rem;
-      padding: 1.5rem 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      border: 1px solid #cfe3ef;
-      backdrop-filter: blur(2px);
-    }
-
-    .live-text {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .pulse {
-      width: 12px;
-      height: 12px;
-      background: #e05a6f;
-      border-radius: 50%;
-      box-shadow: 0 0 0 0 rgba(224, 90, 111, 0.5);
-      animation: pulse-red 1.5s infinite;
-    }
-
-    @keyframes pulse-red {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 111, 0.5);}
-      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(224, 90, 111, 0);}
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 111, 0);}
-    }
-
-    .live-text span {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #b14b5c;
-    }
-
-    .live-text p {
-      font-size: 0.95rem;
-      color: #2d627b;
-    }
-
-    .join-btn {
-      background: #e05a6f;
-      border: none;
-      padding: 0.75rem 2rem;
-      border-radius: 60px;
-      font-weight: bold;
-      color: white;
-      text-decoration: none;
-      transition: 0.2s;
-      display: inline-block;
-      box-shadow: 0 4px 10px rgba(224, 90, 111, 0.2);
-    }
-
-    .join-btn:hover {
-      background: #c7455a;
-      transform: scale(1.02);
-    }
-
-    .footer-note {
-      text-align: center;
-      padding: 1.5rem 2rem 2rem;
-      font-size: 0.8rem;
-      color: #547c92;
-      border-top: 1px solid #d7e5ef;
-      margin-top: 0.2rem;
-    }
-
-    @media (max-width: 780px) {
-      body {
-        padding: 1rem;
-      }
-      h1 {
-        font-size: 2.5rem;
-      }
-      .tagline {
-        font-size: 1rem;
-        max-width: 100%;
-      }
-      .cta-grid {
-        flex-direction: column;
-        gap: 1.5rem;
-        padding: 1.8rem;
-      }
-      .live-session {
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0 1.2rem 1.8rem 1.2rem;
-      }
-      .hero {
-        padding: 1.5rem;
-      }
-      .counters-container {
-        position: relative;
-        top: auto;
-        right: auto;
-        flex-direction: column;
-        margin-bottom: 1rem;
-        width: 100%;
-      }
-      .visitor-counter {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    .choice-prompt {
-      font-size: 1rem;
-      font-weight: 500;
-      background: transparent;
-      padding: 0.5rem 0 0 0;
-      color: #336d89;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    hr {
-      border-color: #cbdde8;
-      margin: 0.5rem 0;
-    }
-
-    .skill-tag {
-      display: inline-block;
-      background: #eef2f9;
-      border-radius: 30px;
-      padding: 0.2rem 0.8rem;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #2b6f8a;
-      margin-right: 0.5rem;
-      margin-top: 0.6rem;
-    }
-
-    .badge-group {
-      margin-top: 0.7rem;
-    }
-
-    .aptitude-tag {
-      background: #ede7ff;
-      color: #735fbf;
-    }
-
-    /* Stats Bar */
-    .stats-bar {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  </style>
+svg.icon{width:18px;height:18px;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
 </head>
 <body>
 
-<div class="glass-container">
-  <div class="hero">
+<div class="hero">
+  <div class="grid-bg"></div>
+  <div class="glow-orb"></div>
 
+  <div class="badge"><span class="dot-live"></span>Pavan X Dhee Coding Lab — Live & Active</div>
 
-    <div class="badge">DSA FORGE • LEETCODE ARENA + APTITUDE LAB</div>
-    <h1>Pavan X<span class="title-highlight"> DHEE CODING LAB</span></h1>
-    <div class="tagline">
-      “Remember the guy who gave up? <strong>No one does</strong>. Either!”
-    </div>
-    <div class="motivation-block">
-      <div class="motivation-text">
-        <strong>So shall we get started?</strong> — Pick your weapon, break the matrix.
-      </div>
-    </div>
+  <h1><span class="grad">Break the Matrix.<br>Master the Code.</span></h1>
+  <p class="hero-sub">DSA Forge • LeetCode Arena • Aptitude Lab — everything you need to crack placements and dominate FAANG interviews.</p>
+
+  <div class="hero-cta">
+    <a href="https://www.pavanxdcl.in/subpage.html" class="btn-prim">
+      <svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Scroll Down To Start Grinding
+    </a>
   </div>
 
-  <!-- choice section: 4 cards (light theme) -->
-  <div class="cta-grid" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
-    <!-- Rookie Rise Card -->
-    <div class="choice-card">
-      <h3>Rookie Rise</h3>
-      <p>Foundations • Arrays • Strings • Recursion<br> 
-      Begin your journey with structured patterns & logic.</p>
-      <div class="badge-group">
-        <span class="skill-tag">Beginner friendly</span>
-        <span class="skill-tag">150+ problems</span>
-      </div>
-      <div style="margin-top: 1.5rem;">
-        <a href="subpage.html" class="pill-btn">Start Grind →</a>
-      </div>
-    </div>
-
-    
-    <!-- Aptitude Ignition Card -->
-    <div class="choice-card aptitude-card">
-      <h3>Aptitude Ignition</h3>
-      <p>Quantitative • Logical Reasoning • Data Interpretation</p>
-      <div class="badge-group">
-        <span class="skill-tag aptitude-tag">Practice Questions</span>
-        <span class="skill-tag aptitude-tag">100% Placement Oriented</span>
-      </div>
-      <div style="margin-top: 1.5rem;">
-        <a href="aptitude.html" class="pill-btn">Fire Up →</a>
-      </div>
-    </div>
-
-    <!-- Intermediate Coder Card -->
-    <div class="choice-card">
-      <h3>JavaScript Module</h3>
-      <p>Master complex Javascript topics & real interview patterns.</p>
-      <div class="badge-group">
-        <span class="skill-tag">⚡ Core Concepts </span>
-        <span class="skill-tag">Live sessions</span>
-          <span class="skill-tag">Placement Focused</span>
-      </div>
-      <div style="margin-top: 1.5rem;">
-        <a href="javascript.html" class="pill-btn intermediate-badge">Level Up →</a>
-      </div>
-    </div>
-
-    <!-- Pro Max : Coming Soon Card -->
-    <div class="choice-card">
-      <h3>Pro Max : Active [Live]</h3>
-      <p>Advanced Algorithms • Code optimisation<br>
-      Crack FAANG & architect high-performance solutions.</p>
-      <div class="badge-group">
-        <span class="skill-tag">Hardcore mode</span>
-        <span class="skill-tag">Mentorship</span>
-      </div>
-      <div style="margin-top: 1.5rem;">
-        <a href="promax.html" class="pill-btn">Unleash →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Live sessions callout (same interactive community section) -->
-  <div class="live-session">
-    <div class="live-text">
-      <div class="pulse"></div>
-      <span>LIVE NOW</span>
-      <p>To attend live Sessions of DSA, Aptitude & Coding Sessions join :</p>
-    </div>
-    <a href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" class="join-btn">JOIN COMMUNITY HUB</a>
-  </div>
-
-  <div class="footer-note">
-    <div class="choice-prompt">
-      Choose your path — consistency over intensity
-    </div>
-    <hr style="margin: 1rem 0 0.5rem 0;">
-    <div>“No one remembers the one who gave up” — keep building, keep solving.</div>
-    <div style="margin-top: 0.6rem;">Aptitude resources updated weekly • DSA + Aptitude = Complete Warrior</div>
-    <div style="margin-top: 0.4rem;">Instagram @codewithpavanprakash</div>
-    <div class="stats-bar" style="margin-top: 1rem; font-size: 0.7rem; opacity: 0.7;">
-      📊 Real-time analytics • Unique device tracking
-    </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">150+</div><div class="stat-lbl">DSA Problems</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Placement Focused</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Learning Tracks</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">Live</div><div class="stat-lbl">Mentorship</div></div>
   </div>
 </div>
 
-<script>
-  (function() {
-    // ============================================================
-    // DUAL COUNTER SYSTEM:
-    // 1. PERSONAL VISITS COUNTER - tracks how many times YOU visited
-    // 2. TOTAL UNIQUE VISITORS COUNTER - tracks unique devices/browsers globally
-    // ============================================================
-    
-    // Storage Keys
-    const PERSONAL_STORAGE_KEY = "pavan_dsa_personal_visits";
-    const PERSONAL_SESSION_FLAG = "pavan_personal_session_recorded";
-    const TOTAL_UNIQUE_KEY = "pavan_dsa_total_unique_visitors";
-    const DEVICE_ID_KEY = "pavan_device_unique_id";
-    
-    // Helper: format number with commas
-    function formatNumber(num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    
-    // Helper: generate a unique device ID (stored permanently in localStorage)
-    function getOrCreateDeviceId() {
-      let deviceId = localStorage.getItem(DEVICE_ID_KEY);
-      if (!deviceId) {
-        // Create a unique ID based on timestamp + random + navigator info (for uniqueness)
-        const timestamp = Date.now();
-        const random = Math.random().toString(36).substring(2, 15);
-        const navInfo = (navigator.userAgent || '').substring(0, 50).replace(/[^a-zA-Z0-9]/g, '');
-        deviceId = `dev_${timestamp}_${random}_${navInfo.substring(0, 20)}`;
-        localStorage.setItem(DEVICE_ID_KEY, deviceId);
-      }
-      return deviceId;
-    }
-    
-    // ========== 1. PERSONAL VISITS COUNTER ==========
-    function updatePersonalCounter() {
-      let currentVisits = 0;
-      const storedVisits = localStorage.getItem(PERSONAL_STORAGE_KEY);
-      if (storedVisits !== null && !isNaN(parseInt(storedVisits, 10))) {
-        currentVisits = parseInt(storedVisits, 10);
-      } else {
-        currentVisits = 0;
-      }
-      
-      const alreadyRecorded = sessionStorage.getItem(PERSONAL_SESSION_FLAG) === "true";
-      
-      if (!alreadyRecorded) {
-        currentVisits += 1;
-        localStorage.setItem(PERSONAL_STORAGE_KEY, currentVisits);
-        sessionStorage.setItem(PERSONAL_SESSION_FLAG, "true");
-      }
-      
-      const finalCount = (isNaN(currentVisits) || currentVisits < 0) ? 0 : currentVisits;
-      const personalSpan = document.getElementById("personalVisitCount");
-      if (personalSpan) {
-        personalSpan.textContent = formatNumber(finalCount);
-        // subtle animation
-        personalSpan.style.transition = "transform 0.2s ease";
-        setTimeout(() => {
-          if (personalSpan) personalSpan.style.transform = "scale(1.05)";
-          setTimeout(() => {
-            if (personalSpan) personalSpan.style.transform = "scale(1)";
-          }, 150);
-        }, 50);
-      }
-      return finalCount;
-    }
-    
-    // ========== 2. TOTAL UNIQUE VISITORS COUNTER (Combined across all users) ==========
-    // This tracks unique devices/browsers. Each new device gets counted only once.
-    // The total is stored in localStorage and increments only when a new unique device visits.
-    // To simulate "global" counter across all users, we store the total in localStorage.
-    // For a real production app, this would be a backend API, but for demo purposes,
-    // we use localStorage with a simulated global counter that increments per unique device.
-    
-    function updateTotalUniqueCounter() {
-      const deviceId = getOrCreateDeviceId();
-      const TOTAL_VISITORS_KEY = "pavan_global_total_unique_visitors";
-      const REGISTERED_DEVICES_KEY = "pavan_registered_devices_set";
-      
-      // Get the set of registered devices (simulated "database" of unique visitors)
-      let registeredDevices = [];
-      const storedDevices = localStorage.getItem(REGISTERED_DEVICES_KEY);
-      if (storedDevices) {
-        try {
-          registeredDevices = JSON.parse(storedDevices);
-        } catch(e) {
-          registeredDevices = [];
-        }
-      }
-      
-      // Get current total unique visitors count
-      let totalUniqueVisitors = 0;
-      const storedTotal = localStorage.getItem(TOTAL_VISITORS_KEY);
-      if (storedTotal !== null && !isNaN(parseInt(storedTotal, 10))) {
-        totalUniqueVisitors = parseInt(storedTotal, 10);
-      } else {
-        totalUniqueVisitors = 0;
-      }
-      
-      // Check if this device is already registered as a unique visitor
-      const isDeviceRegistered = registeredDevices.includes(deviceId);
-      
-      if (!isDeviceRegistered) {
-        // New unique visitor! Increment the global counter
-        registeredDevices.push(deviceId);
-        localStorage.setItem(REGISTERED_DEVICES_KEY, JSON.stringify(registeredDevices));
-        totalUniqueVisitors += 1;
-        localStorage.setItem(TOTAL_VISITORS_KEY, totalUniqueVisitors);
-        
-        // Show a little celebration animation for new visitor
-        console.log(`🎉 New unique visitor! Total unique visitors: ${totalUniqueVisitors}`);
-      }
-      
-      // Update the DOM with the total unique visitors count
-      const totalSpan = document.getElementById("totalVisitorCount");
-      if (totalSpan) {
-        totalSpan.textContent = formatNumber(totalUniqueVisitors);
-        
-        // Add a special animation for new visitors
-        if (!isDeviceRegistered) {
-          totalSpan.style.transition = "all 0.3s ease";
-          totalSpan.style.transform = "scale(1.1)";
-          totalSpan.style.textShadow = "0 0 8px #f59e0b";
-          setTimeout(() => {
-            if (totalSpan) {
-              totalSpan.style.transform = "scale(1)";
-              setTimeout(() => {
-                if (totalSpan) totalSpan.style.textShadow = "none";
-              }, 500);
-            }
-          }, 300);
-        }
-      }
-      
-      return { totalUniqueVisitors, isNewVisitor: !isDeviceRegistered };
-    }
-    
-    // ========== CROSS-TAB SYNC ==========
-    // Listen for storage events to keep counters in sync across tabs
-    window.addEventListener("storage", function(event) {
-      // Sync personal counter
-      if (event.key === PERSONAL_STORAGE_KEY) {
-        const newCount = parseInt(event.newValue, 10);
-        if (!isNaN(newCount)) {
-          const personalSpan = document.getElementById("personalVisitCount");
-          if (personalSpan && personalSpan.textContent.replace(/,/g, '') !== newCount.toString()) {
-            personalSpan.textContent = formatNumber(newCount);
-          }
-        }
-      }
-      
-      // Sync total unique visitors counter
-      if (event.key === "pavan_global_total_unique_visitors") {
-        const newTotal = parseInt(event.newValue, 10);
-        if (!isNaN(newTotal)) {
-          const totalSpan = document.getElementById("totalVisitorCount");
-          if (totalSpan) {
-            const currentDisplay = totalSpan.textContent.replace(/,/g, '');
-            if (currentDisplay !== newTotal.toString()) {
-              totalSpan.textContent = formatNumber(newTotal);
-              // Highlight sync
-              totalSpan.style.transition = "all 0.2s";
-              totalSpan.style.textShadow = "0 0 4px #2c9cbb";
-              setTimeout(() => {
-                if (totalSpan) totalSpan.style.textShadow = "none";
-              }, 400);
-            }
-          }
-        }
-      }
-      
-      // Sync registered devices list (in case of cross-tab updates)
-      if (event.key === "pavan_registered_devices_set") {
-        // Re-sync total counter display without double-counting
-        const storedTotal = localStorage.getItem("pavan_global_total_unique_visitors");
-        if (storedTotal) {
-          const totalSpan = document.getElementById("totalVisitorCount");
-          if (totalSpan) {
-            totalSpan.textContent = formatNumber(parseInt(storedTotal, 10));
-          }
-        }
-      }
-    });
-    
-    // ========== INITIALIZE BOTH COUNTERS ==========
-    const personalCount = updatePersonalCounter();
-    const { totalUniqueVisitors, isNewVisitor } = updateTotalUniqueCounter();
-    
-    // Log stats to console
-    console.log(`📊 DSA MASTERY ANALYTICS:
-    - Your personal visits: ${personalCount}
-    - Total unique visitors (all time): ${totalUniqueVisitors}
-    - New visitor today: ${isNewVisitor ? 'YES 🎉' : 'No'}`);
-    
-    // ========== INTERACTIVE HOVER EFFECTS ==========
-    const personalCounterDiv = document.getElementById("personalCounter");
-    const totalCounterDiv = document.getElementById("totalVisitorCounter");
-    
-    function addHoverEffect(element, numberSpanId) {
-      if (element) {
-        element.addEventListener("mouseenter", () => {
-          const numberSpan = document.getElementById(numberSpanId);
-          if (numberSpan) {
-            numberSpan.style.transform = "scale(1.02)";
-            numberSpan.style.transition = "transform 0.2s ease";
-          }
-        });
-        element.addEventListener("mouseleave", () => {
-          const numberSpan = document.getElementById(numberSpanId);
-          if (numberSpan) {
-            numberSpan.style.transform = "scale(1)";
-          }
-        });
-      }
-    }
-    
-    addHoverEffect(personalCounterDiv, "personalVisitCount");
-    addHoverEffect(totalCounterDiv, "totalVisitorCount");
-    
-    // ========== FALLBACK FOR PRIVACY MODES ==========
-    try {
-      const testKey = "__test_ls_dsa_counter";
-      localStorage.setItem(testKey, "1");
-      localStorage.removeItem(testKey);
-    } catch (e) {
-      console.warn("localStorage not available. Counters will use fallback values.");
-      const personalSpan = document.getElementById("personalVisitCount");
-      const totalSpan = document.getElementById("totalVisitorCount");
-      if (personalSpan && personalSpan.textContent === "—") {
-        personalSpan.textContent = "1";
-      }
-      if (totalSpan && totalSpan.textContent === "—") {
-        totalSpan.textContent = "1";
-      }
-    }
-    
-    // ========== ADD STATISTICS SUMMARY TOOLTIP (optional) ==========
-    // Create a small floating stat summary on hover of total counter
-    if (totalCounterDiv) {
-      let tooltipTimeout;
-      totalCounterDiv.addEventListener("mouseenter", () => {
-        const tooltip = document.createElement("div");
-        tooltip.id = "statTooltip";
-        tooltip.textContent = `🌍 ${formatNumber(totalUniqueVisitors)} unique learners have visited this site!`;
-        tooltip.style.position = "fixed";
-        tooltip.style.background = "#1f4e66";
-        tooltip.style.color = "white";
-        tooltip.style.padding = "0.5rem 1rem";
-        tooltip.style.borderRadius = "2rem";
-        tooltip.style.fontSize = "0.75rem";
-        tooltip.style.fontWeight = "500";
-        tooltip.style.zIndex = "1000";
-        tooltip.style.whiteSpace = "nowrap";
-        tooltip.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-        tooltip.style.pointerEvents = "none";
-        document.body.appendChild(tooltip);
-        
-        const rect = totalCounterDiv.getBoundingClientRect();
-        tooltip.style.top = (rect.top - 35) + "px";
-        tooltip.style.left = (rect.left + rect.width / 2 - 100) + "px";
-        
-        tooltipTimeout = setTimeout(() => {
-          if (tooltip) tooltip.remove();
-        }, 2000);
-      });
-      
-      totalCounterDiv.addEventListener("mouseleave", () => {
-        const tooltip = document.getElementById("statTooltip");
-        if (tooltip) tooltip.remove();
-        if (tooltipTimeout) clearTimeout(tooltipTimeout);
-      });
-    }
-    
-    // ========== ADD CELEBRATION FOR MILESTONES ==========
-    if (totalUniqueVisitors > 0 && totalUniqueVisitors % 10 === 0 && isNewVisitor) {
-      // Celebrate every 10th unique visitor
-      const celebrationMsg = document.createElement("div");
-      celebrationMsg.textContent = `🎉 ${totalUniqueVisitors} unique learners and counting! 🎉`;
-      celebrationMsg.style.position = "fixed";
-      celebrationMsg.style.bottom = "20px";
-      celebrationMsg.style.left = "50%";
-      celebrationMsg.style.transform = "translateX(-50%)";
-      celebrationMsg.style.background = "linear-gradient(135deg, #f59e0b, #d97706)";
-      celebrationMsg.style.color = "white";
-      celebrationMsg.style.padding = "0.8rem 1.5rem";
-      celebrationMsg.style.borderRadius = "2rem";
-      celebrationMsg.style.fontWeight = "bold";
-      celebrationMsg.style.fontSize = "0.9rem";
-      celebrationMsg.style.zIndex = "1000";
-      celebrationMsg.style.boxShadow = "0 4px 20px rgba(0,0,0,0.2)";
-      celebrationMsg.style.animation = "fadeInUp 0.5s ease";
-      document.body.appendChild(celebrationMsg);
-      
-      setTimeout(() => {
-        celebrationMsg.style.opacity = "0";
-        celebrationMsg.style.transition = "opacity 0.5s";
-        setTimeout(() => celebrationMsg.remove(), 500);
-      }, 3000);
-    }
-    
-    // Add CSS animation for celebration
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0);
-        }
-      }
-    `;
-    document.head.appendChild(style);
-    
-  })();
-</script>
+<div class="divider"></div>
 
-<!-- 
-  ============================================================
-  COUNTER EXPLANATION:
-  
-  1. "Your visits" - Tracks how many times YOU personally have visited the website.
-     Increments once per browser session (refresh won't increase it).
-     
-  2. "Total unique visitors" - Tracks unique devices/browsers that have accessed the site.
-     Each new device/browser gets counted only ONCE in the total.
-     This gives you a combined metric of how many unique people have visited your website.
-     
-  For a production website, you'd want to use a backend API to store the global counter,
-  but this demo uses localStorage with device fingerprinting to simulate unique visitor tracking
-  across the same browser on the same device.
-  ============================================================
--->
-  
+<section>
+  <div class="section-tag" id="mark">Choose your track</div>
+  <h2 class="section-title">Pick your weapon</h2>
+  <p class="section-sub">Four battle-tested paths. Each one built to take you from zero to offer letter.</p>
+
+  <div class="cards">
+
+    <a href="https://www.pavanxdcl.in/subpage.html" class="card">
+      <div class="card-icon ic-purple">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="card-title">DSA-Rookie Rise</div>
+      <div class="card-desc">Foundations, arrays, strings & recursion. Structured patterns for beginners who mean business.</div>
+      <div class="card-tags">
+        <span class="tag">Beginner Friendly</span>
+        <span class="tag">150+ Problems</span>
+        <span class="tag">Patterns</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="promax.html" class="card">
+      <div class="card-live-badge"><span class="dot-live"></span>Live</div>
+      <div class="card-icon ic-green">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="card-title">DSA-Pro Max</div>
+      <div class="card-desc">Advanced algorithms, code optimisation & system design. Built to crack FAANG. Mentorship included.</div>
+      <div class="card-tags">
+        <span class="tag">Hardcore Mode</span>
+        <span class="tag">FAANG Focus</span>
+        <span class="tag">Mentorship</span>
+      </div>
+    </a>
+
+    <a href="https://www.pavanxdcl.in/javascript.html" class="card">
+      <div class="card-icon ic-cyan">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="card-title">JavaScript Module</div>
+      <div class="card-desc">Complex JS topics, closures, async, event loops — real interview patterns, not just syntax.</div>
+      <div class="card-tags">
+        <span class="tag">Core Concepts</span>
+        <span class="tag">Live Sessions</span>
+        <span class="tag">Interview Focus</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    
+    <a href="https://www.pavanxdcl.in/aptitude.html" class="card">
+      <div class="card-icon ic-amber">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <div class="card-title">Aptitude Ignition</div>
+      <div class="card-desc">Quantitative reasoning, logical deduction & data interpretation — the placement exam trinity.</div>
+      <div class="card-tags">
+        <span class="tag">Placement Oriented</span>
+        <span class="tag">Practice Sets</span>
+        <span class="tag">Weekly Updates</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="community">
+    <div class="community-title">Join the Community Hub</div>
+    <div class="community-sub">Live DSA, Aptitude & Coding sessions — direct access to Pavan and the grind squad.</div>
+    <a href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" class="btn-whatsapp">
+      <svg style="width:18px;height:18px;fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M5.77 17.636A9.936 9.936 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.936 9.936 0 0 1-5.77-1.836L2 22l2.23-4.364z" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Join on WhatsApp
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer class="footer">
+  <div class="footer-left">Pavan × Dhee Coding Lab · DSA + Aptitude = Complete Warrior</div>
+  <div class="footer-right">
+    <a href="https://www.instagram.com/codewithpavanprakash" class="footer-link">Instagram</a>
+    <a href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" class="footer-link">Community</a>
+    <a href="https://www.pavanxdcl.in/promax.html" class="footer-link">Pro Max</a>
+  </div>
+</footer>
+
 </body>
 </html>

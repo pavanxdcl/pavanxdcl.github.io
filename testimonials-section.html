@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonials — Pavan X DHEE Coding Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0a; }
+
+    .testi-root {
+      background: #0a0a0a;
+      padding: 80px 0 60px;
+      overflow: hidden;
+      font-family: 'Syne', sans-serif;
+      position: relative;
+    }
+
+    .testi-root::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00ff88, #00e5ff, #ff4d6d, transparent);
+    }
+
+    .testi-header {
+      text-align: center;
+      margin-bottom: 56px;
+      padding: 0 24px;
+    }
+
+    .testi-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #00ff88;
+      border: 1px solid #00ff8840;
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .testi-title {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      color: #f0f0f0;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .testi-title span {
+      color: #00ff88;
+    }
+
+    .testi-subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 0.05em;
+    }
+
+    .testi-track-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testi-track-wrap::before,
+    .testi-track-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 100px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .testi-track-wrap::before { left: 0; background: linear-gradient(90deg, #0a0a0a, transparent); }
+    .testi-track-wrap::after  { right: 0; background: linear-gradient(-90deg, #0a0a0a, transparent); }
+
+    .testi-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: scroll-left 40s linear infinite;
+    }
+
+    .testi-track:hover { animation-play-state: paused; }
+
+    .testi-track-2 {
+      animation: scroll-right 45s linear infinite;
+      margin-top: 20px;
+    }
+
+    .testi-track-2:hover { animation-play-state: paused; }
+
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+
+    .testi-card {
+      flex-shrink: 0;
+      width: 300px;
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 4px;
+      padding: 20px;
+      position: relative;
+      transition: border-color 0.3s;
+      cursor: default;
+    }
+
+    .testi-card:hover { border-color: #00ff8840; }
+
+    .testi-card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .testi-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid #1e1e1e;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: #00ff88;
+      flex-shrink: 0;
+    }
+
+    .testi-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f0f0f0;
+      margin: 0 0 2px;
+    }
+
+    .testi-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #444;
+      letter-spacing: 0.08em;
+      margin: 0;
+    }
+
+    .testi-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    .badge-placed   { background: #00ff8815; color: #00ff88; border: 1px solid #00ff8830; }
+    .badge-dsa      { background: #00e5ff15; color: #00e5ff; border: 1px solid #00e5ff30; }
+    .badge-aptitude { background: #ff4d6d15; color: #ff4d6d; border: 1px solid #ff4d6d30; }
+
+    .testi-quote {
+      font-size: 13.5px;
+      color: #888;
+      line-height: 1.7;
+      margin: 0 0 16px;
+      font-style: italic;
+      letter-spacing: 0.01em;
+    }
+
+    .testi-quote::before { content: '\201C'; color: #00ff88; font-size: 20px; font-style: normal; }
+    .testi-quote::after  { content: '\201D'; color: #00ff88; font-size: 20px; font-style: normal; }
+
+    .testi-stars { display: flex; gap: 3px; }
+
+    .star {
+      width: 12px;
+      height: 12px;
+      background: #00ff88;
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    }
+
+    .testi-stat {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      text-align: right;
+    }
+
+    .testi-stat strong {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      color: #00ff88;
+      letter-spacing: -0.02em;
+    }
+
+    .testi-divider {
+      text-align: center;
+      margin: 48px 24px 0;
+      padding-top: 40px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .testi-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #00ff88;
+      text-decoration: none;
+      border: 1px solid #00ff8840;
+      padding: 10px 24px;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .testi-cta:hover { background: #00ff8815; }
+
+    .testi-count {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0 0;
+      padding: 0 24px;
+    }
+
+    .count-item { text-align: center; }
+
+    .count-num {
+      font-size: 32px;
+      font-weight: 800;
+      color: #f0f0f0;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .count-num span { color: #00ff88; }
+
+    .count-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #444;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<!-- =============================================
+     TESTIMONIALS SECTION — PAVAN X DHEE CODING LAB
+     Paste this entire <section> block into your page.
+     Make sure the <style> above and <script> below
+     are also included (or merged into your existing
+     CSS / JS files).
+============================================= -->
+
+<section class="testi-root">
+
+  <div class="testi-header">
+    <div class="testi-tag">// student_wins.log</div>
+    <h2 class="testi-title">Warriors who <span>broke through</span></h2>
+    <p class="testi-subtitle">real results · real grind · no shortcuts</p>
+  </div>
+
+  <div class="testi-count">
+    <div class="count-item">
+      <div class="count-num"><span>Aim</span></div>
+      <div class="count-label">students trained</div>
+    </div>
+    <div class="count-item">
+      <div class="count-num"><span>Grind</span></div>
+      <div class="count-label">placed in tech</div>
+    </div>
+    <div class="count-item">
+      <div class="count-num"><span>Achive</span>★</div>
+      <div class="count-label">avg rating</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 40px;">
+
+    <!-- ROW 1 — scrolls left -->
+    <div class="testi-track-wrap">
+      <div class="testi-track" id="row1">
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>LeetCode</strong>Top 15%</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar">AK</div>
+            <div>
+              <p class="testi-name">Aditya Kumar</p>
+              <p class="testi-role">SDE @ Infosys</p>
+              <span class="testi-badge badge-placed">✓ PLACED</span>
+            </div>
+          </div>
+          <p class="testi-quote">Pavan's DSA sessions are next level. Cracked 3 FAANG rounds after just 2 months of Pro Max. The way he breaks down DP is insane.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>0→120</strong>LeetCode</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar" style="color:#00e5ff">RS</div>
+            <div>
+              <p class="testi-name">Ritika Sharma</p>
+              <p class="testi-role">Dev @ TCS Digital</p>
+              <span class="testi-badge badge-dsa">DSA WARRIOR</span>
+            </div>
+          </div>
+          <p class="testi-quote">Started from absolute zero. The Rookie Rise path + Pavan's explanations made recursion click overnight. Never thought I'd solve medium problems.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>Aptitude</strong>95%ile</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar" style="color:#ff4d6d">MV</div>
+            <div>
+              <p class="testi-name">Mohit Verma</p>
+              <p class="testi-role">Accenture | Bengaluru</p>
+              <span class="testi-badge badge-aptitude">APTITUDE PRO</span>
+            </div>
+          </div>
+          <p class="testi-quote">The Aptitude Ignition module saved my campus placement. Cleared quantitative with 95 percentile. The shortcuts Pavan teaches don't exist on YouTube.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>JS</strong>Fullstack</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar" style="color:#ff9f1c">PD</div>
+            <div>
+              <p class="testi-name">Priya Deshpande</p>
+              <p class="testi-role">Frontend Dev @ Razorpay</p>
+              <span class="testi-badge badge-dsa">JS MODULE</span>
+            </div>
+          </div>
+          <p class="testi-quote">The JS module is genuinely different. Closures, event loop, async patterns — all covered with interview-ready framing. Got my dream startup role.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>FAANG</strong>OA Cleared</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar" style="color:#c77dff">KN</div>
+            <div>
+              <p class="testi-name">Karthik Nair</p>
+              <p class="testi-role">SDE-1 @ Amazon</p>
+              <span class="testi-badge badge-placed">✓ PLACED</span>
+            </div>
+          </div>
+          <p class="testi-quote">Pro Max mentorship changed how I think about systems. The code review sessions caught patterns I was blind to for months. Cleared Amazon OA first try.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>Trees</strong>Conquered</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar" style="color:#06d6a0">SB</div>
+            <div>
+              <p class="testi-name">Sneha Bhatt</p>
+              <p class="testi-role">Wipro | Mumbai</p>
+              <span class="testi-badge badge-dsa">DSA WARRIOR</span>
+            </div>
+          </div>
+          <p class="testi-quote">Trees and graphs were my nightmare. Two weeks with DHEE Coding Lab and I was solving hard problems. The community keeps you accountable too.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>3 offers</strong>in hand</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar" style="color:#ffd60a">VR</div>
+            <div>
+              <p class="testi-name">Vikram Rao</p>
+              <p class="testi-role">Backend Dev @ Flipkart</p>
+              <span class="testi-badge badge-placed">✓ PLACED</span>
+            </div>
+          </div>
+          <p class="testi-quote">Three job offers in one placement season. Pavan's consistent push — show up daily, solve daily — actually works. No fluff, just results.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stat"><strong>Live</strong>Sessions</div>
+          <div class="testi-card-top">
+            <div class="testi-avatar" style="color:#ef476f">DM</div>
+            <div>
+              <p class="testi-name">Divya Menon</p>
+              <p class="testi-role">Cognizant | Chennai</p>
+              <span class="testi-badge badge-aptitude">APTITUDE PRO</span>
+            </div>
+          </div>
+          <p class="testi-quote">Live sessions are pure gold. You can ask doubts in real-time and Pavan never lets you leave confused. The energy in that WhatsApp community is unmatched.</p>
+          <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="testi-divider">
+    <p style="font-family:'Space Mono',monospace; font-size:12px; color:#333; margin: 0 0 16px; letter-spacing:0.08em;">// your win could be next</p>
+    <a class="testi-cta" href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" target="_blank">JOIN THE COMMUNITY →</a>
+  </div>
+
+</section>
+
+<script>
+  /* Duplicate cards so infinite scroll loops seamlessly */
+  const row1 = document.getElementById('row1');
+  const row2 = document.getElementById('row2');
+  row1.innerHTML += row1.innerHTML;
+  row2.innerHTML += row2.innerHTML;
+</script>
+
+</body>
+</html>
