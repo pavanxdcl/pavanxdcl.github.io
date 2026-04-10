@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DSA Forge | Java & Python Mastery (Light Mode)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* LIGHT THEME OVERRIDE - same layout, fresh light colors */
+        body {
+            background: linear-gradient(145deg, #f0f6fa 0%, #e4edf5 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Poppins', 'Segoe UI', sans-serif;
+            color: #1a3a4a;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        /* soft grain overlay (light) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(0, 100, 120, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* home link - light style */
+        .home-nav {
+            margin-bottom: 1.5rem;
+        }
+        .home-link {
+            background: rgba(100, 140, 170, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #2c728c;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid rgba(40, 140, 160, 0.3);
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .home-link:hover {
+            background: #cde3ef;
+            border-color: #2c9cbb;
+            color: #1f5a70;
+            transform: translateY(-2px);
+        }
+
+        /* header glass - light version */
+        .hero-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(60, 140, 160, 0.25);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+        }
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .logo-group img {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+            transition: transform 0.2s;
+        }
+        .logo-group img:hover {
+            transform: scale(1.02);
+        }
+        .hero-header h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            background: linear-gradient(120deg, #1c5a74, #2f8fae, #3a6c8c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        @media (max-width: 650px) {
+            .hero-header { flex-direction: column; align-items: flex-start; }
+            .hero-header h1 { font-size: 1.6rem; }
+        }
+
+        /* tab navigation - light theme */
+        .tab-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(60, 130, 150, 0.25);
+            padding-bottom: 0.5rem;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            color: #3a6e86;
+            transition: 0.2s;
+            backdrop-filter: blur(2px);
+            font-family: inherit;
+        }
+        .tab-btn.active {
+            background: #d9eef7;
+            color: #1e6f8c;
+            box-shadow: 0 2px 8px rgba(0, 100, 120, 0.1);
+            border: 1px solid #8fcbdf;
+        }
+        .tab-btn:hover:not(.active) {
+            background: rgba(100, 150, 180, 0.12);
+            color: #1e5e78;
+        }
+
+        /* content panels */
+        .tab-panel {
+            display: none;
+            animation: fade 0.25s ease;
+        }
+        .tab-panel.active-panel {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* card style for sections - light pastel */
+        .section-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid #cde3ef;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .section-card h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            border-left: 5px solid #2c9cbb;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.2px;
+            color: #235f78;
+        }
+        .section-card h3 {
+            font-size: 1.3rem;
+            margin: 1rem 0 0.5rem;
+            color: #2c7a98;
+        }
+        .resource-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .resource-list li {
+            margin-bottom: 1rem;
+            padding: 0.6rem 0.8rem;
+            background: #f3f9fe;
+            border-radius: 1rem;
+            border-left: 3px solid #7fc1d4;
+            color: #2b5d74;
+        }
+        .resource-list strong {
+            color: #c47e2a;
+        }
+        a {
+            color: #1f7f9c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            border-bottom: 1px dotted #9fcbd9;
+        }
+        a:hover {
+            color: #e05a6f;
+            border-bottom-color: #e05a6f;
+        }
+        .btn-sm {
+            display: inline-block;
+            background: #e4f0f5;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            border: none;
+        }
+        .badge {
+            background: #dbeef5;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #236f8c;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        hr {
+            border-color: #cde0e9;
+            margin: 1rem 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: #58829b;
+            border-top: 1px solid #cde0e9;
+        }
+        @media (max-width: 700px) {
+            body { padding: 1rem; }
+            .section-card { padding: 1.2rem; }
+        }
+
+        /* additional small polish */
+        .resource-list li a {
+            word-break: break-word;
+        }
+        .hero-header .badge {
+            background: #e0f0f5;
+            color: #1d6c88;
+        }
+    </style>
+</head>
+<body>
+<div class="main-wrapper">
+    <div class="home-nav">
+        <a href="index.html" class="home-link">🏠 Home Page</a>
+    </div>
+
+    <div class="hero-header">
+        <div class="logo-group">
+            <!-- <img src="/images/javalogo.png" alt="Java" width="58" onerror="this.src='https://placehold.co/60x60/eef2f8/2c7a98?text=Java'"> -->
+            <h1>Rookie Rise : Beginner DSA Module : Pavan X Dhee Coding Lab </h1>
+            <!-- <img src="/images/pythonlogo.png" alt="Python" width="48" onerror="this.src='https://placehold.co/50x50/eef2f8/2c7a98?text=Py'"> -->
+        </div>
+        <div class="badge">⚡ 500+ problems • Live sessions</div>
+    </div>
+
+    <!-- Tab Navigation (same structure) -->
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="basics">📘 Basics & Patterns</button>
+        <button class="tab-btn" data-tab="collections">📚 ArrayList / HashMap</button>
+        <button class="tab-btn" data-tab="twopointers">🎯 Two Pointers & Stack</button>
+        <button class="tab-btn" data-tab="linkedlist">🔗 LinkedList</button>
+        <button class="tab-btn" data-tab="leetcode">⚡ LeetCode Practice</button>
+    </div>
+
+    <!-- ======================= TAB 1: BASICS ======================= -->
+    <div id="basics-panel" class="tab-panel active-panel">
+        <div class="section-card">
+            <h2>📖 Good to Know</h2>
+            <ul class="resource-list">
+                <li><strong>Java :</strong> <a href="https://youtu.be/UeI4xAn8NLQ" target="_blank">Click here (Crash Course)</a> 
+                    | 📥 <a href="/images/javasheet.png" download>Download Java Collections CheatSheet</a></li>
+                <li><strong>Python :</strong> <a href="https://youtu.be/mdlbz025jkA" target="_blank">Click here (Core DSA)</a>
+                 📥 <a href="/images/pythonsheet.png" download>Download Python Collections CheatSheet</a></li></li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>⭐ Pattern Programming (Beginner DSA)</h2>
+            <ul class="resource-list">
+                <li><strong>Pattern-1</strong> : <a href="https://youtu.be/f1IVU3mKvv8" target="_blank">Recording</a> | 📄 <a href="https://docs.google.com/document/d/1niaekpgZB60z-PXDVEVlcrdS7_Z2sYMblH0F-gnf3d4/edit?usp=sharing" target="_blank">Doc</a> </li>
+                <li><strong>Pattern-2</strong> : <a href="https://youtu.be/ppmBHL1a7YM" target="_blank">Recording</a> | 📄 <a href="https://docs.google.com/document/d/1RjJvfKmbQUDwlVWIAey5X75_rlItXTWYqY7Zg87odKk/edit?usp=sharing" target="_blank">Doc</a> </li>
+                <li><strong>Pattern-3</strong> : <a href="https://youtu.be/Dk4Iua3V5K8" target="_blank">Recording</a> | 📄 <a href="https://docs.google.com/document/d/1TaTZ9AnzBv2oI_TB0uE-SIlVh8aCjo3-axfeQN6MJVo/edit?usp=sharing" target="_blank">Doc</a> |  <a href="https://www.hackerrank.com/challenges/printing-pattern-2/problem" target="_blank">Hackerrank</a> | <a href="https://www.geeksforgeeks.org/problems/pattern/1" target="_blank">GFG</a></li>
+                <li><strong>Pattern-4 Finale</strong> : <a href="https://youtu.be/c-effdypJhI" target="_blank">Recording</a> | 📄 <a href="https://docs.google.com/document/d/1Qh65dI8p0SmOVZQi7yHrDasJMVGITfcBmKzQGnW94Uc/edit?usp=sharing" target="_blank">Doc</a> 
+                    <br>🎯 Solve all: <a href="https://prepinsta.com/pattern-programs-tutorial/" target="_blank">PrepInsta</a> | <a href="https://pynative.com/print-pattern-python-examples/" target="_blank">PyNative</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ======================= TAB 2: ARRAYLIST / HASHMAP ======================= -->
+    <div id="collections-panel" class="tab-panel">
+        <div class="section-card">
+            <h2>📌 ArrayList (Java) / List (Python)</h2>
+            <ul class="resource-list">
+                <li><strong>Intro Part 1</strong> : <a href="https://youtu.be/KaDtZsyDsXc" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/16Jz3nenvEhpKn-cgu6C07zKuN5C-j1UN4ulfjXIpZ90/edit?usp=sharing" target="_blank">Doc</a></li>
+                <li><strong>Intro Part 2</strong> : <a href="https://youtu.be/Hgr_Py6nXnA" target="_blank">Recording</a> | same <a href="https://docs.google.com/document/d/16Jz3nenvEhpKn-cgu6C07zKuN5C-j1UN4ulfjXIpZ90/edit?usp=sharing" target="_blank">Doc</a></li>
+                <li><strong>Prefix Sum Array</strong> : <a href="https://youtu.be/PnIOEPDATjw" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1X2xRCUPv3CNzHgBr7kpBVwsLhVMhVtu3WmCTLNuvsGk/edit?usp=sharing" target="_blank">Doc</a> 
+                    <br>📌 <a href="https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true" target="_blank">Simple Array Sum</a> · <a href="https://www.hackerrank.com/challenges/a-very-big-sum/problem" target="_blank">Very Big Sum</a> · <a href="https://leetcode.com/problems/running-sum-of-1d-array/" target="_blank">Running Sum</a></li>
+                <li><strong>Nested List + Hackerrank</strong> : <a href="https://youtu.be/Wg834zAVliw" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1rm2SbVoUAVapYgnWmDw6myH7cnSBirBCtIZ_HXpE4_E/edit?usp=sharing" target="_blank">Doc</a> 
+                    <br>🎯 <a href="https://www.hackerrank.com/challenges/mini-max-sum/problem" target="_blank">Mini-Max Sum</a> · <a href="https://www.hackerrank.com/challenges/staircase/problem" target="_blank">Staircase</a> · <a href="https://www.hackerrank.com/challenges/diagonal-difference/problem" target="_blank">Diagonal Diff</a></li>
+                <li><strong>Brute Force & Subarrays</strong> : <a href="https://youtu.be/-WK9WPhuKB4" target="_blank">Two Sum BF</a> | <a href="https://youtu.be/XzK5_8cMA6g" target="_blank">SubArrays BF</a> | <a href="https://leetcode.com/problems/two-sum/" target="_blank">Two Sum LeetCode</a></li>
+                <li><strong>Increasing Triplet Sequence</strong> : <a href="https://www.youtube.com/watch?v=KhvpFHlzc1c&t=520s" target="_blank">Recording</a></li>
+                        <li><strong>Merge Strings Alternately </strong> <a href="https://youtu.be/mI6v-1LUL9s" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/merge-strings-alternately/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/merge-strings-alternately/submissions/1957916511" target="_blank">Solution</a></li>
+                </li>
+                   <li><strong>Array prod except self </strong> <a href="https://drive.google.com/file/d/1dkhKX2lxF0qyVHbAeaoXMZPWVXnR2dMY/view?usp=sharing" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/product-of-array-except-self/submissions/1961033405" target="_blank">Solution</a></li>
+                </li>    
+
+                <li><strong> Increasing Triplet Sequence </strong> <a href="https://www.youtube.com/watch?v=KhvpFHlzc1c&t=520s" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/increasing-triplet-subsequence/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/increasing-triplet-subsequence/submissions/1948171683" target="_blank">Solution</a></li>
+                </li>
+
+                    
+                <li><strong> Can Place Flowers </strong> <a href="https://youtu.be/XO2hTYkghVk" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/can-place-flowers/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/can-place-flowers/submissions/1957946761" target="_blank">Solution</a></li>
+                </li>
+            
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>🗺️ HashMap (Java) / Dictionary (Python)</h2>
+            <ul class="resource-list">
+                <li><strong>Intro + Methods</strong> : <a href="https://www.youtube.com/watch?v=7_x9WjVZVNA" target="_blank">Recording</a></li>
+                <li><strong>Frequency HashMap (Java)</strong> : <a href="https://www.youtube.com/watch?v=t2wxEHMbs_A&t=306s" target="_blank">Watch</a> | <strong>Python</strong> : <a href="https://www.youtube.com/watch?v=bdJI_l7yF8E" target="_blank">Watch</a></li>
+                <li><strong>Identify Duplicates</strong> : <a href="https://youtu.be/zHdxch6g0cc" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1kDBgMlPgJ1I-RLgi-TPwjdLeMboYAvLTeuTJadnEkfE/edit?usp=sharing" target="_blank">Doc</a> 
+                    <br>✅ <a href="https://leetcode.com/problems/contains-duplicate/" target="_blank">Contains Duplicate</a> · <a href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank">Find Duplicate Number</a> · <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank">All Duplicates</a></li>
+                <li><strong>HashMap + Prefix Sum (SubArray Sum = k)</strong> : <a href="https://youtu.be/dtCHBS5wZZg" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1_5w3ZumaLnDJEAdu4lnPoIz1ZA25_4I8QTpaH0W_3ZY/edit?usp=sharing" target="_blank">Doc</a></li>
+                <li><strong>Remove Duplicates</strong> : <a href="https://youtu.be/c4dXRQ7UYKs" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/18jYKkavSQcEdKyVMy9u0AfsdyQOPat-d7MzOoMLfMa0/edit?usp=sharing" target="_blank">Doc</a></li>
+                <li><strong>Strings Frequency HashMap</strong> : <a href="https://youtu.be/MA0u-7THJng" target="_blank">Recording</a></li>
+                <li><strong>KADANE'S ALGORITHM</strong> : <a href="https://youtu.be/1RYQw8kEx_U" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1oNzgELbh-Ayw8jqbho4hTomLUbpVkcse2kbQR3LmLWI/edit?usp=sharing" target="_blank">Doc</a> 🔥 <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank">Maximum Subarray</a></li>
+                <li><strong>Longest SubArray (same begin/end)</strong> : <a href="https://youtu.be/cYQkFfHVOtc" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1qhw3nUm4obgM2rL14nilEPTXsBbsJ25NVh-KrXc26kQ/edit?usp=sharing" target="_blank">Doc</a> | <a href="https://www.geeksforgeeks.org/problems/subarray-sum--111254/1" target="_blank">GFG Subarray sum</a></li>
+                <li><strong>Time Complexity</strong> : <a href="https://youtu.be/uNmm0cXZ5ok" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/13zPxfAbsm5SwAtQ37C-SldrkuQrZ4yrjq2h_MwWx3hI/edit?usp=sharing" target="_blank">Doc</a></li>
+                <li><strong>Two Sum O(n) Optimisation</strong> : <a href="https://youtu.be/V4PSb5zUPYI" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1_P4M3WE1ZIcx8q4emFHLMTo_6tqjFjDiM_pwifF-7Bc/edit?usp=sharing" target="_blank">Doc</a></li>
+                <li><strong>Subarray XOR == 0</strong> : <a href="https://www.youtube.com/watch?v=rvtyKzlsK8g" target="_blank">Recording</a> | <a href="https://docs.google.com/document/d/1IBL6n34K5DTwMtiU6EKFG5LJyIQPGujoQKGLVVqYvjs/edit?usp=sharing" target="_blank">Doc</a></li>
+                <li><strong>Isomorphic Strings</strong> : <a href="https://youtu.be/T3B0oI0K8IE" target="_blank">Recording</a></li>
+                <li><strong>Best Time to Buy and Sell Stocks</strong> : <a href="https://youtu.be/lma6H8YdVAY" target="_blank">Recording</a></li>    
+                <li><strong>HashMap Module (Collection)</strong> : <a href="https://youtu.be/AbTdBb_iwAk" target="_blank">Recording</a> 
+                    <br>🎯 Solve all:
+                    <br>🔹 <a href="https://leetcode.com/problems/contains-duplicate/" target="_blank">Contains Duplicate</a> · <a href="https://leetcode.com/problems/valid-anagram/" target="_blank">Valid Anagram</a> · <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank">All Duplicates</a>
+                    <br>🔹 <a href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank">Duplicate Number</a> · <a href="https://leetcode.com/problems/two-sum/" target="_blank">Two Sum</a> · <a href="https://leetcode.com/problems/majority-element/" target="_blank">Majority Element</a>
+                    <br>🔹 <a href="https://leetcode.com/problems/first-unique-character-in-a-string/" target="_blank">First Unique Char</a> · <a href="https://leetcode.com/problems/unique-number-of-occurrences/" target="_blank">Unique Occurrences</a> · <a href="https://leetcode.com/problems/isomorphic-strings/" target="_blank">Isomorphic Strings</a>
+                </li>
+
+                <li><strong>Group Anagrams</strong> : <a href="https://www.youtube.com/watch?v=Ac8DWNmrbyQ" target="_blank">Recording</a></li>
+                <li><strong>Happy Number : </strong><a href="https://www.youtube.com/watch?v=Gjc-40Ilhh0    " target="_blank">Recording</a></li>
+    <li><strong>(Hashmap + Two Pointers)Subarrays with k unique values : </strong><a href="https://youtu.be/l-5Tejq6rVg" target="_blank">Recording</a></li>
+    
+             </ul>
+        </div>
+    </div>
+
+    <!-- ======================= TAB 3: TWO POINTERS & STACK ======================= -->
+    <div id="twopointers-panel" class="tab-panel">
+        <div class="section-card">
+            <h2>🔄 TWO POINTERS</h2>
+            <ul class="resource-list">
+                <li><strong>Intro + Two Pointers</strong> : <a href="https://youtu.be/ASU4tsD80IA" target="_blank">Recording</a></li>
+                <li><strong>3Sum + Intersection of 2 Arrays</strong> : <a href="https://youtu.be/_9TNPk_mEOU" target="_blank">Recording</a></li>
+                <li><strong>4Sum : </strong><a href="https://www.youtube.com/watch?v=Ji4NRa9ctcE&t=299s" target="_blank">Recording</a></li>
+                  <li><strong>Reverse Vowels of a String </strong> <a href="https://youtu.be/W_CFCfh2tWs" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/reverse-vowels-of-a-string/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/reverse-vowels-of-a-string/submissions/1959027795" target="_blank">Solution</a></li>
+                </li>
+                
+                <li><strong>Is Subsequence </strong> <a href="https://youtu.be/eKYMYeB5OuA" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/is-subsequence/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/is-subsequence/submissions/1959043625" target="_blank">Solution</a></li>
+                </li>
+            </ul>
+        </div>
+        <div class="section-card">
+            <h2>📚 STACK</h2>
+            <ul class="resource-list">
+                <li><strong>Introduction to Stack</strong> : <a href="https://youtu.be/Fg5LwtS4cSM" target="_blank">Recording</a></li>
+                <li><strong>Valid Parentheses [LeetCode]</strong> : <a href="https://youtu.be/NWm2mkkFDQU" target="_blank">Recording</a> 
+                    <br>🐍 <a href="https://leetcode.com/problems/valid-parentheses/submissions/1947159048" target="_blank">Python Code</a> | ☕ <a href="https://leetcode.com/problems/valid-parentheses/submissions/1947168606" target="_blank">Java Code</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ======================= TAB 4: LINKEDLIST ======================= -->
+    <div id="linkedlist-panel" class="tab-panel">
+        <div class="section-card">
+            <h2>🔗 LinkedList</h2>
+            <ul class="resource-list">
+                <li><strong>Intro to LinkedList</strong> : <a href="https://youtu.be/gazPXgakwrw" target="_blank">Recording</a></li>
+                <li><strong>Linked List Cycle</strong> : <a href="https://youtu.be/5fB3Nt2TfGA" target="_blank">Recording</a> | 🐍 <a href="https://leetcode.com/problems/linked-list-cycle/submissions/1951271908" target="_blank">Python</a> | ☕ <a href="https://leetcode.com/problems/linked-list-cycle/submissions/1951269044" target="_blank">Java</a></li>
+                <li><strong>Sort List</strong> : <a href="https://youtu.be/krjmsU-MDb4" target="_blank">Recording</a> | <a href="https://leetcode.com/problems/sort-list/submissions/1951300970" target="_blank">Python Code</a> | <a href="https://leetcode.com/problems/sort-list/submissions/1951298088" target="_blank">Java Code</a></li>
+                <li><strong>Middle of the Linked List</strong> : <a href="https://youtu.be/A5EQyA_AIUQ" target="_blank">Recording</a> | <a href="https://leetcode.com/problems/middle-of-the-linked-list/submissions/1951325083" target="_blank">Python</a> | <a href="https://leetcode.com/problems/middle-of-the-linked-list/submissions/1951320345" target="_blank">Java</a></li>
+                <li><strong>Odd Even Linked List</strong> : <a href="https://youtu.be/BSpmdh5QE68" target="_blank">Recording</a> | <a href="https://leetcode.com/problems/odd-even-linked-list/submissions/1951336762" target="_blank">Python</a> | <a href="https://leetcode.com/problems/odd-even-linked-list/submissions/1951334368" target="_blank">Java</a></li>
+                  <li><strong>Remove LinkedList Elements </strong> <a href="https://drive.google.com/file/d/1RokGB9x1YXMSCRmAviKiPchH9DvH0Jwx/view?usp=sharing" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/remove-linked-list-elements/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/remove-linked-list-elements/submissions/1961959891" target="_blank">Java Solution |</a>
+                <a href="https://leetcode.com/problems/remove-linked-list-elements/submissions/1961955250" target="_blank">Python Solution</a></li>
+                
+                <li><strong>Delete the Middle Node of a Linked List
+ </strong> <a href="https://drive.google.com/file/d/1j2BkXd4QnUX8gSTUK7UjYEHl9T_CluEJ/view?usp=sharing" target="_blank">Class Recording |</a> 
+                    <a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/" target="_blank">Try Yourself |</a>
+                <a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/submissions/1961979859" target="_blank">Java Solution |</a>
+                <a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/submissions/1961986192" target="_blank">Python Solution</a></li>
+            
+            
+            </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ======================= TAB 5: LEETCODE PRACTICE ======================= -->
+    <div id="leetcode-panel" class="tab-panel">
+        <div class="section-card">
+            <h2>⚡ LeetCode Workout</h2>
+            <ul class="resource-list">
+                <li><strong>1. Two Sum</strong> : <a href="https://leetcode.com/problems/two-sum/description/" target="_blank">Solve</a></li>
+                <li><strong>9. Palindrome Number</strong> : <a href="https://leetcode.com/problems/palindrome-number/description/" target="_blank">Solve</a></li>
+                <li><strong>13. Roman to Integer</strong> : <a href="https://leetcode.com/problems/roman-to-integer/description/" target="_blank">Solve</a></li>
+                <li><strong>14. Longest Common Prefix</strong> : <a href="https://leetcode.com/problems/longest-common-prefix/description/" target="_blank">Solve</a></li>
+                <li><strong>15. 3Sum</strong> : <a href="https://leetcode.com/problems/3sum/description/" target="_blank">Solve</a></li>
+                <li><strong>18. 4Sum</strong> : <a href="https://leetcode.com/problems/4sum/description/" target="_blank">Solve</a></li>
+                <li><strong>20. Valid Parentheses</strong> : <a href="https://leetcode.com/problems/valid-parentheses/description/" target="_blank">Solve</a></li>
+                <li><strong>21. Merge Two Sorted Lists</strong> : <a href="https://leetcode.com/problems/merge-two-sorted-lists/description/" target="_blank">Solve</a></li>
+                <li><strong>26. Remove Duplicates from Sorted Array</strong> : <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/" target="_blank">Solve</a></li>
+                <li><strong>27. Remove Element</strong> : <a href="https://leetcode.com/problems/remove-element/description/" target="_blank">Solve</a></li>
+                <li><strong>28. Find the Index of the First Occurrence in a String</strong> : <a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/" target="_blank">Solve</a></li>
+                <li><strong>35. Search Insert Position</strong> : <a href="https://leetcode.com/problems/search-insert-position/description/" target="_blank">Solve</a></li>
+                <li><strong>41. First Missing Positive</strong> : <a href="https://leetcode.com/problems/first-missing-positive/description/" target="_blank">Solve</a></li>
+                <li><strong>49. Group Anagrams</strong> : <a href="https://leetcode.com/problems/group-anagrams/description/" target="_blank">Solve</a></li>
+                <li><strong>53. Maximum Subarray</strong> : <a href="https://leetcode.com/problems/maximum-subarray/description/" target="_blank">Solve</a></li>
+                <li><strong>58. Length of Last Word</strong> : <a href="https://leetcode.com/problems/length-of-last-word/description/" target="_blank">Solve</a></li>
+                <li><strong>66. Plus One</strong> : <a href="https://leetcode.com/problems/plus-one/description/" target="_blank">Solve</a></li>
+                <li><strong>67. Add Binary</strong> : <a href="https://leetcode.com/problems/add-binary/description/" target="_blank">Solve</a></li>
+                <li><strong>69. Sqrt(x)</strong> : <a href="https://leetcode.com/problems/sqrtx/description/" target="_blank">Solve</a></li>
+                <li><strong>70. Climbing Stairs</strong> : <a href="https://leetcode.com/problems/climbing-stairs/description/" target="_blank">Solve</a></li>
+                <li><strong>83. Remove Duplicates from Sorted List</strong> : <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/" target="_blank">Solve</a></li>
+                <li><strong>88. Merge Sorted Array</strong> : <a href="https://leetcode.com/problems/merge-sorted-array/description/" target="_blank">Solve</a></li>
+                <li><strong>100. Same Tree</strong> : <a href="https://leetcode.com/problems/same-tree/description/" target="_blank">Solve</a></li>
+                <li><strong>104. Maximum Depth of Binary Tree</strong> : <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/description/" target="_blank">Solve</a></li>
+                <li><strong>108. Convert Sorted Array to Binary Search Tree</strong> : <a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/" target="_blank">Solve</a></li>
+                <li><strong>110. Balanced Binary Tree</strong> : <a href="https://leetcode.com/problems/balanced-binary-tree/description/" target="_blank">Solve</a></li>
+                <li><strong>112. Path Sum</strong> : <a href="https://leetcode.com/problems/path-sum/description/" target="_blank">Solve</a></li>
+                <li><strong>118. Pascal's Triangle</strong> : <a href="https://leetcode.com/problems/pascals-triangle/description/" target="_blank">Solve</a></li>
+                <li><strong>121. Best Time to Buy and Sell Stock</strong> : <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/" target="_blank">Solve</a></li>
+                <li><strong>122. Best Time to Buy and Sell Stock II</strong> : <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/" target="_blank">Solve</a></li>
+                <li><strong>125. Valid Palindrome</strong> : <a href="https://leetcode.com/problems/valid-palindrome/description/" target="_blank">Solve</a></li>
+                <li><strong>128. Longest Consecutive Sequence</strong> : <a href="https://leetcode.com/problems/longest-consecutive-sequence/description/" target="_blank">Solve</a></li>
+                <li><strong>136. Single Number</strong> : <a href="https://leetcode.com/problems/single-number/description/" target="_blank">Solve</a></li>
+                <li><strong>141. Linked List Cycle</strong> : <a href="https://leetcode.com/problems/linked-list-cycle/description/" target="_blank">Solve</a></li>
+                <li><strong>148. Sort List</strong> : <a href="https://leetcode.com/problems/sort-list/description/" target="_blank">Solve</a></li>
+                <li><strong>151. Reverse Words in a String</strong> : <a href="https://leetcode.com/problems/reverse-words-in-a-string/description/" target="_blank">Solve</a></li>
+                <li><strong>160. Intersection of Two Linked Lists</strong> : <a href="https://leetcode.com/problems/intersection-of-two-linked-lists/description/" target="_blank">Solve</a></li>
+                <li><strong>169. Majority Element</strong> : <a href="https://leetcode.com/problems/majority-element/description/" target="_blank">Solve</a></li>
+                <li><strong>1732. Find the Highest Altitude</strong> : <a href="https://leetcode.com/problems/find-the-highest-altitude/description/" target="_blank">Solve</a></li>
+                <li><strong>202. Happy Number</strong> : <a href="https://leetcode.com/problems/happy-number/description/" target="_blank">Solve</a></li>
+                <li><strong>205. Isomorphic Strings</strong> : <a href="https://leetcode.com/problems/isomorphic-strings/description/" target="_blank">Solve</a></li>
+                <li><strong>238. Product of Array Except Self</strong> : <a href="https://leetcode.com/problems/product-of-array-except-self/description/" target="_blank">Solve</a></li>
+                <li><strong>242. Valid Anagram</strong> : <a href="https://leetcode.com/problems/valid-anagram/description/" target="_blank">Solve</a></li>
+                <li><strong>2427. Number of Common Factors</strong> : <a href="https://leetcode.com/problems/number-of-common-factors/description/" target="_blank">Solve</a></li>
+                <li><strong>2657. Find the Prefix Common Array of Two Arrays</strong> : <a href="https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays/description/" target="_blank">Solve</a></li>
+                <li><strong>268. Missing Number</strong> : <a href="https://leetcode.com/problems/missing-number/description/" target="_blank">Solve</a></li>
+                <li><strong>283. Move Zeroes</strong> : <a href="https://leetcode.com/problems/move-zeroes/description/" target="_blank">Solve</a></li>
+                <li><strong>287. Find the Duplicate Number</strong> : <a href="https://leetcode.com/problems/find-the-duplicate-number/description/" target="_blank">Solve</a></li>
+                <li><strong>328. Odd Even Linked List</strong> : <a href="https://leetcode.com/problems/odd-even-linked-list/description/" target="_blank">Solve</a></li>
+                <li><strong>334. Increasing Triplet Subsequence</strong> : <a href="https://leetcode.com/problems/increasing-triplet-subsequence/description/" target="_blank">Solve</a></li>
+                <li><strong>345. Reverse Vowels of a String</strong> : <a href="https://leetcode.com/problems/reverse-vowels-of-a-string/description/" target="_blank">Solve</a></li>
+                <li><strong>3774. Absolute Difference Between Maximum and Minimum K Elements</strong> : <a href="https://leetcode.com/problems/absolute-difference-between-maximum-and-minimum-k-elements/description/" target="_blank">Solve</a></li>
+                <li><strong>387. First Unique Character in a String</strong> : <a href="https://leetcode.com/problems/first-unique-character-in-a-string/description/" target="_blank">Solve</a></li>
+                <li><strong>392. Is Subsequence</strong> : <a href="https://leetcode.com/problems/is-subsequence/description/" target="_blank">Solve</a></li>
+                <li><strong>442. Find All Duplicates in an Array</strong> : <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/description/" target="_blank">Solve</a></li>
+                <li><strong>454. 4Sum II</strong> : <a href="https://leetcode.com/problems/4sum-ii/description/" target="_blank">Solve</a></li>
+                <li><strong>496. Next Greater Element I</strong> : <a href="https://leetcode.com/problems/next-greater-element-i/description/" target="_blank">Solve</a></li>
+                <li><strong>523. Continuous Subarray Sum</strong> : <a href="https://leetcode.com/problems/continuous-subarray-sum/description/" target="_blank">Solve</a></li>
+                <li><strong>525. Contiguous Array</strong> : <a href="https://leetcode.com/problems/contiguous-array/description/" target="_blank">Solve</a></li>
+                <li><strong>560. Subarray Sum Equals K</strong> : <a href="https://leetcode.com/problems/subarray-sum-equals-k/description/" target="_blank">Solve</a></li>
+                <li><strong>605. Can Place Flowers</strong> : <a href="https://leetcode.com/problems/can-place-flowers/description/" target="_blank">Solve</a></li>
+                <li><strong>876. Middle of the Linked List</strong> : <a href="https://leetcode.com/problems/middle-of-the-linked-list/description/" target="_blank">Solve</a></li>
+                <li><strong>977. Squares of a Sorted Array</strong> : <a href="https://leetcode.com/problems/squares-of-a-sorted-array/description/" target="_blank">Solve</a></li>
+                <li><strong>1002. Find Common Characters</strong> : <a href="https://leetcode.com/problems/find-common-characters/description/" target="_blank">Solve</a></li>
+                <li><strong>1281. Subtract the Product and Sum of Digits of an Integer</strong> : <a href="https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/description/" target="_blank">Solve</a></li>
+                <li><strong>1480. Running Sum of 1d Array</strong> : <a href="https://leetcode.com/problems/running-sum-of-1d-array/description/" target="_blank">Solve</a></li>
+                <li><strong>1572. Matrix Diagonal Sum</strong> : <a href="https://leetcode.com/problems/matrix-diagonal-sum/description/" target="_blank">Solve</a></li>
+                <li><strong>1832. Check if the Sentence Is Pangram</strong> : <a href="https://leetcode.com/problems/check-if-the-sentence-is-pangram/description/" target="_blank">Solve</a></li>
+                <li><strong>1941. Check if All Characters Have Equal Number of Occurrences</strong> : <a href="https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/description/" target="_blank">Solve</a></li>
+                <li><strong>2006. Count Number of Pairs With Absolute Difference K</strong> : <a href="https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/description/" target="_blank">Solve</a></li>
+                <li><strong>3622. Check Divisibility by Digit Sum and Product</strong> : <a href="https://leetcode.com/problems/check-divisibility-by-digit-sum-and-product/description/" target="_blank">Solve</a></li>
+                <li><strong>3795. Minimum Subarray Length With Distinct Sum At Least K</strong> : <a href="https://leetcode.com/problems/minimum-subarray-length-with-distinct-sum-at-least-k/description/" target="_blank">Solve</a></li>    
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        ⚡ “No one remembers the one who gave up” — Keep grinding DSA with Java & Python 🐍☕<br>
+        📌 Live sessions every week | All resources & homework updated
+    </footer>
+</div>
+
+<script>
+    (function() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = {
+            basics: document.getElementById('basics-panel'),
+            collections: document.getElementById('collections-panel'),
+            twopointers: document.getElementById('twopointers-panel'),
+            linkedlist: document.getElementById('linkedlist-panel'),
+            leetcode: document.getElementById('leetcode-panel')
+        };
+
+        function activateTab(tabId) {
+            Object.values(panels).forEach(panel => {
+                if (panel) panel.classList.remove('active-panel');
+            });
+            if (panels[tabId]) panels[tabId].classList.add('active-panel');
+            
+            tabs.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        tabs.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tabValue = btn.getAttribute('data-tab');
+                if (tabValue === 'basics') activateTab('basics');
+                else if (tabValue === 'collections') activateTab('collections');
+                else if (tabValue === 'twopointers') activateTab('twopointers');
+                else if (tabValue === 'linkedlist') activateTab('linkedlist');
+                else if (tabValue === 'leetcode') activateTab('leetcode');
+            });
+        });
+
+        if (!panels.basics.classList.contains('active-panel')) activateTab('basics');
+    })();
+</script>
+</body>
+</html>
