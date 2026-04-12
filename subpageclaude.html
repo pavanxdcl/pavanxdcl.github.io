@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rookie Rise : Beginner DSA Module | Pavan X Dhee Coding Lab</title>
+  <meta name="description" content="Learn DSA from scratch with 500+ problems, live sessions, Java & Python. Covers Arrays, HashMap, Two Pointers, Stack, LinkedList & LeetCode practice. By pavanxdcl.">
+  <meta name="keywords" content="pavanxdcl, beginner DSA, rookie rise, DSA Java Python, LeetCode practice, FAANG prep, Pavan Dhee Coding Lab">
+  <meta name="author" content="Pavan X DCL">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.pavanxdcl.in/subpage.html">
+  <meta property="og:title" content="Rookie Rise: Beginner DSA Module | pavanxdcl">
+  <meta property="og:description" content="500+ DSA problems, live sessions, Java & Python. Master Arrays, HashMap, Stack, LinkedList & LeetCode with pavanxdcl.">
+  <meta property="og:url" content="https://www.pavanxdcl.in/subpage.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pavan X DCL">
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg:      #050509;
+      --bg2:     #0b0b12;
+      --bg3:     #111119;
+      --card:    #0d0d16;
+      --border:  #1e1e2e;
+      --border2: #2a2a40;
+
+      --accent:       #00ff88;
+      --accent2:      #00e57a;
+      --accent-dim:   rgba(0,255,136,0.08);
+      --accent-border:rgba(0,255,136,0.25);
+
+      --blue:   #60a5fa;
+      --yellow: #fbbf24;
+      --purple: #a78bfa;
+      --red:    #f87171;
+      --cyan:   #22d3ee;
+      --orange: #fb923c;
+
+      --text:  #e2e8f0;
+      --muted: #8892a4;
+      --dim:   #4a5568;
+
+      --font: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --glow: 0 0 20px rgba(0,255,136,0.18), 0 0 2px rgba(0,255,136,0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 100% 50% at 50% -5%, rgba(0,255,136,0.06) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,136,0.01) 2px, rgba(0,255,136,0.01) 3px);
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border2);
+      background: rgba(5,5,9,0.96);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      text-shadow: var(--glow);
+    }
+    .nav-badge {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.25rem 0.9rem;
+      border-radius: 999px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #000;
+      box-shadow: 0 0 14px rgba(0,255,136,0.35);
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      text-align: center;
+      padding: 3.5rem 2rem 2rem;
+      position: relative;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 65% 55% at 50% 0%, rgba(0,255,136,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      padding: 0.28rem 0.9rem;
+      border-radius: 4px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .page-header h1 {
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+      margin-bottom: 0.6rem;
+    }
+    .page-header h1 span { color: var(--accent); text-shadow: var(--glow); }
+    .page-header p {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── QUICK NAV ── */
+    .quick-nav {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .qn-btn {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      border: 1px solid var(--border2);
+      background: var(--bg3);
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .qn-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem 5rem;
+    }
+
+    /* ── MENTOR CARD ── */
+    .mentor-card {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.75rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      margin-bottom: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
+    .mentor-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--cyan), transparent);
+    }
+    .mentor-avatar {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; font-weight: 700; color: #000;
+      font-family: var(--mono);
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(0,255,136,0.3);
+    }
+    .mentor-info { flex: 1; min-width: 200px; }
+    .mentor-name { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .mentor-title { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); margin-bottom: 0.7rem; letter-spacing: 0.04em; }
+    .mentor-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .mbadge {
+      font-family: var(--mono); font-size: 0.63rem; padding: 0.16rem 0.5rem;
+      border-radius: 3px; border: 1px solid;
+    }
+    .mbadge.g { color: var(--accent);  border-color: var(--accent-border); background: var(--accent-dim); }
+    .mbadge.b { color: var(--blue);   border-color: rgba(96,165,250,0.2); background: rgba(96,165,250,0.07); }
+    .mbadge.o { color: var(--orange); border-color: rgba(251,146,60,0.2); background: rgba(251,146,60,0.07); }
+    .mentor-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .mstat-num { font-family: var(--mono); font-size: 1.25rem; font-weight: 700; color: var(--accent); text-shadow: var(--glow); line-height: 1; }
+    .mstat-lbl { font-size: 0.7rem; color: var(--dim); margin-top: 0.2rem; white-space: nowrap; }
+
+    /* ── PHILOSOPHY CARDS ── */
+    .phil-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      gap: 0.7rem;
+      margin-bottom: 1.25rem;
+    }
+    .phil-card {
+      padding: 0.95rem 1.1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .phil-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .phil-card:hover { border-color: var(--accent-border); box-shadow: 0 0 16px rgba(0,255,136,0.06); }
+    .phil-card:hover::after { opacity: 1; }
+    .phil-card h3 { font-size: 0.83rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+    .phil-card p  { font-size: 0.77rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── COURSE BANNER ── */
+    .course-banner {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: -3px 0 16px rgba(0,255,136,0.08);
+    }
+    .course-banner p { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .course-banner p:last-child { margin-bottom: 0; }
+    .course-banner strong { color: var(--accent); }
+    .ptag {
+      display: inline-block;
+      font-family: var(--mono); font-size: 0.62rem;
+      color: var(--dim); background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 0.12rem 0.45rem; border-radius: 3px; margin: 0 0.15rem;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex; align-items: center; gap: 0.85rem;
+      margin: 2.5rem 0 0.85rem;
+    }
+    .section-icon { font-size: 1.1rem; line-height: 1; }
+    .section-header h2 {
+      font-family: var(--mono); font-size: 0.9rem; font-weight: 700;
+      color: var(--text); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+    .section-count {
+      font-family: var(--mono); font-size: 0.6rem; color: var(--dim);
+      background: var(--bg3); padding: 0.13rem 0.45rem;
+      border-radius: 3px; border: 1px solid var(--border);
+    }
+
+    /* ── GOOD-TO-KNOW GRID ── */
+    .gtk-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.7rem; margin-bottom: 0.5rem;
+    }
+    @media(max-width:520px){ .gtk-grid { grid-template-columns:1fr; } }
+    .gtk-card {
+      padding: 1rem 1.1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; position: relative; overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gtk-card::before {
+      content: ''; position: absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity:0; transition: opacity 0.2s;
+    }
+    .gtk-card:hover { border-color: var(--accent-border); box-shadow: 0 0 16px rgba(0,255,136,0.06); }
+    .gtk-card:hover::before { opacity:1; }
+    .gtk-lang { font-family:var(--mono); font-size:0.72rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.25rem; }
+    .gtk-desc { font-size:0.78rem; color:var(--dim); margin-bottom:0.65rem; }
+
+    /* ── SESSION TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 0.4rem;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    thead tr { background: var(--bg3); border-bottom: 1px solid var(--border2); }
+    thead th {
+      padding: 0.65rem 0.95rem; text-align: left;
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 700;
+      color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); background: var(--card); transition: background 0.15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(0,255,136,0.022); }
+    tbody td { padding: 0.72rem 0.95rem; vertical-align: middle; }
+
+    .td-session { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); white-space: nowrap; }
+    .td-content  { color: var(--text); font-weight: 500; min-width: 170px; }
+    .td-links    { white-space: nowrap; }
+    .td-imp      { white-space: nowrap; }
+    .td-practice { min-width: 120px; }
+
+    /* ── IMPORTANCE BADGES ── */
+    .imp {
+      display: inline-block; font-family: var(--mono); font-size: 0.6rem;
+      font-weight: 700; padding: 0.13rem 0.5rem; border-radius: 3px;
+      letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid;
+    }
+    .imp-critical { background: rgba(248,113,113,0.1); color: var(--red);    border-color: rgba(248,113,113,0.25); }
+    .imp-high     { background: rgba(251,146,60,0.1);  color: var(--orange); border-color: rgba(251,146,60,0.22); }
+    .imp-medium   { background: rgba(251,191,36,0.08); color: var(--yellow); border-color: rgba(251,191,36,0.2); }
+    .imp-core     { background: rgba(0,255,136,0.08);  color: var(--accent); border-color: var(--accent-border); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.25rem;
+      font-family: var(--mono); font-size: 0.64rem; font-weight: 600;
+      padding: 0.22rem 0.6rem; border-radius: 4px; text-decoration: none;
+      transition: all 0.16s; border: 1px solid transparent;
+      white-space: nowrap; margin: 0.08rem 0.08rem 0.08rem 0;
+    }
+    .btn-rec { background: rgba(0,255,136,0.08); color: var(--accent); border-color: rgba(0,255,136,0.2); }
+    .btn-rec:hover { background: rgba(0,255,136,0.16); border-color: var(--accent); box-shadow: 0 0 8px rgba(0,255,136,0.2); }
+    .btn-doc { background: rgba(96,165,250,0.08); color: var(--blue); border-color: rgba(96,165,250,0.18); }
+    .btn-doc:hover { background: rgba(96,165,250,0.16); border-color: var(--blue); }
+    .btn-lc  { background: rgba(251,191,36,0.08); color: var(--yellow); border-color: rgba(251,191,36,0.18); }
+    .btn-lc:hover  { background: rgba(251,191,36,0.16); border-color: var(--yellow); }
+    .btn-sol { background: rgba(34,211,238,0.08); color: var(--cyan); border-color: rgba(34,211,238,0.18); }
+    .btn-sol:hover { background: rgba(34,211,238,0.16); border-color: var(--cyan); }
+    .btn-ext { background: rgba(167,139,250,0.08); color: var(--purple); border-color: rgba(167,139,250,0.18); }
+    .btn-ext:hover { background: rgba(167,139,250,0.16); border-color: var(--purple); }
+    .btn-practice { background: rgba(251,191,36,0.06); color: var(--yellow); border-color: rgba(251,191,36,0.14); font-size: 0.62rem; }
+    .btn-practice:hover { background: rgba(251,191,36,0.15); border-color: var(--yellow); }
+
+    /* ── FOOTER ── */
+    .footer-note {
+      margin-top: 3rem;
+      padding: 1.25rem 1.75rem;
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      box-shadow: -3px 0 18px rgba(0,255,136,0.08);
+    }
+    .footer-note p { font-size: 0.83rem; color: var(--muted); font-style: italic; }
+    .footer-meta { margin-top: 0.55rem; font-family: var(--mono); font-size: 0.64rem; color: var(--dim); font-style: normal; }
+    .footer-meta a { color: var(--accent); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .page-header    { animation: fadeUp 0.45s ease both; }
+    .mentor-card    { animation: fadeUp 0.5s  ease 0.05s both; }
+    .phil-grid      { animation: fadeUp 0.5s  ease 0.1s  both; }
+    .course-banner  { animation: fadeUp 0.5s  ease 0.15s both; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:680px){
+      thead th:nth-child(4), tbody td:nth-child(4) { display:none; }
+      .mentor-stats { gap: 1rem; }
+    }
+    @media(max-width:460px){
+      thead th:nth-child(1), tbody td:nth-child(1) { display:none; }
+      nav { padding: 0.75rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://www.pavanxdcl.in/index.html">⚡ pavanxdcl</a>
+  <span class="nav-badge">Rookie Rise</span>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-tag">DSA Forge · Beginner Module</div>
+  <h1>Pavan X Dhee Coding Lab DSA :<br><span>Rookie Rise</span></h1>
+  <p>Beginner Data Structures &amp; Algorithms · Structured Course by Pavan Prakash X Dhee Coding Lab</p>
+</div>
+
+<!-- QUICK NAV -->
+<div class="quick-nav">
+  <a class="qn-btn" href="#goodtoknow">📘 Good to Know</a>
+  <a class="qn-btn" href="#patterns">⭐ Patterns</a>
+  <a class="qn-btn" href="#arraylist">📌 ArrayList</a>
+  <a class="qn-btn" href="#hashmap">🗺️ HashMap</a>
+  <a class="qn-btn" href="#twopointers">🔄 Two Pointers</a>
+  <a class="qn-btn" href="#stack">📚 Stack</a>
+  <a class="qn-btn" href="#linkedlist">🔗 LinkedList</a>
+</div>
+
+<div class="container">
+
+  <!-- MENTOR CARD -->
+  <div class="mentor-card">
+    <div class="mentor-avatar">P</div>
+    <div class="mentor-info">
+      <div class="mentor-name">Pavan Prakash</div>
+      <div class="mentor-title">SDE @ Prodhee Tech · Dhee Coding Lab</div>
+      <div class="mentor-badges">
+        <span class="mbadge g">🏆 LeetCode &amp; HackerRank Expert</span>
+        <span class="mbadge b">🚀 Cracked TCS Codevita</span>
+        <span class="mbadge o">⚡ Contest Expert</span>
+      </div>
+    </div>
+    <div class="mentor-stats">
+      <div>
+        <div class="mstat-num">2000+</div>
+        <div class="mstat-lbl">Students Mentored</div>
+      </div>
+      <div>
+        <div class="mstat-num">1500+</div>
+        <div class="mstat-lbl">DSA Questions Solved</div>
+      </div>
+      <div>
+        <div class="mstat-num">Live</div>
+        <div class="mstat-lbl">Weekly Sessions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY CARDS -->
+  <div class="phil-grid">
+    <div class="phil-card">
+      <h3>✅ Use Your Own Logic</h3>
+      <p>Don't copy variables or logic. Understand concepts &amp; create your own approach.</p>
+    </div>
+    <div class="phil-card">
+      <h3>🎯 Extract Concepts</h3>
+      <p>Focus on core ideas, implement them your own way — not just the solution.</p>
+    </div>
+    <div class="phil-card">
+      <h3>🤔 Understand the "Why"</h3>
+      <p>Analyze the necessity of each part to grasp deeper algorithmic thinking.</p>
+    </div>
+    <div class="phil-card">
+      <h3>🚀 Prepare for Advanced</h3>
+      <p>Solid foundation here makes Pro Max-level problems easy to adapt to.</p>
+    </div>
+  </div>
+
+  <!-- COURSE BANNER -->
+  <div class="course-banner">
+    <p>📌 <strong>Course Completion Path</strong> — <span class="ptag">Rookie Module</span> → <span class="ptag">Pro Max Series</span></p>
+    <p>Once you complete this, you are king of your own territory in DSA.</p>
+    <p>📝 <strong>Create revision notes</strong> &nbsp;·&nbsp; Complete all videos + notes (even if you know the solution) &nbsp;·&nbsp; Give contests on LeetCode &amp; CodeChef to keep hustling!</p>
+  </div>
+
+  <!-- ──────────────── GOOD TO KNOW ──────────────── -->
+  <div id="goodtoknow" class="section-header">
+    <span class="section-icon">📖</span>
+    <h2>Good to Know</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="gtk-grid">
+    <div class="gtk-card">
+      <div class="gtk-lang">☕ Java</div>
+      <div class="gtk-desc">Crash Course + Collections CheatSheet</div>
+      <a class="btn btn-rec" href="https://youtu.be/UeI4xAn8NLQ" target="_blank">🔥 Class Recording</a>
+      <a class="btn btn-doc" href="/images/javasheet.png" target="_blank">📄 CheatSheet</a>
+    </div>
+    <div class="gtk-card">
+      <div class="gtk-lang">🐍 Python</div>
+      <div class="gtk-desc">Core DSA + Collections CheatSheet</div>
+      <a class="btn btn-rec" href="https://youtu.be/mdlbz025jkA" target="_blank">🔥 Class Recording</a>
+      <a class="btn btn-doc" href="/images/pythonsheet.png" target="_blank">📄 CheatSheet</a>
+    </div>
+  </div>
+
+  <!-- ──────────────── PATTERN PROGRAMMING ──────────────── -->
+  <div id="patterns" class="section-header">
+    <span class="section-icon">⭐</span>
+    <h2>Pattern Programming</h2>
+    <div class="section-line"></div>
+    <span class="section-count">4 Sessions</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Session</th><th>Content</th><th>Resources</th><th>Importance</th><th>Practice</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-session">Pattern-1</td>
+          <td class="td-content">Basic patterns — squares, triangles, stars</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/f1IVU3mKvv8" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1niaekpgZB60z-PXDVEVlcrdS7_Z2sYMblH0F-gnf3d4/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://prepinsta.com/pattern-programs-tutorial/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">Pattern-2</td>
+          <td class="td-content">Number patterns + pyramid variations</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/ppmBHL1a7YM" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1RjJvfKmbQUDwlVWIAey5X75_rlItXTWYqY7Zg87odKk/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://pynative.com/print-pattern-python-examples/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">Pattern-3</td>
+          <td class="td-content">Diamond, hourglass &amp; complex patterns</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/Dk4Iua3V5K8" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1TaTZ9AnzBv2oI_TB0uE-SIlVh8aCjo3-axfeQN6MJVo/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+            <a class="btn btn-ext" href="https://www.hackerrank.com/challenges/printing-pattern-2/problem" target="_blank">HackerRank</a>
+            <a class="btn btn-ext" href="https://www.geeksforgeeks.org/problems/pattern/1" target="_blank">GFG</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://www.geeksforgeeks.org/problems/pattern/1" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">Pattern-4 Finale</td>
+          <td class="td-content">All pattern types — full revision + notes</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/c-effdypJhI" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1Qh65dI8p0SmOVZQi7yHrDasJMVGITfcBmKzQGnW94Uc/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1Y0UZG4tWEh26-GcBr1nvxoaoJZ4vg0bsn80tTPYryQc/edit?usp=sharing" target="_blank">📄 All Patterns Notes</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://prepinsta.com/pattern-programs-tutorial/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ──────────────── ARRAYLIST ──────────────── -->
+  <div id="arraylist" class="section-header">
+    <span class="section-icon">📌</span>
+    <h2>ArrayList (Java) / List (Python)</h2>
+    <div class="section-line"></div>
+    <span class="section-count">9 Sessions</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Session</th><th>Content</th><th>Resources</th><th>Importance</th><th>Practice</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-session">AL-01</td>
+          <td class="td-content">Intro Part 1 — Array basics &amp; methods</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/KaDtZsyDsXc" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/16Jz3nenvEhpKn-cgu6C07zKuN5C-j1UN4ulfjXIpZ90/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-02</td>
+          <td class="td-content">Intro Part 2 — Iteration &amp; in-place ops</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/Hgr_Py6nXnA" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/16Jz3nenvEhpKn-cgu6C07zKuN5C-j1UN4ulfjXIpZ90/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-03</td>
+          <td class="td-content">Prefix Sum Array</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/PnIOEPDATjw" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1X2xRCUPv3CNzHgBr7kpBVwsLhVMhVtu3WmCTLNuvsGk/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice">
+            <a class="btn btn-practice" href="https://leetcode.com/problems/running-sum-of-1d-array/" target="_blank">Running Sum</a>
+            <a class="btn btn-practice" href="https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true" target="_blank">Simple Array Sum</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-04</td>
+          <td class="td-content">Nested List + HackerRank challenges</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/Wg834zAVliw" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1rm2SbVoUAVapYgnWmDw6myH7cnSBirBCtIZ_HXpE4_E/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice">
+            <a class="btn btn-practice" href="https://www.hackerrank.com/challenges/mini-max-sum/problem" target="_blank">Mini-Max Sum</a>
+            <a class="btn btn-practice" href="https://www.hackerrank.com/challenges/diagonal-difference/problem" target="_blank">Diagonal Diff</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-05</td>
+          <td class="td-content">Brute Force &amp; Subarrays</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/-WK9WPhuKB4" target="_blank">🔥 Two Sum BF</a>
+            <a class="btn btn-rec" href="https://youtu.be/XzK5_8cMA6g" target="_blank">🔥 SubArrays BF</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/two-sum/" target="_blank">Two Sum</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/two-sum/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-06</td>
+          <td class="td-content">Merge Strings Alternately</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/mI6v-1LUL9s" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/merge-strings-alternately/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/merge-strings-alternately/submissions/1957916511" target="_blank">Solution</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/merge-strings-alternately/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-07</td>
+          <td class="td-content">Product of Array Except Self</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://drive.google.com/file/d/1dkhKX2lxF0qyVHbAeaoXMZPWVXnR2dMY/view?usp=sharing" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/product-of-array-except-self/submissions/1961033405" target="_blank">Solution</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-08</td>
+          <td class="td-content">Increasing Triplet Subsequence</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://www.youtube.com/watch?v=KhvpFHlzc1c&t=520s" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/increasing-triplet-subsequence/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/increasing-triplet-subsequence/submissions/1948171683" target="_blank">Solution</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/increasing-triplet-subsequence/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">AL-09</td>
+          <td class="td-content">Can Place Flowers</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/XO2hTYkghVk" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/can-place-flowers/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/can-place-flowers/submissions/1957946761" target="_blank">Solution</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/can-place-flowers/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ──────────────── HASHMAP ──────────────── -->
+  <div id="hashmap" class="section-header">
+    <span class="section-icon">🗺️</span>
+    <h2>HashMap (Java) / Dictionary (Python)</h2>
+    <div class="section-line"></div>
+    <span class="section-count">14 Sessions</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Session</th><th>Content</th><th>Resources</th><th>Importance</th><th>Practice</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-session">HM-01</td>
+          <td class="td-content">Intro + Methods</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://www.youtube.com/watch?v=7_x9WjVZVNA" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-02</td>
+          <td class="td-content">Frequency HashMap — Java &amp; Python</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://www.youtube.com/watch?v=t2wxEHMbs_A&t=306s" target="_blank">🔥 Java</a>
+            <a class="btn btn-rec" href="https://www.youtube.com/watch?v=bdJI_l7yF8E" target="_blank">🔥 Python</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/valid-anagram/" target="_blank">Valid Anagram</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-03</td>
+          <td class="td-content">Identify Duplicates</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/zHdxch6g0cc" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1kDBgMlPgJ1I-RLgi-TPwjdLeMboYAvLTeuTJadnEkfE/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice">
+            <a class="btn btn-practice" href="https://leetcode.com/problems/contains-duplicate/" target="_blank">Contains Duplicate</a>
+            <a class="btn btn-practice" href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank">All Duplicates</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-04</td>
+          <td class="td-content">HashMap + Prefix Sum (SubArray Sum = k)</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/dtCHBS5wZZg" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1_5w3ZumaLnDJEAdu4lnPoIz1ZA25_4I8QTpaH0W_3ZY/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-05</td>
+          <td class="td-content">Remove Duplicates</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/c4dXRQ7UYKs" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/18jYKkavSQcEdKyVMy9u0AfsdyQOPat-d7MzOoMLfMa0/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank">All Duplicates</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-06</td>
+          <td class="td-content">Strings Frequency HashMap</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://youtu.be/MA0u-7THJng" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/first-unique-character-in-a-string/" target="_blank">First Unique Char</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-07</td>
+          <td class="td-content">Kadane's Algorithm 🔥</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/1RYQw8kEx_U" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1oNzgELbh-Ayw8jqbho4hTomLUbpVkcse2kbQR3LmLWI/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/maximum-subarray/" target="_blank">Max Subarray</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/maximum-subarray/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-08</td>
+          <td class="td-content">Longest SubArray (same begin/end)</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/cYQkFfHVOtc" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1qhw3nUm4obgM2rL14nilEPTXsBbsJ25NVh-KrXc26kQ/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+            <a class="btn btn-ext" href="https://www.geeksforgeeks.org/problems/subarray-sum--111254/1" target="_blank">GFG</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://www.geeksforgeeks.org/problems/subarray-sum--111254/1" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-09</td>
+          <td class="td-content">Time Complexity</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/uNmm0cXZ5ok" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/13zPxfAbsm5SwAtQ37C-SldrkuQrZ4yrjq2h_MwWx3hI/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-10</td>
+          <td class="td-content">Two Sum O(n) Optimisation</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/V4PSb5zUPYI" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1_P4M3WE1ZIcx8q4emFHLMTo_6tqjFjDiM_pwifF-7Bc/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/two-sum/" target="_blank">Two Sum</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-11</td>
+          <td class="td-content">Subarray XOR == 0</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://www.youtube.com/watch?v=rvtyKzlsK8g" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-doc" href="https://docs.google.com/document/d/1IBL6n34K5DTwMtiU6EKFG5LJyIQPGujoQKGLVVqYvjs/edit?usp=sharing" target="_blank">🔥 VERY IMPORTANT</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-12</td>
+          <td class="td-content">Isomorphic Strings</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://youtu.be/T3B0oI0K8IE" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/isomorphic-strings/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-13</td>
+          <td class="td-content">Best Time to Buy and Sell Stocks</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://youtu.be/lma6H8YdVAY" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">HM-14</td>
+          <td class="td-content">HashMap Module · Group Anagrams · Happy Number · k Unique</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/AbTdBb_iwAk" target="_blank">🔥 Module</a>
+            <a class="btn btn-rec" href="https://www.youtube.com/watch?v=Ac8DWNmrbyQ" target="_blank">🔥 Anagrams</a>
+            <a class="btn btn-rec" href="https://www.youtube.com/watch?v=Gjc-40Ilhh0" target="_blank">🔥 Happy Num</a>
+            <a class="btn btn-rec" href="https://youtu.be/l-5Tejq6rVg" target="_blank">🔥 k Unique</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/group-anagrams/" target="_blank">Group Anagrams</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ──────────────── TWO POINTERS ──────────────── -->
+  <div id="twopointers" class="section-header">
+    <span class="section-icon">🔄</span>
+    <h2>Two Pointers</h2>
+    <div class="section-line"></div>
+    <span class="section-count">5 Sessions</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Session</th><th>Content</th><th>Resources</th><th>Importance</th><th>Practice</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-session">TP-01</td>
+          <td class="td-content">Intro + Two Pointers Template</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://youtu.be/ASU4tsD80IA" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">TP-02</td>
+          <td class="td-content">3Sum + Intersection of 2 Arrays</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://youtu.be/_9TNPk_mEOU" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/3sum/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">TP-03</td>
+          <td class="td-content">4Sum</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://www.youtube.com/watch?v=Ji4NRa9ctcE&t=299s" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/4sum/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">TP-04</td>
+          <td class="td-content">Reverse Vowels of a String</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/W_CFCfh2tWs" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/reverse-vowels-of-a-string/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/reverse-vowels-of-a-string/submissions/1959027795" target="_blank">Solution</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/reverse-vowels-of-a-string/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">TP-05</td>
+          <td class="td-content">Is Subsequence</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/eKYMYeB5OuA" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/is-subsequence/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/is-subsequence/submissions/1959043625" target="_blank">Solution</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/is-subsequence/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ──────────────── STACK ──────────────── -->
+  <div id="stack" class="section-header">
+    <span class="section-icon">📚</span>
+    <h2>Stack</h2>
+    <div class="section-line"></div>
+    <span class="section-count">2 Sessions</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Session</th><th>Content</th><th>Resources</th><th>Importance</th><th>Practice</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-session">ST-01</td>
+          <td class="td-content">Introduction to Stack</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://youtu.be/Fg5LwtS4cSM" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">ST-02</td>
+          <td class="td-content">Valid Parentheses [LeetCode]</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/NWm2mkkFDQU" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/valid-parentheses/submissions/1947159048" target="_blank">🐍 Python</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/valid-parentheses/submissions/1947168606" target="_blank">☕ Java</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/valid-parentheses/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ──────────────── LINKEDLIST ──────────────── -->
+  <div id="linkedlist" class="section-header">
+    <span class="section-icon">🔗</span>
+    <h2>LinkedList</h2>
+    <div class="section-line"></div>
+    <span class="section-count">7 Sessions</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Session</th><th>Content</th><th>Resources</th><th>Importance</th><th>Practice</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-session">LL-01</td>
+          <td class="td-content">Intro to LinkedList</td>
+          <td class="td-links"><a class="btn btn-rec" href="https://youtu.be/gazPXgakwrw" target="_blank">🔥 Class Recording</a></td>
+          <td class="td-imp"><span class="imp imp-core">Core</span></td>
+          <td class="td-practice">—</td>
+        </tr>
+        <tr>
+          <td class="td-session">LL-02</td>
+          <td class="td-content">Linked List Cycle</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/5fB3Nt2TfGA" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/linked-list-cycle/submissions/1951271908" target="_blank">🐍 Python</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/linked-list-cycle/submissions/1951269044" target="_blank">☕ Java</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-critical">Critical</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/linked-list-cycle/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">LL-03</td>
+          <td class="td-content">Sort List</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/krjmsU-MDb4" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/sort-list/submissions/1951300970" target="_blank">🐍 Python</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/sort-list/submissions/1951298088" target="_blank">☕ Java</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/sort-list/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">LL-04</td>
+          <td class="td-content">Middle of the Linked List</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/A5EQyA_AIUQ" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/middle-of-the-linked-list/submissions/1951325083" target="_blank">🐍 Python</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/middle-of-the-linked-list/submissions/1951320345" target="_blank">☕ Java</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/middle-of-the-linked-list/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">LL-05</td>
+          <td class="td-content">Odd Even Linked List</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://youtu.be/BSpmdh5QE68" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/odd-even-linked-list/submissions/1951336762" target="_blank">🐍 Python</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/odd-even-linked-list/submissions/1951334368" target="_blank">☕ Java</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-medium">Medium</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/odd-even-linked-list/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">LL-06</td>
+          <td class="td-content">Remove LinkedList Elements</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://drive.google.com/file/d/1RokGB9x1YXMSCRmAviKiPchH9DvH0Jwx/view?usp=sharing" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/remove-linked-list-elements/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/remove-linked-list-elements/submissions/1961959891" target="_blank">☕ Java</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/remove-linked-list-elements/submissions/1961955250" target="_blank">🐍 Python</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/remove-linked-list-elements/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+        <tr>
+          <td class="td-session">LL-07</td>
+          <td class="td-content">Delete the Middle Node of a Linked List</td>
+          <td class="td-links">
+            <a class="btn btn-rec" href="https://drive.google.com/file/d/1j2BkXd4QnUX8gSTUK7UjYEHl9T_CluEJ/view?usp=sharing" target="_blank">🔥 Class Recording</a>
+            <a class="btn btn-lc" href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/" target="_blank">Try It</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/submissions/1961979859" target="_blank">☕ Java</a>
+            <a class="btn btn-sol" href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/submissions/1961986192" target="_blank">🐍 Python</a>
+          </td>
+          <td class="td-imp"><span class="imp imp-high">High</span></td>
+          <td class="td-practice"><a class="btn btn-practice" href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/" target="_blank">Click Here to Practice</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <p>"No one remembers the one who gave up" — Keep grinding DSA with Java &amp; Python 🐍☕</p>
+    <div class="footer-meta">
+      🎯 Watch all videos + make notes even if you know the solution. Master concepts, not code. &nbsp;·&nbsp;
+      🚀 <a href="https://www.pavanxdcl.in/index.html">pavanxdcl.in</a> | Complete roadmap to crack product based companies
+    </div>
+  </div>
+
+</div><!-- /container -->
+</body>
+</html>
