@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PavanX Pro DSA — Elite Batch</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04050a;
+  --surface: #090c16;
+  --card: #0c1020;
+  --accent: #7c6aff;
+  --accent2: #ff6b6b;
+  --gold: #f0c060;
+  --green: #3dffa0;
+  --text: #e8eaff;
+  --muted: #4a5080;
+  --border: rgba(124,106,255,0.18);
+  --border-dim: rgba(255,255,255,0.05);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+/* ── BACKGROUND MESH ── */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+}
+.orb1 { width: 700px; height: 700px; background: rgba(124,106,255,0.08); top: -200px; left: -200px; animation: drift1 12s ease-in-out infinite; }
+.orb2 { width: 500px; height: 500px; background: rgba(255,107,107,0.06); bottom: -100px; right: -100px; animation: drift2 15s ease-in-out infinite; }
+.orb3 { width: 400px; height: 400px; background: rgba(61,255,160,0.04); top: 50%; left: 60%; animation: drift3 10s ease-in-out infinite; }
+
+@keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,50px)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-40px)} }
+@keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,30px)} }
+
+/* ── LAYOUT ── */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border-dim);
+  margin-bottom: 100px;
+  animation: slideDown 0.7s ease both;
+}
+
+.logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.logo span { color: var(--accent); }
+
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+  background: rgba(61,255,160,0.08);
+  border: 1px solid rgba(61,255,160,0.2);
+  padding: 8px 16px;
+  border-radius: 100px;
+}
+.live-dot {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--green);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  margin-bottom: 80px;
+  animation: riseUp 0.9s ease 0.1s both;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(124,106,255,0.1);
+  border: 1px solid rgba(124,106,255,0.25);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+}
+
+.hero h1 {
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -2px;
+  margin-bottom: 28px;
+  background: linear-gradient(160deg, #ffffff 0%, #a89fff 55%, #7c6aff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--gold), #ff9a3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: #606898;
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+}
+.stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.stat-num .accent { color: var(--accent); }
+
+/* ── SECTION TITLES ── */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.section-sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ── WHAT YOU GET ── */
+.what-section {
+  margin-bottom: 80px;
+  animation: riseUp 0.9s ease 0.2s both;
+}
+
+.section-head { margin-bottom: 36px; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.feat-card {
+  background: var(--card);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.feat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124,106,255,0.06), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.feat-card:hover { border-color: rgba(124,106,255,0.35); transform: translateY(-3px); }
+.feat-card:hover::before { opacity: 1; }
+
+.feat-card.highlight {
+  border-color: rgba(124,106,255,0.3);
+  background: linear-gradient(135deg, rgba(124,106,255,0.1), var(--card));
+  grid-column: span 2;
+}
+
+.feat-icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-dim);
+}
+.feat-card.highlight .feat-icon-wrap {
+  background: rgba(124,106,255,0.15);
+  border-color: rgba(124,106,255,0.3);
+}
+
+.feat-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.feat-desc {
+  font-size: 0.88rem;
+  color: #4a5580;
+  line-height: 1.65;
+}
+.feat-badge {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(124,106,255,0.12);
+  border: 1px solid rgba(124,106,255,0.25);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* ── 1:1 MENTORSHIP SECTION ── */
+.mentorship-section {
+  margin-bottom: 80px;
+  animation: riseUp 0.9s ease 0.3s both;
+}
+
+.mentorship-card {
+  background: linear-gradient(135deg, rgba(124,106,255,0.12), rgba(9,12,22,0.95));
+  border: 1px solid rgba(124,106,255,0.3);
+  border-radius: 24px;
+  padding: 56px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mentorship-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--gold), transparent);
+}
+
+.mentorship-card::after {
+  content: '1:1';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12rem;
+  font-weight: 800;
+  color: rgba(124,106,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.mentorship-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.mentorship-left .section-label { margin-bottom: 10px; }
+.mentorship-left .section-title { font-size: 2.6rem; margin-bottom: 16px; }
+.mentorship-left .section-title span {
+  background: linear-gradient(135deg, var(--accent), #b09fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mentorship-points {
+  list-style: none;
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mentorship-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.92rem;
+  color: #7080b0;
+  line-height: 1.5;
+}
+.check {
+  width: 22px; height: 22px;
+  background: rgba(61,255,160,0.1);
+  border: 1px solid rgba(61,255,160,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: var(--green);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mentor-card-right {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 32px;
+}
+.mentor-avatar-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.mentor-avatar {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #b09fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  border: 2px solid rgba(124,106,255,0.4);
+}
+.mentor-info-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+.mentor-info-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.mentor-session-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.session-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid var(--border-dim);
+}
+.session-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.session-val {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.session-val.green { color: var(--green); }
+.session-val.gold { color: var(--gold); }
+
+/* ── ROADMAP ── */
+.roadmap-section {
+  margin-bottom: 80px;
+  animation: riseUp 0.9s ease 0.35s both;
+}
+
+.roadmap-steps {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.roadmap-steps::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), rgba(124,106,255,0.1));
+}
+
+.step {
+  display: flex;
+  gap: 24px;
+  position: relative;
+  padding-bottom: 32px;
+}
+.step:last-child { padding-bottom: 0; }
+.step-num {
+  width: 47px; height: 47px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  z-index: 1;
+  position: relative;
+  border: 1px solid;
+}
+.step-num.done { background: rgba(61,255,160,0.12); border-color: rgba(61,255,160,0.35); color: var(--green); }
+.step-num.active { background: rgba(124,106,255,0.2); border-color: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(124,106,255,0.3); }
+.step-num.next { background: rgba(255,255,255,0.03); border-color: var(--border-dim); color: var(--muted); }
+
+.step-body {
+  padding-top: 10px;
+}
+.step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.step-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.step-tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.tag-done { color: var(--green); background: rgba(61,255,160,0.08); border: 1px solid rgba(61,255,160,0.2); }
+.tag-active { color: var(--accent); background: rgba(124,106,255,0.1); border: 1px solid rgba(124,106,255,0.25); }
+.tag-next { color: var(--muted); background: rgba(255,255,255,0.03); border: 1px solid var(--border-dim); }
+
+/* ── CONTACT / ACCESS CARD ── */
+.access-section {
+  margin-bottom: 80px;
+  animation: riseUp 0.9s ease 0.4s both;
+}
+
+.access-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 56px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.access-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.pro-badge {
+  position: absolute;
+  top: 24px; right: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  background: rgba(240,192,96,0.1);
+  border: 1px solid rgba(240,192,96,0.25);
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+
+.access-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.access-left .card-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.access-left .card-desc {
+  font-size: 0.92rem;
+  color: #4a5580;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid rgba(124,106,255,0.3);
+  border-radius: 10px;
+  background: rgba(124,106,255,0.08);
+  transition: all 0.25s;
+  letter-spacing: 0.5px;
+}
+.doc-link:hover {
+  background: rgba(124,106,255,0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(124,106,255,0.15);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 28px 0;
+}
+
+.contact-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.mentor-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.avatar-sm {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #b09fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.mentor-name-sm {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+.mentor-title-sm {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.cta-phone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(124,106,255,0.1);
+  border: 1px solid rgba(124,106,255,0.3);
+  border-radius: 14px;
+  padding: 16px 22px;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.cta-phone:hover {
+  background: rgba(124,106,255,0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(124,106,255,0.2);
+  transform: translateY(-2px);
+}
+.phone-ico { font-size: 1.2rem; }
+.phone-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+.phone-hint {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cta-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(37,211,102,0.1);
+  border: 1px solid rgba(37,211,102,0.25);
+  border-radius: 14px;
+  padding: 14px 22px;
+  text-decoration: none;
+  transition: all 0.25s;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #25d366;
+}
+.cta-whatsapp:hover {
+  background: rgba(37,211,102,0.18);
+  border-color: #25d366;
+  transform: translateY(-2px);
+}
+
+/* Right side access card */
+.access-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-block {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-dim);
+  border-radius: 14px;
+  padding: 22px;
+}
+.info-block-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+}
+.info-row:last-child { margin-bottom: 0; }
+.info-key { color: var(--muted); }
+.info-val { color: var(--text); font-weight: 600; }
+.info-val.accent { color: var(--accent); }
+.info-val.green { color: var(--green); }
+.info-val.gold { color: var(--gold); }
+
+.prereq-block {
+  background: rgba(255,107,107,0.06);
+  border: 1px solid rgba(255,107,107,0.18);
+  border-radius: 14px;
+  padding: 22px;
+}
+.prereq-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: rgba(255,107,107,0.8);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.prereq-text {
+  font-size: 0.88rem;
+  color: #7080b0;
+  line-height: 1.65;
+}
+
+/* ── FAQ ── */
+.faq-section {
+  margin-bottom: 80px;
+  animation: riseUp 0.9s ease 0.45s both;
+}
+
+.faq-list {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border-dim);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+.faq-item:hover { border-color: rgba(124,106,255,0.25); }
+
+.faq-q {
+  padding: 22px 26px;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+.faq-q::after {
+  content: '+';
+  font-size: 1.3rem;
+  color: var(--accent);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s;
+  padding: 0 26px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.faq-item.open .faq-a {
+  max-height: 200px;
+  padding: 0 26px 22px;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border-dim);
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  animation: riseUp 0.9s ease 0.5s both;
+}
+
+.footer-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+}
+.footer-brand span { color: var(--accent); }
+
+.footer-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: #252a40;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .feat-card.highlight { grid-column: span 1; }
+  .mentorship-grid { grid-template-columns: 1fr; }
+  .mentorship-card { padding: 36px 28px; }
+  .mentorship-card::after { display: none; }
+  .access-inner { grid-template-columns: 1fr; }
+  .access-card { padding: 36px 28px; }
+  .hero h1 { letter-spacing: -1px; }
+  .hero-stats { gap: 24px; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-mesh">
+  <div class="mesh-orb orb1"></div>
+  <div class="mesh-orb orb2"></div>
+  <div class="mesh-orb orb3"></div>
+</div>
+
+<div class="container">
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">pavan<span>x</span>dcl.in</div>
+    <div class="nav-pill"><div class="live-dot"></div>Enrolling Now</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">&#x2726; Exclusive Pro Batch</div>
+    <h1>Pro DSA<br><em>PavanX</em></h1>
+    <p class="hero-sub">Level up from Rookie to Pro. Master Data Structures & Algorithms with structured mentorship from Pavan Prakash Sir.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num"><span class="accent">∞</span></span>
+        <span class="stat-label">Problems Solved</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1<span class="accent">:</span>1</span>
+        <span class="stat-label">Mentorship</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num"><span class="accent">Pro</span></span>
+        <span class="stat-label">Level Content</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">24<span class="accent">/7</span></span>
+        <span class="stat-label">Support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="what-section">
+    <div class="section-head">
+      <div class="section-label">// 01 — Curriculum</div>
+      <div class="section-title">What's Inside the Pro Batch</div>
+      <div class="section-sub">Curated content that takes you from intermediate to interview-ready.</div>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card highlight">
+        <div class="feat-icon-wrap">🎯</div>
+        <div class="feat-name">1:1 Mentorship Sessions</div>
+        <div class="feat-desc">Get dedicated one-on-one sessions with Pavan Prakash Sir. Personalized feedback on your code, approach, and interview strategy — tailored exactly to your weak spots and goals.</div>
+        <span class="feat-badge">✦ Signature Feature</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">⚡</div>
+        <div class="feat-name">Advanced DSA Modules</div>
+        <div class="feat-desc">Trees, Graphs, DP, Segment Trees, Tries, and more — covered with depth and precision you won't find elsewhere.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">🏆</div>
+        <div class="feat-name">Contest Prep & Mock Tests</div>
+        <div class="feat-desc">Timed mock interviews, competitive programming rounds, and real-world problem sets to sharpen your speed under pressure.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">🧠</div>
+        <div class="feat-name">Code Reviews</div>
+        <div class="feat-desc">Submit your solutions and get line-by-line feedback. Learn why your approach works — and when to use something better.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">📂</div>
+        <div class="feat-name">Pro Document Access</div>
+        <div class="feat-desc">Exclusive written notes, cheat sheets, and pattern guides curated by Pavan Sir. Download and keep forever.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">🤝</div>
+        <div class="feat-name">Community Access</div>
+        <div class="feat-desc">Join a tight-knit cohort of serious learners. Pair-program, discuss problems, and grow together in the Pro batch group.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">🚀</div>
+        <div class="feat-name">Placement Support</div>
+        <div class="feat-desc">Resume reviews, referral discussions, and company-specific preparation to get you placed at top product companies.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1:1 MENTORSHIP SECTION -->
+  <section class="mentorship-section">
+    <div class="mentorship-card">
+      <div class="mentorship-grid">
+        <div class="mentorship-left">
+          <div class="section-label">// 02 — Mentorship</div>
+          <div class="section-title">Real <span>1:1 Time</span><br>with Pavan Sir</div>
+          <p class="section-sub" style="margin-top:12px;">This isn't a recorded course you'll abandon in week two. Every Pro student gets dedicated one-on-one time — your sessions, your pace, your goals.</p>
+          <ul class="mentorship-points">
+            <li><div class="check">✓</div>Personalized session scheduling that fits your routine</li>
+            <li><div class="check">✓</div>Deep-dive code walkthroughs on your specific solutions</li>
+            <li><div class="check">✓</div>Interview simulation with real FAANG-style questions</li>
+            <li><div class="check">✓</div>Career roadmap review & target company guidance</li>
+            <li><div class="check">✓</div>Direct WhatsApp access to Pavan Sir between sessions</li>
+            <li><div class="check">✓</div>Progress tracking with honest, no-fluff feedback</li>
+          </ul>
+        </div>
+        <div class="mentor-card-right">
+          <div class="mentor-avatar-area">
+            <div class="mentor-avatar">P</div>
+            <div>
+              <div class="mentor-info-name">Pavan Prakash Sir</div>
+              <div class="mentor-info-role">Pro DSA Mentor · pavanxdcl.in</div>
+            </div>
+          </div>
+          <div class="mentor-session-info">
+            <div class="session-row">
+              <span class="session-key">SESSION TYPE</span>
+              <span class="session-val">Live 1:1 Video</span>
+            </div>
+            <div class="session-row">
+              <span class="session-key">AVAILABILITY</span>
+              <span class="session-val green">Open to Pro Students</span>
+            </div>
+            <div class="session-row">
+              <span class="session-key">RESPONSE TIME</span>
+              <span class="session-val">Within 24 hrs</span>
+            </div>
+            <div class="session-row">
+              <span class="session-key">BATCH SIZE</span>
+              <span class="session-val gold">Limited Seats</span>
+            </div>
+            <div class="session-row">
+              <span class="session-key">PREREQUISITE</span>
+              <span class="session-val" style="color:var(--accent2)">Rookie Batch ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="roadmap-section">
+    <div class="section-head">
+      <div class="section-label">// 03 — Your Path</div>
+      <div class="section-title">The Journey to Pro</div>
+      <div class="section-sub">Two-phase learning path. Master the basics, then go deep.</div>
+    </div>
+    <div class="roadmap-steps">
+      <div class="step">
+        <div class="step-num done">✓</div>
+        <div class="step-body">
+          <div class="step-title">Rookie Batch — Foundation</div>
+          <div class="step-desc">Core DSA concepts, arrays, strings, recursion, sorting, and binary search. Build the intuition before you build the speed.</div>
+          <span class="step-tag tag-done">Completed</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num active">02</div>
+        <div class="step-body">
+          <div class="step-title">Pro Batch — Advanced Mastery</div>
+          <div class="step-desc">Trees, Graphs, DP, Advanced Searching, System Design Basics, and Interview-pattern recognition. Taught live with 1:1 support.</div>
+          <span class="step-tag tag-active">You Are Here → Enroll Now</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num next">03</div>
+        <div class="step-body">
+          <div class="step-title">Placement Sprint — Interview Ready</div>
+          <div class="step-desc">Mock interviews, FAANG problem sets, resume reviews, and personalized placement guidance until you get an offer.</div>
+          <span class="step-tag tag-next">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS CARD -->
+  <section class="access-section">
+    <div class="access-card">
+      <div class="pro-badge">PRO BATCH</div>
+      <div class="access-inner">
+        <div class="access-left">
+          <div class="card-title">Get Pro Batch Access</div>
+          <p class="card-desc">You must complete the Rookie Batch before requesting access. Once ready, reach out to Pavan Prakash Sir directly for batch details, pricing, and scheduling.</p>
+          <a class="doc-link" href="PavanX Beginner DSA Full Document.pdf" download>
+            <span>📄</span> Preview Pro Batch Document
+          </a>
+
+          <div class="divider"></div>
+
+          <div class="contact-label">Your Point of Contact</div>
+          <div class="mentor-profile">
+            <div class="avatar-sm">P</div>
+            <div>
+              <div class="mentor-name-sm">Pavan Prakash Sir</div>
+              <div class="mentor-title-sm">DSA Mentor · pavanxdcl.in</div>
+            </div>
+          </div>
+
+          <a class="cta-phone" href="tel:+917760876386">
+            <span class="phone-ico">📞</span>
+            <span class="phone-num">+91 77608 76386</span>
+            <span class="phone-hint">Call</span>
+          </a>
+          <a class="cta-whatsapp" href="https://wa.me/917760876386" target="_blank">
+            <span>💬</span> Chat on WhatsApp
+          </a>
+        </div>
+
+        <div class="access-right">
+          <div class="info-block">
+            <div class="info-block-title">Batch Details</div>
+            <div class="info-row"><span class="info-key">Format</span><span class="info-val">Live Online</span></div>
+            <div class="info-row"><span class="info-key">Mentorship</span><span class="info-val accent">1:1 Sessions</span></div>
+            <div class="info-row"><span class="info-key">Batch Size</span><span class="info-val gold">Limited Seats</span></div>
+            <div class="info-row"><span class="info-key">Duration</span><span class="info-val">3–4 Months</span></div>
+            <div class="info-row"><span class="info-key">Enrollment</span><span class="info-val green">Open Now</span></div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-block-title">Included in Pro</div>
+            <div class="info-row"><span class="info-key">Advanced Modules</span><span class="info-val green">✓</span></div>
+            <div class="info-row"><span class="info-key">1:1 Mentorship</span><span class="info-val green">✓</span></div>
+            <div class="info-row"><span class="info-key">Code Reviews</span><span class="info-val green">✓</span></div>
+            <div class="info-row"><span class="info-key">Mock Interviews</span><span class="info-val green">✓</span></div>
+            <div class="info-row"><span class="info-key">Placement Help</span><span class="info-val green">✓</span></div>
+          </div>
+
+          <div class="prereq-block">
+            <div class="prereq-title">⚠ Prerequisite</div>
+            <p class="prereq-text">Rookie Batch completion is required before joining Pro. This ensures everyone starts at the same strong baseline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-head">
+      <div class="section-label">// 04 — FAQ</div>
+      <div class="section-title">Common Questions</div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Do I really need to finish the Rookie Batch first?</div>
+        <div class="faq-a">Yes. The Pro Batch builds directly on Rookie foundations. Skipping ahead will make the content significantly harder to absorb and you'll miss key intuition building blocks.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does the 1:1 mentorship actually work?</div>
+        <div class="faq-a">Once enrolled, you schedule sessions directly with Pavan Sir. Sessions are conducted live via video call where you can share your screen, get code reviewed, and discuss your progress. You also get direct WhatsApp access between sessions.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the batch fully live or are there recorded sessions too?</div>
+        <div class="faq-a">The core content includes both live sessions and curated materials. The 1:1 mentorship is always live. Contact Pavan Sir for the current schedule format.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How many seats are available in the Pro Batch?</div>
+        <div class="faq-a">Seats are intentionally limited to maintain the quality of 1:1 mentorship. Reach out early to secure your spot — cohorts fill up fast.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What companies can I target after completing the Pro Batch?</div>
+        <div class="faq-a">The curriculum is designed with product company interviews in mind — FAANG, unicorn startups, and top Indian tech firms. Pavan Sir also provides company-specific prep guidance as part of placement support.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">pavan<span>x</span>dcl.in</div>
+    <div class="footer-copy">© 2025 · All rights reserved</div>
+  </footer>
+
+</div>
+
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
