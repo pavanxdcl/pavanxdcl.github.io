@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pavanxdcl.in — DSA Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #11111a;
+    --border: #1e1e2e;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --card: #13131f;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid bg */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+  .orb1 { width: 500px; height: 500px; background: var(--accent); top: -100px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: var(--accent2); bottom: 0; left: -80px; animation-delay: -4s; }
+  .orb3 { width: 300px; height: 300px; background: var(--accent3); top: 40%; left: 40%; animation-delay: -8s; }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(30px, 20px) scale(1.05); }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--accent); }
+  .logo em { color: var(--accent2); font-style: normal; }
+
+  .nav-badge {
+    font-size: 0.7rem;
+    padding: 4px 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 100px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 32px 80px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 28px;
+    padding: 6px 16px;
+    border: 1px solid rgba(6,182,212,0.25);
+    border-radius: 100px;
+    background: rgba(6,182,212,0.05);
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent2);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 .line2 { color: var(--accent); }
+  .hero h1 .line3 {
+    -webkit-text-stroke: 1px var(--accent2);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.8;
+    margin-bottom: 52px;
+  }
+
+  /* CTA BUTTON */
+  .cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 44px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.3px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 40px rgba(124,58,237,0.35), 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 60px rgba(124,58,237,0.5), 0 8px 32px rgba(0,0,0,0.5); }
+  .cta-btn:active { transform: translateY(0); }
+
+  .cta-arrow {
+    width: 20px; height: 20px;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    font-size: 0.85rem;
+    transition: transform 0.2s;
+  }
+  .cta-btn:hover .cta-arrow { transform: translateX(3px); }
+
+  .cta-note {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* STATS */
+  .stats {
+    position: relative; z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 0 auto 100px;
+    max-width: 700px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .stat {
+    flex: 1;
+    padding: 28px 24px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+  }
+  .stat:nth-child(2) .stat-num { color: var(--accent2); }
+  .stat:nth-child(3) .stat-num { color: var(--accent3); }
+  .stat-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+  /* TOPICS */
+  .section {
+    position: relative; z-index: 1;
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 0 32px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .section-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 36px; }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .topic-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 18px;
+    cursor: default;
+    transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .topic-card:hover { transform: translateY(-2px); border-color: rgba(124,58,237,0.4); background: rgba(124,58,237,0.05); }
+
+  .topic-icon { font-size: 1.5rem; margin-bottom: 10px; }
+  .topic-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .topic-count { font-size: 0.65rem; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 48px 32px;
+    border-top: 1px solid var(--border);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  footer strong { color: var(--accent); }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.7s ease both; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .cta-wrap { animation-delay: 0.4s; }
+
+  a{
+    text-decoration: none;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<nav>
+  <div class="logo"><a href="https://www.pavanxdcl.in"><span>pavan</span><em>x</em>dcl<span>.in</span></a></div>
+  <div class="nav-badge">DSA Pro</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Free Resource · Updated 2025</div>
+  <h1>
+    Master<br>
+    <span class="line2">Data Structures</span><br>
+    <span class="line3">&amp; Algorithms</span>
+  </h1>
+  <p class="hero-sub">
+   500+ hours of advanced DSA content — from LeetCode Easy to LeetCode Hard, competitive programming patterns, FAANG-level problem solving, and deep algorithm theory. One document. Zero paywalls. </p>
+  <div class="cta-wrap">
+    <a class="cta-btn" href="https://docs.google.com/document/d/13NmAr3DIKfAhFTJgY-dC3QShygVsCS4ESBTx840mwZs/edit?usp=sharing" target="_blank" rel="noopener">
+      Open DSA Notes
+      <span class="cta-arrow">→</span>
+    </a>
+    <span class="cta-note">// Opens Google Docs — free to read</span>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <span class="stat-num">100+</span>
+    <div class="stat-label">Topics</div>
+  </div>
+  <div class="stat">
+    <span class="stat-num">∞</span>
+    <div class="stat-label">Free Access</div>
+  </div>
+  <div class="stat">
+    <span class="stat-num">1 Doc</span>
+    <div class="stat-label">All-in-One</div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-title">What's Inside</div>
+  <div class="section-sub">// Topics covered in the document</div>
+  <div class="topics-grid">
+    <div class="topic-card"><div class="topic-icon">📦</div><div class="topic-name">Arrays</div><div class="topic-count">fundamentals</div></div>
+    <div class="topic-card"><div class="topic-icon">🔗</div><div class="topic-name">Linked Lists</div><div class="topic-count">singly &amp; doubly</div></div>
+    <div class="topic-card"><div class="topic-icon">📚</div><div class="topic-name">Stacks &amp; Queues</div><div class="topic-count">LIFO / FIFO</div></div>
+    <div class="topic-card"><div class="topic-icon">🌳</div><div class="topic-name">Trees</div><div class="topic-count">BST, AVL, heaps</div></div>
+    <div class="topic-card"><div class="topic-icon">🕸️</div><div class="topic-name">Graphs</div><div class="topic-count">BFS, DFS, Dijkstra</div></div>
+    <div class="topic-card"><div class="topic-icon">🔍</div><div class="topic-name">Searching</div><div class="topic-count">binary, linear</div></div>
+    <div class="topic-card"><div class="topic-icon">🔀</div><div class="topic-name">Sorting</div><div class="topic-count">merge, quick, heap</div></div>
+    <div class="topic-card"><div class="topic-icon">⚡</div><div class="topic-name">Dynamic Prog.</div><div class="topic-count">memoization, DP</div></div>
+    <div class="topic-card"><div class="topic-icon">🧩</div><div class="topic-name">Recursion</div><div class="topic-count">backtracking</div></div>
+    <div class="topic-card"><div class="topic-icon">🗂️</div><div class="topic-name">Hashing</div><div class="topic-count">maps, sets</div></div>
+    <div class="topic-card"><div class="topic-icon">🎯</div><div class="topic-name">Greedy</div><div class="topic-count">optimization</div></div>
+    <div class="topic-card"><div class="topic-icon">🏆</div><div class="topic-name">Interview Prep</div><div class="topic-count">patterns &amp; tips</div></div>
+  </div>
+</section>
+
+<footer>
+  Made with ❤️ by <strong>pavanxdcl.in</strong> &nbsp;·&nbsp; Share freely &nbsp;·&nbsp; Keep learning
+</footer>
+
+</body>
+</html>
