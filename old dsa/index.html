@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>PavanxDCL — DSA, LeetCode & FAANG Prep | Redesigned Courses</title>
+  <meta name="description" content="Master DSA, crack FAANG interviews & ace placements with PavanxDCL. Live mentorship, LeetCode Arena, JavaScript modules & aptitude prep.">
+  <meta name="keywords" content="pavanxdcl, pavanx, pavan x dcl, DSA course, FAANG preparation, coding mentorship, aptitude for placements, JavaScript interview, LeetCode problems, Dhee Coding Lab">
+  <meta name="author" content="Pavan X Dhee Coding Lab">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.pavanxdcl.in/">
+  
+  <meta property="og:title" content="Pavan X DCL — Break the Matrix. Master the Code.">
+  <meta property="og:description" content="DSA Forge • LeetCode Arena • Aptitude Lab — everything to crack placements and dominate FAANG interviews.">
+  <meta property="og:url" content="https://www.pavanxdcl.in/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.pavanxdcl.in/og-pavanxdcl.jpg">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1a0d05">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+ 
+ 
+<style>
+  .scrolling-images-section {
+    padding: 60px 0;
+    text-align: center;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .scrolling-header {
+    margin-bottom: 40px;
+  }
+
+  .section-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #fdba74;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #ededed;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 20%, #fdba74 50%, #fb923c 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .section-sub {
+    color: #a0a0a0;
+    max-width: 560px;
+    margin-bottom: 48px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .scroll-container {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+
+  .scroll-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: scrollLeftToRight 28s linear infinite;
+    will-change: transform;
+  }
+
+  .scroll-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* WhatsApp Screenshot Optimized Card */
+  .scroll-image-card {
+    flex-shrink: 0;
+    width: 220px;
+    background: rgba(18, 18, 24, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5);
+    cursor: pointer;
+  }
+
+  .scroll-image-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: #fb923c;
+    box-shadow: 0 18px 32px -12px rgba(249, 115, 22, 0.4);
+  }
+
+  /* Square aspect ratio for WhatsApp screenshots (1:1) */
+  .scroll-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* 1:1 Square aspect ratio - perfect for chat screenshots */
+    overflow: hidden;
+    background: #0d0d0d;
+  }
+
+  .scroll-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .scroll-image-card:hover .scroll-image {
+    transform: scale(1.05);
+  }
+
+  /* Badge overlay for WhatsApp indicator */
+  .whatsapp-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(37, 211, 102, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+  }
+
+  .image-caption {
+    padding: 14px 12px 16px;
+    text-align: center;
+  }
+
+  .image-caption h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fdba74;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .image-caption p {
+    font-size: 0.7rem;
+    color: #aaa;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @keyframes scrollLeftToRight {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Mobile optimization - larger touch targets */
+  @media (max-width: 768px) {
+    .scroll-image-card {
+      width: 180px;
+    }
+    
+    .image-caption {
+      padding: 10px 8px 12px;
+    }
+    
+    .image-caption h4 {
+      font-size: 0.8rem;
+    }
+    
+    .image-caption p {
+      font-size: 0.65rem;
+    }
+    
+    .whatsapp-badge {
+      padding: 3px 8px;
+      font-size: 0.55rem;
+      bottom: 6px;
+      right: 6px;
+    }
+    
+    .scroll-track {
+      gap: 16px;
+    }
+  }
+
+  /* For very small devices */
+  @media (max-width: 480px) {
+    .scroll-image-card {
+      width: 150px;
+    }
+  }
+
+  /* Optional: Lightbox click effect (simple zoom on click) */
+  .scroll-image-card:active {
+    transform: scale(0.98);
+  }
+</style>
+ <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #050505;
+      color: #ededed;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Animated gradient background */
+    .bg-aura {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(circle at 20% 30%, #0a0a0a, #000000);
+    }
+
+    .bg-aura::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 80% 70%, rgba(249, 115, 22, 0.12), transparent 60%);
+      animation: breathe 8s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Glowing orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 50vw;
+      height: 50vw;
+      background: #f9731620;
+      top: -20vh;
+      left: -10vw;
+      animation: float 20s infinite;
+    }
+
+    .orb-2 {
+      width: 40vw;
+      height: 40vw;
+      background: #fb923c15;
+      bottom: -15vh;
+      right: -10vw;
+      animation: float 25s infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(5%, 5%) scale(1.05); }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #fdba74);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: #fb923c;
+      -webkit-text-fill-color: #fb923c;
+      background: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #a0a0a0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fdba74;
+    }
+
+    /* Hero Section (unchanged, center aligned) */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #fb923c;
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #f97316;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #f97316;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 20%, #fdba74 50%, #fb923c 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #b0b0b0;
+      max-width: 560px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(105deg, #f97316, #fb923c);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(4px);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #e0e0e0;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(249, 115, 22, 0.5);
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      padding: 32px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      justify-content: center;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #fdba74);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* Section Headers (centered) */
+    .section {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fdba74;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      color: #a0a0a0;
+      max-width: 560px;
+      margin-bottom: 48px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ========== REDESIGNED COURSE CARDS ========== */
+    /* More premium, interactive, with depth and visual hierarchy */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .course-card {
+      background: rgba(12, 12, 16, 0.75);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .course-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 100% 0%, rgba(249, 115, 22, 0.2), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .course-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: rgba(251, 146, 60, 0.6);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(251, 146, 60, 0.2);
+      background: rgba(18, 18, 24, 0.9);
+    }
+
+    .course-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Card header area with icon and badge */
+    .card-header {
+      padding: 28px 28px 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(251, 146, 60, 0.05));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.2s;
+    }
+
+    .course-card:hover .card-icon-wrapper {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.35), rgba(251, 146, 60, 0.1));
+    }
+
+    .card-badge-new {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fb923c;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 20px 28px 20px 28px;
+      flex: 1;
+    }
+
+    .course-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      background: linear-gradient(135deg, #fff, #e2e2e2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .course-description {
+      font-size: 0.9rem;
+      color: #b0b0b0;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    /* Feature list / highlights */
+    .course-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .feature-chip {
+      background: rgba(249, 115, 22, 0.12);
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #fdba74;
+      letter-spacing: 0.01em;
+      border: 0.5px solid rgba(124,58,237,0.3);
+    }
+
+    /* Card footer (meta + CTA) */
+    .card-footer {
+      padding: 16px 28px 24px 28px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: #888;
+    }
+
+    .card-meta-icon {
+      font-size: 0.9rem;
+    }
+
+    .card-arrow {
+      font-size: 1.3rem;
+      transition: transform 0.2s;
+      color: #fdba74;
+    }
+
+    .course-card:hover .card-arrow {
+      transform: translateX(6px);
+    }
+
+    /* Special variant for Pro Max & JS (live) */
+    .course-card.live-card {
+      border-top: 2px solid #fb923c;
+    }
+
+    /* Quote & Community sections (preserved from original) */
+    .quote-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(168,85,247,0.03));
+      border-left: 4px solid #fb923c;
+      padding: 32px 40px;
+      border-radius: 24px;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #e0e0e0;
+      margin-bottom: 12px;
+    }
+
+    .quote-author {
+      font-size: 0.85rem;
+      color: #fb923c;
+    }
+
+    .community-card {
+      background: radial-gradient(ellipse at 30% 40%, rgba(124,58,237,0.12), transparent);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 32px;
+      padding: 48px 32px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .community-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #ea580c;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      margin-top: 24px;
+      transition: 0.2s;
+    }
+
+    .whatsapp-btn:hover {
+      background: #c2410c;
+      transform: scale(1.02);
+    }
+
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: #888;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fdba74;
+    }
+
+    hr {
+      border-color: rgba(255,255,255,0.05);
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .nav { flex-direction: column; text-align: center; }
+      .stats-grid { gap: 28px; }
+      .card-header { padding: 20px 20px 0 20px; }
+      .card-body { padding: 16px 20px; }
+      .card-footer { padding: 16px 20px 20px; }
+      .course-title { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-aura"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="container">
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="logo">PAVAN<span>XDCL</span></div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="aptitude.html">Aptitude</a>
+      <a href="#community">Community</a>
+      <a href="https://www.instagram.com/codewithpavanprakash" target="_blank">Instagram</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section (fully centered, content preserved) -->
+  <section class="hero">
+    <div class="live-badge">
+      <span class="live-dot"></span> Pavan X Dhee Coding Lab — Live & Active
+    </div>
+    <h1>
+      Break the Matrix.<br>
+      <span class="gradient-text">Master the Code.</span>
+    </h1>
+    <p class="hero-description">
+      DSA Forge • LeetCode Arena • Aptitude Lab — everything you need to crack placements and dominate FAANG interviews with <strong>PavanxDCL</strong> mentorship.
+    </p>
+    <div class="cta-group">
+      <a href="dsa.html" class="btn-primary">
+        ⚡ Start Grinding → DSA Pro-MAX
+      </a>
+        <a href="indexold.html" class="btn-primary">
+        ⚡ Start Upskilling → Full Stack Development Sheet
+      </a>
+    
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">DSA Problems</div></div>
+      <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Placement Focused</div></div>
+      <div class="stat-item"><div class="stat-number">2000+</div><div class="stat-label">Active Learners</div></div>
+      <div class="stat-item"><div class="stat-number">Live</div><div class="stat-label">Mentorship</div></div>
+    </div>
+
+
+    <div class="scrolling-images-section">
+  <div class="scrolling-header">
+    <div class="section-tag">💬 ACHIVERS ARENA</div>
+    <h2 class="section-title">SUCCESS <span class="gradient-text">STORIES</span></h2>
+    <div class="section-sub">Hard Work , Dedication and Consistency Always PaysOff</div>
+  </div>
+  <div class="scroll-container">
+    <div class="scroll-track" id="imageScrollTrack">
+      <!-- WhatsApp screenshot images will be dynamically injected from local folder -->
+    </div>
+  </div>
+</div>
+
+    
+  </section>
+
+  <hr>
+
+
+
+  <!-- Community Section (preserved, same styling) -->
+  <section class="section" id="community">
+    <div class="community-card">
+      <h3>Join the Official PavanxDCL Community Hub</h3>
+      <p style="color: #aaa; max-width: 500px; margin: 0 auto;">Live DSA, Aptitude & Coding sessions — direct access to Pavan and the grind squad. Get updates on pavanx placements, coding challenges & more.</p>
+      <a href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" class="whatsapp-btn">
+        💬 Join on WhatsApp (pavanxdcl)
+      </a>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>© 2025 Pavan × Dhee Coding Lab · <strong>pavanxdcl</strong> | DSA + Aptitude = Complete Warrior | All Placement Focused Resources</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/codewithpavanprakash" target="_blank">Instagram</a>
+      <a href="https://whatsapp.com/channel/0029VbBqF0Q5a23umr9kfA3k" target="_blank">Community</a>
+      <a href="https://www.pavanxdcl.in/promax.html">Pro Max</a>
+      <a href="https://www.pavanxdcl.in/aptitude.html">Aptitude Lab</a>
+    </div>
+  </footer>
+</div>
+
+<!-- SEO hidden (preserved from original) -->
+<div style="display: none;" aria-hidden="true">PavanX DCL - pavanx dsa, pavanxdcl courses, FAANG prep, coding mentorship by Pavan Prakash, Dhee Coding Lab placement hub. Search for pavanxdcl on Google for the ultimate coding bootcamp.</div>
+</body>
+
+
+<script>
+  // ========== LOCAL IMAGES CONFIGURATION ==========
+  // Place your WhatsApp screenshot images inside an "images" folder
+  // Update the filenames below to match your actual screenshot files
+  // Recommended: Use square or portrait WhatsApp screenshots for best display
+  
+  const imagesData = [
+    {
+      src: "images/harshith.jpeg",
+      title: "Placed in LG",
+      desc: "Harshith"
+    },
+    {
+      src: "images/narasimha.jpeg",
+      title: "Placed in TCS NQT Prime",
+      desc: "Narasimha"
+    },
+    {
+      src: "images/swetha.jpeg",
+      title: "Placed in Genpact",
+      desc: "Swetha"
+    },
+    {
+      src: "images/sumanth.jpeg",
+      title: "Placed in LG",
+      desc: "Sumanth"
+    },
+   {
+      src: "images/teju.jpeg",
+      title: "Placed in Sasken",
+      desc: "Tejaswini"
+    },
+   {
+      src: "images/shankar.jpeg",
+      title: "Placed in Stanch Solutions",
+      desc: "Shankar"
+    },
+    {
+      src: "images/kushwanth.jpeg",
+      title: "Placed in Surya AI & Zino",
+      desc: "Kushwanth"
+    },
+     {
+      src: "images/afsaan.jpeg",
+      title: "Placed in PayU",
+      desc: "Afsaan"
+    },
+    {
+      src: "images/lakshya.jpeg",
+      title: "Placed in Avaali Solutions",
+      desc: "Lakshya"
+    },
+    {
+      src: "images/Anusha.jpeg",
+      title: "Placed in Fintech Solutions",
+      desc: "Anusha"
+    },
+     {
+      src: "images/lalasa.jpeg",
+      title: "Placed in Deloitte",
+      desc: "Lalasa"
+    },
+    {
+      src: "images/prajwal.jpeg",
+      title: "Placed in Avaali Solutions",
+      desc: "Prajwal"
+    },
+     {
+      src: "images/manasa.jpeg",
+      title: "Placed in Mavenir Systems",
+      desc: "Manasa"
+    },
+    {
+      src: "images/madhu.jpeg",
+      title: "Placed in Avaali Solutions",
+      desc: "Madhu"
+    },
+    {
+      src: "images/varshitha.jpeg",
+      title: "Placed in Lkq",
+      desc: "Varshitha"
+    },
+     {
+      src: "images/abhiram1.jpeg",
+      title: "Placed in TCS Ninja",
+      desc: "Abhiram"
+    },
+     {
+      src: "images/ranjitha1.jpeg",
+      title: "Placed in Mavenir",
+      desc: "Ranjitha"
+    },
+    {
+      src: "images/harish.jpeg",
+      title: "Placed in Avaali",
+      desc: "Harish"
+    },
+    {
+      src: "images/sharanu.jpeg",
+      title: "Placed in Avaali",
+      desc: "Sharanu"
+    },
+    {
+      src: "images/omkar.jpeg",
+      title: "Placed in Avaali",
+      desc: "Omkar"
+    },
+    {
+      src: "images/harish.jpeg",
+      title: "Placed in Avaali",
+      desc: "Harish"
+    },
+    {
+      src: "images/sumana.jpeg",
+      title: "Placed in Shindengen",
+      desc: "Sumana Shree"
+    },
+       {
+      src: "images/aditya.jpeg",
+      title: "Placed in JAAS IT",
+      desc: "Adithya"
+    },
+        {
+      src: "images/vidya.jpeg",
+      title: "Placed in LG Soft",
+      desc: "Vidya"
+    },
+         {
+      src: "images/bhumika.jpeg",
+      title: "Placed in Nalsoft",
+      desc: "Bhumika"
+    },
+        {
+      src: "images/shridar.jpeg",
+      title: "Placed in Learnyst",
+      desc: "Shridar"
+    },
+           {
+      src: "images/lalitha.jpeg",
+      title: "Placed in Learnyst",
+      desc: "Lalitha"
+    },
+
+    
+  ];
+
+  // Build the scrolling track with duplicate items for seamless infinite loop
+  const track = document.getElementById('imageScrollTrack');
+  
+  function buildImageCard(item) {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'scroll-image-card';
+    cardDiv.setAttribute('data-title', item.title);
+    
+    cardDiv.innerHTML = `
+      <div class="scroll-image-wrapper">
+        <img class="scroll-image" src="${item.src}" alt="${item.title}" loading="lazy" 
+             onerror="this.src='https://placehold.co/400x400/1a1a2e/fb923c?text=WhatsApp+Screenshot&font=monospace'">
+        <div class="whatsapp-badge">
+          📱 WA
+        </div>
+      </div>
+      <div class="image-caption">
+        <h4>${item.title}</h4>
+        <p>${item.desc}</p>
+      </div>
+    `;
+    
+    // Optional: Add click handler to open image in new tab (good for viewing full screenshot)
+    cardDiv.addEventListener('click', () => {
+      window.open(item.src, '_blank');
+    });
+    
+    return cardDiv;
+  }
+  
+  // Clear any existing content
+  if (track) {
+    track.innerHTML = '';
+    
+    // Create primary set of images
+    imagesData.forEach(img => {
+      track.appendChild(buildImageCard(img));
+    });
+    
+    // Duplicate set for seamless infinite loop (creates the endless effect)
+    imagesData.forEach(img => {
+      track.appendChild(buildImageCard(img));
+    });
+  }
+  
+  // Optional: Adjust animation speed based on number of images
+  // More images = slower scroll for better readability
+  const imageCount = imagesData.length;
+  if (imageCount >= 10) {
+    document.querySelector('.scroll-track').style.animationDuration = '35s';
+  } else if (imageCount >= 6) {
+    document.querySelector('.scroll-track').style.animationDuration = '28s';
+  }
+  
+  console.log(`WhatsApp screenshot carousel initialized — ${imageCount} images loaded from local 'images/' folder (1:1 square aspect ratio)`);
+</script>
+</html>
