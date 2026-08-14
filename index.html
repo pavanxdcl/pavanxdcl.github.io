@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PavanxDCL — DSA & FAANG Prep | Dhee Coding Lab</title>
+<meta name="description" content="Master DSA, crack FAANG interviews & ace placements with PavanxDCL. Live mentorship, LeetCode Arena, Full Stack Sheet & Aptitude Lab.">
+<meta name="keywords" content="pavanxdcl, pavanx, DSA course, FAANG preparation, coding mentorship, aptitude for placements, LeetCode, Dhee Coding Lab">
+<meta name="author" content="Pavan X Dhee Coding Lab">
+<link rel="canonical" href="https://www.pavanxdcl.in/">
+<meta property="og:title" content="Pavan X DCL — Block by Block. Master the Code.">
+<meta property="og:description" content="DSA Forge • LeetCode Arena • Aptitude Lab — pixel perfect for placements and FAANG.">
+<meta name="theme-color" content="#121212">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#121212;
+    --grid-line: rgba(90,90,90,0.16);
+    --surface:#201f1c;
+    --surface-raised:#2a2924;
+    --stone:#48453c;
+    --stone-hi:#68644f;
+    --grass:#6b8c42;
+    --grass-dark:#3c6e1f;
+    --gold:#d9c94f;
+    --redstone:#b6432c;
+    --common:#c9c6ba;
+    --uncommon:#e8d95a;
+    --rare:#6cd0e8;
+    --epic:#c98ee8;
+    --text:#e9e4d4;
+    --text-muted:#a29d87;
+    --font-display:'VT323', monospace;
+    --font-pixel:'Press Start 2P', monospace;
+    --font-body:'Space Grotesk', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    background:var(--void);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:32px 32px;
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:1rem;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  /* ---------- HOTBAR NAV ---------- */
+  .hotbar-shell{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,18,18,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:4px solid var(--stone);
+  }
+  .hotbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 0;gap:16px;flex-wrap:wrap;
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-size:1.9rem;letter-spacing:1px;
+    color:var(--gold);
+    text-shadow:2px 2px 0 #2c2a16;
+    display:flex;align-items:center;gap:8px;
+    text-decoration:none;
+  }
+  .brand .cube{
+    width:22px;height:22px;background:var(--grass);
+    border:2px solid #e9e4d4;
+    box-shadow: inset -3px -3px 0 rgba(0,0,0,0.35), inset 3px 3px 0 rgba(255,255,255,0.18);
+  }
+  .brand span{color:var(--grass);}
+
+  .slots{display:flex;gap:10px;flex-wrap:wrap;}
+  .slot{
+    position:relative;
+    display:flex;align-items:center;gap:8px;
+    background:var(--surface);
+    border:2px solid var(--stone);
+    border-top-color:var(--stone-hi);
+    border-left-color:var(--stone-hi);
+    padding:8px 14px 8px 10px;
+    text-decoration:none;
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:0.92rem;
+    color:var(--text-muted);
+    transition:border-color .12s linear, color .12s linear, transform .08s linear;
+  }
+  .slot .key{
+    font-family:var(--font-mono);
+    font-size:0.62rem;
+    color:#78745f;
+    background:#111;
+    border:1px solid var(--stone);
+    width:16px;height:16px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .slot:hover, .slot:focus-visible{
+    color:var(--gold);
+    border-color:var(--gold);
+    transform:translateY(-1px);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:82vh;
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    text-align:center;
+    padding:64px 0 40px;
+    position:relative;
+  }
+
+  .live-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--surface);
+    border:3px solid var(--stone);
+    padding:7px 18px;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:1.5px;
+    color:#b8d96c;
+    text-transform:uppercase;
+    margin-bottom:30px;
+    opacity:0;
+    animation:pop-in .4s ease-out .1s forwards;
+  }
+  .live-dot{
+    width:10px;height:10px;background:var(--grass);
+    box-shadow:0 0 0 2px #1a1a1a;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{0%,100%{opacity:1;background:var(--grass);}50%{opacity:.4;background:#2f4519;}}
+  @keyframes pop-in{
+    0%{opacity:0;transform:translateY(-8px) scale(.96);}
+    100%{opacity:1;transform:translateY(0) scale(1);}
+  }
+
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(3rem, 9vw, 6.2rem);
+    font-weight:400;
+    line-height:0.98;
+    letter-spacing:1px;
+    text-shadow:5px 5px 0 #1c1c1c;
+    color:#f2eecb;
+    margin-bottom:22px;
+    opacity:0;
+    animation:pop-in .5s ease-out .22s forwards;
+  }
+  h1 .accent{color:var(--gold);text-shadow:4px 4px 0 #3c3416;}
+
+  .hero-desc{
+    font-family:var(--font-body);
+    font-size:clamp(1.02rem, 2.4vw, 1.2rem);
+    color:#c7c2ae;
+    max-width:600px;
+    margin-bottom:36px;
+    opacity:0;
+    animation:pop-in .5s ease-out .34s forwards;
+  }
+  .hero-desc strong{color:var(--gold);font-weight:700;}
+
+  .cta-group{
+    display:flex;gap:18px;flex-wrap:wrap;justify-content:center;
+    margin-bottom:56px;
+    opacity:0;
+    animation:pop-in .5s ease-out .46s forwards;
+  }
+
+  .btn{
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:1.02rem;
+    padding:13px 26px;
+    text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;
+    cursor:pointer;
+    transition:transform .05s linear, box-shadow .05s linear;
+    border:none;
+  }
+  .btn-primary{
+    background:var(--grass-dark);
+    border:3px solid var(--grass);
+    color:#f4f4dc;
+    box-shadow:0 5px 0 #1e3a0e;
+  }
+  .btn-primary:hover{transform:translateY(3px);box-shadow:0 2px 0 #1e3a0e;background:#4e812a;}
+  .btn-secondary{
+    background:var(--surface-raised);
+    border:3px solid var(--stone-hi);
+    color:var(--text);
+    box-shadow:0 5px 0 #17150f;
+  }
+  .btn-secondary:hover{transform:translateY(3px);box-shadow:0 2px 0 #17150f;background:#38362e;}
+
+  /* achievement toast stats */
+  .achievements{
+    display:flex;gap:18px;flex-wrap:wrap;justify-content:center;
+    max-width:900px;
+  }
+  .achv{
+    display:flex;align-items:center;gap:12px;
+    background:var(--surface);
+    border:2px solid var(--stone);
+    padding:10px 16px;
+    text-align:left;
+    opacity:0;
+    transform:translateX(-16px);
+    animation:toast-in .35s ease-out forwards;
+  }
+  .achv:nth-child(1){animation-delay:.6s;}
+  .achv:nth-child(2){animation-delay:.72s;}
+  .achv:nth-child(3){animation-delay:.84s;}
+  .achv:nth-child(4){animation-delay:.96s;}
+  @keyframes toast-in{
+    0%{opacity:0;transform:translateX(-16px);}
+    60%{opacity:1;}
+    100%{opacity:1;transform:translateX(0);}
+  }
+  .achv-icon{
+    width:34px;height:34px;flex-shrink:0;
+    background:#1f3a12;border:2px solid var(--grass);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;
+  }
+  .achv-label{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:1px;color:#8a8670;text-transform:uppercase;}
+  .achv-value{font-family:var(--font-display);font-size:1.5rem;color:var(--gold);line-height:1;}
+
+  /* ---------- SECTION SHARED ---------- */
+  .section{padding:80px 0;}
+  .section-head{text-align:center;margin-bottom:52px;}
+  .eyebrow{
+    font-family:var(--font-pixel);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--grass);
+    margin-bottom:14px;
+  }
+  .section-title{
+    font-family:var(--font-display);
+    font-size:clamp(2.1rem, 5vw, 3.1rem);
+    text-shadow:3px 3px 0 #1c1c1c;
+    color:#f2eecb;
+    margin-bottom:14px;
+  }
+  .section-sub{
+    color:var(--text-muted);
+    max-width:540px;margin:0 auto;
+    font-size:0.98rem;
+  }
+  .divider{border:none;border-top:3px solid var(--stone);margin:0;}
+
+  /* ---------- INVENTORY / COURSE SLOTS ---------- */
+  .inventory{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:28px;
+  }
+  .item-slot{
+    background:var(--surface);
+    border:4px solid var(--stone);
+    border-top-color:var(--stone-hi);
+    border-left-color:var(--stone-hi);
+    box-shadow:6px 6px 0 rgba(0,0,0,0.4);
+    text-decoration:none;color:inherit;
+    display:flex;flex-direction:column;
+    text-align:left;
+    transition:transform .1s linear, box-shadow .1s linear, border-color .1s linear;
+    position:relative;
+  }
+  .item-slot:hover, .item-slot:focus-visible{
+    transform:translate(-3px,-3px);
+    box-shadow:9px 9px 0 rgba(0,0,0,0.5);
+  }
+  .item-slot[data-rarity="epic"]{--rarity-color:var(--epic);}
+  .item-slot[data-rarity="rare"]{--rarity-color:var(--rare);}
+  .item-slot[data-rarity="uncommon"]{--rarity-color:var(--uncommon);}
+  .item-slot:hover{border-color:var(--rarity-color);}
+
+  .slot-top{
+    padding:22px 22px 0;
+    display:flex;justify-content:space-between;align-items:flex-start;
+  }
+  .slot-icon{
+    width:60px;height:60px;
+    background:#1a1a1a;
+    border:3px solid var(--rarity-color);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.8rem;
+    box-shadow:0 0 14px -4px var(--rarity-color);
+  }
+  .rarity-tag{
+    font-family:var(--font-mono);
+    font-size:0.62rem;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--rarity-color);
+    border:1.5px solid var(--rarity-color);
+    padding:3px 8px;
+  }
+
+  .slot-body{padding:16px 22px 8px;flex:1;}
+  .item-title{
+    font-family:var(--font-display);
+    font-size:1.7rem;
+    color:var(--rarity-color);
+    margin-bottom:10px;
+  }
+  .item-desc{
+    font-size:0.94rem;
+    color:#b9b4a0;
+    margin-bottom:18px;
+  }
+  .item-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .tag{
+    background:#1c1c15;
+    border:1.5px solid var(--stone-hi);
+    padding:4px 10px;
+    font-family:var(--font-mono);
+    font-size:0.66rem;
+    color:#c9c4a6;
+    letter-spacing:.3px;
+  }
+  .slot-foot{
+    padding:14px 22px 20px;
+    border-top:3px solid var(--stone);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .slot-meta{font-family:var(--font-mono);font-size:0.72rem;color:#8a8670;}
+  .slot-go{font-family:var(--font-display);font-size:1.3rem;color:var(--rarity-color);transition:transform .1s linear;}
+  .item-slot:hover .slot-go{transform:translateX(5px);}
+
+  /* ---------- COMMUNITY / SERVER JOIN ---------- */
+  .server-card{
+    background:linear-gradient(180deg, #24261b, #1c1e14);
+    border:5px solid var(--stone-hi);
+    padding:56px 32px;
+    text-align:center;
+    position:relative;
+  }
+  .server-card::before{
+    content:"● ONLINE";
+    position:absolute;top:16px;right:20px;
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    color:var(--grass);
+    letter-spacing:1px;
+  }
+  .server-title{
+    font-family:var(--font-display);
+    font-size:2.1rem;
+    color:#f2eecb;
+    margin-bottom:14px;
+  }
+  .server-desc{
+    color:var(--text-muted);
+    max-width:520px;margin:0 auto 8px;
+    font-size:0.98rem;
+  }
+  .whatsapp-btn{
+    background:var(--grass-dark);
+    border:3px solid var(--grass);
+    padding:13px 26px;
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:1.02rem;
+    text-decoration:none;
+    color:#fff3cf;
+    display:inline-flex;gap:10px;align-items:center;
+    margin-top:26px;
+    box-shadow:0 5px 0 #1e3a0e;
+    transition:transform .05s linear, box-shadow .05s linear;
+  }
+  .whatsapp-btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #1e3a0e;background:#2d5516;}
+
+  .side-links{
+    display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+    margin-top:22px;
+  }
+  .side-links a{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#9b9670;
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .side-links a:hover{color:var(--gold);border-bottom-color:var(--gold);}
+
+  /* ---------- FOOTER ---------- */
+  .footer{
+    border-top:4px solid var(--stone);
+    padding:36px 0;
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:14px;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:#7d795f;
+  }
+  .footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+  .footer-links a{color:#9b9670;text-decoration:none;}
+  .footer-links a:hover{color:var(--gold);}
+
+  @media (max-width:768px){
+    .hotbar{justify-content:center;text-align:center;}
+    .slots{justify-content:center;}
+    .footer{flex-direction:column;text-align:center;}
+    .server-card::before{position:static;display:block;margin-bottom:12px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hotbar-shell">
+  <div class="wrap hotbar">
+    <a href="#" class="brand">PAVANXDCL</a>
+    <nav class="slots" aria-label="Primary">
+      <a href="#" class="slot"><span class="key">1</span>🏠 Home</a>
+      <a href="aptitude.html" class="slot"><span class="key">2</span>⚙️ Aptitude</a>
+      <a href="https://t.me/pavanprakash" class="slot"><span class="key">3</span>🧱 Telegram</a>
+      <a href="https://whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H" class="slot"><span class="key">4</span>🌿 Community</a>
+  </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="live-badge"><span class="live-dot"></span> Welcome to The Arena Of Coders</div>
+    <h1>BREAK THE MATRIX.<br><span class="accent">CRAFT THE CODE.</span></h1>
+    <p class="hero-desc">DSA Forge • LeetCode Arena • Aptitude Lab — everything to raid placements and conquer FAANG with <strong>PavanxDCL</strong>.</p>
+
+    <div class="cta-group">
+      <a href="https://docs.google.com/document/d/13NmAr3DIKfAhFTJgY-dC3QShygVsCS4ESBTx840mwZs/edit?usp=sharing" class="btn btn-primary">⚔️ PavanX - Pro DSA Sheet</a>
+      <a href="https://t.me/pavanprakash" class="btn btn-secondary">🗺️ Live → DSA Batch</a>
+    </div>
+
+    <div class="achievements" aria-label="Community stats">
+      <div class="achv"><div class="achv-icon">🧩</div><div><div class="achv-label">Problems Solved Together</div><div class="achv-value">500+</div></div></div>
+      <div class="achv"><div class="achv-icon">🎯</div><div><div class="achv-label">Placement Focus</div><div class="achv-value">100%</div></div></div>
+      <div class="achv"><div class="achv-icon">👥</div><div><div class="achv-label">Active Learners</div><div class="achv-value">2500+</div></div></div>
+      <div class="achv"><div class="achv-icon">📡</div><div><div class="achv-label">Mentorship</div><div class="achv-value">LIVE</div></div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- COURSES / INVENTORY -->
+  <section class="section" id="courses">
+    <div class="section-head">
+      <div class="eyebrow">// YOUR INVENTORY</div>
+      <h2 class="section-title">PICK YOUR LOADOUT</h2>
+      <p class="section-sub">Three tracks, ranked by grind intensity. Equip one, or run all three like the top of the leaderboard does.</p>
+    </div>
+
+    <div class="inventory">
+      <a href="https://docs.google.com/document/d/13NmAr3DIKfAhFTJgY-dC3QShygVsCS4ESBTx840mwZs/edit?usp=sharing" class="item-slot" data-rarity="epic">
+        <div class="slot-top">
+          <div class="slot-icon">⚔️</div>
+          <span class="rarity-tag">Legendary</span>
+        </div>
+        <div class="slot-body">
+          <div class="item-title">DSA Pro-MAX</div>
+          <p class="item-desc">The core grind — patterns, problems and mock interviews built to get you FAANG-ready, block by block.</p>
+          <div class="item-tags">
+            <span class="tag">500+ Problems</span>
+            <span class="tag">Live Doubt Support</span>
+            <span class="tag">Interview Sheets</span>
+          </div>
+        </div>
+        <div class="slot-foot">
+          <span class="slot-meta">dsa.html</span>
+          <span class="slot-go">→</span>
+        </div>
+      </a>
+
+      <a href="https://docs.google.com/document/d/1ySf6Y_vKVSNRBFXM60DjaELj7p51EmeqGm0zrq2LK1g/edit?usp=sharing" class="item-slot" data-rarity="rare">
+        <div class="slot-top">
+          <div class="slot-icon">🧩</div>
+          <span class="rarity-tag">Rare</span>
+        </div>
+        <div class="slot-body">
+          <div class="item-title">Full Stack Sheet</div>
+          <p class="item-desc">Level up beyond DSA — a structured upskilling sheet to round out your profile for full-stack and SDE roles.</p>
+          <div class="item-tags">
+            <span class="tag">Project Tracks</span>
+            <span class="tag">Resume Ready</span>
+            <span class="tag">Self-Paced</span>
+          </div>
+        </div>
+        <div class="slot-foot">
+          <span class="slot-meta">indexold.html</span>
+          <span class="slot-go">→</span>
+        </div>
+      </a>
+
+      <a href="aptitude.html" class="item-slot" data-rarity="uncommon">
+        <div class="slot-top">
+          <div class="slot-icon">🧮</div>
+          <span class="rarity-tag">Uncommon</span>
+        </div>
+        <div class="slot-body">
+          <div class="item-title">Aptitude Lab</div>
+          <p class="item-desc">Quant, logical reasoning and verbal drills — clear the first gate before your code even gets reviewed.</p>
+          <div class="item-tags">
+            <span class="tag">Timed Drills</span>
+            <span class="tag">Company-wise Sets</span>
+            <span class="tag">Quick Revision</span>
+          </div>
+        </div>
+        <div class="slot-foot">
+          <span class="slot-meta">aptitude.html</span>
+          <span class="slot-go">→</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- COMMUNITY -->
+  <section class="section" id="community">
+    <div class="server-card">
+      <div class="server-title">🌍 JOIN THE CRAFTING CREW</div>
+      <p class="server-desc">Live DSA, Aptitude & coding sessions — direct access to Pavan and the grind squad. Get placement updates, LeetCode challenges and more.</p>
+      <a href="https://whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H" target="_blank" rel="noopener" class="whatsapp-btn">📱 Join on WhatsApp (pavanxdcl)</a>
+      <div class="side-links">
+        <a href="https://www.instagram.com/codewithpavanprakash" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.pavanxdcl.in/promax.html" target="_blank" rel="noopener">Pro Max</a>
+        <a href="https://docs.google.com/document/d/12bGjDJNLZ3lluQ0rTdA_FHAXC06rCgVJ6nC_9HfWA00/edit?usp=sharing" target="_blank" rel="noopener">Hall Of Fame</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>© 2026 PavanXDCL · <strong>pavanxdcl</strong> · DSA + Aptitude = Complete Warrior</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/codewithpavanprakash" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H" target="_blank" rel="noopener">Community</a>
+      <a href="aptitude.html" target="_blank" rel="noopener">Aptitude Lab</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // Hotbar number-key shortcuts (1-5), mirroring Minecraft's hotbar selection
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const slots = document.querySelectorAll('.slots .slot');
+    const n = parseInt(e.key, 10);
+    if (n >= 1 && n <= slots.length) {
+      slots[n - 1].click();
+    }
+  });
+</script>
+
+</body>
+</html>
