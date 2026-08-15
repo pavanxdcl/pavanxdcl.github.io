@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Roadmap – Pavan X DCL | Must-Solve Questions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* header */
+    .roadmap-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .roadmap-header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #ffb347, #ff6b6b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .roadmap-header p {
+      color: #aaa;
+      font-size: 1.2rem;
+    }
+
+    .target-badge {
+      display: inline-block;
+      background: #ff6b6b20;
+      border: 1px solid #ff6b6b;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* roadmap grid */
+    .phase {
+      background: #111;
+      border-radius: 2rem;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      border-left: 6px solid #ff6b6b;
+      transition: 0.2s;
+    }
+
+    .phase:hover {
+      background: #161616;
+      border-left-color: #ffb347;
+    }
+
+    .phase h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .phase-badge {
+      background: #ff6b6b20;
+      color: #ffb347;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .target-count {
+      background: #1e3a3a;
+      color: #4ade80;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+    }
+
+    .topic-section {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .topic-title {
+      font-size: 1.3rem;
+      color: #ffb347;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 0.3rem;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .question-card {
+      background: #1a1a1a;
+      padding: 0.7rem 1rem;
+      border-radius: 0.8rem;
+      border-left: 3px solid #ff6b6b;
+      font-size: 0.9rem;
+      transition: 0.1s;
+    }
+
+    .question-card:hover {
+      background: #222;
+      border-left-color: #ffb347;
+    }
+
+    .question-card a {
+      color: #ddd;
+      text-decoration: none;
+      display: block;
+    }
+
+    .question-card a:hover {
+      color: #ffb347;
+    }
+
+    .question-id {
+      color: #ff6b6b;
+      font-weight: bold;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+
+    hr {
+      border-color: #2a2a2a;
+      margin: 2rem 0;
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(145deg, #111, #0e0e0e);
+      padding: 2rem;
+      border-radius: 2rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      background: #ff6b6b;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 3rem;
+      font-weight: bold;
+      color: #0a0a0a;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #ffb347;
+      transition: 0.2s;
+    }
+
+    .progress-note {
+      background: #0f172a;
+      padding: 1rem;
+      border-radius: 1rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #555;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem;
+      }
+      .phase h2 {
+        font-size: 1.3rem;
+      }
+      .question-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="roadmap-header">
+    <h1>🗺️ DSA Roadmap – Pavan X DCL</h1>
+    <p>From fundamentals to FAANG — structured, mentored & battle-tested 🔥</p>
+    <div class="target-badge">
+      🎯 Total must-solve problems: <strong>75+</strong> | Placement + FAANG focused
+    </div>
+  </div>
+
+  <!-- ================= PHASE 1 ================= -->
+  <div class="phase">
+    <div class="phase-badge">🧱 FOUNDATION (Weeks 1–4) <span class="target-count">Target: 25-30 problems</span></div>
+    <h2>🏁 1. Basics & Complexity</h2>
+
+    <div class="topic-section">
+      <div class="topic-title">📦 Arrays</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/two-sum/" target="_blank"><span class="question-id">[1]</span> Two Sum</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/maximum-subarray/" target="_blank"><span class="question-id">[53]</span> Maximum Subarray (Kadane's Algo)</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank"><span class="question-id">[121]</span> Best Time to Buy & Sell Stock</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/contains-duplicate/" target="_blank"><span class="question-id">[217]</span> Contains Duplicate</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank"><span class="question-id">[238]</span> Product of Array Except Self</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">📝 Strings</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/valid-palindrome/" target="_blank"><span class="question-id">[125]</span> Valid Palindrome</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/valid-anagram/" target="_blank"><span class="question-id">[242]</span> Valid Anagram</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank"><span class="question-id">[3]</span> Longest Substring Without Repeating Characters</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/valid-parentheses/" target="_blank"><span class="question-id">[20]</span> Valid Parentheses</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🎯 Hashing</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/single-number/" target="_blank"><span class="question-id">[136]</span> Single Number</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/majority-element/" target="_blank"><span class="question-id">[169]</span> Majority Element</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/intersection-of-two-arrays/" target="_blank"><span class="question-id">[349]</span> Intersection of Two Arrays</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🔄 Recursion Basics</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/fibonacci-number/" target="_blank"><span class="question-id">[509]</span> Fibonacci Number</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank"><span class="question-id">[206]</span> Reverse Linked List (recursive)</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/reverse-string/" target="_blank"><span class="question-id">[344]</span> Reverse String</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PHASE 2 ================= -->
+  <div class="phase">
+    <div class="phase-badge">⚙️ CORE DSA (Weeks 5–10) <span class="target-count">Target: 30-40 problems</span></div>
+    <h2>📌 2. Sorting, Searching & Key Patterns</h2>
+
+    <div class="topic-section">
+      <div class="topic-title">🔁 Sorting</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/sort-an-array/" target="_blank"><span class="question-id">[912]</span> Sort an Array (merge/quick)</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/sort-colors/" target="_blank"><span class="question-id">[75]</span> Sort Colors (Dutch National Flag)</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🔍 Binary Search</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/binary-search/" target="_blank"><span class="question-id">[704]</span> Binary Search</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank"><span class="question-id">[33]</span> Search in Rotated Sorted Array</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank"><span class="question-id">[153]</span> Find Minimum in Rotated Sorted Array</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/search-a-2d-matrix/" target="_blank"><span class="question-id">[74]</span> Search a 2D Matrix</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">📎 Linked Lists</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank"><span class="question-id">[206]</span> Reverse Linked List</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/linked-list-cycle/" target="_blank"><span class="question-id">[141]</span> Linked List Cycle</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank"><span class="question-id">[21]</span> Merge Two Sorted Lists</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/" target="_blank"><span class="question-id">[19]</span> Remove Nth Node From End</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank"><span class="question-id">[2]</span> Add Two Numbers</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🥞 Stacks & Queues</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/valid-parentheses/" target="_blank"><span class="question-id">[20]</span> Valid Parentheses</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/min-stack/" target="_blank"><span class="question-id">[155]</span> Min Stack</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/implement-queue-using-stacks/" target="_blank"><span class="question-id">[232]</span> Implement Queue using Stacks</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/sliding-window-maximum/" target="_blank"><span class="question-id">[239]</span> Sliding Window Maximum (deque)</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PHASE 3 ================= -->
+  <div class="phase">
+    <div class="phase-badge">🧠 ADVANCED PATTERNS (Weeks 11–16) <span class="target-count">Target: 40-50 problems</span></div>
+    <h2>⚡ 3. Recursion, DP & Graphs</h2>
+
+    <div class="topic-section">
+      <div class="topic-title">🌲 Binary Trees</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank"><span class="question-id">[104]</span> Maximum Depth</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank"><span class="question-id">[102]</span> Level Order Traversal</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/invert-binary-tree/" target="_blank"><span class="question-id">[226]</span> Invert Binary Tree</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank"><span class="question-id">[236]</span> Lowest Common Ancestor</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank"><span class="question-id">[124]</span> Binary Tree Maximum Path Sum</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🌳 Binary Search Trees</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank"><span class="question-id">[98]</span> Validate BST</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/" target="_blank"><span class="question-id">[230]</span> Kth Smallest in BST</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/search-in-a-binary-search-tree/" target="_blank"><span class="question-id">[700]</span> Search in BST</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🧩 Backtracking</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/subsets/" target="_blank"><span class="question-id">[78]</span> Subsets</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/permutations/" target="_blank"><span class="question-id">[46]</span> Permutations</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/combination-sum/" target="_blank"><span class="question-id">[39]</span> Combination Sum</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/n-queens/" target="_blank"><span class="question-id">[51]</span> N-Queens</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🧠 Dynamic Programming</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/climbing-stairs/" target="_blank"><span class="question-id">[70]</span> Climbing Stairs</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/house-robber/" target="_blank"><span class="question-id">[198]</span> House Robber</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank"><span class="question-id">[300]</span> Longest Increasing Subsequence</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank"><span class="question-id">[1143]</span> Longest Common Subsequence</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/coin-change/" target="_blank"><span class="question-id">[322]</span> Coin Change</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🕸️ Graphs (BFS/DFS)</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/number-of-islands/" target="_blank"><span class="question-id">[200]</span> Number of Islands</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/flood-fill/" target="_blank"><span class="question-id">[733]</span> Flood Fill</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/course-schedule/" target="_blank"><span class="question-id">[207]</span> Course Schedule (Topological Sort)</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/rotting-oranges/" target="_blank"><span class="question-id">[994]</span> Rotting Oranges</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/network-delay-time/" target="_blank"><span class="question-id">[743]</span> Network Delay Time (Dijkstra)</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PHASE 4 ================= -->
+  <div class="phase">
+    <div class="phase-badge">🏆 FAANG READY + PLACEMENTS <span class="target-count">Target: 25+ advanced problems</span></div>
+    <h2>🎯 4. Advanced Topics & Mock Interview Grind</h2>
+
+    <div class="topic-section">
+      <div class="topic-title">📈 Heaps & Priority Queues</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank"><span class="question-id">[215]</span> Kth Largest Element</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank"><span class="question-id">[347]</span> Top K Frequent Elements</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank"><span class="question-id">[23]</span> Merge K Sorted Lists</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/find-median-from-data-stream/" target="_blank"><span class="question-id">[295]</span> Find Median from Data Stream</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🔁 Tries & Advanced Strings</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/implement-trie-prefix-tree/" target="_blank"><span class="question-id">[208]</span> Implement Trie (Prefix Tree)</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/word-search-ii/" target="_blank"><span class="question-id">[212]</span> Word Search II</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank"><span class="question-id">[5]</span> Longest Palindromic Substring</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">⚡ Segment Tree & BIT</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/range-sum-query-mutable/" target="_blank"><span class="question-id">[307]</span> Range Sum Query - Mutable</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/" target="_blank"><span class="question-id">[315]</span> Count of Smaller Numbers After Self</a></div>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-title">🎤 Must-Do Interview Classics</div>
+      <div class="question-grid">
+        <div class="question-card"><a href="https://leetcode.com/problems/lru-cache/" target="_blank"><span class="question-id">[146]</span> LRU Cache</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" target="_blank"><span class="question-id">[297]</span> Serialize & Deserialize Binary Tree</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/word-ladder/" target="_blank"><span class="question-id">[127]</span> Word Ladder</a></div>
+        <div class="question-card"><a href="https://leetcode.com/problems/regular-expression-matching/" target="_blank"><span class="question-id">[10]</span> Regular Expression Matching</a></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="progress-note">
+    📌 <strong>Pro tip from Pavan X DCL:</strong> Don't just solve — understand patterns. <br>
+    Each problem above teaches a concept that repeats in FAANG interviews. Track your progress, revisit weak spots, and grind weekly contests.
+  </div>
+
+  <div class="cta">
+    <p>🔥 This roadmap runs live inside <strong>Pavan X DCL mentorship</strong> — with daily problem solving, doubt sessions & mock interviews.</p>
+    <a href="#" class="btn" onclick="alert('📱 Join Pavan X DCL WhatsApp community: https://chat.whatsapp.com/... or DM for direct mentorship access')">🎯 Join the DSA roadmap cohort →</a>
+    <p style="margin-top: 1rem; font-size: 0.8rem;">📌 Weekly DSA sprints • LeetCode ranking • Aptitude Lab integrated</p>
+  </div>
+
+  <footer>
+    © Pavan X DCL — Break the Matrix. Master the Code. | DSA roadmap v2.0 with must-solve problems
+  </footer>
+</div>
+</body>
+</html>

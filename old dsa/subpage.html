@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rookie Rise : Beginner DSA Module | Pavan X Dhee Coding Lab</title>
+  <meta name="description" content="Learn DSA from scratch with 500+ problems, live sessions, Java & Python. Covers Arrays, HashMap, Two Pointers, Stack, LinkedList & LeetCode practice. By pavanxdcl.">
+  <meta name="keywords" content="pavanxdcl, beginner DSA, rookie rise, DSA Java Python, LeetCode practice, FAANG prep, Pavan Dhee Coding Lab">
+  <meta name="author" content="Pavan X DCL">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.pavanxdcl.in/subpage.html">
+  <meta property="og:title" content="Rookie Rise: Beginner DSA Module | pavanxdcl">
+  <meta property="og:description" content="500+ DSA problems, live sessions, Java & Python. Master Arrays, HashMap, Stack, LinkedList & LeetCode with pavanxdcl.">
+  <meta property="og:url" content="https://www.pavanxdcl.in/subpage.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pavan X DCL">
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #1a1a24;
+      --card: #13131c;
+      --border: #2a2a3a;
+      --accent: #f97316;
+      --accent2: #fb923c;
+      --blue: #60a5fa;
+      --green: #34d399;
+      --purple: #a78bfa;
+      --yellow: #fbbf24;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --dim: #64748b;
+      --font: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,15,0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-badge {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(249,115,22,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .stat-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .stat-dot.blue { background: var(--blue); }
+    .stat-dot.green { background: var(--green); }
+
+    /* ── QUICK NAV ── */
+    .quick-nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .qn-btn {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .qn-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(249,115,22,0.08);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0 1.25rem;
+    }
+    .section-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+    .section-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-count {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--dim);
+      background: var(--bg3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── RESOURCE LIST ── */
+    .resource-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .resource-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 1.1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s, background 0.2s;
+      flex-wrap: wrap;
+    }
+    .resource-item:hover {
+      border-color: rgba(249,115,22,0.35);
+      background: rgba(249,115,22,0.04);
+    }
+    .resource-label {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 500;
+      flex: 1;
+      min-width: 180px;
+    }
+    .resource-label strong {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+    .resource-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.18s;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-rec {
+      background: rgba(249,115,22,0.12);
+      color: var(--accent);
+      border-color: rgba(249,115,22,0.25);
+    }
+    .btn-rec:hover { background: rgba(249,115,22,0.22); border-color: var(--accent); }
+    .btn-doc {
+      background: rgba(96,165,250,0.1);
+      color: var(--blue);
+      border-color: rgba(96,165,250,0.2);
+    }
+    .btn-doc:hover { background: rgba(96,165,250,0.2); border-color: var(--blue); }
+    .btn-lc {
+      background: rgba(251,191,36,0.1);
+      color: var(--yellow);
+      border-color: rgba(251,191,36,0.2);
+    }
+    .btn-lc:hover { background: rgba(251,191,36,0.2); border-color: var(--yellow); }
+    .btn-sol {
+      background: rgba(52,211,153,0.1);
+      color: var(--green);
+      border-color: rgba(52,211,153,0.2);
+    }
+    .btn-sol:hover { background: rgba(52,211,153,0.2); border-color: var(--green); }
+    .btn-ext {
+      background: rgba(167,139,250,0.1);
+      color: var(--purple);
+      border-color: rgba(167,139,250,0.2);
+    }
+    .btn-ext:hover { background: rgba(167,139,250,0.2); border-color: var(--purple); }
+
+    /* ── PRACTICE PILL ROW ── */
+    .practice-row {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      padding: 0.5rem 1.1rem 0.9rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      margin-top: -10px;
+    }
+    .practice-pill {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 5px;
+      background: rgba(251,191,36,0.08);
+      color: var(--yellow);
+      border: 1px solid rgba(251,191,36,0.18);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .practice-pill:hover { background: rgba(251,191,36,0.18); }
+
+    /* ── GOOD TO KNOW CARDS ── */
+    .goodtoknow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .goodtoknow-grid { grid-template-columns: 1fr; } }
+    .gk-card {
+      padding: 1.1rem 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s;
+    }
+    .gk-card:hover { border-color: rgba(249,115,22,0.35); }
+    .gk-lang {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .gk-card .resource-links { margin-top: 0.5rem; }
+
+    /* ── LEETCODE TABLE ── */
+    .lc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.5rem;
+    }
+    .lc-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0.9rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.82rem;
+      transition: all 0.15s;
+    }
+    .lc-item:hover {
+      border-color: rgba(251,191,36,0.35);
+      color: var(--text);
+      background: rgba(251,191,36,0.04);
+    }
+    .lc-num {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--dim);
+      min-width: 36px;
+    }
+
+    /* ── FOOTER QUOTE ── */
+    .footer-quote {
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      background: var(--card);
+      font-style: italic;
+      color: var(--muted);
+    }
+    .footer-quote strong { color: var(--accent); font-style: normal; }
+    .footer-meta {
+      margin-top: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--dim);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp 0.5s ease both; }
+    .container > * { animation: fadeUp 0.5s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://www.pavanxdcl.in/index.html">⚡ pavanxdcl</a>
+  <span class="nav-badge">Rookie Rise</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">DSA Forge · Beginner Module</div>
+  <h1>Rookie Rise :<br><span>Beginner DSA Module</span></h1>
+  <p class="hero-sub">Pavan X Dhee Coding Lab · Java &amp; Python · Zero-Hero</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-dot"></span>100+ problems</div>
+    <div class="stat"><span class="stat-dot blue"></span>Live sessions</div>
+    <div class="stat"><span class="stat-dot green"></span>Java &amp; Python</div>
+  </div>
+</div>
+
+<!-- QUICK NAV -->
+<div class="quick-nav">
+  <a class="qn-btn" href="#goodtoknow">📘 Good to Know</a>
+  <a class="qn-btn" href="#patterns">⭐ Patterns</a>
+  <a class="qn-btn" href="#arraylist">📌 ArrayList</a>
+  <a class="qn-btn" href="#hashmap">🗺️ HashMap</a>
+  <a class="qn-btn" href="#twopointers">🔄 Two Pointers</a>
+  <a class="qn-btn" href="#stack">📚 Stack</a>
+  <a class="qn-btn" href="#linkedlist">🔗 LinkedList</a>
+  <a class="qn-btn" href="#leetcode">⚡ LeetCode</a>
+</div>
+
+<div class="container">
+
+  <!-- GOOD TO KNOW -->
+  <div id="goodtoknow" class="section-header">
+    <span class="section-icon">📖</span>
+    <h2>Good to Know</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="goodtoknow-grid">
+    <div class="gk-card">
+      <div class="gk-lang">☕ Java</div>
+      <div style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem;">Crash Course + Collections CheatSheet</div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/UeI4xAn8NLQ" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="/images/javasheet.png" target="_blank">⬇ CheatSheet</a>
+      </div>
+    </div>
+    <div class="gk-card">
+      <div class="gk-lang">🐍 Python</div>
+      <div style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem;">Core DSA + Collections CheatSheet</div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/mdlbz025jkA" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="/images/pythonsheet.png" target="_blank">⬇ CheatSheet</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATTERN PROGRAMMING -->
+  <div id="patterns" class="section-header">
+    <span class="section-icon">⭐</span>
+    <h2>Pattern Programming</h2>
+    <div class="section-line"></div>
+    <span class="section-count">Beginner DSA</span>
+  </div>
+  <div class="resource-list">
+    <div class="resource-item">
+      <div class="resource-label"><strong>Pattern-1</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/f1IVU3mKvv8" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1niaekpgZB60z-PXDVEVlcrdS7_Z2sYMblH0F-gnf3d4/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Pattern-2</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/ppmBHL1a7YM" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1RjJvfKmbQUDwlVWIAey5X75_rlItXTWYqY7Zg87odKk/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Pattern-3</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/Dk4Iua3V5K8" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1TaTZ9AnzBv2oI_TB0uE-SIlVh8aCjo3-axfeQN6MJVo/edit?usp=sharing" target="_blank">📄 Doc</a>
+        <a class="btn btn-ext" href="https://www.hackerrank.com/challenges/printing-pattern-2/problem" target="_blank">HackerRank</a>
+        <a class="btn btn-ext" href="https://www.geeksforgeeks.org/problems/pattern/1" target="_blank">GFG</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Pattern-4 Finale</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/c-effdypJhI" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1Qh65dI8p0SmOVZQi7yHrDasJMVGITfcBmKzQGnW94Uc/edit?usp=sharing" target="_blank">📄 Doc</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1Y0UZG4tWEh26-GcBr1nvxoaoJZ4vg0bsn80tTPYryQc/edit?usp=sharing" target="_blank">📄 All Patterns Notes</a>
+      
+      
+      </div>
+    </div>
+  </div>
+  <div class="practice-row" style="margin-top:0.5rem;border-radius:10px;">
+    <span style="font-size:0.75rem;color:var(--dim);margin-right:0.25rem;">🎯 Solve all:</span>
+    <a class="practice-pill" href="https://prepinsta.com/pattern-programs-tutorial/" target="_blank">PrepInsta</a>
+    <a class="practice-pill" href="https://pynative.com/print-pattern-python-examples/" target="_blank">PyNative</a>
+  </div>
+
+  <!-- ARRAYLIST -->
+  <div id="arraylist" class="section-header">
+    <span class="section-icon">📌</span>
+    <h2>ArrayList (Java) / List (Python)</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="resource-list">
+
+    <div class="resource-item">
+      <div class="resource-label"><strong>Intro Part 1</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/KaDtZsyDsXc" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/16Jz3nenvEhpKn-cgu6C07zKuN5C-j1UN4ulfjXIpZ90/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Intro Part 2</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/Hgr_Py6nXnA" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/16Jz3nenvEhpKn-cgu6C07zKuN5C-j1UN4ulfjXIpZ90/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Prefix Sum Array</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/PnIOEPDATjw" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1X2xRCUPv3CNzHgBr7kpBVwsLhVMhVtu3WmCTLNuvsGk/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="practice-row">
+      <a class="practice-pill" href="https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true" target="_blank">Simple Array Sum</a>
+      <a class="practice-pill" href="https://www.hackerrank.com/challenges/a-very-big-sum/problem" target="_blank">Very Big Sum</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/running-sum-of-1d-array/" target="_blank">Running Sum</a>
+    </div>
+
+    <div class="resource-item">
+      <div class="resource-label"><strong>Nested List + HackerRank</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/Wg834zAVliw" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1rm2SbVoUAVapYgnWmDw6myH7cnSBirBCtIZ_HXpE4_E/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="practice-row">
+      <a class="practice-pill" href="https://www.hackerrank.com/challenges/mini-max-sum/problem" target="_blank">Mini-Max Sum</a>
+      <a class="practice-pill" href="https://www.hackerrank.com/challenges/staircase/problem" target="_blank">Staircase</a>
+      <a class="practice-pill" href="https://www.hackerrank.com/challenges/diagonal-difference/problem" target="_blank">Diagonal Diff</a>
+    </div>
+
+    <div class="resource-item">
+      <div class="resource-label"><strong>Brute Force &amp; Subarrays</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/-WK9WPhuKB4" target="_blank">▶ Two Sum BF</a>
+        <a class="btn btn-rec" href="https://youtu.be/XzK5_8cMA6g" target="_blank">▶ SubArrays BF</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/two-sum/" target="_blank">Two Sum</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Merge Strings Alternately</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/mI6v-1LUL9s" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/merge-strings-alternately/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/merge-strings-alternately/submissions/1957916511" target="_blank">Solution</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Product of Array Except Self</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://drive.google.com/file/d/1dkhKX2lxF0qyVHbAeaoXMZPWVXnR2dMY/view?usp=sharing" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/product-of-array-except-self/submissions/1961033405" target="_blank">Solution</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Increasing Triplet Subsequence</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=KhvpFHlzc1c&t=520s" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/increasing-triplet-subsequence/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/increasing-triplet-subsequence/submissions/1948171683" target="_blank">Solution</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Can Place Flowers</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/XO2hTYkghVk" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/can-place-flowers/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/can-place-flowers/submissions/1957946761" target="_blank">Solution</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HASHMAP -->
+  <div id="hashmap" class="section-header">
+    <span class="section-icon">🗺️</span>
+    <h2>HashMap (Java) / Dictionary (Python)</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="resource-list">
+    <div class="resource-item">
+      <div class="resource-label"><strong>Intro + Methods</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=7_x9WjVZVNA" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Frequency HashMap</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=t2wxEHMbs_A&t=306s" target="_blank">▶ Java</a>
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=bdJI_l7yF8E" target="_blank">▶ Python</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Identify Duplicates</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/zHdxch6g0cc" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1kDBgMlPgJ1I-RLgi-TPwjdLeMboYAvLTeuTJadnEkfE/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="practice-row">
+      <a class="practice-pill" href="https://leetcode.com/problems/contains-duplicate/" target="_blank">Contains Duplicate</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank">Find Duplicate</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank">All Duplicates</a>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>HashMap + Prefix Sum (SubArray Sum = k)</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/dtCHBS5wZZg" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1_5w3ZumaLnDJEAdu4lnPoIz1ZA25_4I8QTpaH0W_3ZY/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Remove Duplicates</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/c4dXRQ7UYKs" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/18jYKkavSQcEdKyVMy9u0AfsdyQOPat-d7MzOoMLfMa0/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Strings Frequency HashMap</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/MA0u-7THJng" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Kadane's Algorithm 🔥</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/1RYQw8kEx_U" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1oNzgELbh-Ayw8jqbho4hTomLUbpVkcse2kbQR3LmLWI/edit?usp=sharing" target="_blank">📄 Doc</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/maximum-subarray/" target="_blank">Max Subarray</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Longest SubArray (same begin/end)</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/cYQkFfHVOtc" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1qhw3nUm4obgM2rL14nilEPTXsBbsJ25NVh-KrXc26kQ/edit?usp=sharing" target="_blank">📄 Doc</a>
+        <a class="btn btn-ext" href="https://www.geeksforgeeks.org/problems/subarray-sum--111254/1" target="_blank">GFG</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Time Complexity</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/uNmm0cXZ5ok" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/13zPxfAbsm5SwAtQ37C-SldrkuQrZ4yrjq2h_MwWx3hI/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Two Sum O(n) Optimisation</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/V4PSb5zUPYI" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1_P4M3WE1ZIcx8q4emFHLMTo_6tqjFjDiM_pwifF-7Bc/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Subarray XOR == 0</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=rvtyKzlsK8g" target="_blank">▶ Recording</a>
+        <a class="btn btn-doc" href="https://docs.google.com/document/d/1IBL6n34K5DTwMtiU6EKFG5LJyIQPGujoQKGLVVqYvjs/edit?usp=sharing" target="_blank">📄 Doc</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Isomorphic Strings</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/T3B0oI0K8IE" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Best Time to Buy and Sell Stocks</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/lma6H8YdVAY" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>HashMap Module (Collection)</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/AbTdBb_iwAk" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="practice-row">
+      <a class="practice-pill" href="https://leetcode.com/problems/contains-duplicate/" target="_blank">Contains Duplicate</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/valid-anagram/" target="_blank">Valid Anagram</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank">All Duplicates</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank">Duplicate Number</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/two-sum/" target="_blank">Two Sum</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/majority-element/" target="_blank">Majority Element</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/first-unique-character-in-a-string/" target="_blank">First Unique Char</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/unique-number-of-occurrences/" target="_blank">Unique Occurrences</a>
+      <a class="practice-pill" href="https://leetcode.com/problems/isomorphic-strings/" target="_blank">Isomorphic Strings</a>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Group Anagrams</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=Ac8DWNmrbyQ" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Happy Number</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=Gjc-40Ilhh0" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Subarrays with k Unique Values (HashMap + Two Pointers)</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/l-5Tejq6rVg" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO POINTERS -->
+  <div id="twopointers" class="section-header">
+    <span class="section-icon">🔄</span>
+    <h2>Two Pointers</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="resource-list">
+    <div class="resource-item">
+      <div class="resource-label"><strong>Intro + Two Pointers</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/ASU4tsD80IA" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>3Sum + Intersection of 2 Arrays</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/_9TNPk_mEOU" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>4Sum</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://www.youtube.com/watch?v=Ji4NRa9ctcE&t=299s" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Reverse Vowels of a String</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/W_CFCfh2tWs" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/reverse-vowels-of-a-string/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/reverse-vowels-of-a-string/submissions/1959027795" target="_blank">Solution</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Is Subsequence</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/eKYMYeB5OuA" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/is-subsequence/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/is-subsequence/submissions/1959043625" target="_blank">Solution</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STACK -->
+  <div id="stack" class="section-header">
+    <span class="section-icon">📚</span>
+    <h2>Stack</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="resource-list">
+    <div class="resource-item">
+      <div class="resource-label"><strong>Introduction to Stack</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/Fg5LwtS4cSM" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Valid Parentheses [LeetCode]</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/NWm2mkkFDQU" target="_blank">▶ Recording</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/valid-parentheses/submissions/1947159048" target="_blank">🐍 Python</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/valid-parentheses/submissions/1947168606" target="_blank">☕ Java</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKEDLIST -->
+  <div id="linkedlist" class="section-header">
+    <span class="section-icon">🔗</span>
+    <h2>LinkedList</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="resource-list">
+    <div class="resource-item">
+      <div class="resource-label"><strong>Intro to LinkedList</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/gazPXgakwrw" target="_blank">▶ Recording</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Linked List Cycle</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/5fB3Nt2TfGA" target="_blank">▶ Recording</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/linked-list-cycle/submissions/1951271908" target="_blank">🐍 Python</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/linked-list-cycle/submissions/1951269044" target="_blank">☕ Java</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Sort List</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/krjmsU-MDb4" target="_blank">▶ Recording</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/sort-list/submissions/1951300970" target="_blank">🐍 Python</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/sort-list/submissions/1951298088" target="_blank">☕ Java</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Middle of the Linked List</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/A5EQyA_AIUQ" target="_blank">▶ Recording</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/middle-of-the-linked-list/submissions/1951325083" target="_blank">🐍 Python</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/middle-of-the-linked-list/submissions/1951320345" target="_blank">☕ Java</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Odd Even Linked List</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://youtu.be/BSpmdh5QE68" target="_blank">▶ Recording</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/odd-even-linked-list/submissions/1951336762" target="_blank">🐍 Python</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/odd-even-linked-list/submissions/1951334368" target="_blank">☕ Java</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Remove LinkedList Elements</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://drive.google.com/file/d/1RokGB9x1YXMSCRmAviKiPchH9DvH0Jwx/view?usp=sharing" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/remove-linked-list-elements/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/remove-linked-list-elements/submissions/1961959891" target="_blank">☕ Java</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/remove-linked-list-elements/submissions/1961955250" target="_blank">🐍 Python</a>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-label"><strong>Delete the Middle Node of a Linked List</strong></div>
+      <div class="resource-links">
+        <a class="btn btn-rec" href="https://drive.google.com/file/d/1j2BkXd4QnUX8gSTUK7UjYEHl9T_CluEJ/view?usp=sharing" target="_blank">▶ Recording</a>
+        <a class="btn btn-lc" href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/" target="_blank">Try It</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/submissions/1961979859" target="_blank">☕ Java</a>
+        <a class="btn btn-sol" href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/submissions/1961986192" target="_blank">🐍 Python</a>
+      </div>
+    </div>
+  </div>
+
+ 
+  <!-- FOOTER QUOTE -->
+  <div class="footer-quote">
+    "No one remembers the one who gave up" — Keep grinding DSA with Java &amp; Python 🐍☕
+    <div class="footer-meta">📌 Live sessions every week · All resources &amp; homework updated · <a href="https://www.pavanxdcl.in/index.html" style="color:var(--accent);text-decoration:none;">pavanxdcl.in</a></div>
+  </div>
+
+</div><!-- /container -->
+
+</body>
+</html>
