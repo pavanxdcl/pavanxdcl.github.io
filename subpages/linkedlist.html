@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PavanXDCL | Linked List DSA</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:#08090d;color:#f5f5f5;line-height:1.6}
+:root{--card:#11131a;--card2:#171923;--border:#292c38;--muted:#9297a7;--a:#8b5cf6;--a2:#a78bfa;--green:#22c55e}
+nav{height:70px;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:#08090de8;backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.logo{font-size:22px;font-weight:800}.logo span{color:var(--a2)}nav ul{display:flex;gap:23px;list-style:none}nav a{color:#aaa;text-decoration:none;font-size:14px}nav a:hover{color:#fff}
+.hero{min-height:600px;display:grid;place-items:center;text-align:center;padding:80px 20px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;width:650px;height:650px;background:#7c3aed;opacity:.13;filter:blur(150px);border-radius:50%}.hero>div{position:relative;max-width:900px}
+.badge{display:inline-block;padding:7px 14px;border:1px solid #44326e;background:#171126;color:#bda9ff;border-radius:30px;font-size:13px;margin-bottom:22px}.hero h1{font-size:clamp(45px,7vw,80px);line-height:1;letter-spacing:-4px}.hero h1 span{color:var(--a2)}.hero p{max-width:720px;margin:25px auto 0;color:var(--muted);font-size:18px}
+.buttons{margin-top:32px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.btn{padding:13px 21px;border-radius:9px;text-decoration:none;font-weight:700;font-size:14px}.primary{background:var(--a);color:#fff}.secondary{border:1px solid var(--border);color:#fff}
+.container{max-width:1150px;margin:auto;padding:75px 25px}.title{margin-bottom:35px}.title small{color:var(--a2);font-weight:800;letter-spacing:2px}.title h2{font-size:38px;margin-top:6px}.title p{color:var(--muted);margin-top:7px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card,.sim,.q,.practice-card,.video-card{background:var(--card);border:1px solid var(--border);border-radius:15px}.card{padding:25px}.icon{width:45px;height:45px;border-radius:10px;background:#1b1630;color:var(--a2);display:grid;place-items:center;font-size:20px;margin-bottom:17px}.card h3{margin-bottom:9px}.card p,.practice-card p,.video-info p{color:var(--muted);font-size:14px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}th,td{padding:15px;border-bottom:1px solid var(--border);text-align:left}th{color:var(--a2)}td{color:#bbb}.good{color:var(--green)!important}
+.flow,.sim{padding:30px}.flow{background:var(--card);border:1px solid var(--border);border-radius:18px}.flowrow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:18px;align-items:center}.box{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center}.box strong{display:block;font-size:20px}.box span{color:var(--muted);font-size:13px}.arrow{color:var(--a2);font-size:25px}
+.array{display:flex;gap:9px;overflow:auto;margin-top:28px;padding-bottom:8px}.cell{min-width:100px;height:92px;border:1px solid var(--border);border-radius:9px;background:#0c0d12;padding:8px}.idx{font-size:10px;color:#666}.val{text-align:center;margin-top:17px;color:#c4b5fd;font-weight:700}.empty .val{color:#444}.note{margin-top:14px;color:#888;font-size:13px}.note b{color:#c4b5fd}
+.ops{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.op{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}.op b{display:block;color:var(--a2);margin-bottom:7px}.op p{color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:8px;margin-bottom:14px}.tab{background:var(--card);border:1px solid var(--border);color:#aaa;padding:8px 15px;border-radius:7px;cursor:pointer}.tab.active{background:var(--a);color:#fff}.codebox{background:#0c0d12;border:1px solid var(--border);border-radius:14px;overflow:hidden}.codehead{padding:13px 18px;border-bottom:1px solid var(--border);color:#999;font-size:13px}pre{padding:22px;overflow:auto;font-family:Consolas,monospace;font-size:14px;color:#d4d4d8}
+.sim{background:var(--card);border:1px solid var(--border);border-radius:18px}.controls{display:flex;gap:10px;flex-wrap:wrap}input{background:#0c0d12;border:1px solid var(--border);color:#fff;padding:12px;border-radius:8px;outline:none}.controls button{padding:12px 18px;border:0;border-radius:8px;background:var(--a);color:#fff;font-weight:700;cursor:pointer}.controls button.alt{background:#20222d}.stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:17px;color:#999;font-size:13px}.stats b{color:#c4b5fd}.simarray{display:flex;gap:8px;overflow:auto;margin-top:24px}.simcell{min-width:75px;height:82px;background:#0c0d12;border:1px solid var(--border);border-radius:8px;text-align:center;padding:7px}.simcell .sidx{font-size:10px;color:#666}.simcell .sval{margin-top:16px;color:#c4b5fd;font-weight:700}.free{border-style:dashed}.free .sval{color:#444}
+.practice{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.practice-card{padding:22px}.num{color:var(--a2);font-size:12px;font-weight:800}.practice-card h3{margin:8px 0}
+.q{padding:19px;margin-bottom:12px;cursor:pointer}.q h3{font-size:16px}.ans{display:none;color:var(--muted);font-size:14px;margin-top:10px}.q.open .ans{display:block}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.video-card{display:block;color:#fff;text-decoration:none;overflow:hidden;transition:.2s}.video-card:hover{transform:translateY(-4px);border-color:#57428f}.thumb{height:160px;background:radial-gradient(circle,#31205e,#171126 45%,#0c0d12);display:grid;place-items:center;position:relative}.thumb:after{content:"ARRAY";position:absolute;font-size:46px;font-weight:900;opacity:.08}.play{width:54px;height:54px;border-radius:50%;background:var(--a);display:grid;place-items:center;position:relative;z-index:2}.video-info{padding:19px}.video-info span{font-size:10px;color:var(--a2);font-weight:800;letter-spacing:1.5px}.video-info h3{margin:7px 0}
+footer{text-align:center;border-top:1px solid var(--border);padding:40px;color:#666}footer strong{color:var(--a2)}
+@media(max-width:850px){.grid,.practice,.video-grid{grid-template-columns:1fr 1fr}.ops{grid-template-columns:1fr 1fr}.flowrow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}}
+@media(max-width:600px){nav ul{display:none}.grid,.practice,.video-grid,.ops{grid-template-columns:1fr}.hero h1{letter-spacing:-2px}}
+
+.ll-flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px}
+.ll-node{min-width:120px;background:#0c0d12;border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.ll-node strong{display:block;color:#c4b5fd;font-size:18px}.ll-node span{font-size:11px;color:#777}
+.ll-arrow{font-size:22px;color:#8b5cf6}
+.formula{font-family:Consolas,monospace;color:#c4b5fd;background:#0b0c10;border:1px solid var(--border);padding:14px 18px;border-radius:9px;margin-top:14px}
+.video-grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:850px){.video-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.video-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><nav><a href="https://www.pavanxdcl.in"><div class="logo">Pavan<span>XDCL</span></div></a><ul>
+<li><a href="#learn">Learn</a></li>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#types">Types</a></li>
+<li><a href="#operations">Operations</a></li>
+<li><a href="#complexity">Complexity</a></li>
+<li><a href="#problems">Practice</a></li>
+<li><a href="#videos">Videos</a></li>
+</ul></nav><section class="hero"><div>
+<div class="badge">PAVANXDCL • DSA FOUNDATION</div>
+<h1>Master <span>LinkedList</span></h1>
+<p>Solve the problems to Revise all the topics done so far.</p>
+<div class="buttons">
+<a class="btn primary" href="#learn">Start Learning</a>
+<a class="btn secondary" href="#videos">Watch Videos</a>
+</div>
+</div></section>
+<section id="learn" class="container">
+<div class="title"><small>01 — FOUNDATION</small><h2>What is a Linked List?</h2>
+<p>A Linked List is a linear data structure made of nodes. Each node stores data and a link to another node.</p></div>
+<div class="grid">
+<div class="card"><div class="icon">●</div><h3>Node</h3><p>A node contains the data and the link needed to connect it to another node.</p></div>
+<div class="card"><div class="icon">→</div><h3>Connection</h3><p>Nodes are connected using links, forming a sequence.</p></div>
+<div class="card"><div class="icon">↔</div><h3>Flexible Size</h3><p>Nodes can be added or removed without requiring a continuous block of memory.</p></div>
+</div>
+</section>
+
+<section id="structure" class="container">
+<div class="title"><small>02 — STRUCTURE</small><h2>How a Linked List Looks</h2>
+<p>Each node stores a value and a link to the next node. The first node is reached through the head.</p></div>
+<div class="ll-flow">
+<div class="ll-node"><strong>HEAD</strong><span>points to first node</span></div>
+<div class="ll-arrow">→</div>
+<div class="ll-node"><strong>10</strong><span>next →</span></div>
+<div class="ll-arrow">→</div>
+<div class="ll-node"><strong>20</strong><span>next →</span></div>
+<div class="ll-arrow">→</div>
+<div class="ll-node"><strong>30</strong><span>next → NULL</span></div>
+</div>
+<div class="formula">Node = data + link to the next node</div>
+</section>
+
+<section class="container">
+<div class="title"><small>03 — NODE</small><h2>Understanding a Node</h2></div>
+<div class="grid">
+<div class="card"><h3>Data</h3><p>The value stored inside the node.</p></div>
+<div class="card"><h3>Next</h3><p>The link that points to the next node.</p></div>
+<div class="card"><h3>Head</h3><p>A pointer or reference used to access the first node.</p></div>
+<div class="card"><h3>NULL</h3><p>The final node points to NULL, indicating the end of the list.</p></div>
+</div>
+</section>
+
+<section id="types" class="container">
+<div class="title"><small>04 — TYPES</small><h2>Types of Linked Lists</h2></div>
+<div class="grid">
+<div class="card"><h3>Singly Linked List</h3><p>Each node points only to the next node.</p></div>
+<div class="card"><h3>Doubly Linked List</h3><p>Each node contains links to both the previous and next nodes.</p></div>
+<div class="card"><h3>Circular Linked List</h3><p>The last node links back to the first node instead of pointing to NULL.</p></div>
+</div>
+</section>
+
+<section id="operations" class="container">
+<div class="title"><small>05 — OPERATIONS</small><h2>Important Operations</h2>
+<p>Most Linked List problems are built around a few fundamental operations.</p></div>
+<div class="ops">
+<div class="op"><b>Traversal</b><p>Visit nodes one by one from the head.</p></div>
+<div class="op"><b>Insertion</b><p>Add a new node at a required position.</p></div>
+<div class="op"><b>Deletion</b><p>Remove a node by changing the required links.</p></div>
+<div class="op"><b>Search</b><p>Traverse the list to find a required value.</p></div>
+</div>
+</section>
+
+<section class="container">
+<div class="title"><small>06 — INSERTION</small><h2>Insertion Step by Step</h2>
+<p>To insert a node, connect the new node to the correct part of the list and update the surrounding link.</p></div>
+<div class="flow"><div class="flowrow">
+<div class="box"><strong>10 → 30</strong><span>Original list</span></div><div class="arrow">→</div>
+<div class="box"><strong>Insert 20</strong><span>Create a new node</span></div><div class="arrow">→</div>
+<div class="box"><strong>10 → 20 → 30</strong><span>Update links</span></div>
+</div></div>
+</section>
+
+<section class="container">
+<div class="title"><small>07 — DELETION</small><h2>Deletion Step by Step</h2>
+<p>Deletion usually means changing a link so that the unwanted node is skipped.</p></div>
+<div class="flow"><div class="flowrow">
+<div class="box"><strong>10 → 20 → 30</strong><span>Original list</span></div><div class="arrow">→</div>
+<div class="box"><strong>Remove 20</strong><span>Change the link</span></div><div class="arrow">→</div>
+<div class="box"><strong>10 → 30</strong><span>Updated list</span></div>
+</div></div>
+</section>
+
+<section id="complexity" class="container">
+<div class="title"><small>08 — COMPLEXITY</small><h2>Time Complexity</h2></div>
+<table>
+<tr><th>Operation</th><th>Singly Linked List</th><th>Reason</th></tr>
+<tr><td>Access by index</td><td class="good">O(n)</td><td>Nodes must be traversed</td></tr>
+<tr><td>Search</td><td class="good">O(n)</td><td>May need to visit every node</td></tr>
+<tr><td>Insert at head</td><td class="good">O(1)</td><td>Only head needs updating</td></tr>
+<tr><td>Delete at head</td><td class="good">O(1)</td><td>Move head to the next node</td></tr>
+<tr><td>Traverse</td><td class="good">O(n)</td><td>Visit each node</td></tr>
+</table>
+</section>
+
+<section class="container">
+<div class="title"><small>09 — APPLICATIONS</small><h2>Where Linked Lists Are Used</h2></div>
+<div class="grid">
+<div class="card"><h3>Dynamic Data</h3><p>Useful when elements are frequently inserted and removed.</p></div>
+<div class="card"><h3>Stacks & Queues</h3><p>Linked Lists can be used to implement these data structures.</p></div>
+<div class="card"><h3>Memory Management</h3><p>Linked structures are useful in systems where flexible allocation is needed.</p></div>
+<div class="card"><h3>Graph Representation</h3><p>Linked structures can help represent adjacency relationships.</p></div>
+</div>
+</section>
+
+<section id="problems" class="container">
+<div class="title"><small>10 — PRACTICE</small><h2>Important Linked List Problems</h2></div>
+<div class="practice">
+<div class="card practice-card"><span class="num">01</span><h3>Reverse a Linked List</h3><p>Reverse the direction of the links.</p></div>
+<div class="card practice-card"><span class="num">02</span><h3>Find Middle Node</h3><p>Use the slow and fast pointer technique.</p></div>
+<div class="card practice-card"><span class="num">03</span><h3>Detect a Cycle</h3><p>Use two pointers moving at different speeds.</p></div>
+<div class="card practice-card"><span class="num">04</span><h3>Merge Two Lists</h3><p>Combine two sorted Linked Lists.</p></div>
+<div class="card practice-card"><span class="num">05</span><h3>Remove Nth Node</h3><p>Use two pointers to locate the required node.</p></div>
+<div class="card practice-card"><span class="num">06</span><h3>Palindrome List</h3><p>Check whether the list reads the same forward and backward.</p></div>
+</div>
+</section>
+
+<section class="container">
+<div class="title"><small>11 — CODE</small><h2>Simple Linked List Code</h2></div>
+<div class="tabs"><button class="tab active" onclick="showCode('cpp',this)">C++</button><button class="tab" onclick="showCode('java',this)">Java</button><button class="tab" onclick="showCode('python',this)">Python</button></div>
+<div class="codebox"><div class="codehead" id="codeTitle">C++ — linked list</div><pre id="code"></pre></div>
+</section>
+
+<section id="videos" class="container">
+<div class="title"><small>12 — VIDEO LEARNING</small><h2>Watch Videos</h2><p>Learn Linked List concepts through visual explanations.</p></div>
+<div class="video-grid">
+<a href="https://www.youtube.com/watch?v=gazPXgakwrw&feature=youtu.be" target="_blank" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>BEGINNER</span><h3>Intro to LinkedList</h3><p>Understand nodes, links and the head.</p></div></a>
+<a href="https://www.youtube.com/watch?v=5fB3Nt2TfGA&feature=youtu.be" target="_blank" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>CONCEPT</span><h3>Linked List Cycle</h3><p>Learn how links change during updates.</p></div></a>
+<a href="https://www.youtube.com/watch?v=krjmsU-MDb4&feature=youtu.be" target="_blank" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>IMPORTANT</span><h3>Sort List</h3><p>Practice common interview patterns.</p></div></a>
+<a href="https://www.youtube.com/watch?v=A5EQyA_AIUQ&feature=youtu.be" target="_blank" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>PROBLEM</span><h3>Middle of the Linked List</h3><p>Practice common interview patterns.</p></div></a>
+<a href="https://www.youtube.com/watch?v=BSpmdh5QE68&feature=youtu.be" target="_blank" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>DSA PATTERN</span><h3>Odd Even LinkedList</h3><p>Practice common interview patterns..</p></div></a>
+<a href="https://drive.google.com/file/d/1RokGB9x1YXMSCRmAviKiPchH9DvH0Jwx/view" target="_blank" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>INTERVIEW</span><h3>Remove LinkedList Elements</h3><p>Practice common interview patterns.</p></div></a>
+<a href="https://drive.google.com/file/d/1j2BkXd4QnUX8gSTUK7UjYEHl9T_CluEJ/view" target="_blank" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>INTERVIEW</span><h3>Delete the Middle Node of a Linked List</h3><p>Practice common interview patterns.</p></div></a>
+
+</div>
+</section>
+
+<footer><p><strong>PavanXDCL</strong> • Linked List • Learn → Visualize → Code → Practice</p></footer>
+<script>
+const codes={
+cpp:`#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
+
+int main() {
+    Node* head = new Node(10);
+    head->next = new Node(20);
+    head->next->next = new Node(30);
+
+    Node* cur = head;
+    while (cur != nullptr) {
+        cout << cur->data << " ";
+        cur = cur->next;
+    }
+}`,
+java:`class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Node head = new Node(10);
+        head.next = new Node(20);
+        head.next.next = new Node(30);
+
+        Node cur = head;
+        while (cur != null) {
+            System.out.print(cur.data + " ");
+            cur = cur.next;
+        }
+    }
+}`,
+python:`class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+head = Node(10)
+head.next = Node(20)
+head.next.next = Node(30)
+
+cur = head
+while cur:
+    print(cur.data, end=" ")
+    cur = cur.next`
+};
+
+function showCode(lang,btn){
+    document.getElementById('code').textContent=codes[lang];
+    document.getElementById('codeTitle').textContent={
+        cpp:'C++ — linked list',
+        java:'Java — linked list',
+        python:'Python — linked list'
+    }[lang];
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+}
+showCode('cpp',document.querySelector('.tab'));
+</script>
+</body>
+</html>

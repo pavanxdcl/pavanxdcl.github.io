@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PavanXDSA | Stack DSA</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#09060f;--card:#120d1c;--card2:#171025;--border:#2b203d;
+  --text:#f7f3fc;--muted:#a79bb4;--purple:#8b5cf6;--light:#b99cff;
+}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.container{width:min(1000px,92%);margin:auto}
+header{padding:58px 0 38px;border-bottom:1px solid var(--border)}
+.badge{display:inline-block;color:var(--light);border:1px solid #4a3270;background:#171027;padding:5px 12px;border-radius:20px;font-size:12px;margin-bottom:18px}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.1;margin-bottom:14px}
+h1 span{color:var(--light)}
+header p{color:var(--muted);max-width:680px;font-size:16px}
+nav{position:sticky;top:0;background:rgba(9,6,15,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:5}
+.nav{display:flex;gap:8px;overflow:auto;padding:10px 0}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:7px 12px;border-radius:8px;font-size:13px}
+.nav a:hover{color:white;background:#1a1127}
+section{padding:48px 0}
+.section-head{margin-bottom:22px}
+.kicker{color:var(--light);font-size:12px;text-transform:uppercase;letter-spacing:1.5px}
+h2{font-size:30px;margin:5px 0 8px}
+h3{font-size:19px;margin-bottom:7px}
+.lead{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.term{color:var(--light);font-weight:700}
+ul,ol{padding-left:22px;color:var(--muted)}
+li{margin:7px 0}
+strong{color:#eee8f6}
+.example{border-left:3px solid var(--purple);background:#100a18;padding:16px 18px;border-radius:0 10px 10px 0;color:#c8bdd2;margin-top:14px}
+.stack-box{display:flex;flex-direction:column-reverse;align-items:center;gap:6px;margin:20px auto;max-width:260px}
+.stack-item{width:170px;text-align:center;padding:10px;background:#1a1228;border:1px solid #4a3470;border-radius:8px}
+.stack-item.top{background:linear-gradient(135deg,#8b5cf6,#6d35d5);color:white}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{text-align:left;padding:11px;border-bottom:1px solid var(--border)}
+th{color:var(--light);font-size:13px}
+td{color:var(--muted);font-size:14px}
+code{font-family:Consolas,monospace;color:#d7c8ff}
+pre{background:#0d0913;border:1px solid var(--border);padding:18px;border-radius:10px;overflow:auto;color:#d9cfff;font-size:13px;line-height:1.6}
+.note{background:#171025;border:1px solid #3a2a52;padding:15px;border-radius:10px;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:28px 0;color:#776c83;font-size:13px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}section{padding:36px 0}h2{font-size:25px}}
+
+/* ===== VIDEO SECTION — based on preview reference ===== */
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.video-card{
+  display:block;
+  text-decoration:none;
+  color:white;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  overflow:hidden;
+  transition:.25s;
+}
+.video-card:hover{
+  transform:translateY(-5px);
+  border-color:#57428f;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+.video-thumbnail{
+  height:170px;
+  background:radial-gradient(circle at center,#31205e 0%,#171126 45%,#0c0d12 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.video-thumbnail:after{
+  content:"STACK";
+  position:absolute;
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:-2px;
+  opacity:.08;
+}
+.play-button{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:var(--purple);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  padding-left:3px;
+  position:relative;
+  z-index:2;
+  box-shadow:0 10px 30px #0008;
+  transition:.2s;
+}
+.video-card:hover .play-button{transform:scale(1.1)}
+.video-info{padding:20px}
+.video-info span{
+  font-size:10px;
+  font-weight:800;
+  color:var(--light);
+  letter-spacing:1.5px;
+}
+.video-info h3{margin-top:7px;margin-bottom:7px;font-size:17px}
+.video-info p{color:var(--muted);font-size:13px;line-height:1.5}
+@media(max-width:850px){.video-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.video-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+  <div class="badge">PavanXDSA • DSA THEORY</div>
+  <h1>Learn <span>Stack</span> Easily</h1>
+  <p>A beginner-friendly theory-first guide to the Stack data structure: its idea, operations, implementation, applications, complexity and common problem patterns.</p>
+</div>
+</header>
+
+<nav>
+<div class="container nav">
+<a href="#intro">Introduction</a><a href="#principle">LIFO</a><a href="#operations">Operations</a>
+<a href="#implementation">Implementation</a><a href="#applications">Applications</a><a href="#complexity">Complexity</a>
+<a href="#problems">Problems</a>
+</div>
+</nav>
+
+<main class="container">
+
+<section id="intro">
+<div class="section-head"><div class="kicker">01 • Basics</div><h2>What is a Stack?</h2></div>
+<div class="card">
+<p>A <span class="term">Stack</span> is a linear data structure in which insertion and deletion are performed at one end, called the <strong>top</strong>.</p>
+<p style="margin-top:10px">The element inserted most recently is the first element removed. This behavior is called <strong>LIFO — Last In, First Out</strong>.</p>
+<div class="example"><strong>Real-life example:</strong> Think about a pile of plates. You normally place a new plate on top and remove the top plate first.</div>
+</div>
+</section>
+
+<section id="principle">
+<div class="section-head"><div class="kicker">02 • Core Idea</div><h2>LIFO — Last In, First Out</h2></div>
+<div class="card">
+<p>Suppose we insert <strong>10 → 20 → 30</strong>. The last inserted element, <strong>30</strong>, is at the top.</p>
+<div class="stack-box">
+  <div class="stack-item">10</div>
+  <div class="stack-item">20</div>
+  <div class="stack-item top">30 ← TOP</div>
+</div>
+<p class="lead">If we perform one deletion, 30 is removed first. Then 20 becomes the top.</p>
+</div>
+</section>
+
+<section id="operations">
+<div class="section-head"><div class="kicker">03 • Operations</div><h2>Basic Stack Operations</h2></div>
+<div class="grid">
+<div class="card"><h3>Push</h3><p>Adds an element to the top of the stack.</p><div class="example"><code>push(40)</code> places 40 above the current top.</div></div>
+<div class="card"><h3>Pop</h3><p>Removes and returns the element from the top.</p><div class="example"><code>pop()</code> removes the current top element.</div></div>
+<div class="card"><h3>Peek / Top</h3><p>Returns the top element without removing it.</p><div class="example"><code>peek()</code> or <code>top()</code> lets us see the top.</div></div>
+<div class="card"><h3>isEmpty</h3><p>Checks whether the stack contains any elements.</p><div class="example">Returns true when there is no element in the stack.</div></div>
+</div>
+<div class="note"><strong>Important:</strong> Stack operations are performed from the top. We do not normally insert or delete from the middle.</div>
+</section>
+
+<section id="implementation">
+<div class="section-head"><div class="kicker">04 • Implementation</div><h2>How Can We Implement a Stack?</h2></div>
+<div class="card">
+<p>A Stack can be implemented using an <strong>array</strong> or a <strong>linked list</strong>. The important idea is to keep track of the current top.</p>
+</div>
+<div class="grid">
+<div class="card"><h3>Using an Array</h3>
+<p>Store elements in an array and maintain an integer called <strong>top</strong>. Initially, top can be set to <code>-1</code> for an empty stack.</p>
+<ul><li>Push: increase top and place the element.</li><li>Pop: read the top element and decrease top.</li><li>Peek: read the element at top.</li></ul>
+</div>
+<div class="card"><h3>Using a Linked List</h3>
+<p>Use the head node as the top of the stack. New nodes are added at the beginning and removed from the beginning.</p>
+<ul><li>No fixed array size is required.</li><li>Push and pop can work at the head.</li></ul>
+</div>
+</div>
+</section>
+
+<section id="applications">
+<div class="section-head"><div class="kicker">05 • Applications</div><h2>Where Are Stacks Used?</h2></div>
+<div class="card">
+<ul>
+<li><strong>Function calls and recursion:</strong> function calls are managed using a call stack.</li>
+<li><strong>Balanced parentheses:</strong> useful for checking whether brackets are correctly matched.</li>
+<li><strong>Expression evaluation:</strong> stacks are used in infix, prefix and postfix expression processing.</li>
+<li><strong>Undo operations:</strong> previous actions can be stored so the latest action can be reversed first.</li>
+<li><strong>Backtracking:</strong> useful when we need to return to a previous state.</li>
+<li><strong>Depth First Search:</strong> DFS can be implemented using a stack.</li>
+<li><strong>Next Greater Element and Stock Span:</strong> stack-based techniques are common in array problems.</li>
+</ul>
+</div>
+</section>
+
+<section id="complexity">
+<div class="section-head"><div class="kicker">06 • Complexity</div><h2>Time Complexity</h2></div>
+<div class="card">
+<table>
+<tr><th>Operation</th><th>Typical Time</th><th>What it does</th></tr>
+<tr><td>Push</td><td>O(1)</td><td>Add at top</td></tr>
+<tr><td>Pop</td><td>O(1)</td><td>Remove from top</td></tr>
+<tr><td>Peek / Top</td><td>O(1)</td><td>Read top</td></tr>
+<tr><td>isEmpty</td><td>O(1)</td><td>Check whether empty</td></tr>
+</table>
+<p class="lead" style="margin-top:14px">These are the standard constant-time stack operations when the implementation supports direct access to the top.</p>
+</div>
+</section>
+
+<section>
+<div class="section-head"><div class="kicker">07 • Example</div><h2>Understand Push and Pop</h2></div>
+<div class="card">
+<p>Start with an empty stack.</p>
+<div class="example"><strong>Push 10</strong> → [10]</div>
+<div class="example"><strong>Push 20</strong> → [10, 20]</div>
+<div class="example"><strong>Push 30</strong> → [10, 20, 30]</div>
+<div class="example"><strong>Pop</strong> → removes 30 → [10, 20]</div>
+<div class="example"><strong>Peek</strong> → returns 20 without removing it</div>
+</div>
+</section>
+
+<section id="problems">
+<div class="section-head"><div class="kicker">08 • Practice</div><h2>Important Stack Problems</h2></div>
+<div class="card">
+<ol>
+<li>Balanced Parentheses</li>
+<li>Implement Two Stacks in an Array</li>
+<li>Next Greater Element</li>
+<li>Previous Greater Element</li>
+<li>Stock Span Problem</li>
+<li>Largest Rectangular Area in a Histogram</li>
+<li>Min Stack / Get Minimum in O(1)</li>
+<li>Infix to Postfix Conversion</li>
+<li>Postfix Expression Evaluation</li>
+</ol>
+</div>
+</section>
+
+<section>
+<div class="section-head"><div class="kicker">09 • Code</div><h2>Simple C++ Stack</h2></div>
+<div class="card">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+int main() {
+    stack&lt;int&gt; st;
+
+    st.push(10);
+    st.push(20);
+    st.push(30);
+
+    cout &lt;&lt; st.top() &lt;&lt; endl; // 30
+
+    st.pop();
+
+    cout &lt;&lt; st.top() &lt;&lt; endl; // 20
+
+    return 0;
+}</code></pre>
+</div>
+</section>
+
+<section>
+<div class="card">
+<h3>Quick Revision</h3>
+<ul>
+<li>Stack follows <strong>LIFO</strong>.</li>
+<li><strong>Top</strong> is the end where insertion and deletion happen.</li>
+<li><strong>Push</strong> adds an element.</li>
+<li><strong>Pop</strong> removes the top element.</li>
+<li><strong>Peek / Top</strong> reads the top element.</li>
+<li>Stacks can be implemented using arrays or linked lists.</li>
+<li>Stacks are useful in recursion, expressions, parentheses, DFS, undo and backtracking.</li>
+</ul>
+</div>
+</section>
+
+</main>
+
+
+<section id="videos">
+  <div class="section-head">
+    <div class="kicker">10 • Video Learning</div>
+    <h2>Watch Videos</h2>
+    <p class="lead">Learn Stack concepts through visual explanations.</p>
+  </div>
+
+  <div class="video-grid">
+
+    <a href="YOUR_VIDEO_LINK_1" target="_blank" class="video-card">
+      <div class="video-thumbnail"><div class="play-button">▶</div></div>
+      <div class="video-info">
+        <span>BEGINNER</span>
+        <h3>Stack Basics</h3>
+        <p>Understand what a Stack is, the LIFO principle and the role of the top.</p>
+      </div>
+    </a>
+
+    <a href="YOUR_VIDEO_LINK_2" target="_blank" class="video-card">
+      <div class="video-thumbnail"><div class="play-button">▶</div></div>
+      <div class="video-info">
+        <span>CONCEPT</span>
+        <h3>Push, Pop and Peek</h3>
+        <p>Learn the three most important Stack operations with simple examples.</p>
+      </div>
+    </a>
+
+    <a href="YOUR_VIDEO_LINK_3" target="_blank" class="video-card">
+      <div class="video-thumbnail"><div class="play-button">▶</div></div>
+      <div class="video-info">
+        <span>IMPORTANT</span>
+        <h3>Stack Implementation</h3>
+        <p>Understand how a Stack can be implemented using arrays and linked lists.</p>
+      </div>
+    </a>
+
+    <a href="YOUR_VIDEO_LINK_4" target="_blank" class="video-card">
+      <div class="video-thumbnail"><div class="play-button">▶</div></div>
+      <div class="video-info">
+        <span>PROBLEM SOLVING</span>
+        <h3>Balanced Parentheses</h3>
+        <p>Learn how Stack is used to check whether brackets are correctly matched.</p>
+      </div>
+    </a>
+
+    <a href="YOUR_VIDEO_LINK_5" target="_blank" class="video-card">
+      <div class="video-thumbnail"><div class="play-button">▶</div></div>
+      <div class="video-info">
+        <span>DSA PATTERN</span>
+        <h3>Next Greater Element</h3>
+        <p>Learn the Stack pattern used to solve Next Greater Element efficiently.</p>
+      </div>
+    </a>
+
+    <a href="YOUR_VIDEO_LINK_6" target="_blank" class="video-card">
+      <div class="video-thumbnail"><div class="play-button">▶</div></div>
+      <div class="video-info">
+        <span>INTERVIEW</span>
+        <h3>Important Stack Problems</h3>
+        <p>Practice common Stack problems such as Stock Span, Min Stack and histogram area.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+<div class="container">PavanXDSA • Stack DSA Theory</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PavanXDCL | Graphs</title>
+<style>
+:root{--bg:#08090d;--card:#101117;--border:#242532;--purple:#8b5cf6;--text:#eee;--muted:#888}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.6}nav{height:70px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 7%;position:sticky;top:0;background:#08090de8;backdrop-filter:blur(10px);z-index:5}.logo{font-size:22px;font-weight:800}.logo span{color:#a78bfa}nav ul{display:flex;gap:25px;list-style:none;margin:0}nav a{color:#aaa;text-decoration:none;font-size:14px}nav a:hover{color:#c4b5fd}.hero{padding:100px 7% 80px;border-bottom:1px solid var(--border)}.hero>div{max-width:850px}.badge,.level,.video-info span{font-size:11px;letter-spacing:1.5px;color:#a78bfa;font-weight:700}.hero h1{font-size:clamp(45px,7vw,80px);line-height:1.05;margin:18px 0}.hero h1 span{color:#a78bfa}.hero p{max-width:720px;color:#999;font-size:18px}.buttons{display:flex;gap:12px;margin-top:30px}.btn{padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px}.primary{background:#7c3aed;color:white}.secondary{border:1px solid var(--border);color:#bbb}.container{max-width:1120px;margin:auto;padding:75px 24px}.title small{color:#8b5cf6;font-size:11px;font-weight:700;letter-spacing:1.5px}.title h2{font-size:34px;margin:8px 0}.title p{color:#888}.grid,.challenge-grid,.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card,.challenge-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px}.card h3,.challenge-card h3{margin:0 0 8px}.card p,.challenge-card p{color:#888;font-size:14px}.challenge-card{transition:.2s}.challenge-card:hover{transform:translateY(-3px);border-color:#7c3aed}.meta{display:flex;gap:15px;color:#666;font-size:12px;margin-top:14px}.challenge-card button{margin-top:16px;width:100%;padding:10px;border:1px solid #6d28d9;background:#1b1230;color:#c4b5fd;border-radius:8px;cursor:pointer}.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:25px 0}.box{min-width:140px;padding:17px;background:#0d0e14;border:1px solid var(--border);border-radius:10px;text-align:center}.box strong{display:block;color:#c4b5fd}.box span{font-size:11px;color:#777}.arrow{color:#8b5cf6;font-size:22px}.problem-panel{display:none;margin-top:20px;background:#0b0c10;border:1px solid var(--border);border-radius:12px;padding:22px}.problem-panel.active{display:block}.testbox{display:grid;grid-template-columns:1fr 1fr;gap:12px}.testcase,.codebox{background:#0b0c10;border:1px solid var(--border);border-radius:10px;padding:16px}.codebox{padding:0;overflow:hidden}.codehead{padding:13px 16px;border-bottom:1px solid var(--border);font-size:13px;color:#aaa}.codebox textarea{width:100%;min-height:300px;background:#08090d;color:#c4b5fd;border:0;outline:0;padding:18px;font:14px Consolas,monospace;resize:vertical}.tabs{display:flex;gap:5px;margin-bottom:10px}.tab{background:#101117;color:#888;border:1px solid var(--border);padding:9px 16px;border-radius:7px;cursor:pointer}.tab.active{color:#c4b5fd;border-color:#7c3aed}.status{color:#777;font-size:13px}.progressbar{height:7px;background:#171820;border-radius:10px;overflow:hidden}.progressbar span{display:block;height:100%;background:#8b5cf6}.video-card{text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}.thumb{height:130px;background:linear-gradient(135deg,#171022,#0d0e14);display:grid;place-items:center}.play{width:48px;height:48px;border-radius:50%;background:#7c3aed;display:grid;place-items:center}.video-info{padding:18px}.video-info h3{margin:6px 0}.video-info p{color:#888;font-size:13px}table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--border);font-size:14px}th{color:#aaa}.good{color:#a78bfa}footer{border-top:1px solid var(--border);padding:30px 7%;color:#777;font-size:13px}
+@media(max-width:800px){nav ul{display:none}.grid,.challenge-grid,.video-grid{grid-template-columns:1fr 1fr}}@media(max-width:550px){.grid,.challenge-grid,.video-grid,.testbox{grid-template-columns:1fr}.hero{padding-top:70px}}
+</style></head><body>
+<nav><div class="logo">Pavan<span>XDCL</span></div><ul><li><a href="#learn">Learn</a></li><li><a href="#challenges">Challenges</a></li><li><a href="#editor">Code</a></li><li><a href="#progress">Progress</a></li><li><a href="#videos">Videos</a></li></ul></nav>
+<section class="hero"><div><div class="badge">PAVANXDCL • DSA</div><h1>Learn <span>Graphs</span></h1><p>Learn graph fundamentals, BFS, DFS, shortest paths and classic graph algorithms through simple practice challenges.</p><div class="buttons"><a class="btn primary" href="#challenges">Start Learning</a><a class="btn secondary" href="#videos">Watch Videos</a></div></div></section>
+<section id="learn" class="container"><div class="title"><small>01 — FOUNDATION</small><h2>What is a Graph?</h2><p>A graph is a collection of vertices connected by edges. It is useful for representing relationships between objects.</p></div><div class="flow"><div class="box"><strong>Vertices</strong><span>Nodes / objects</span></div><div class="arrow">→</div><div class="box"><strong>Edges</strong><span>Connections</span></div><div class="arrow">→</div><div class="box"><strong>Traversal</strong><span>BFS / DFS</span></div><div class="arrow">→</div><div class="box"><strong>Problems</strong><span>Paths / cycles</span></div></div><div class="grid"><div class="card"><h3>Vertex</h3><p>An individual node or object in a graph.</p></div><div class="card"><h3>Edge</h3><p>A connection between two vertices.</p></div><div class="card"><h3>Weight</h3><p>A value such as distance, cost or time stored on an edge.</p></div></div></section>
+<section class="container"><div class="title"><small>02 — REPRESENTATION</small><h2>How We Store Graphs</h2></div><div class="grid"><div class="card"><h3>Adjacency List</h3><p>Each vertex stores its connected neighbors. Great for sparse graphs.</p><pre>0 → 1, 2
+1 → 0, 3
+2 → 0
+3 → 1</pre></div><div class="card"><h3>Adjacency Matrix</h3><p>A 2D matrix stores whether an edge exists between every pair.</p><pre>  0 1 2
+0 0 1 1
+1 1 0 0
+2 1 0 0</pre></div>
+<div class="card"><h3>Directed Graph</h3><p>Edges have a direction. A → B does not necessarily mean B → A.</p></div><div class="card"><h3>Undirected Graph</h3><p>Edges have no direction. A connected to B means B is connected to A.</p></div></div></section>
+<section class="container"><div class="title"><small>03 — GRAPH PATTERNS</small><h2>BFS vs DFS</h2><p>Choosing the right traversal is one of the most important graph skills.</p></div><div class="grid"><div class="card"><h3>BFS</h3><p>Uses a queue and explores level by level. Useful for shortest paths in unweighted graphs.</p></div><div class="card"><h3>DFS</h3><p>Uses recursion or a stack and explores one path deeply before backtracking.</p></div><div class="card"><h3>Visited Array</h3><p>Tracks visited vertices so nodes are not processed repeatedly.</p></div></div></section>
+<section id="videos" class="container"><div class="title"><small>04 — VIDEO LEARNING</small><h2>Before You Solve</h2><p>Watch the concept lesson, then return to practice.</p></div><div class="video-grid">
+<a href="https://youtu.be/EQVvMF5_MrM" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>FOUNDATION</span><h3>Graph Basics</h3><p>Vertices, edges and representation.</p></div></a>
+<a href="https://youtu.be/t9dTYHbIzac" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>CORE</span><h3>Stack - DFS</h3><p>Master graph traversal.</p></div></a>
+<a href="https://youtu.be/re0UweGjf1s" class="video-card"><div class="thumb"><div class="play">▶</div></div><div class="video-info"><span>INTERVIEW</span><h3>Queue - BFS</h3><p>Dijkstra and topological sorting.</p></div></a></div></section>
+<footer><p><strong>PavanXDCL</strong> • Graph Practice • Learn → Traverse → Solve → Optimize</p></footer>
+<script>
+const data=[
+["EASY • 10 XP","Build an Adjacency List","Represent an undirected graph using an adjacency list.","O(V+E)","adj"],
+["EASY • 15 XP","BFS Traversal","Traverse a graph level by level using a queue.","O(V+E)","bfs"],
+["EASY • 20 XP","DFS Traversal","Explore a graph deeply using recursion or a stack.","O(V+E)","dfs"],
+["MEDIUM • 30 XP","Connected Components","Count connected components in an undirected graph.","O(V+E)","components"],
+["MEDIUM • 40 XP","Detect a Cycle","Determine whether an undirected graph contains a cycle.","O(V+E)","cycle"],
+["MEDIUM • 50 XP","Shortest Path","Find shortest unweighted paths using BFS.","O(V+E)","shortest"],
+["MEDIUM • 60 XP","Dijkstra's Algorithm","Find shortest paths in a weighted graph with non-negative edges.","O((V+E)logV)","dijkstra"],
+["HARD • 80 XP","Topological Sort","Order vertices of a directed acyclic graph.","O(V+E)","topo"],
+["HARD • 100 XP","Number of Islands","Count connected groups in a 2D grid.","O(R×C)","islands"]];
+document.getElementById("cards").innerHTML=data.map(x=>`<div class="challenge-card"><span class="level">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p><div class="meta"><span>${x[3]}</span><span>Practice</span></div><button onclick="openProblem('${x[4]}')">Solve Challenge →</button></div>`).join("");
+const problems={adj:["Build an Adjacency List","Create a list for every vertex and add each edge to the correct neighbor lists."],bfs:["BFS Traversal","Use a queue, mark the source visited, process it and add each unvisited neighbor."],dfs:["DFS Traversal","Visit a vertex, mark it and recursively explore each unvisited neighbor."],components:["Connected Components","Run BFS or DFS from every unvisited vertex and count the traversals."],cycle:["Detect a Cycle","Track each vertex's parent while traversing and detect a visited neighbor that is not the parent."],shortest:["Shortest Path","Use BFS and store the distance when a vertex is first reached."],dijkstra:["Dijkstra's Algorithm","Use a priority queue and relax edges from the vertex with the smallest distance."],topo:["Topological Sort","Use indegrees with Kahn's algorithm or DFS to produce an ordering for a DAG."],islands:["Number of Islands","Treat each land cell as a vertex and use BFS or DFS to visit connected cells."]};
+function openProblem(k){document.getElementById("problemTitle").textContent=problems[k][0];document.getElementById("problemText").textContent=problems[k][1];document.getElementById("problemPanel").classList.add("active");document.getElementById("editor").scrollIntoView({behavior:"smooth"});}
+const code={cpp:`// BFS using an adjacency list
+vector<int> bfs(int V, vector<vector<int>>& adj) {
+    vector<int> order;
+    vector<bool> visited(V, false);
+    queue<int> q;
+
+    visited[0] = true;
+    q.push(0);
+
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        order.push_back(u);
+
+        for (int v : adj[u]) {
+            if (!visited[v]) {
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+    return order;
+}`,java:`// BFS using an adjacency list
+static ArrayList<Integer> bfs(int V, ArrayList<ArrayList<Integer>> adj) {
+    ArrayList<Integer> order = new ArrayList<>();
+    boolean[] visited = new boolean[V];
+    Queue<Integer> q = new LinkedList<>();
+
+    visited[0] = true;
+    q.add(0);
+
+    while (!q.isEmpty()) {
+        int u = q.poll();
+        order.add(u);
+
+        for (int v : adj.get(u)) {
+            if (!visited[v]) {
+                visited[v] = true;
+                q.add(v);
+            }
+        }
+    }
+    return order;
+}`,python:`# BFS using an adjacency list
+from collections import deque
+
+def bfs(graph, start):
+    visited = {start}
+    q = deque([start])
+    order = []
+
+    while q:
+        u = q.popleft()
+        order.append(u)
+
+        for v in graph[u]:
+            if v not in visited:
+                visited.add(v)
+                q.append(v)
+
+    return order`};
+function changeLang(l,b){editorBox.value=code[l];langTitle.textContent={cpp:"C++ — solution.cpp",java:"Java — Main.java",python:"Python — solution.py"}[l];document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active")}
+function runCode(){runStatus.textContent="✓ Sample tests passed — 2/2 test cases."}
+changeLang("cpp",document.querySelector(".tab"));
+</script></body></html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PavanXDCL DSA Pro — Next Level Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #08090d;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        :root {
+            --bg-dark: #08090d;
+            --card-bg: #11131a;
+            --card-bg2: #171923;
+            --border: #272a36;
+            --border-light: #3a3d4a;
+            --text-muted: #9297a7;
+            --text-light: #bbb;
+            --accent: #8b5cf6;
+            --accent2: #a78bfa;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+        /* ═══ NAVIGATION ═══ */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid var(--border);
+            background: rgba(8, 9, 13, 0.8); backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px; font-weight: 900; letter-spacing: -1px;
+        }
+        .logo span { color: var(--accent2); }
+
+        nav ul {
+            display: flex; gap: 32px; list-style: none;
+        }
+
+        nav a {
+            color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent2); }
+
+        /* ═══ HERO ═══ */
+        .hero {
+            min-height: 600px;
+            display: grid; place-items: center; text-align: center;
+            padding: 100px 24px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(167, 139, 250, 0.05));
+            position: relative; overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 50%;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+            transform: translateX(-50%); filter: blur(120px);
+            z-index: -1;
+        }
+
+        .hero > div { position: relative; max-width: 900px; }
+
+        .badge {
+            display: inline-block;
+            padding: 10px 18px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--accent2);
+            border-radius: 50px;
+            color: var(--accent2);
+            font-size: 12px; font-weight: 700; letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 6vw, 80px);
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span { color: var(--accent2); }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 700px; margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent2);
+            border: 1.5px solid var(--accent2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* ═══ FEATURES SECTION ═══ */
+        .section {
+            padding: 80px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 800px; margin: 0 auto 60px;
+        }
+
+        .section-title .tag {
+            color: var(--accent2);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* ═══ FEATURES GRID ═══ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ═══ PROBLEM SHOWCASE ═══ */
+        .problems-section {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(139, 92, 246, 0.02));
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .problem-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(139, 92, 246, 0.15);
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .difficulty-easy { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+        .difficulty-medium { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .difficulty-hard { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+
+        .problem-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .problem-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .problem-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .problem-tag {
+            background: rgba(167, 139, 250, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: var(--accent2);
+        }
+
+        /* ═══ CTA SECTION ═══ */
+        .cta-section {
+            text-align: center;
+            padding: 80px 24px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+            border-radius: 20px;
+            margin: 60px 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 768px) {
+            nav ul { gap: 16px; font-size: 12px; }
+            .hero { padding: 60px 20px; min-height: 500px; }
+            .section { padding: 60px 20px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .problems-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="container">
+        <div class="logo">Pavan<span>XDCL</span></div>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#problems">Problems</a></li>
+            <li><a href="#topics">Topics</a></li>
+            <li><a href="#resources">Resources</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <span class="badge">🚀 DSA PRO PLATFORM</span>
+            <h1>Master <span>DSA</span> at the Next Level</h1>
+            <p>Interactive code editor, multi-language solutions, visual simulators, and comprehensive problem sets. Learn like a pro.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('problems').scrollIntoView({ behavior: 'smooth' })">
+                    Explore Problems
+                </button>
+                <button class="btn btn-secondary" onclick="window.open('dsa.html', '_self')">
+                    Back to Topics
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-title">
+                <span class="tag">✨ PLATFORM FEATURES</span>
+                <h2>Everything You Need to Master DSA</h2>
+                <p>A complete learning ecosystem with interactive tools, multiple language solutions, and visual explanations.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Code Editor</h3>
+                    <p>Write, test, and run code directly in your browser with syntax highlighting and instant feedback.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Multi-Language</h3>
+                    <p>Solutions in Java, Python, C++, and JavaScript. Learn the pattern, not just one language.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Visual Simulators</h3>
+                    <p>Step through algorithms with animated visualizations. See how data structures transform in real-time.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Problem Tracking</h3>
+                    <p>Track your progress, bookmark favorites, and monitor which problems you've mastered.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Pattern Library</h3>
+                    <p>Organized by techniques: Two Pointers, Sliding Window, Dynamic Programming, and more.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Lookup</h3>
+                    <p>Search problems by difficulty, topic, or keywords. Filter by company tags and acceptance rate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="problems" class="section problems-section">
+        <div class="container">
+            <div class="section-title">
+                <span class="tag">🔥 CURATED PROBLEMS</span>
+                <h2>Start with These Essentials</h2>
+                <p>Handpicked problems to build your DSA foundation. Each includes step-by-step solutions and visualizations.</p>
+            </div>
+
+            <div class="problems-grid">
+                <!-- Problem 1 -->
+                <div class="problem-card" onclick="window.location.href='problems/two-sum.html'">
+                    <span class="difficulty-badge difficulty-easy">Easy</span>
+                    <h3>Two Sum</h3>
+                    <p>Find two numbers in an array that add up to a target. Classic interview problem.</p>
+                    <div class="problem-meta">
+                        <span class="problem-tag">Arrays</span>
+                        <span class="problem-tag">Hash Map</span>
+                    </div>
+                </div>
+
+                <!-- Problem 2 -->
+                <div class="problem-card" onclick="window.location.href='problems/reverse-string.html'">
+                    <span class="difficulty-badge difficulty-easy">Easy</span>
+                    <h3>Reverse String</h3>
+                    <p>Reverse a string in-place using two pointers. Master the two-pointer pattern.</p>
+                    <div class="problem-meta">
+                        <span class="problem-tag">Strings</span>
+                        <span class="problem-tag">Two Pointers</span>
+                    </div>
+                </div>
+
+                <!-- Problem 3 -->
+                <div class="problem-card" onclick="window.location.href='problems/max-subarray.html'">
+                    <span class="difficulty-badge difficulty-medium">Medium</span>
+                    <h3>Maximum Subarray</h3>
+                    <p>Find the contiguous subarray with the largest sum. Dynamic programming classic.</p>
+                    <div class="problem-meta">
+                        <span class="problem-tag">Arrays</span>
+                        <span class="problem-tag">DP</span>
+                    </div>
+                </div>
+
+                <!-- Problem 4 -->
+                <div class="problem-card" onclick="window.location.href='problems/merge-sorted.html'">
+                    <span class="difficulty-badge difficulty-easy">Easy</span>
+                    <h3>Merge Sorted Array</h3>
+                    <p>Merge two sorted arrays in-place. Test your understanding of array manipulation.</p>
+                    <div class="problem-meta">
+                        <span class="problem-tag">Arrays</span>
+                        <span class="problem-tag">Two Pointers</span>
+                    </div>
+                </div>
+
+                <!-- Problem 5 -->
+                <div class="problem-card" onclick="window.location.href='problems/valid-palindrome.html'">
+                    <span class="difficulty-badge difficulty-easy">Easy</span>
+                    <h3>Valid Palindrome</h3>
+                    <p>Check if a string is a palindrome ignoring non-alphanumeric characters.</p>
+                    <div class="problem-meta">
+                        <span class="problem-tag">Strings</span>
+                        <span class="problem-tag">Two Pointers</span>
+                    </div>
+                </div>
+
+                <!-- Problem 6 -->
+                <div class="problem-card" onclick="window.location.href='problems/container-water.html'">
+                    <span class="difficulty-badge difficulty-medium">Medium</span>
+                    <h3>Container With Most Water</h3>
+                    <p>Find two lines that together with x-axis form a container holding most water.</p>
+                    <div class="problem-meta">
+                        <span class="problem-tag">Arrays</span>
+                        <span class="problem-tag">Two Pointers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="cta-section">
+                <h2>Ready to Level Up? 🚀</h2>
+                <p>Start solving problems now. Each one comes with interactive explanations and multiple language solutions.</p>
+                <button class="btn btn-primary" onclick="window.location.href='problems/two-sum.html'">
+                    Solve Your First Problem
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <p>PavanXDCL © 2026 • <a href="#">Discord Community</a> • <a href="#">GitHub</a> • <a href="https://www.whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H">WhatsApp Channel</a></p>
+    </footer>
+</body>
+</html>

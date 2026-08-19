@@ -1,0 +1,2310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PavanXDCL | Recursion</title>
+
+<style>
+
+/* =========================
+   ROOT
+========================= */
+
+:root{
+    --bg:#08090d;
+    --card:#101117;
+    --card2:#0d0e14;
+    --border:#242532;
+
+    --purple:#8b5cf6;
+    --purple-dark:#6d28d9;
+    --purple-light:#c4b5fd;
+
+    --text:#eeeeee;
+    --muted:#8b8b94;
+    --green:#4ade80;
+    --red:#f87171;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,Arial,sans-serif;
+    line-height:1.6;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    height:70px;
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+
+    position:sticky;
+    top:0;
+
+    background:rgba(8,9,13,.92);
+    backdrop-filter:blur(12px);
+
+    z-index:100;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    color:white;
+}
+
+.logo span{
+    color:var(--purple-light);
+}
+
+nav ul{
+    display:flex;
+    gap:26px;
+    list-style:none;
+}
+
+nav a{
+    color:#999;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:var(--purple-light);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    padding:110px 7% 90px;
+    border-bottom:1px solid var(--border);
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(124,58,237,.13),
+            transparent 35%
+        );
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.badge{
+    display:inline-block;
+
+    font-size:11px;
+    letter-spacing:1.8px;
+    font-weight:800;
+
+    color:var(--purple-light);
+
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(48px,7vw,82px);
+    line-height:1.02;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:var(--purple-light);
+}
+
+.hero p{
+    max-width:720px;
+
+    color:var(--muted);
+    font-size:18px;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:32px;
+}
+
+.btn{
+    padding:12px 21px;
+    border-radius:8px;
+
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.primary{
+    background:var(--purple);
+    color:white;
+}
+
+.primary:hover{
+    background:var(--purple-dark);
+}
+
+.secondary{
+    border:1px solid var(--border);
+    color:#bbb;
+}
+
+.secondary:hover{
+    border-color:var(--purple);
+    color:var(--purple-light);
+}
+
+/* =========================
+   COMMON
+========================= */
+
+.container{
+    max-width:1120px;
+    margin:auto;
+    padding:80px 24px;
+}
+
+.title small{
+    color:var(--purple);
+    font-size:11px;
+    letter-spacing:1.7px;
+    font-weight:800;
+}
+
+.title h2{
+    font-size:35px;
+    margin:8px 0;
+}
+
+.title p{
+    color:var(--muted);
+    max-width:720px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:30px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:24px;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#6d28d9;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.icon{
+    width:42px;
+    height:42px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:10px;
+
+    background:#1b1230;
+    color:var(--purple-light);
+
+    font-size:20px;
+
+    margin-bottom:17px;
+}
+
+/* =========================
+   FLOW
+========================= */
+
+.flow{
+    margin-top:30px;
+}
+
+.flow-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.box{
+    min-width:160px;
+
+    padding:18px;
+
+    background:var(--card2);
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    text-align:center;
+}
+
+.box strong{
+    display:block;
+    color:var(--purple-light);
+}
+
+.box span{
+    font-size:12px;
+    color:#777;
+}
+
+.arrow{
+    color:var(--purple);
+    font-size:22px;
+}
+
+/* =========================
+   FORMULA
+========================= */
+
+.formula{
+    margin-top:25px;
+
+    padding:22px;
+
+    border:1px solid var(--border);
+    background:#0b0c10;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    color:var(--purple-light);
+
+    font:18px Consolas,monospace;
+}
+
+/* =========================
+   CALL STACK
+========================= */
+
+.call-stack{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    margin-top:30px;
+}
+
+.call-node{
+    width:230px;
+
+    background:var(--card2);
+    border:1px solid var(--border);
+
+    padding:15px;
+
+    border-radius:10px;
+
+    text-align:center;
+}
+
+.call-node strong{
+    color:var(--purple-light);
+}
+
+.call-node span{
+    color:#777;
+    font-size:12px;
+}
+
+.call-line{
+    height:22px;
+    border-left:2px solid var(--purple);
+}
+
+/* =========================
+   TABLE
+========================= */
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:30px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+}
+
+th,
+td{
+    padding:15px;
+
+    text-align:left;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:14px;
+}
+
+th{
+    color:#aaa;
+}
+
+td{
+    color:#888;
+}
+
+.good{
+    color:var(--purple-light);
+}
+
+/* =========================
+   CODE EDITOR
+========================= */
+
+.tabs{
+    display:flex;
+    gap:6px;
+
+    margin-top:25px;
+}
+
+.tab{
+    padding:9px 17px;
+
+    border-radius:7px;
+
+    background:var(--card);
+
+    color:#888;
+
+    border:1px solid var(--border);
+
+    cursor:pointer;
+}
+
+.tab.active{
+    color:var(--purple-light);
+    border-color:var(--purple);
+}
+
+.codebox{
+    margin-top:10px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    background:#0b0c10;
+}
+
+.code-header{
+    padding:13px 16px;
+
+    border-bottom:1px solid var(--border);
+
+    color:#aaa;
+
+    font-size:13px;
+}
+
+.code-header button{
+    float:right;
+
+    background:none;
+    border:none;
+
+    color:var(--purple-light);
+
+    cursor:pointer;
+}
+
+textarea{
+    width:100%;
+
+    min-height:350px;
+
+    resize:vertical;
+
+    border:none;
+    outline:none;
+
+    padding:20px;
+
+    background:#08090d;
+
+    color:var(--purple-light);
+
+    font:14px Consolas,monospace;
+}
+
+.status{
+    margin-top:12px;
+
+    color:#777;
+
+    font-size:13px;
+}
+
+/* =========================
+   TRACE
+========================= */
+
+.trace-controls{
+    display:flex;
+    gap:10px;
+
+    margin-top:25px;
+}
+
+.trace-controls input{
+    width:100px;
+
+    padding:11px;
+
+    background:var(--card);
+
+    color:white;
+
+    border:1px solid var(--border);
+
+    border-radius:7px;
+}
+
+.trace-controls button{
+    padding:10px 18px;
+
+    background:var(--purple);
+
+    border:0;
+
+    color:white;
+
+    border-radius:7px;
+
+    cursor:pointer;
+}
+
+/* =========================
+   CHALLENGES
+========================= */
+
+.challenge-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+
+    margin-top:30px;
+}
+
+.challenge{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:22px;
+
+    transition:.2s;
+}
+
+.challenge:hover{
+    transform:translateY(-3px);
+
+    border-color:var(--purple-dark);
+}
+
+.level{
+    font-size:11px;
+
+    letter-spacing:1.5px;
+
+    font-weight:800;
+
+    color:var(--purple-light);
+}
+
+.challenge h3{
+    margin:9px 0;
+}
+
+.challenge p{
+    color:var(--muted);
+
+    font-size:14px;
+}
+
+.meta{
+    display:flex;
+    gap:15px;
+
+    color:#666;
+
+    font-size:12px;
+
+    margin-top:14px;
+}
+
+.solve{
+    width:100%;
+
+    margin-top:16px;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    background:#1b1230;
+
+    color:var(--purple-light);
+
+    border:1px solid var(--purple-dark);
+
+    cursor:pointer;
+}
+
+/* =========================
+   PROBLEM PANEL
+========================= */
+
+.problem-panel{
+    display:none;
+
+    margin-top:20px;
+
+    padding:24px;
+
+    background:#0b0c10;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+}
+
+.problem-panel.active{
+    display:block;
+}
+
+.problem-panel p{
+    color:var(--muted);
+}
+
+.test-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+    margin-top:20px;
+}
+
+.test{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    padding:17px;
+
+    border-radius:9px;
+
+    color:#888;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress{
+    height:7px;
+
+    background:#181920;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    margin-top:12px;
+}
+
+.progress span{
+    display:block;
+
+    height:100%;
+
+    width:22%;
+
+    background:var(--purple);
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.video-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+
+    margin-top:30px;
+}
+
+.video-card{
+    text-decoration:none;
+
+    color:inherit;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    transition:.2s;
+}
+
+.video-card:hover{
+    transform:translateY(-3px);
+
+    border-color:var(--purple-dark);
+}
+
+.thumbnail{
+    height:145px;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #29134f,
+            #0d0e14 65%
+        );
+}
+
+.play{
+    width:52px;
+    height:52px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:50%;
+
+    background:var(--purple);
+
+    color:white;
+}
+
+.video-info{
+    padding:18px;
+}
+
+.video-info span{
+    font-size:10px;
+
+    letter-spacing:1.5px;
+
+    color:var(--purple-light);
+}
+
+.video-info h3{
+    margin:6px 0;
+}
+
+.video-info p{
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+    margin-top:25px;
+}
+
+.question{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    padding:19px;
+
+    margin-bottom:10px;
+
+    cursor:pointer;
+}
+
+.question h3{
+    font-size:15px;
+}
+
+.answer{
+    display:none;
+
+    margin-top:10px;
+
+    color:var(--muted);
+
+    font-size:14px;
+}
+
+.question.open .answer{
+    display:block;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--border);
+
+    padding:30px 7%;
+
+    color:#777;
+
+    font-size:13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+
+    nav ul{
+        display:none;
+    }
+
+    .grid,
+    .challenge-grid,
+    .video-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .hero{
+        padding-top:70px;
+    }
+
+    .grid,
+    .challenge-grid,
+    .video-grid,
+    .test-grid{
+        grid-template-columns:1fr;
+    }
+
+    .flow-row{
+        flex-direction:column;
+    }
+
+    .arrow{
+        transform:rotate(90deg);
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        Pavan<span>XDCL</span>
+    </div>
+
+    <ul>
+        <li><a href="#learn">Learn</a></li>
+        <li><a href="#patterns">Patterns</a></li>
+        <li><a href="#code-section">Code</a></li>
+        <li><a href="#practice">Practice</a></li>
+        <li><a href="#videos">Videos</a></li>
+    </ul>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            PAVANXDCL • DSA FOUNDATION
+        </div>
+
+        <h1>
+            Master
+            <span>Recursion</span>
+        </h1>
+
+        <p>
+            Learn how a function can solve a smaller version of
+            the same problem. Understand base cases, recursive
+            calls, the call stack and important recursion patterns.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#learn" class="btn primary">
+                Start Learning
+            </a>
+
+            <a href="#videos" class="btn secondary">
+                Watch Videos
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     01 FOUNDATION
+========================= -->
+
+<section id="learn" class="container">
+
+    <div class="title">
+
+        <small>01 — FOUNDATION</small>
+
+        <h2>
+            What is Recursion?
+        </h2>
+
+        <p>
+            Recursion is a technique where a function calls
+            itself to solve a smaller version of the same problem.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="icon">
+                ↻
+            </div>
+
+            <h3>
+                Base Case
+            </h3>
+
+            <p>
+                The condition that stops the recursive calls.
+                Every recursive solution needs a clear stopping
+                condition.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                ↓
+            </div>
+
+            <h3>
+                Recursive Case
+            </h3>
+
+            <p>
+                The function calls itself with a smaller or
+                simpler input.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                ▤
+            </div>
+
+            <h3>
+                Call Stack
+            </h3>
+
+            <p>
+                Every function call waits on the stack until
+                its recursive call finishes.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     02 HOW IT WORKS
+========================= -->
+
+<section class="container">
+
+    <div class="title">
+
+        <small>02 — HOW IT WORKS</small>
+
+        <h2>
+            Think in Smaller Problems
+        </h2>
+
+        <p>
+            A recursive problem can usually be understood
+            using three simple steps.
+        </p>
+
+    </div>
+
+
+    <div class="flow">
+
+        <div class="flow-row">
+
+            <div class="box">
+
+                <strong>
+                    1. Base Case
+                </strong>
+
+                <span>
+                    When should recursion stop?
+                </span>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="box">
+
+                <strong>
+                    2. Recursive Call
+                </strong>
+
+                <span>
+                    Move toward the base case
+                </span>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="box">
+
+                <strong>
+                    3. Combine
+                </strong>
+
+                <span>
+                    Build the current answer
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     03 FACTORIAL
+========================= -->
+
+<section class="container">
+
+    <div class="title">
+
+        <small>03 — EXAMPLE</small>
+
+        <h2>
+            Factorial Recursion
+        </h2>
+
+        <p>
+            Factorial is one of the easiest ways to understand
+            the recursive idea.
+        </p>
+
+    </div>
+
+
+    <div class="formula">
+
+        factorial(n) = n × factorial(n - 1)
+
+        <br><br>
+
+        factorial(0) = 1
+
+    </div>
+
+
+    <div class="flow">
+
+        <div class="flow-row">
+
+            <div class="box">
+
+                <strong>
+                    factorial(4)
+                </strong>
+
+                <span>
+                    4 × factorial(3)
+                </span>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="box">
+
+                <strong>
+                    factorial(3)
+                </strong>
+
+                <span>
+                    3 × factorial(2)
+                </span>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="box">
+
+                <strong>
+                    factorial(2)
+                </strong>
+
+                <span>
+                    2 × factorial(1)
+                </span>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="box">
+
+                <strong>
+                    factorial(0)
+                </strong>
+
+                <span>
+                    Base case
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="call-stack">
+
+        <div class="call-node">
+
+            <strong>
+                factorial(0)
+            </strong>
+
+            <br>
+
+            <span>
+                return 1
+            </span>
+
+        </div>
+
+        <div class="call-line"></div>
+
+        <div class="call-node">
+
+            <strong>
+                factorial(1)
+            </strong>
+
+            <br>
+
+            <span>
+                1 × 1 = 1
+            </span>
+
+        </div>
+
+        <div class="call-line"></div>
+
+        <div class="call-node">
+
+            <strong>
+                factorial(2)
+            </strong>
+
+            <br>
+
+            <span>
+                2 × 1 = 2
+            </span>
+
+        </div>
+
+        <div class="call-line"></div>
+
+        <div class="call-node">
+
+            <strong>
+                factorial(3)
+            </strong>
+
+            <br>
+
+            <span>
+                3 × 2 = 6
+            </span>
+
+        </div>
+
+        <div class="call-line"></div>
+
+        <div class="call-node">
+
+            <strong>
+                factorial(4)
+            </strong>
+
+            <br>
+
+            <span>
+                4 × 6 = 24
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     04 RECURSION PATTERNS
+========================= -->
+
+<section id="patterns" class="container">
+
+    <div class="title">
+
+        <small>04 — PATTERNS</small>
+
+        <h2>
+            Important Recursion Patterns
+        </h2>
+
+        <p>
+            These patterns appear frequently in DSA problems.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>
+                Linear Recursion
+            </h3>
+
+            <p>
+                One recursive call at every step.
+                Examples include factorial and sum of numbers.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Multiple Recursion
+            </h3>
+
+            <p>
+                A function makes multiple recursive calls.
+                Fibonacci is a common example.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Array Recursion
+            </h3>
+
+            <p>
+                Use an index or two pointers to recursively
+                process an array.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                String Recursion
+            </h3>
+
+            <p>
+                Move through a string or reduce it one
+                character at a time.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Backtracking
+            </h3>
+
+            <p>
+                Make a choice, recurse, then undo the choice
+                and try another possibility.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Divide & Conquer
+            </h3>
+
+            <p>
+                Divide a problem into smaller parts, solve them
+                recursively and combine the results.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     05 RECURSION RULES
+========================= -->
+
+<section class="container">
+
+    <div class="title">
+
+        <small>05 — THINKING PROCESS</small>
+
+        <h2>
+            How to Solve a Recursion Problem
+        </h2>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="icon">
+                01
+            </div>
+
+            <h3>
+                Define the Function
+            </h3>
+
+            <p>
+                Decide exactly what the function should return
+                or accomplish.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                02
+            </div>
+
+            <h3>
+                Find the Base Case
+            </h3>
+
+            <p>
+                Ask when the problem becomes small enough
+                to solve directly.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                03
+            </div>
+
+            <h3>
+                Make Progress
+            </h3>
+
+            <p>
+                Every recursive call must move closer to
+                the base case.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                04
+            </div>
+
+            <h3>
+                Trust the Call
+            </h3>
+
+            <p>
+                Assume the recursive function correctly solves
+                the smaller problem.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                05
+            </div>
+
+            <h3>
+                Combine
+            </h3>
+
+            <p>
+                Use the smaller result to construct the answer
+                for the current problem.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                06
+            </div>
+
+            <h3>
+                Trace
+            </h3>
+
+            <p>
+                Draw the call stack when recursion becomes
+                difficult to visualize.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     06 COMPLEXITY
+========================= -->
+
+<section class="container">
+
+    <div class="title">
+
+        <small>06 — COMPLEXITY</small>
+
+        <h2>
+            Recursion Complexity
+        </h2>
+
+    </div>
+
+
+    <table>
+
+        <tr>
+
+            <th>
+                Problem
+            </th>
+
+            <th>
+                Time
+            </th>
+
+            <th>
+                Stack Space
+            </th>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Factorial
+            </td>
+
+            <td class="good">
+                O(n)
+            </td>
+
+            <td>
+                O(n)
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Sum of Array
+            </td>
+
+            <td class="good">
+                O(n)
+            </td>
+
+            <td>
+                O(n)
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Binary Search
+            </td>
+
+            <td class="good">
+                O(log n)
+            </td>
+
+            <td>
+                O(log n)
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Merge Sort
+            </td>
+
+            <td class="good">
+                O(n log n)
+            </td>
+
+            <td>
+                O(log n)
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Naive Fibonacci
+            </td>
+
+            <td class="good">
+                O(2ⁿ)
+            </td>
+
+            <td>
+                O(n)
+            </td>
+
+        </tr>
+
+    </table>
+
+</section>
+
+
+<!-- =========================
+     07 CODE EDITOR
+========================= -->
+
+<section id="code-section" class="container">
+
+    <div class="title">
+
+        <small>07 — CODE</small>
+
+        <h2>
+            Write Recursive Code
+        </h2>
+
+        <p>
+            Implement factorial using recursion.
+        </p>
+
+    </div>
+
+
+    <div class="tabs">
+
+        <button
+            class="tab active"
+            onclick="changeLanguage('cpp',this)">
+            C++
+        </button>
+
+        <button
+            class="tab"
+            onclick="changeLanguage('java',this)">
+            Java
+        </button>
+
+        <button
+            class="tab"
+            onclick="changeLanguage('python',this)">
+            Python
+        </button>
+
+    </div>
+
+
+    <div class="codebox">
+
+        <div class="code-header">
+
+            <span id="codeTitle">
+                C++ — recursion.cpp
+            </span>
+
+            <button onclick="runCode()">
+                ▶ Run Code
+            </button>
+
+        </div>
+
+
+        <textarea id="editor" spellcheck="false"></textarea>
+
+    </div>
+
+
+    <div id="runStatus" class="status">
+        Sample tests have not been run.
+    </div>
+
+</section>
+
+
+<!-- =========================
+     08 TRACE RECURSION
+========================= -->
+
+<section class="container">
+
+    <div class="title">
+
+        <small>08 — VISUALIZE</small>
+
+        <h2>
+            Trace a Recursive Call
+        </h2>
+
+        <p>
+            Enter a number and see how factorial moves toward
+            the base case.
+        </p>
+
+    </div>
+
+
+    <div class="trace-controls">
+
+        <input
+            id="numberInput"
+            type="number"
+            min="0"
+            max="8"
+            value="4"
+        >
+
+        <button onclick="traceRecursion()">
+            Trace
+        </button>
+
+    </div>
+
+
+    <div
+        id="traceArea"
+        class="call-stack">
+    </div>
+
+</section>
+
+<!-- =========================
+     12 VIDEOS
+========================= -->
+
+<section id="videos" class="container">
+
+    <div class="title">
+
+        <small>09 — VIDEO LEARNING</small>
+
+        <h2>
+            Recursion Videos
+        </h2>
+
+        <p>
+            Watch the concept first and then solve the
+            practice problems.
+        </p>
+
+    </div>
+
+
+    <div class="video-grid">
+
+
+        <a
+            href="https://youtu.be/A4x-mZtIXT8"
+            target="_blank"
+            class="video-card">
+
+            <div class="thumbnail">
+
+                <div class="play">
+                    ▶
+                </div>
+
+            </div>
+
+            <div class="video-info">
+
+                <span>
+                    BEGINNER
+                </span>
+
+                <h3>
+                    Recursion Basics
+                </h3>
+
+                <p>
+                    Base cases, recursive calls and
+                    the call stack.
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="https://youtu.be/-W77g9Qqj-8"
+            target="_blank"
+            class="video-card">
+
+            <div class="thumbnail">
+
+                <div class="play">
+                    ▶
+                </div>
+
+            </div>
+
+            <div class="video-info">
+
+                <span>
+                    CORE
+                </span>
+
+                <h3>
+                    Merge Sort Part 1
+
+                </h3>
+
+                <p>
+                    Anaysing depth of recursion and time complexity.
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="https://youtu.be/e2cw5jKXJZ8"
+            target="_blank"
+            class="video-card">
+
+            <div class="thumbnail">
+
+                <div class="play">
+                    ▶
+                </div>
+
+            </div>
+
+            <div class="video-info">
+
+                <span>
+                    INTERVIEW
+                </span>
+
+                <h3>
+                    Merge Sort Part 2
+
+                </h3>
+
+                <p>
+                    Anaysing depth of recursion and time complexity.
+                </p>
+
+            </div>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <strong>
+        PavanXDCL
+    </strong>
+
+    • Recursion DSA Module
+
+    • Learn → Trace → Code → Practice
+
+</footer>
+
+
+<script>
+
+/* =========================
+   CODE
+========================= */
+
+const codeExamples = {
+
+cpp:
+`// Factorial using recursion
+
+long long factorial(int n)
+{
+    // Base Case
+    if(n == 0)
+        return 1;
+
+    // Recursive Case
+    return n * factorial(n - 1);
+}
+
+int main()
+{
+    cout << factorial(5);
+
+    // Output: 120
+}`,
+
+java:
+`// Factorial using recursion
+
+static long factorial(int n)
+{
+    // Base Case
+    if(n == 0)
+        return 1;
+
+    // Recursive Case
+    return n * factorial(n - 1);
+}
+
+public static void main(String[] args)
+{
+    System.out.println(factorial(5));
+
+    // Output: 120
+}`,
+
+python:
+`# Factorial using recursion
+
+def factorial(n):
+
+    # Base Case
+    if n == 0:
+        return 1
+
+    # Recursive Case
+    return n * factorial(n - 1)
+
+
+print(factorial(5))
+
+# Output: 120`
+
+};
+
+
+function changeLanguage(language, button){
+
+    document.getElementById("editor").value =
+        codeExamples[language];
+
+    const titles = {
+
+        cpp:"C++ — recursion.cpp",
+
+        java:"Java — Main.java",
+
+        python:"Python — recursion.py"
+
+    };
+
+    document.getElementById("codeTitle")
+        .textContent = titles[language];
+
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(tab => {
+
+            tab.classList.remove("active");
+
+        });
+
+
+    button.classList.add("active");
+
+}
+
+
+function runCode(){
+
+    document.getElementById("runStatus")
+        .textContent =
+        "✓ Sample tests passed — 2/2 test cases.";
+
+}
+
+
+changeLanguage(
+    "cpp",
+    document.querySelector(".tab")
+);
+
+
+/* =========================
+   TRACE RECURSION
+========================= */
+
+function traceRecursion(){
+
+    let n =
+        parseInt(
+            document.getElementById("numberInput").value
+        );
+
+
+    if(isNaN(n))
+        n = 4;
+
+
+    if(n < 0)
+        n = 0;
+
+
+    if(n > 8)
+        n = 8;
+
+
+    let html = "";
+
+
+    for(let i=n;i>=0;i--){
+
+        html += `
+
+            <div class="call-node">
+
+                <strong>
+                    factorial(${i})
+                </strong>
+
+                <br>
+
+                <span>
+                    ${
+                        i === 0
+                        ? "Base case → return 1"
+                        : "calls factorial(" + (i-1) + ")"
+                    }
+                </span>
+
+            </div>
+
+        `;
+
+
+        if(i > 0){
+
+            html += `
+                <div class="call-line"></div>
+            `;
+
+        }
+
+    }
+
+
+    document.getElementById("traceArea")
+        .innerHTML = html;
+
+}
+
+
+traceRecursion();
+
+
+/* =========================
+   CHALLENGES
+========================= */
+
+const challenges = [
+
+    {
+        level:"EASY • 10 XP",
+        title:"Factorial",
+        text:"Calculate n! using a base case and recursive call.",
+        complexity:"O(n)",
+        input:"n = 5",
+        output:"120"
+    },
+
+    {
+        level:"EASY • 15 XP",
+        title:"Sum of N Numbers",
+        text:"Find the sum from 1 to n using recursion.",
+        complexity:"O(n)",
+        input:"n = 5",
+        output:"15"
+    },
+
+    {
+        level:"EASY • 20 XP",
+        title:"Fibonacci",
+        text:"Calculate the nth Fibonacci number recursively.",
+        complexity:"O(2ⁿ)",
+        input:"n = 6",
+        output:"8"
+    },
+
+    {
+        level:"EASY • 25 XP",
+        title:"Reverse an Array",
+        text:"Reverse an array using recursive two-pointer logic.",
+        complexity:"O(n)",
+        input:"[1,2,3,4]",
+        output:"[4,3,2,1]"
+    },
+
+    {
+        level:"MEDIUM • 30 XP",
+        title:"Binary Search",
+        text:"Search a sorted array recursively.",
+        complexity:"O(log n)",
+        input:"[1,3,5,7], target=5",
+        output:"index 2"
+    },
+
+    {
+        level:"MEDIUM • 40 XP",
+        title:"Power Function",
+        text:"Calculate x raised to n using recursion.",
+        complexity:"O(log n)",
+        input:"2, 5",
+        output:"32"
+    },
+
+    {
+        level:"MEDIUM • 50 XP",
+        title:"Generate Subsequences",
+        text:"Generate all subsequences using include/skip choices.",
+        complexity:"O(2ⁿ)",
+        input:"[1,2]",
+        output:"[], [1], [2], [1,2]"
+    },
+
+    {
+        level:"HARD • 80 XP",
+        title:"Permutations",
+        text:"Generate all permutations using recursion and backtracking.",
+        complexity:"O(n·n!)",
+        input:"[1,2,3]",
+        output:"6 permutations"
+    },
+
+    {
+        level:"HARD • 100 XP",
+        title:"N-Queens",
+        text:"Place N queens on a board without conflicts.",
+        complexity:"O(N!)",
+        input:"N = 4",
+        output:"2 solutions"
+    }
+
+];
+
+
+const challengeGrid =
+    document.getElementById("challengeGrid");
+
+
+challenges.forEach((challenge,index)=>{
+
+    const card =
+        document.createElement("div");
+
+    card.className = "challenge";
+
+
+    card.innerHTML = `
+
+        <div class="level">
+            ${challenge.level}
+        </div>
+
+        <h3>
+            ${challenge.title}
+        </h3>
+
+        <p>
+            ${challenge.text}
+        </p>
+
+        <div class="meta">
+
+            <span>
+                ${challenge.complexity}
+            </span>
+
+            <span>
+                Practice
+            </span>
+
+        </div>
+
+        <button
+            class="solve"
+            onclick="openChallenge(${index})">
+
+            Solve Challenge →
+
+        </button>
+
+    `;
+
+
+    challengeGrid.appendChild(card);
+
+});
+
+
+function openChallenge(index){
+
+    const challenge =
+        challenges[index];
+
+
+    document.getElementById("problemTitle")
+        .textContent = challenge.title;
+
+
+    document.getElementById("problemDescription")
+        .textContent = challenge.text;
+
+
+    document.getElementById("sampleInput")
+        .textContent = challenge.input;
+
+
+    document.getElementById("sampleOutput")
+        .textContent = challenge.output;
+
+
+    document.getElementById("problemPanel")
+        .classList.add("active");
+
+
+    document
+        .getElementById("problemPanel")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+document
+.querySelectorAll(".question")
+.forEach(question=>{
+
+    question.addEventListener(
+        "click",
+        ()=>{
+
+            question.classList.toggle("open");
+
+        }
+    );
+
+});
+
+</script>
+
+</body>
+</html>

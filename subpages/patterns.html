@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PavanXDCL | Star Patterns</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:#08090d;color:#f5f5f5;line-height:1.6}
+:root{--card:#11131a;--card2:#171923;--border:#272a36;--muted:#9297a7;--accent:#8b5cf6;--accent2:#a78bfa;--green:#22c55e}
+nav{height:70px;border-bottom:1px solid var(--border);background:rgba(8,9,13,.92);backdrop-filter:blur(15px);position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 6%}
+.logo{font-size:22px;font-weight:800;letter-spacing:-1px}.logo span{color:var(--accent2)}
+nav ul{list-style:none;display:flex;gap:25px}nav a{color:#aaa;text-decoration:none;font-size:14px}nav a:hover{color:#fff}
+.hero{min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:600px;height:600px;background:#7c3aed;opacity:.12;filter:blur(150px);border-radius:50%}
+.hero-content{position:relative;max-width:900px}.badge{display:inline-block;border:1px solid #44326e;background:#171126;color:#bda9ff;padding:7px 14px;border-radius:30px;font-size:13px;margin-bottom:22px}
+.hero h1{font-size:clamp(45px,7vw,82px);line-height:1;letter-spacing:-4px;margin-bottom:25px}.hero h1 span{color:var(--accent2)}
+.hero p{max-width:700px;margin:auto;color:var(--muted);font-size:18px}.buttons{margin-top:35px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn{text-decoration:none;padding:13px 22px;border-radius:9px;font-weight:600;font-size:14px}.primary{background:var(--accent);color:#fff}.secondary{border:1px solid var(--border);color:#fff}
+.container{max-width:1150px;margin:auto;padding:75px 25px}.section-title{margin-bottom:38px}.section-title small{color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:2px}.section-title h2{font-size:38px;margin-top:7px;letter-spacing:-1px}.section-title p{color:var(--muted);margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:25px}.card h3{margin-bottom:10px}.card p{color:var(--muted);font-size:15px}
+.icon{width:45px;height:45px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#1b1630;color:var(--accent2);font-size:20px;margin-bottom:18px}
+.pattern-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.pattern-card{background:var(--card);border:1px solid var(--border);border-radius:15px;overflow:hidden}
+.pattern-head{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.pattern-head h3{font-size:17px}.level{font-size:10px;color:var(--accent2);font-weight:800;letter-spacing:1px}
+.pattern-preview{padding:25px;background:#0c0d12;min-height:190px;display:flex;align-items:center;justify-content:center}
+.pattern-preview pre{font-family:Consolas,monospace;color:#c4b5fd;font-size:18px;line-height:1.35}
+.pattern-body{padding:20px}.pattern-body p{color:var(--muted);font-size:13px;margin-bottom:15px}
+.small-btn{display:inline-block;padding:8px 13px;border:1px solid var(--border);border-radius:7px;color:#fff;text-decoration:none;font-size:12px}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:18px}
+.flow-box{background:var(--card2);border:1px solid var(--border);padding:25px;border-radius:12px;text-align:center}.flow-box strong{display:block;font-size:20px;margin-bottom:5px}.flow-box span{color:var(--muted);font-size:13px}.arrow{font-size:25px;color:var(--accent2)}
+.visualizer{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px}
+.rule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.rule{background:var(--card);border:1px solid var(--border);padding:20px;border-radius:12px}.rule strong{display:block;color:var(--accent2);margin-bottom:7px}.rule p{font-size:13px;color:var(--muted)}
+.tabs{display:flex;gap:8px;margin-bottom:15px}.tab{border:1px solid var(--border);background:var(--card);color:#aaa;padding:8px 15px;border-radius:7px;cursor:pointer}.tab.active{background:var(--accent);color:#fff}
+.code-section{background:#0c0d12;border:1px solid var(--border);border-radius:14px;overflow:hidden}.code-header{padding:13px 18px;border-bottom:1px solid var(--border);color:#999;font-size:13px}pre.code{padding:22px;overflow:auto;color:#d4d4d8;font-family:Consolas,monospace;font-size:14px}
+.practice{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.practice-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px}.practice-card .num{color:var(--accent2);font-weight:800;font-size:12px}.practice-card h3{margin:8px 0}.practice-card p{color:var(--muted);font-size:13px}
+.simulator{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}input,select{background:#0c0d12;border:1px solid var(--border);color:#fff;padding:12px;border-radius:8px;outline:none}input:focus,select:focus{border-color:var(--accent)}button{border:none;cursor:pointer}.control-btn{padding:12px 18px;border-radius:8px;background:var(--accent);color:#fff;font-weight:600}.secondary-btn{background:#20222d!important}
+.output{margin-top:25px;background:#0c0d12;border:1px solid var(--border);border-radius:12px;padding:25px;min-height:220px;display:flex;align-items:center;justify-content:center;overflow:auto}.output pre{font-family:Consolas,monospace;color:#c4b5fd;font-size:18px;line-height:1.3}
+.question{padding:20px;border:1px solid var(--border);background:var(--card);border-radius:12px;margin-bottom:12px;cursor:pointer}.question h3{font-size:16px}.answer{display:none;color:var(--muted);margin-top:12px;font-size:14px}.question.open .answer{display:block}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.video-card{display:block;text-decoration:none;color:#fff;background:var(--card);border:1px solid var(--border);border-radius:15px;overflow:hidden;transition:.25s}.video-card:hover{transform:translateY(-5px);border-color:#57428f}
+.video-thumbnail{height:165px;background:radial-gradient(circle at center,#31205e 0%,#171126 45%,#0c0d12 100%);display:flex;align-items:center;justify-content:center;position:relative}.video-thumbnail:after{content:"STAR";position:absolute;font-size:48px;font-weight:900;letter-spacing:-2px;opacity:.08}
+.play-button{width:55px;height:55px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;padding-left:3px;position:relative;z-index:2;box-shadow:0 10px 30px #0008}.video-info{padding:20px}.video-info span{font-size:10px;font-weight:800;color:var(--accent2);letter-spacing:1.5px}.video-info h3{margin-top:7px;margin-bottom:7px;font-size:17px}.video-info p{color:var(--muted);font-size:13px;line-height:1.5}
+footer{border-top:1px solid var(--border);text-align:center;padding:40px;color:#666}footer strong{color:var(--accent2)}
+@media(max-width:850px){.grid,.pattern-grid{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.rule-grid{grid-template-columns:1fr 1fr}.practice{grid-template-columns:1fr 1fr}.video-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){nav ul{display:none}.grid,.pattern-grid,.rule-grid,.practice,.video-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-2px}.flow-box{padding:20px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">Pavan<span>XDCL</span></div>
+<ul>
+<li><a href="#learn">Learn</a></li>
+<li><a href="#patterns">Patterns</a></li>
+<li><a href="#logic">Logic</a></li>
+<li><a href="#code">Code</a></li>
+<li><a href="#practice">Practice</a></li>
+<li><a href="#videos">Videos</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+<div class="hero-content">
+<div class="badge">PAVANXDCL • PROGRAMMING FOUNDATION</div>
+<h1>Master <span>Star Patterns</span></h1>
+<p>Learn the logic behind nested loops, rows, columns, spaces and stars. Stop memorizing patterns and start building them from first principles.</p>
+<div class="buttons">
+<a href="#videos" class="btn primary">Start Learning</a>
+<a target="_blank" href="https://docs.google.com/document/d/1Y0UZG4tWEh26-GcBr1nvxoaoJZ4vg0bsn80tTPYryQc/edit?usp=sharing" class="btn primary">Download Notes</a>
+</div>
+</div>
+</section>
+
+
+
+<section id="videos" class="container">
+<div class="section-title"><small>01 — Video Learning</small><h2>Watch Videos</h2></div>
+<div class="video-grid">
+<a href="https://www.youtube.com/watch?v=f1IVU3mKvv8&feature=youtu.be" target="_blank" class="video-card"><div class="video-thumbnail"><div class="play-button">▶</div></div><div class="video-info"><span>BEGINNER</span><h3>Basic patterns — squares, triangles, stars</h3><p>Understand rows, columns and nested loops.</p></div></a>
+<a href="https://www.youtube.com/watch?v=ppmBHL1a7YM&feature=youtu.be" target="_blank" class="video-card"><div class="video-thumbnail"><div class="play-button">▶</div></div><div class="video-info"><span>LOGIC</span><h3>Number patterns + pyramid variations</h3><p>Learn how to derive loop conditions from the output.</p></div></a>
+<a href="https://www.youtube.com/watch?v=Dk4Iua3V5K8" target="_blank" class="video-card"><div class="video-thumbnail"><div class="play-button">▶</div></div><div class="video-info"><span>TRIANGLES</span><h3>Diamond, hourglass & complex patterns</h3><p>Master increasing and decreasing triangle patterns.</p></div></a>
+<a href="https://www.youtube.com/watch?v=c-effdypJhI" target="_blank" class="video-card"><div class="video-thumbnail"><div class="play-button">▶</div></div><div class="video-info"><span>PYRAMIDS</span><h3>All pattern types — full revision + notes</h3><p>Understand spaces and odd-number star sequences.</p></div></a>
+</div>
+</section>
+
+<footer><p><strong>PavanXDCL</strong> • Star Patterns • Learn → Visualize → Code → Practice</p></footer>
+
+<script>
+const codes={
+java:`import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int n = 5;
+
+        for (int i = 1; i <= n; i++) {
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+    }
+}`,
+cpp:`#include <iostream>
+using namespace std;
+
+int main() {
+
+    int n = 5;
+
+    for (int i = 1; i <= n; i++) {
+
+        for (int j = 1; j <= i; j++) {
+            cout << "*";
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}`,
+python:`n = 5
+
+for i in range(1, n + 1):
+
+    for j in range(1, i + 1):
+        print("*", end="")
+
+    print()`
+};
+
+function showCode(language,button){
+document.getElementById("codeBlock").textContent=codes[language];
+document.getElementById("codeTitle").textContent=language.toUpperCase()+" — Right Triangle";
+document.querySelectorAll(".tab").forEach(tab=>tab.classList.remove("active"));
+button.classList.add("active");
+}
+showCode("java",document.querySelector(".tab"));
+
+document.querySelectorAll(".question").forEach(q=>q.addEventListener("click",()=>q.classList.toggle("open")));
+
+function generatePattern(){
+const type=document.getElementById("patternSelect").value;
+let n=parseInt(document.getElementById("sizeInput").value)||5;
+n=Math.max(1,Math.min(15,n));
+let lines=[];
+
+if(type==="square"){
+for(let i=0;i<n;i++) lines.push("*".repeat(n));
+}
+else if(type==="triangle"){
+for(let i=1;i<=n;i++) lines.push("*".repeat(i));
+}
+else if(type==="inverse"){
+for(let i=n;i>=1;i--) lines.push("*".repeat(i));
+}
+else if(type==="pyramid"){
+for(let i=1;i<=n;i++) lines.push(" ".repeat(n-i)+"*".repeat(2*i-1));
+}
+else if(type==="diamond"){
+for(let i=1;i<=n;i++) lines.push(" ".repeat(n-i)+"*".repeat(2*i-1));
+for(let i=n-1;i>=1;i--) lines.push(" ".repeat(n-i)+"*".repeat(2*i-1));
+}
+else if(type==="hollow"){
+for(let i=1;i<=n;i++){
+if(i===1||i===n) lines.push("*".repeat(n));
+else lines.push("*"+" ".repeat(Math.max(0,n-2))+"*");
+}
+}
+
+document.getElementById("patternOutput").textContent=lines.join("\n");
+}
+
+function clearPattern(){
+document.getElementById("patternOutput").textContent="Select a pattern and click Generate.";
+}
+</script>
+</body>
+</html>

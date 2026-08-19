@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Sum - PavanXDCL DSA Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #08090d;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        :root {
+            --accent: #8b5cf6;
+            --accent2: #a78bfa;
+            --card: #11131a;
+            --card2: #171923;
+            --border: #272a36;
+            --muted: #9297a7;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAVIGATION */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 50; background: rgba(8, 9, 13, 0.95); backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 20px; font-weight: 900;
+        }
+        .logo span { color: var(--accent2); }
+
+        nav a {
+            color: var(--muted); text-decoration: none; font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent2); }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center; gap: 8px;
+            padding: 8px 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent2);
+        }
+
+        /* HEADER */
+        .problem-header {
+            padding: 60px 24px 40px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .problem-header .container {
+            max-width: 1200px;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .difficulty-easy { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+        .difficulty-medium { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .difficulty-hard { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+
+        .problem-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .problem-meta {
+            display: flex;
+            gap: 24px;
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 24px;
+        }
+
+        .meta-item {
+            display: flex;
+            gap: 8px;
+        }
+
+        .meta-item strong { color: #f5f5f5; }
+
+        /* MAIN CONTENT */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            padding: 60px 24px;
+        }
+
+        .left-panel, .right-panel { }
+
+        .section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            color: var(--accent2);
+        }
+
+        .description {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        /* TAGS */
+        .tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent2);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* EXAMPLE */
+        .example {
+            background: var(--card2);
+            border-left: 4px solid var(--accent);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .example strong { color: var(--accent2); display: block; margin-bottom: 8px; }
+
+        .example code {
+            font-family: 'Fira Code', monospace;
+            color: #d4d4d8;
+            background: #0c0d12;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* CODE EDITOR SECTION */
+        .code-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: var(--card2);
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .language-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-tab {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--muted);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+
+        .lang-tab.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .lang-tab:hover {
+            border-color: var(--accent);
+        }
+
+        .code-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .code-btn {
+            padding: 8px 14px;
+            background: var(--accent);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .code-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .code-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .code-editor {
+            padding: 20px;
+            background: #0c0d12;
+            overflow: auto;
+            max-height: 500px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #d4d4d8;
+        }
+
+        .code-editor code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* COMPLEXITY */
+        .complexity {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .complexity-item {
+            background: var(--card2);
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .complexity-item strong {
+            display: block;
+            color: var(--accent2);
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .complexity-item code {
+            color: #d4d4d8;
+            font-size: 13px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* APPROACH BUTTONS */
+        .approach-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .approach-btn {
+            padding: 10px 16px;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--muted);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .approach-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .approach-btn:hover {
+            border-color: var(--accent);
+        }
+
+        /* RELATED PROBLEMS */
+        .related-problems {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .related-card {
+            background: var(--card2);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .related-card .difficulty {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .related-card h4 {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .problem-title { font-size: 32px; }
+            .section { padding: 20px; }
+            .code-editor { max-height: 300px; }
+            .problem-meta { flex-wrap: wrap; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="container">
+        <a href="javascript:history.back()" class="back-btn">← Back</a>
+        <div class="logo">Pavan<span>XDCL</span></div>
+        <a href="https://discord.gg/pavanxdcl">Community</a>
+    </nav>
+
+    <section class="problem-header">
+        <div class="container">
+            <span class="difficulty-badge difficulty-easy">Easy</span>
+            <h1 class="problem-title">Two Sum</h1>
+            <p class="description">Given an array of integers nums and an integer target, return the indices of the two numbers such that they add up to target. You may assume that each input has exactly one solution, and you may not use the same element twice.</p>
+            
+            <div class="problem-meta">
+                <div class="meta-item"><strong>Acceptance:</strong> 48.7%</div>
+                <div class="meta-item"><strong>Submissions:</strong> 12.8M</div>
+                <div class="meta-item"><strong>Companies:</strong> Amazon, Apple, Google</div>
+            </div>
+
+            <div class="tags">
+                <span class="tag">Arrays</span>
+                <span class="tag">Hash Map</span>
+                <span class="tag">Two Pointers</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="content container">
+        <!-- LEFT PANEL: Problem Details -->
+        <div class="left-panel">
+            <!-- Examples -->
+            <div class="section">
+                <h2>📋 Examples</h2>
+
+                <div class="example">
+                    <strong>Example 1:</strong>
+                    <div>Input: nums = [2,7,11,15], target = 9</div>
+                    <div>Output: [0,1]</div>
+                    <div style="color: var(--muted); font-size: 13px; margin-top: 8px;">Explanation: nums[0] + nums[1] == 9, so we return [0, 1].</div>
+                </div>
+
+                <div class="example">
+                    <strong>Example 2:</strong>
+                    <div>Input: nums = [3,2,4], target = 6</div>
+                    <div>Output: [1,2]</div>
+                </div>
+
+                <div class="example">
+                    <strong>Example 3:</strong>
+                    <div>Input: nums = [3,3], target = 6</div>
+                    <div>Output: [0,1]</div>
+                </div>
+            </div>
+
+            <!-- Constraints -->
+            <div class="section">
+                <h2>🎯 Constraints</h2>
+                <ul style="list-style: none; color: var(--muted);">
+                    <li>✓ 2 ≤ nums.length ≤ 10⁴</li>
+                    <li>✓ -10⁹ ≤ nums[i] ≤ 10⁹</li>
+                    <li>✓ -10⁹ ≤ target ≤ 10⁹</li>
+                    <li>✓ Only one valid answer exists</li>
+                </ul>
+            </div>
+
+            <!-- Approach Selection -->
+            <div class="section">
+                <h2>💡 Approaches</h2>
+                <div class="approach-tabs">
+                    <button class="approach-btn active" onclick="showApproach(1)">1. Brute Force</button>
+                    <button class="approach-btn" onclick="showApproach(2)">2. Hash Map ⭐</button>
+                    <button class="approach-btn" onclick="showApproach(3)">3. Two Pointers</button>
+                </div>
+
+                <div id="approach-1" class="approach-content">
+                    <h3>Brute Force O(n²)</h3>
+                    <p class="description">Check every pair of numbers to find the target sum.</p>
+                    <div class="complexity">
+                        <div class="complexity-item">
+                            <strong>Time:</strong>
+                            <code>O(n²)</code>
+                        </div>
+                        <div class="complexity-item">
+                            <strong>Space:</strong>
+                            <code>O(1)</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="approach-2" class="approach-content" style="display: none;">
+                    <h3>Hash Map O(n) ⭐ Best</h3>
+                    <p class="description">Use a hash map to store complement values for O(1) lookup.</p>
+                    <div class="complexity">
+                        <div class="complexity-item">
+                            <strong>Time:</strong>
+                            <code>O(n)</code>
+                        </div>
+                        <div class="complexity-item">
+                            <strong>Space:</strong>
+                            <code>O(n)</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="approach-3" class="approach-content" style="display: none;">
+                    <h3>Two Pointers O(n log n)</h3>
+                    <p class="description">Sort the array and use two pointers from both ends.</p>
+                    <div class="complexity">
+                        <div class="complexity-item">
+                            <strong>Time:</strong>
+                            <code>O(n log n)</code>
+                        </div>
+                        <div class="complexity-item">
+                            <strong>Space:</strong>
+                            <code>O(1)</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Problems -->
+            <div class="section">
+                <h2>🔗 Related Problems</h2>
+                <div class="related-problems">
+                    <div class="related-card">
+                        <div class="difficulty" style="color: var(--success);">Easy</div>
+                        <h4>3Sum</h4>
+                    </div>
+                    <div class="related-card">
+                        <div class="difficulty" style="color: var(--warning);">Medium</div>
+                        <h4>4Sum</h4>
+                    </div>
+                    <div class="related-card">
+                        <div class="difficulty" style="color: var(--success);">Easy</div>
+                        <h4>Two Sum II</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Code Editor -->
+        <div class="right-panel">
+            <!-- Code Section -->
+            <div class="code-section">
+                <div class="code-header">
+                    <div class="language-tabs">
+                        <button class="lang-tab active" onclick="switchLanguage('java')">Java</button>
+                        <button class="lang-tab" onclick="switchLanguage('python')">Python</button>
+                        <button class="lang-tab" onclick="switchLanguage('cpp')">C++</button>
+                        <button class="lang-tab" onclick="switchLanguage('js')">JavaScript</button>
+                    </div>
+                    <div class="code-buttons">
+                        <button class="code-btn secondary" onclick="copyCode()">Copy</button>
+                        <button class="code-btn" onclick="runCode()">Run ▶</button>
+                    </div>
+                </div>
+
+                <div class="code-editor" id="codeEditor">
+<hljs-code language="java">class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // Hash map to store value -> index
+        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+        
+        for (int i = 0; i &lt; nums.length; i++) {
+            int complement = target - nums[i];
+            
+            // Check if complement exists
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+            
+            // Store current number and its index
+            map.put(nums[i], i);
+        }
+        
+        return new int[]{-1, -1}; // No solution found
+    }
+}</hljs-code>
+                </div>
+            </div>
+
+            <!-- Explanation -->
+            <div class="section" style="margin-top: 24px;">
+                <h2>📖 Explanation</h2>
+                <h3>Algorithm:</h3>
+                <ol style="color: var(--muted); line-height: 1.8; padding-left: 20px;">
+                    <li>Create a HashMap to store value-to-index mappings</li>
+                    <li>For each number, calculate its complement (target - current)</li>
+                    <li>If complement exists in map, return both indices</li>
+                    <li>Otherwise, add current number to map and continue</li>
+                </ol>
+
+                <h3 style="margin-top: 20px;">Why This Works:</h3>
+                <p class="description">
+                    A Hash Map allows us to check if a number's complement exists in O(1) time, reducing the overall complexity from O(n²) to O(n). Each number is stored with its index for quick retrieval.
+                </p>
+            </div>
+
+            <!-- Test Cases -->
+            <div class="section">
+                <h2>✅ Test Cases</h2>
+                <div id="testResults" style="font-size: 13px; font-family: 'Fira Code', monospace;">
+                    <div style="color: var(--success); margin-bottom: 8px;">✓ Test 1 Passed: [0, 1]</div>
+                    <div style="color: var(--success); margin-bottom: 8px;">✓ Test 2 Passed: [1, 2]</div>
+                    <div style="color: var(--success);">✓ Test 3 Passed: [0, 1]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const codes = {
+                java: `class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+            
+            map.put(nums[i], i);
+        }
+        
+        return new int[]{-1, -1};
+    }
+}`,
+                python: `class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        num_map = {}
+        
+        for i, num in enumerate(nums):
+            complement = target - num
+            
+            if complement in num_map:
+                return [num_map[complement], i]
+            
+            num_map[num] = i
+        
+        return [-1, -1]`,
+                cpp: `class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> map;
+        
+        for (int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+            
+            if (map.find(complement) != map.end()) {
+                return {map[complement], i};
+            }
+            
+            map[nums[i]] = i;
+        }
+        
+        return {-1, -1};
+    }
+};`,
+                js: `var twoSum = function(nums, target) {
+    const map = new Map();
+    
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        
+        if (map.has(complement)) {
+            return [map.get(complement), i];
+        }
+        
+        map.set(nums[i], i);
+    }
+    
+    return [-1, -1];
+};`
+            };
+            
+            document.getElementById('codeEditor').textContent = codes[lang];
+            hljs.highlightElement(document.getElementById('codeEditor'));
+        }
+
+        function showApproach(num) {
+            document.querySelectorAll('.approach-content').forEach(el => el.style.display = 'none');
+            document.getElementById(`approach-${num}`).style.display = 'block';
+            
+            document.querySelectorAll('.approach-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function copyCode() {
+            const code = document.getElementById('codeEditor').textContent;
+            navigator.clipboard.writeText(code);
+            alert('Code copied to clipboard!');
+        }
+
+        function runCode() {
+            alert('Run feature available with CodePen/LeetCode integration');
+        }
+    </script>
+</body>
+</html>
