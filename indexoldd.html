@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>PavanxDCL — DSA, LeetCode & FAANG Prep | Redesigned</title>
+  <meta name="description" content="Master DSA, crack FAANG interviews & ace placements with PavanxDCL. Live mentorship, LeetCode Arena, JavaScript modules & aptitude prep.">
+  <meta name="theme-color" content="#08090d">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ––– reset & base ––– */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: #08090d;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+    :root {
+      --card: #11131a;
+      --card2: #171923;
+      --border: #272a36;
+      --muted: #9297a7;
+      --accent: #8b5cf6;
+      --accent2: #a78bfa;
+      --green: #22c55e;
+    }
+
+    /* ––– bg orbs ––– */
+    .bg-aura {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+      background: #08090d;
+    }
+    .bg-aura::before {
+      content: '';
+      position: absolute;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12), transparent 60%);
+      animation: breathe 8s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 50vw; height: 50vw;
+      background: #7c3aed20;
+      top: -20vh; left: -10vw;
+      animation: float 20s infinite;
+    }
+    .orb-2 {
+      width: 40vw; height: 40vw;
+      background: #a78bfa15;
+      bottom: -15vh; right: -10vw;
+      animation: float 25s infinite reverse;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(5%,5%) scale(1.05); }
+    }
+
+    /* ––– container ––– */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ––– nav ––– */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .logo span { color: var(--accent2); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    /* ––– hero ––– */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid #44326e;
+      background: #171126;
+      color: #bda9ff;
+      padding: 7px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 20%, #a78bfa 50%, #8b5cf6 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-description {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--accent);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(4px);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #e0e0e0;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--accent2);
+    }
+
+    /* ––– stats ––– */
+    .stats-grid {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      padding: 32px 0 0;
+      border-top: 1px solid var(--border);
+      justify-content: center;
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* ––– section ––– */
+    .section {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 48px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ––– scrolling images ––– */
+    .scrolling-images-section {
+      padding: 60px 0;
+      text-align: center;
+      overflow: hidden;
+      background: transparent;
+    }
+    .scroll-container {
+      width: 100%;
+      overflow-x: hidden;
+      position: relative;
+      mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    }
+    .scroll-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: scrollLeftToRight 28s linear infinite;
+      will-change: transform;
+    }
+    .scroll-track:hover { animation-play-state: paused; }
+    @keyframes scrollLeftToRight {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .scroll-image-card {
+      flex-shrink: 0;
+      width: 220px;
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: 0.3s ease;
+      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+    .scroll-image-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--accent2);
+      box-shadow: 0 18px 32px -12px rgba(139, 92, 246, 0.4);
+    }
+    .scroll-image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      overflow: hidden;
+      background: #0c0d12;
+    }
+    .scroll-image {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .scroll-image-card:hover .scroll-image { transform: scale(1.05); }
+    .whatsapp-badge {
+      position: absolute;
+      bottom: 8px; right: 8px;
+      background: rgba(37, 211, 102, 0.9);
+      backdrop-filter: blur(4px);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 2;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+    .image-caption {
+      padding: 14px 12px 16px;
+      text-align: center;
+    }
+    .image-caption h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .image-caption p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 768px) {
+      .scroll-image-card { width: 180px; }
+      .image-caption { padding: 10px 8px 12px; }
+      .image-caption h4 { font-size: 0.8rem; }
+      .image-caption p { font-size: 0.65rem; }
+      .scroll-track { gap: 16px; }
+    }
+    @media (max-width: 480px) {
+      .scroll-image-card { width: 150px; }
+    }
+
+    /* ––– course cards ––– */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
+    }
+    .course-card {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      transition: 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+    .course-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.15), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .course-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: var(--accent2);
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(139, 92, 246, 0.2);
+      background: var(--card2);
+    }
+    .course-card:hover::before { opacity: 1; }
+
+    .card-header {
+      padding: 28px 28px 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .card-icon-wrapper {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(167, 139, 250, 0.05));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.2s;
+    }
+    .course-card:hover .card-icon-wrapper {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(167, 139, 250, 0.1));
+    }
+    .card-badge-new {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.02em;
+    }
+    .card-body {
+      padding: 20px 28px 20px 28px;
+      flex: 1;
+    }
+    .course-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      background: linear-gradient(135deg, #fff, #e2e2e2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .course-description {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .course-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .feature-chip {
+      background: rgba(139, 92, 246, 0.12);
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent2);
+      letter-spacing: 0.01em;
+      border: 0.5px solid rgba(139, 92, 246, 0.3);
+    }
+    .card-footer {
+      padding: 16px 28px 24px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .card-arrow {
+      font-size: 1.3rem;
+      transition: transform 0.2s;
+      color: var(--accent2);
+    }
+    .course-card:hover .card-arrow { transform: translateX(6px); }
+
+    /* ––– community ––– */
+    .community-card {
+      background: radial-gradient(ellipse at 30% 40%, rgba(139, 92, 246, 0.08), transparent);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      padding: 48px 32px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .community-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent);
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      margin-top: 24px;
+      transition: 0.2s;
+    }
+    .whatsapp-btn:hover {
+      background: #7c3aed;
+      transform: scale(1.02);
+    }
+
+    /* ––– footer ––– */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--accent2); }
+    hr {
+      border-color: var(--border);
+      margin: 20px 0;
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .nav { flex-direction: column; text-align: center; }
+      .stats-grid { gap: 28px; }
+      .card-header { padding: 20px 20px 0 20px; }
+      .card-body { padding: 16px 20px; }
+      .card-footer { padding: 16px 20px 20px; }
+      .course-title { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-aura"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="container">
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="logo">Pavan<span>XDCL</span></div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="aptitude.html">Aptitude</a>
+      <a href="https://www.whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H">Community</a>
+      <a href="https://www.instagram.com/codewithpavanprakash">Instagram</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">PAVANXDCL • PROGRAMMING FOUNDATION</div>
+    <h1>Break the Matrix.<br><span class="gradient-text">Master the Code.</span></h1>
+    <p class="hero-description">
+      DSA Forge • LeetCode Arena • Aptitude Lab — everything you need to crack placements and dominate FAANG interviews with <strong>PavanxDCL</strong> mentorship.
+    </p>
+    <div class="cta-group">
+      <a href="dsa.html" class="btn-primary">⚡ Start Grinding → DSA Pro-MAX</a>
+      <a href="https://www.whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H" class="btn-secondary">💬 WhatsApp Community</a>
+      <a href="https://t.me/pavanprakash" class="btn-secondary">📱 Telegram Live</a>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">DSA Problems</div></div>
+      <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Placement Focused</div></div>
+      <div class="stat-item"><div class="stat-number">2000+</div><div class="stat-label">Active Learners</div></div>
+      <div class="stat-item"><div class="stat-number">Live</div><div class="stat-label">Mentorship</div></div>
+    </div>
+
+    <!-- Scrolling images -->
+    <div class="scrolling-images-section">
+      <div class="section-tag">💬 ACHIEVERS ARENA</div>
+      <h2 class="section-title">SUCCESS <span class="gradient-text">STORIES</span></h2>
+      <div class="section-sub">Hard Work, Dedication and Consistency Always Pays Off</div>
+      <div class="scroll-container">
+        <div class="scroll-track" id="imageScrollTrack"></div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+ 
+
+  <!-- Community -->
+  <section class="section" id="community">
+    <div class="community-card">
+      <h3>Join the Official PavanxDCL Community Hub</h3>
+      <p style="color: var(--muted); max-width: 500px; margin: 0 auto;">Live DSA, Aptitude & Coding sessions — direct access to Pavan and the grind squad.</p>
+      <a href="https://www.whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H" class="whatsapp-btn">💬 Join on WhatsApp</a>
+      <a href="https://t.me/pavanprakash" class="whatsapp-btn" style="margin-left:12px; background: #1e293b;">📱 Join on Telegram</a>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>© 2025 Pavan Prakash | DSA + Aptitude = Complete Warrior</div>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="https://www.whatsapp.com/channel/0029Vb8eoKy4tRrw0hnkyF0H">Community</a>
+      <a href="#">Pro Max</a>
+      <a href="aptitude.html">Aptitude Lab</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Local images — same as original, using placeholder if not found
+  const imagesData = [
+    { src: "images/harshith.jpeg", title: "Placed in LG", desc: "Harshith" },
+    { src: "images/narasimha.jpeg", title: "Placed in TCS NQT Prime", desc: "Narasimha" },
+    { src: "images/swetha.jpeg", title: "Placed in Genpact", desc: "Swetha" },
+    { src: "images/sumanth.jpeg", title: "Placed in LG", desc: "Sumanth" },
+    { src: "images/teju.jpeg", title: "Placed in Sasken", desc: "Tejaswini" },
+    { src: "images/shankar.jpeg", title: "Placed in Stanch Solutions", desc: "Shankar" },
+    { src: "images/kushwanth.jpeg", title: "Placed in Surya AI & Zino", desc: "Kushwanth" },
+    { src: "images/afsaan.jpeg", title: "Placed in PayU", desc: "Afsaan" },
+    { src: "images/lakshya.jpeg", title: "Placed in Avaali Solutions", desc: "Lakshya" },
+    { src: "images/Anusha.jpeg", title: "Placed in Fintech Solutions", desc: "Anusha" },
+    { src: "images/lalasa.jpeg", title: "Placed in Deloitte", desc: "Lalasa" },
+    { src: "images/prajwal.jpeg", title: "Placed in Avaali Solutions", desc: "Prajwal" },
+    { src: "images/manasa.jpeg", title: "Placed in Mavenir Systems", desc: "Manasa" },
+    { src: "images/madhu.jpeg", title: "Placed in Avaali Solutions", desc: "Madhu" },
+    { src: "images/varshitha.jpeg", title: "Placed in Lkq", desc: "Varshitha" },
+    { src: "images/abhiram1.jpeg", title: "Placed in TCS Ninja", desc: "Abhiram" },
+    { src: "images/ranjitha1.jpeg", title: "Placed in Mavenir", desc: "Ranjitha" },
+    { src: "images/harish.jpeg", title: "Placed in Avaali", desc: "Harish" },
+    { src: "images/sharanu.jpeg", title: "Placed in Avaali", desc: "Sharanu" },
+    { src: "images/omkar.jpeg", title: "Placed in Avaali", desc: "Omkar" },
+    { src: "images/sumana.jpeg", title: "Placed in Shindengen", desc: "Sumana Shree" },
+    { src: "images/aditya.jpeg", title: "Placed in JAAS IT", desc: "Adithya" },
+    { src: "images/vidya.jpeg", title: "Placed in LG Soft", desc: "Vidya" },
+    { src: "images/bhumika.jpeg", title: "Placed in Nalsoft", desc: "Bhumika" },
+    { src: "images/shridar.jpeg", title: "Placed in Learnyst", desc: "Shridar" },
+    { src: "images/lalitha.jpeg", title: "Placed in Learnyst", desc: "Lalitha" },
+    { src: "images/Abhilg.jpeg", title: "Placed in LGSoft", desc: "Abhi" },
+    { src: "images/poorvaj.jpeg", title: "Placed in Sharp Software", desc: "Poorvaj" },
+    { src: "images/shree.jpeg", title: "Placed in ShriLakshmi", desc: "Sasken" },
+    { src: "images/aishw.jpeg", title: "Placed in Aishwarya", desc: "LKQ" },
+    { src: "images/ry.jpeg", title: "Placed in Rydham", desc: "Nichi IN" },
+  ];
+
+  const track = document.getElementById('imageScrollTrack');
+  function buildCard(item) {
+    const div = document.createElement('div');
+    div.className = 'scroll-image-card';
+    div.innerHTML = `
+      <div class="scroll-image-wrapper">
+        <img class="scroll-image" src="${item.src}" alt="${item.title}" loading="lazy" onerror="this.src='https://placehold.co/400x400/1a1a2e/a78bfa?text=+WA+&font=monospace'">
+        <div class="whatsapp-badge">📱 WA</div>
+      </div>
+      <div class="image-caption"><h4>${item.title}</h4><p>${item.desc}</p></div>
+    `;
+    div.addEventListener('click', () => window.open(item.src, '_blank'));
+    return div;
+  }
+
+  if (track) {
+    track.innerHTML = '';
+    imagesData.forEach(img => track.appendChild(buildCard(img)));
+    imagesData.forEach(img => track.appendChild(buildCard(img))); // duplicate for seamless loop
+  }
+</script>
+</body>
+</html>
