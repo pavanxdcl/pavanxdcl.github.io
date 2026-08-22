@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodePath 150 · Fully Operational</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root {
+      --bg: #05080a;
+      --bg-soft: #0a1210;
+      --surface: #0d1512;
+      --surface-alt: #0f1a16;
+      --border: #1c2b24;
+      --border-soft: #16211c;
+      --text: #d6e8de;
+      --text-dim: #7c948a;
+      --text-faint: #5a6d65;
+      --accent: #ff9f43;
+      --accent-strong: #ff7a00;
+      --accent-dim: #b35a13;
+      --accent-bg: #2a1608;
+      --accent-glow: rgba(255, 159, 67, 0.35);
+      --cyan: #22e5cc;
+      --danger: #ff4d5e;
+      --warn: #ffb020;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Space Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at top left, rgba(255,159,67,0.07), transparent 45%),
+        radial-gradient(ellipse at bottom right, rgba(34,229,204,0.05), transparent 50%),
+        var(--bg);
+      min-height: 100vh;
+      display: flex;
+      color: var(--text);
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+      width: 280px;
+      background: var(--bg-soft);
+      color: var(--text-dim);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.2rem 1.5rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      z-index: 10;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 2.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-brand i {
+      font-size: 2rem;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-dim);
+      padding: 0.5rem;
+      border-radius: 8px;
+      text-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .sidebar-brand h2 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      color: #eafff4;
+    }
+    .sidebar-brand h2::before {
+      content: '<';
+      color: var(--text-faint);
+    }
+    .sidebar-brand h2::after {
+      content: '/>';
+      color: var(--text-faint);
+    }
+    .sidebar-brand span {
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-dim);
+      padding: 0.1rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-left: 0.2rem;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .nav-section-title {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-faint);
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      padding-left: 0.5rem;
+    }
+    .nav-section-title::before {
+      content: '// ';
+      color: var(--accent-dim);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 6px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.88rem;
+      transition: 0.12s ease;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid transparent;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item i {
+      width: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text-faint);
+      transition: 0.1s;
+    }
+
+    .nav-item.active {
+      background: var(--accent-bg);
+      color: #eafff4;
+      border: 1px solid var(--accent-dim);
+      box-shadow: 0 0 16px rgba(255,159,67,0.18), inset 0 0 0 1px rgba(255,159,67,0.06);
+    }
+
+    .nav-item.active i {
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    .nav-item:hover:not(.active) {
+      background: var(--surface-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .nav-item .badge {
+      margin-left: auto;
+      background: var(--surface-alt);
+      color: var(--accent);
+      font-size: 0.68rem;
+      padding: 0.1rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-item.active .badge {
+      background: var(--accent-dim);
+      color: #05080a;
+      border: 1px solid var(--accent-dim);
+      font-weight: 700;
+    }
+
+    .sub-modules {
+      margin-left: 1.5rem;
+      margin-top: 0.2rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      border-left: 2px solid var(--border);
+      padding-left: 0.8rem;
+    }
+
+    .sub-module {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      transition: 0.1s;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .sub-module i {
+      font-size: 0.55rem;
+      color: var(--text-faint);
+    }
+
+    .sub-module.active {
+      background: var(--surface-alt);
+      color: var(--accent);
+    }
+    .sub-module.active i {
+      color: var(--accent);
+      text-shadow: 0 0 6px var(--accent-glow);
+    }
+
+    .sub-module:hover:not(.active) {
+      background: var(--bg-soft);
+      color: var(--text-dim);
+    }
+
+    .sidebar-footer {
+      margin-top: 2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--text-faint);
+    }
+
+    .sidebar-footer .avatar {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-dim);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ---------- MAIN CONTENT ---------- */
+    .main-content {
+      flex: 1;
+      padding: 2rem 2rem 2.5rem;
+      max-width: calc(100% - 280px);
+      margin-left: 0;
+    }
+
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .page-title h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #eafff4;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      letter-spacing: -0.02em;
+    }
+    .page-title h3 i {
+      color: var(--accent);
+      font-size: 1.4rem;
+      text-shadow: 0 0 10px var(--accent-glow);
+    }
+    .page-title .sub {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--text-dim);
+      margin-left: 0.5rem;
+    }
+    .page-title .sub-module-indicator {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-dim);
+      padding: 0.15rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-left: 0.3rem;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--surface);
+      padding: 0.3rem 1rem 0.3rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .top-actions i {
+      color: var(--text-dim);
+    }
+    .top-actions .student-name {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.88rem;
+    }
+    .top-actions .login-badge {
+      background: var(--accent-bg);
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      padding: 0.2rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .action-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem 0.8rem;
+      margin-bottom: 1.8rem;
+      background: var(--surface);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1 1 240px;
+    }
+    .search-box i { color: var(--text-faint); }
+    .search-box input {
+      border: none;
+      background: transparent;
+      padding: 0.5rem 0;
+      font-size: 0.88rem;
+      width: 100%;
+      outline: none;
+      color: var(--text);
+    }
+    .search-box input::placeholder { color: var(--text-faint); }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .filter-tags .tag {
+      background: var(--bg-soft);
+      padding: 0.25rem 1rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: 0.1s;
+    }
+    .filter-tags .tag.active {
+      background: var(--accent-dim);
+      color: #05080a;
+      border-color: var(--accent-dim);
+      font-weight: 700;
+    }
+    .filter-tags .tag:hover:not(.active) {
+      background: var(--surface-alt);
+      color: var(--text);
+    }
+
+    .table-container {
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      min-width: 680px;
+    }
+
+    th {
+      text-align: left;
+      padding: 1rem 1.2rem;
+      background: var(--bg-soft);
+      color: var(--text-dim);
+      font-weight: 600;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      vertical-align: middle;
+      color: var(--text-dim);
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface-alt); }
+
+    .problem-title {
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .problem-title i { color: var(--accent); font-size: 0.85rem; }
+
+    .topic-badge {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      display: inline-block;
+    }
+
+    .link-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .link-group a {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg-soft);
+      padding: 0.2rem 0.9rem 0.2rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      transition: 0.1s;
+      cursor: pointer;
+    }
+    .link-group a i { font-size: 0.8rem; }
+    .link-group a.video-link { background: var(--accent-bg); border-color: var(--accent-dim); color: var(--accent); }
+    .link-group a.video-link i { color: var(--accent); }
+    .link-group a:hover {
+      background: var(--surface-alt);
+      transform: translateY(-1px);
+      border-color: var(--accent-dim);
+      color: var(--text);
+    }
+    .link-group a:active { transform: translateY(0); }
+
+    .footer-note {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-faint);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .footer-note span i { margin-right: 6px; color: var(--accent); }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      border: 1px solid var(--accent-dim);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 20px rgba(255,159,67,0.14);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .toast i { color: var(--accent); font-size: 1.2rem; text-shadow: 0 0 10px var(--accent-glow); }
+
+    @media (max-width: 1024px) {
+      .sidebar { width: 240px; padding: 1.5rem 1rem; }
+      .main-content { padding: 1.5rem; max-width: calc(100% - 240px); }
+    }
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1rem 1.2rem;
+        gap: 0.5rem;
+      }
+      .sidebar-brand { margin-bottom: 0; border-bottom: none; flex: 1; }
+      .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 0.2rem; }
+      .nav-section-title { display: none; }
+      .nav-item { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+      .sub-modules { margin-left: 0; border-left: none; flex-direction: row; flex-wrap: wrap; }
+      .sidebar-footer { display: none; }
+      .main-content { max-width: 100%; padding: 1rem; }
+      .top-bar { flex-direction: column; align-items: stretch; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <i class="fas fa-code"></i>
+      <h2>PavanXDCL</h2>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-section-title">modules</div>
+      <!-- Arrays module -->
+      <button class="nav-item active" data-module="arrays" id="arraysModuleBtn">
+        <i class="fas fa-array"></i> Arrays <span class="badge">12</span>
+      </button>
+      <!-- sub-modules for Arrays -->
+      <div class="sub-modules" id="arraysSubmodules">
+        <button class="sub-module active" data-submodule="two-pointers"><i class="fas fa-circle"></i> Two Pointers</button>
+        <button class="sub-module" data-submodule="sliding-window"><i class="fas fa-circle"></i> Sliding Window</button>
+        <button class="sub-module" data-submodule="prefix-sum"><i class="fas fa-circle"></i> Prefix Sum</button>
+        <button class="sub-module" data-submodule="sorting"><i class="fas fa-circle"></i> Sorting</button>
+        <button class="sub-module" data-submodule="matrix"><i class="fas fa-circle"></i> Matrix</button>
+      </div>
+
+      <button class="nav-item" data-module="linked-list"><i class="fas fa-link"></i> Linked List <span class="badge">8</span></button>
+      <button class="nav-item" data-module="trees"><i class="fas fa-tree"></i> Trees <span class="badge">10</span></button>
+      <button class="nav-item" data-module="dp"><i class="fas fa-layer-group"></i> Dynamic Prog. <span class="badge">14</span></button>
+      <button class="nav-item" data-module="design"><i class="fas fa-database"></i> Design <span class="badge">6</span></button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar">JD</div>
+      <div>
+        <div style="font-weight: 500; color: #e2e8f0; font-size: 0.9rem;"> Coder.</div>
+        <div style="font-size: 0.7rem; color: #94a3b8;">student · logged in</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main-content" id="mainContent">
+    <!-- top bar -->
+    <div class="top-bar">
+      <div class="page-title" id="pageTitle">
+        <h3>
+          <i class="fas fa-array"></i> Arrays
+          <span class="sub">· Two Pointers</span>
+          <span class="sub-module-indicator">sub‑module</span>
+        </h3>
+      </div>
+      <div class="top-actions">
+        <i class="fas fa-graduation-cap"></i>
+        <span class="student-name">Coder</span>
+        <span class="login-badge"><i class="fas fa-check-circle"></i> logged in</span>
+      </div>
+    </div>
+
+    <!-- search & filter -->
+    <div class="action-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search problems..." id="searchInput">
+      </div>
+      <div class="filter-tags" id="filterTags">
+        <button class="tag active" data-filter="all">All</button>
+        <button class="tag" data-filter="easy">Easy</button>
+        <button class="tag" data-filter="medium">Medium</button>
+        <button class="tag" data-filter="hard">Hard</button>
+      </div>
+    </div>
+
+    <!-- problem table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Problem</th>
+            <th>Sub‑module</th>
+            <th>Resources</th>
+          </tr>
+        </thead>
+        <tbody id="problemsBody">
+          <!-- dynamically rendered -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-note" id="footerNote">
+      <span><i class="fas fa-video"></i> <span id="problemCount">0</span> problems</span>
+      <span><i class="fas fa-file-alt"></i> official docs & notes</span>
+      <span><i class="fas fa-user-graduate"></i> student: PavanX · logged in</span>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Link clicked!</span>
+  </div>
+
+  <script>
+    (function() {
+      // ---------- DUMMY DATA ----------
+      const problemData = {
+        'two-pointers': [
+          { id: 1, title: 'Two Sum', difficulty: 'easy', video: '#video-1', doc: '#doc-1', leet: 'https://leetcode.com/problems/two-sum/' },
+          { id: 2, title: '3Sum', difficulty: 'medium', video: '#video-2', doc: '#doc-2', leet: 'https://leetcode.com/problems/3sum/' },
+          { id: 3, title: 'Container With Most Water', difficulty: 'medium', video: '#video-3', doc: '#doc-3', leet: 'https://leetcode.com/problems/container-with-most-water/' },
+          { id: 4, title: 'Trapping Rain Water', difficulty: 'hard', video: '#video-4', doc: '#doc-4', leet: 'https://leetcode.com/problems/trapping-rain-water/' },
+          { id: 5, title: 'Remove Duplicates', difficulty: 'easy', video: '#video-5', doc: '#doc-5', leet: 'https://leetcode.com/problems/remove-duplicates-from-sorted-array/' },
+          { id: 6, title: 'Move Zeroes', difficulty: 'easy', video: '#video-6', doc: '#doc-6', leet: 'https://leetcode.com/problems/move-zeroes/' },
+          { id: 7, title: 'Sort Colors', difficulty: 'medium', video: '#video-7', doc: '#doc-7', leet: 'https://leetcode.com/problems/sort-colors/' },
+        ],
+        'sliding-window': [
+          { id: 8, title: 'Best Time to Buy/Sell Stock', difficulty: 'easy', video: '#video-8', doc: '#doc-8', leet: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/' },
+          { id: 9, title: 'Longest Substring Without Repeating', difficulty: 'medium', video: '#video-9', doc: '#doc-9', leet: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/' },
+          { id: 10, title: 'Minimum Window Substring', difficulty: 'hard', video: '#video-10', doc: '#doc-10', leet: 'https://leetcode.com/problems/minimum-window-substring/' },
+        ],
+        'prefix-sum': [
+          { id: 11, title: 'Range Sum Query', difficulty: 'easy', video: '#video-11', doc: '#doc-11', leet: 'https://leetcode.com/problems/range-sum-query-immutable/' },
+          { id: 12, title: 'Subarray Sum Equals K', difficulty: 'medium', video: '#video-12', doc: '#doc-12', leet: 'https://leetcode.com/problems/subarray-sum-equals-k/' },
+        ],
+        'sorting': [
+          { id: 13, title: 'Merge Intervals', difficulty: 'medium', video: '#video-13', doc: '#doc-13', leet: 'https://leetcode.com/problems/merge-intervals/' },
+          { id: 14, title: 'Insert Interval', difficulty: 'medium', video: '#video-14', doc: '#doc-14', leet: 'https://leetcode.com/problems/insert-interval/' },
+        ],
+        'matrix': [
+          { id: 15, title: 'Spiral Matrix', difficulty: 'medium', video: '#video-15', doc: '#doc-15', leet: 'https://leetcode.com/problems/spiral-matrix/' },
+          { id: 16, title: 'Rotate Image', difficulty: 'medium', video: '#video-16', doc: '#doc-16', leet: 'https://leetcode.com/problems/rotate-image/' },
+        ]
+      };
+
+      // fallback for other modules
+      const fallbackProblems = [
+        { id: 101, title: 'Sample Problem 1', difficulty: 'easy', video: '#sample1', doc: '#sample1-doc', leet: 'https://leetcode.com/' },
+        { id: 102, title: 'Sample Problem 2', difficulty: 'medium', video: '#sample2', doc: '#sample2-doc', leet: 'https://leetcode.com/' },
+      ];
+
+      // ---------- STATE ----------
+      let currentModule = 'arrays';
+      let currentSubmodule = 'two-pointers';
+      let currentFilter = 'all';
+      let searchQuery = '';
+
+      // DOM refs
+      const problemsBody = document.getElementById('problemsBody');
+      const pageTitle = document.getElementById('pageTitle');
+      const problemCountSpan = document.getElementById('problemCount');
+      const searchInput = document.getElementById('searchInput');
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      let toastTimeout;
+
+      // ---------- HELPERS ----------
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+      }
+
+      // Get problems for current submodule
+      function getProblems() {
+        if (currentModule === 'arrays' && problemData[currentSubmodule]) {
+          return problemData[currentSubmodule];
+        }
+        // For other modules, return fallback with module name
+        return fallbackProblems.map(p => ({ ...p, title: `${currentModule.replace('-',' ').toUpperCase()} - ${p.title}` }));
+      }
+
+      // Render table
+      function renderTable() {
+        let problems = getProblems();
+        // filter by search
+        if (searchQuery.trim()) {
+          const q = searchQuery.trim().toLowerCase();
+          problems = problems.filter(p => p.title.toLowerCase().includes(q));
+        }
+        // filter by difficulty
+        if (currentFilter !== 'all') {
+          problems = problems.filter(p => p.difficulty === currentFilter);
+        }
+
+        // update count
+        problemCountSpan.textContent = problems.length;
+
+        if (problems.length === 0) {
+          problemsBody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:2rem; color:#64748b;">No problems found</td></tr>`;
+          return;
+        }
+
+        let html = '';
+        problems.forEach(p => {
+          html += `
+            <tr>
+              <td><span class="problem-title"><i class="fas fa-hashtag"></i>${p.title}</span></td>
+              <td><span class="topic-badge"><i class="fas fa-tag"></i> ${currentSubmodule.replace('-',' ')}</span></td>
+              <td>
+                <div class="link-group">
+                  <a href="#" class="video-link" data-action="video" data-problem="${p.title}"><i class="fas fa-play-circle"></i> Video</a>
+                  <a href="#" data-action="doc" data-problem="${p.title}"><i class="fas fa-file-pdf"></i> Doc</a>
+                  <a href="${p.leet}" target="_blank" data-action="leet" data-problem="${p.title}"><i class="fas fa-external-link-alt"></i> Leet</a>
+                </div>
+              </td>
+            </tr>
+          `;
+        });
+        problemsBody.innerHTML = html;
+
+        // attach event listeners to all links (except Leet which opens new tab)
+        document.querySelectorAll('.link-group a[data-action]').forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const action = this.dataset.action;
+            const problem = this.dataset.problem;
+            if (action === 'video') {
+              showToast(`📺 Playing video for "${problem}"`);
+            } else if (action === 'doc') {
+              showToast(`📄 Opening documentation for "${problem}"`);
+            } else if (action === 'leet') {
+              // already handled by target="_blank"
+              showToast(`🔗 Opening LeetCode for "${problem}"`);
+            }
+          });
+        });
+      }
+
+      // Update page title
+      function updateTitle() {
+        const moduleName = currentModule.replace('-',' ').toUpperCase();
+        const subName = currentSubmodule.replace('-',' ').replace(/\b\w/g, l => l.toUpperCase());
+        let icon = 'fa-array';
+        if (currentModule === 'linked-list') icon = 'fa-link';
+        else if (currentModule === 'trees') icon = 'fa-tree';
+        else if (currentModule === 'dp') icon = 'fa-layer-group';
+        else if (currentModule === 'design') icon = 'fa-database';
+
+        pageTitle.innerHTML = `
+          <h3>
+            <i class="fas ${icon}"></i> ${moduleName}
+            <span class="sub">· ${subName}</span>
+            <span class="sub-module-indicator">sub‑module</span>
+          </h3>
+        `;
+      }
+
+      // Update active states in sidebar
+      function updateSidebar() {
+        // Nav items
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.classList.remove('active');
+          if (item.dataset.module === currentModule) {
+            item.classList.add('active');
+          }
+        });
+        // Submodules
+        document.querySelectorAll('.sub-module').forEach(sub => {
+          sub.classList.remove('active');
+          if (sub.dataset.submodule === currentSubmodule) {
+            sub.classList.add('active');
+          }
+        });
+      }
+
+      // Full update
+      function fullUpdate() {
+        updateTitle();
+        updateSidebar();
+        renderTable();
+      }
+
+      // ---------- NAVIGATION HANDLERS ----------
+      // Module nav items
+      document.querySelectorAll('.nav-item[data-module]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const module = this.dataset.module;
+          currentModule = module;
+          // If switching to arrays, set default submodule
+          if (module === 'arrays') {
+            currentSubmodule = 'two-pointers';
+          } else {
+            currentSubmodule = 'overview';
+          }
+          fullUpdate();
+          // show toast
+          showToast(`📂 Loaded ${module.replace('-',' ')} module`);
+        });
+      });
+
+      // Submodule buttons
+      document.querySelectorAll('.sub-module').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const sub = this.dataset.submodule;
+          if (currentModule !== 'arrays') {
+            showToast('⚠️ Please select the Arrays module first');
+            return;
+          }
+          currentSubmodule = sub;
+          fullUpdate();
+          showToast(`📌 ${sub.replace('-',' ')} sub-module loaded`);
+        });
+      });
+
+      // Search input
+      searchInput.addEventListener('input', function() {
+        searchQuery = this.value;
+        renderTable();
+      });
+
+      // Filter tags
+      document.querySelectorAll('.filter-tags .tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+          document.querySelectorAll('.filter-tags .tag').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          renderTable();
+        });
+      });
+
+      // ---------- INIT ----------
+      fullUpdate();
+
+      // Show welcome toast
+      setTimeout(() => {
+        showToast('🚀 Welcome back to, God Batch! Get Started!.');
+      }, 500);
+
+      // Handle all anchor clicks (including those added dynamically via delegation)
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link && link.href && link.href.startsWith('#') && !link.dataset.action) {
+          e.preventDefault();
+          showToast(`🔗 Internal link: ${link.textContent.trim() || 'link'}`);
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
